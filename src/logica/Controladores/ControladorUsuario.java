@@ -13,7 +13,6 @@ import java.sql.Date;
 import java.util.Map;
 import logica.Clases.Colaborador;
 import logica.Clases.Propuesta;
-import logica.Interfaces.IUsuario;
 import logica.Clases.Usuario;
 import Persistencia.DBUsuario;
 import java.io.File;
@@ -58,37 +57,85 @@ public class ControladorUsuario implements IControladorUsuario {
         this.Usuarios = Usuarios;
     }
 
-    public void seguirUsuario(String nickUsu1, String nickUsu2) {
-
-        Usuario aux1 = (Usuario) this.Usuarios.get(nickUsu1);
-        Usuario aux2 = (Usuario) this.Usuarios.get(nickUsu2);
-
-        if (aux1.getSeguidos().containsKey(nickUsu2)) //throw new Exception("El Usuario ya sigue a esa Persona");
-        {
-            if (aux1 != null && aux2 != null) {
-                aux1.getSeguidos().put(nickUsu2, aux2);
-//            aux2.getSeguidores().put(nickUsu1, aux1);
-            } else {
-                // throw new Exception("Usuario a seguir Incorrecto");
-
+   public boolean seguirUsuario(String nickUsu1, String nickUsu2){
+            
+//        try{
+//            
+        Usuario aux1=(Usuario) this.Usuarios.get(nickUsu1);
+        Usuario aux2=(Usuario) this.Usuarios.get(nickUsu2);
+        
+        
+//            throw new Exception("El Usuario "+ nickUsu1 + " ya sigue a " +nickUsu2);}
+        
+        if(aux1==null){
+            return false;
+        }
+//            throw new Exception("El Usuario " + nickUsu1 + " NO existe");
+        
+        
+        if (aux2==null){
+            return false;
+        }
+//             throw new Exception("El Usuario " + nickUsu2 + " NO existe");
+       if(aux1.getSeguidos().containsKey(nickUsu2)){
+            return false;
+        }
+        
+         boolean res = this.dbUsuario.seguirUsuario(nickUsu1, nickUsu2);
+            if (res){
+               aux1.getSeguidos().put(nickUsu2, aux2);
+               return true;
             }
-        }
+          
+            
+             
+            return res;
 
+
+         
+//        }catch (Exception error){
+//           
+//        }
+    
     }
-
-    public void dejarseguirUsuario(String nickUsu1, String nickUsu2) {
-
-        Usuario aux1 = (Usuario) this.Usuarios.get(nickUsu1);
-        Usuario aux2 = (Usuario) this.Usuarios.get(nickUsu2);
-
-        if (aux1 != null && aux2 != null) {
-            aux1.getSeguidos().remove(nickUsu2, aux2);
-
-        } else {
-            // throw new Exception("Usted no sigue a ese Usuario");
-
+    
+    public boolean dejarseguirUsuario(String nickUsu1, String nickUsu2){
+        
+//       try{
+            
+        Usuario aux1=(Usuario) this.Usuarios.get(nickUsu1);
+        Usuario aux2=(Usuario) this.Usuarios.get(nickUsu2);
+        
+     
+//            throw new Exception("El Usuario "+ nickUsu1 + " NO sigue a " +nickUsu2);}
+        
+        if(aux1==null){
+            return false;
         }
+            //throw new Exception("El Usuario " + nickUsu1 + " NO existe");}
+        
+        if (aux2==null){
+            return false;
+             //throw new Exception("El Usuario " + nickUsu2 + " NO existe");
+        }
+    
+        if(aux1.getSeguidos().containsKey(nickUsu2)==false){
+            return false;
+        }
+           
+        boolean res =this.dbUsuario.seguirUsuario(nickUsu1, nickUsu2);
+            if (res){
+                aux1.getSeguidos().remove(nickUsu2, aux2);
+                return true;
+            }
+            
+            return res;
 
+         
+//        }catch (Exception error){
+//           
+//        }
+    
     }
 
     public boolean AgregarUsuarioColaborador(String nickName, String nombre, String apellido, String correo, Calendar fechaN, String imagen) {

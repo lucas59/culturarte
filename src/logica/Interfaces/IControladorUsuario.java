@@ -14,9 +14,9 @@ import java.util.Date;
  */
 public interface IControladorUsuario {
 
-    public abstract void seguirUsuario(String nickUsu1, String nickUsu2);
+    public abstract boolean seguirUsuario(String nickUsu1, String nickUsu2);
 
-    public abstract void dejarseguirUsuario(String nickUsu1, String nickUsu2);
+    public abstract boolean dejarseguirUsuario(String nickUsu1, String nickUsu2);
 
     public abstract boolean AgregarUsuarioColaborador(String nickName, String nombre, String apellido,String correo, Calendar fechaN, String imagen);
 

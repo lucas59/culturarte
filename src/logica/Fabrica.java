@@ -6,7 +6,7 @@
 package logica;
 
 import logica.Interfaces.IPropCat;
-import logica.Interfaces.IUsuario;
+import logica.Interfaces.IControladorUsuario;
 import logica.Controladores.ControladorUsuario;
 import logica.Controladores.ControladorPropCat;
 import logica.Interfaces.IControladorUsuario;
@@ -37,11 +37,6 @@ public class Fabrica {
         IPropCat ip = this.getControladorPropCat();
         ip.cargarPropuestas();
     }
-
-//    public IUsuario getIControladorPersona() {
-//        IUsuario ControladorU = ControladorUsuario.getInstance();
-//        return ControladorU;
-//    }
 
     public IPropCat getControladorPropCat() {
         IPropCat ControladorPC = ControladorPropCat.getInstance();
