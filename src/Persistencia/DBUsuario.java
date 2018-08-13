@@ -1,0 +1,73 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Persistencia;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Calendar;
+import java.time.LocalDate;
+import logica.Clases.Colaborador;
+import logica.Clases.Proponente;
+import java.util.Date;
+import java.text.DateFormatSymbols;
+import java.text.SimpleDateFormat;
+
+/**
+ *
+ * @author Usuario
+ */
+public class DBUsuario {
+
+    private Connection conexion = new ConexionDB().getConexion();
+
+    public boolean agregarColaborador(Colaborador p) {
+        try {
+            PreparedStatement statement = conexion.prepareStatement("INSERT INTO colaborador " + "(nickName, nombre, apellido,correo,fechaN,imagen) values(?,?,?,?,?,?)");
+            Calendar calen = p.getFechaN();
+            Date fechaN = (Date) calen.getTime();
+            java.sql.Date sDate = new java.sql.Date(fechaN.getTime());
+
+            statement.setString(1, p.getNickname());
+            statement.setString(2, p.getNombre());
+            statement.setString(3, p.getApellido());
+            statement.setString(4, p.getCorreo());
+            statement.setDate(5, sDate);
+            statement.setString(6, p.getImagen());
+            statement.executeUpdate();
+            statement.close();
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean agregarProponente(Proponente p) {
+        try {
+            PreparedStatement statement = conexion.prepareStatement("INSERT INTO proponente " + "(nickName, nombre, apellido,correo,fechaN,imagen,direccion,biografia,sitioWeb) values(?,?,?,?,?,?,?,?,?)");
+            Calendar calendar = p.getFechaN();
+            Calendar calen = p.getFechaN();
+            Date fechaN = (Date) calen.getTime();
+            java.sql.Date sDate = new java.sql.Date(fechaN.getTime());
+            statement.setString(1, p.getNickname());
+            statement.setString(2, p.getNombre());
+            statement.setString(3, p.getApellido());
+            statement.setString(4, p.getCorreo());
+            statement.setDate(5, sDate);
+            statement.setString(6, p.getImagen());
+            statement.setString(7, p.getDireccion());
+            statement.setString(8, p.getBiografia());
+            statement.setString(9, p.getsitioweb());
+            statement.executeUpdate();
+            statement.close();
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+}
