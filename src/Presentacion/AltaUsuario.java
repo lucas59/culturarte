@@ -346,13 +346,10 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
 
     private void jRadioProponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioProponenteActionPerformed
         // TODO add your handling code here:
-
         jTextDireccion.setEnabled(true);
         jTextSitioWeb.setEnabled(true);
         jTextBiografia.setEnabled(true);
         jPanelAdicionales.setEnabled(true);
-
-
     }//GEN-LAST:event_jRadioProponenteActionPerformed
 
     private void jRadioColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioColaboradorActionPerformed
@@ -410,10 +407,8 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
                     }
                 }
             }
-
             return valido;
         }
-
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
