@@ -307,7 +307,7 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
         Calendar fechaN = jDateChooser1.getCalendar();
         boolean ok;
 
-        if ("".equals(nick) || "".equals(nombre) || "".equals(apellido) || "".equals(correo) || "".equals(imagen) || fechaN.getTime() == null) {
+        if ("".equals(nick) || "".equals(nombre) || "".equals(apellido) || "".equals(correo) || fechaN.getTime() == null) {
             JOptionPane.showMessageDialog(null, "Se deben completar todos los campos obligatorios");
             return;
         }
