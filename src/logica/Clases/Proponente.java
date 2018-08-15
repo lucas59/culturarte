@@ -28,6 +28,23 @@ public class Proponente extends Usuario {
         this.Propuestas = Propuestas;
     }
 
+    public String getSitioweb() {
+        return sitioweb;
+    }
+
+    public void setSitioweb(String sitioweb) {
+        this.sitioweb = sitioweb;
+    }
+
+    public Map<String, Propuesta> getPropuestas() {
+        return Propuestas;
+    }
+
+    public void setPropuestas(Map<String, Propuesta> Propuestas) {
+        this.Propuestas = Propuestas;
+    }
+    
+
     public String getDireccion() {
         return this.direccion;
     }

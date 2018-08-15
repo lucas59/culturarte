@@ -5,8 +5,12 @@
  */
 package logica.Interfaces;
 
+import java.awt.List;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import logica.Clases.DtProponente;
+import logica.Clases.Proponente;
 
 /**
  *
@@ -18,8 +22,12 @@ public interface IControladorUsuario {
 
     public abstract boolean dejarseguirUsuario(String nickUsu1, String nickUsu2);
 
-    public abstract boolean AgregarUsuarioColaborador(String nickName, String nombre, String apellido,String correo, Calendar fechaN, String imagen);
+    public abstract boolean AgregarUsuarioColaborador(String nickName, String nombre, String apellido, String correo, Calendar fechaN, String imagen);
 
-    public abstract boolean AgregarUsuarioProponente(String nickName, String nombre, String apellido,String correo, Calendar fechaN, String imagen, String direccion, String biografia, String sitioWeb);
+    public abstract boolean AgregarUsuarioProponente(String nickName, String nombre, String apellido, String correo, Calendar fechaN, String imagen, String direccion, String biografia, String sitioWeb);
+
+    public abstract ArrayList<Proponente> BuscarProponente(String nick);
+
+    public abstract ArrayList<Proponente> ListarProponentes();
 
 }
