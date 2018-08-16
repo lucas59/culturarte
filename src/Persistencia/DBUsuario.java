@@ -70,4 +70,34 @@ public class DBUsuario {
             return false;
         }
     }
+
+    public boolean seguirUsuario(String nickUsu1, String nickUsu2){
+        try {
+            PreparedStatement statement = conexion.prepareStatement("INSERT INTO seguidores" + "(nickName, uSigue) values(?,?)");
+            statement.setString(1, nickUsu1);
+            statement.setString(2, nickUsu2);
+            statement.executeUpdate();
+            statement.close();
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }        
+            
+        }
+        public boolean dejarseguirUsuario(String nickUsu1, String nickUsu2){
+        try {
+            PreparedStatement statement = conexion.prepareStatement("DELETE FROM seguidores" + "(nickName, uSigue) values(?,?)");
+            statement.setString(1, nickUsu1);
+            statement.setString(2, nickUsu2);
+            statement.executeUpdate();
+            statement.close();
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }        
+            
+            
+        }
 }

@@ -5,13 +5,15 @@
  */
 package Presentacion;
 
+import javax.swing.JOptionPane;
+import logica.Fabrica;
 import logica.Interfaces.IControladorUsuario;
 
 /**
  *
  * @author Usuario
  */
-public class Seguir_Usuario extends javax.swing.JFrame {
+public class Seguir_Usuario extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form SeguirUsuario
@@ -20,6 +22,8 @@ public class Seguir_Usuario extends javax.swing.JFrame {
     
     public Seguir_Usuario() {
         initComponents();
+        this.ICU = Fabrica.getInstance().getIControladorUsuario();
+        
     }
 
     /**
@@ -156,13 +160,23 @@ public class Seguir_Usuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String nickUsu1=jTextPane1.getText();
+         String nickUsu1=jTextPane1.getText();
         String nickUsu2=jTextPane2.getText();
         
-        ICU.seguirUsuario(nickUsu1, nickUsu2);
+        if ("".equals(nickUsu1) || "".equals(nickUsu2)) {
+        JOptionPane.showMessageDialog(null, "Se deben completar todos los campos obligatorios");
+        return;}
+            
+        boolean ok;
         
-        javax.swing.JOptionPane.showMessageDialog(null,"El Usuario " +nickUsu1+ " ahora sigue a "+ nickUsu2);
+        ok = ICU.seguirUsuario(nickUsu1, nickUsu2);
         
+        if (ok){javax.swing.JOptionPane.showMessageDialog(null,"El Usuario " +nickUsu1+ " ahora sigue a "+ nickUsu2);
+        }
+        else {
+            javax.swing.JOptionPane.showMessageDialog(null, "Error al realizar seguimiento o el seguimiento ya existe");
+        }
+                                   
                                    
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -177,12 +191,22 @@ public class Seguir_Usuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextPane3KeyReleased
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        String nickUsu1 = jTextPane3.getText();
-        String nickUsu2 = jTextPane4.getText();
+        String nickUsu1=jTextPane1.getText();
+        String nickUsu2=jTextPane2.getText();
         
-         ICU.dejarseguirUsuario(nickUsu1, nickUsu2);
+        if ("".equals(nickUsu1) || "".equals(nickUsu2)) {
+        JOptionPane.showMessageDialog(null, "Se deben completar todos los campos obligatorios");
+        return;}
+            
+        boolean ok;
         
-          javax.swing.JOptionPane.showMessageDialog(null,"El Usuario " +nickUsu1+ " ya no sigue a "+ nickUsu2);
+        ok = ICU.dejarseguirUsuario(nickUsu1, nickUsu2);
+        
+        if (ok){javax.swing.JOptionPane.showMessageDialog(null,"El Usuario " +nickUsu1+ " ya no sigue a "+ nickUsu2);
+        }
+        else {
+            javax.swing.JOptionPane.showMessageDialog(null, "Error al finalizar seguimiento o no existe");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
