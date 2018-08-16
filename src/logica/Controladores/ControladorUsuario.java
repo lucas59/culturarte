@@ -9,11 +9,9 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.File;
 import java.util.Calendar;
-import java.sql.Date;
 import java.util.Map;
 import logica.Clases.Colaborador;
 import logica.Clases.Propuesta;
-import logica.Interfaces.IUsuario;
 import logica.Clases.Usuario;
 import Persistencia.DBUsuario;
 import java.io.File;
@@ -46,10 +44,16 @@ public class ControladorUsuario implements IControladorUsuario {
     }
 
     public ControladorUsuario() {
-        this.Usuarios = new HashMap<String, Usuario>();
+        this.Usuarios = new HashMap<>();
         this.dbUsuario = new DBUsuario();
     }
 
+    @Override
+    public Proponente ObtenerProponente(String nombreP) {
+        return (Proponente) this.Usuarios.get(nombreP);
+    }
+
+    
     public Map<String, Usuario> getUsuarios() {
         return Usuarios;
     }
@@ -58,6 +62,7 @@ public class ControladorUsuario implements IControladorUsuario {
         this.Usuarios = Usuarios;
     }
 
+    @Override
     public void seguirUsuario(String nickUsu1, String nickUsu2) {
 
         Usuario aux1 = (Usuario) this.Usuarios.get(nickUsu1);
@@ -76,6 +81,7 @@ public class ControladorUsuario implements IControladorUsuario {
 
     }
 
+    @Override
     public void dejarseguirUsuario(String nickUsu1, String nickUsu2) {
 
         Usuario aux1 = (Usuario) this.Usuarios.get(nickUsu1);
@@ -91,13 +97,14 @@ public class ControladorUsuario implements IControladorUsuario {
 
     }
 
+    @Override
     public boolean AgregarUsuarioColaborador(String nickName, String nombre, String apellido, String correo, Calendar fechaN, String imagen) {
         if (this.Usuarios.get(nickName) != null) {
             return false;
 
         } else {
-            Map<String, Usuario> seguidores = new HashMap<String, Usuario>();
-            Map<String, Propuesta> favoritas = new HashMap<String, Propuesta>();
+            Map<String, Usuario> seguidores = new HashMap<>();
+            Map<String, Propuesta> favoritas = new HashMap<>();
             Colaborador c = new Colaborador(nickName, nombre, apellido, correo, fechaN, imagen, seguidores, favoritas);
             boolean res = this.dbUsuario.agregarColaborador(c);
             if (res) {
@@ -108,6 +115,7 @@ public class ControladorUsuario implements IControladorUsuario {
         }
     }
 
+    @Override
     public boolean AgregarUsuarioProponente(String nickName, String nombre, String apellido, String correo, Calendar fechaN, String imagen, String direccion, String biografia, String sitioWeb) {
         if (this.Usuarios.get(nickName) != null) {
             return false;
@@ -124,6 +132,7 @@ public class ControladorUsuario implements IControladorUsuario {
         }
     }
 
+    @Override
     public void copiarFoto(String foto, String nick) {
 
         File origen = new File(foto);
