@@ -6,7 +6,6 @@
 package logica;
 
 import logica.Interfaces.IPropCat;
-import logica.Interfaces.IUsuario;
 import logica.Controladores.ControladorUsuario;
 import logica.Controladores.ControladorPropCat;
 import logica.Interfaces.IControladorUsuario;
