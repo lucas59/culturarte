@@ -5,36 +5,41 @@
  */
 package logica.Clases;
 
-import java.util.Date;
-import java.util.Map;
+import java.util.Calendar;
 
-/**
- *
- * @author Lucas
- */
-class EstadoPropuesta {
+public class EstadoPropuesta {
+
     private TipoE Estado;
-    private Date Fechacambio;
-    
-    public EstadoPropuesta(TipoE Estado, Date Fechacambio){
+    private Calendar fechaInicio;
+    private Calendar fechaFinal;
+
+    public EstadoPropuesta(TipoE Estado, Calendar Fechacambio) {
         this.Estado = Estado;
-        this.Fechacambio = Fechacambio;
+        this.fechaInicio = Fechacambio;
     }
-    
-    public TipoE getEstado(){
+
+    public TipoE getEstado() {
         return this.Estado;
-    } 
-    
-    public Date getFechacambio(){
-        return this.Fechacambio;
     }
-    
-    public void setEstado(TipoE Estado){
+
+    public Calendar getfechaInicio() {
+        return this.fechaInicio;
+    }
+
+    public Calendar getfechaFinal() {
+        return this.fechaFinal;
+    }
+
+    public void setEstado(TipoE Estado) {
         this.Estado = Estado;
     }
-    
-    public void setFechacambio(Date Fechacambio){
-        this.Fechacambio = Fechacambio;
+
+    public void setfechaInicio(Calendar inicio) {
+        this.fechaInicio = inicio;
     }
-    
+
+    public void setfechaFinal(Calendar fechaF) {
+        this.fechaFinal = fechaF;
+    }
+
 }

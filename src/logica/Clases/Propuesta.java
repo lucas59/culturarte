@@ -9,35 +9,40 @@ package logica.Clases;
  *
  * @author Usuario
  */
-
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Calendar;
 
 public class Propuesta {
-  
-private String TituloP;
-private String descripcionP;
-private String imagen;
-private String lugar;
-private Calendar fecha;
-private float montoE;
-private float montoTot;
-private Calendar fechaPubl;
-private Map <Integer, Colaboracion> Colaboraciones;
-private Categoria categoria;    
 
-public Propuesta(String TituloP, String descripcionP, String imagen, String lugar, Calendar fecha, float montoE, float montoTot, Calendar fechaPubl) {
-        this.TituloP = TituloP;
-        this.descripcionP = descripcionP;
+    private String TituloP;
+    private String descripcionP;
+    private String imagen;
+    private String lugar;
+    private Calendar fecha;
+    private float montoE;
+    private float montoTot;
+    private Calendar fechaPubl;
+    private Proponente Autor;
+    private TipoRetorno retornos;
+    private EstadoPropuesta estadoActual;
+    private Map<Integer, Colaboracion> Colaboraciones;
+    private Categoria categoria;
+
+    public Propuesta(String tituloP, String descripcion, String imagen, String lugar, Calendar fecha, float montoE, float montoTot, Calendar fechaPubl, EstadoPropuesta estado, Categoria cate, TipoRetorno retorno, Proponente autor) {
+        this.TituloP = tituloP;
+        this.descripcionP = descripcion;
         this.imagen = imagen;
         this.lugar = lugar;
         this.fecha = fecha;
         this.montoE = montoE;
         this.montoTot = montoTot;
         this.fechaPubl = fechaPubl;
-        this.Colaboraciones = new HashMap<Integer, Colaboracion>();
+        this.categoria = cate;
+        this.retornos = retorno;
+        this.estadoActual = estado;
+        this.Autor = autor;
+        this.Colaboraciones = new HashMap<>();
     }
 
     public String getTituloP() {
@@ -103,17 +108,21 @@ public Propuesta(String TituloP, String descripcionP, String imagen, String luga
     public void setFechaPubl(Calendar fechaPubl) {
         this.fechaPubl = fechaPubl;
     }
-    
-    public void setCategoria(Categoria categoria){
+
+    public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
-    
-    public Categoria getCategoria(){
+
+    public Categoria getCategoria() {
         return this.categoria;
     }
-
-   
+    
+    public TipoRetorno getRetornos(){
+        return this.retornos;
+    }
+    
+    public Proponente getAutor(){
+        return this.Autor;
+    }
 
 }
-
-
