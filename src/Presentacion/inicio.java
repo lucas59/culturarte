@@ -7,7 +7,6 @@ package Presentacion;
 
 import java.awt.Component;
 import java.util.Locale;
-import javax.swing.JMenuItem;
 import logica.Controladores.ControladorPropCat;
 import logica.Fabrica;
 import logica.Interfaces.IControladorUsuario;
@@ -20,7 +19,6 @@ import logica.Interfaces.IPropCat;
 public class inicio extends javax.swing.JFrame {
     private IPropCat IPC;
     private IControladorUsuario ICU;
-    private JMenuItem jMenuItem4;
     /**
      * Creates new form inicio
      */
