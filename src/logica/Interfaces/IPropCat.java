@@ -31,5 +31,5 @@ public interface IPropCat {
     public abstract void seleccionarUC(String nombreP, String tipoEsp);
     public abstract void crearPropuesta(String tituloP,String descripcion,String lugar, String imagen,Calendar fecha,float montoE, float montoTot, Calendar fechaPubl, TipoRetorno retorno);
     public abstract List<DtConsultaPropuesta>listarPropuestas();
-
+    public DtinfoPropuesta SeleccionarPropuestaR(String titulo);
 }

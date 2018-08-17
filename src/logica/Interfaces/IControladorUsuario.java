@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import logica.Clases.DtProponente;
+import logica.Clases.DtinfoColaborador;
 import logica.Clases.Proponente;
 
 /**
@@ -25,4 +26,5 @@ public interface IControladorUsuario {
     public abstract boolean AgregarUsuarioProponente(String nickName, String nombre, String apellido,String correo, Calendar fechaN, String imagen, String direccion, String biografia, String sitioWeb);
     public abstract Proponente ObtenerProponente(String nombreP);
     public abstract ArrayList<DtProponente> ListarProponentes();
+    public abstract ArrayList<DtinfoColaborador> ListarColaboradores();
 }

@@ -17,27 +17,27 @@ import java.util.Set;
  */
 public class NickTitProp{
     private String Titulo;
-    private String Descripcion;
+    private String Proponente;
     public NickTitProp(){
         this.Titulo = null;
-        this.Descripcion = null;
+        this.Proponente = null;
     }
     public NickTitProp(Propuesta p){
         this.Titulo = p.getTituloP();
-        this.Descripcion=p.getDescripcionP();
+        this.Proponente=p.getAutor().getNickname();
     
     } 
     public NickTitProp(String titulo, String descricion){
         this.Titulo = titulo;
-        this.Descripcion = descricion;
+        this.Proponente = descricion;
     }    
 
     public String getTituloP() {
         return Titulo;
     }
 
-    public String getDescripcionP() {
-        return Descripcion;
+    public String getProponente() {
+        return Proponente;
     }
 
    

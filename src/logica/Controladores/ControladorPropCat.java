@@ -38,6 +38,7 @@ public class ControladorPropCat implements IPropCat {
     private DBPropuesta dbPropuesta = null;
     private Categoria catRecordada;
     private Proponente uProponente;
+    private Propuesta Propuesta;
     
     public static ControladorPropCat getInstance() {
         if (instancia == null) {
@@ -115,12 +116,28 @@ public class ControladorPropCat implements IPropCat {
         return listPropuestas;
     }
     
+        public DtinfoPropuesta SeleccionarPropuestaR(String titulo){
+        Map<String, Propuesta>propuestas = this.propuestas;
+        Set set = propuestas.entrySet();
+        Iterator iterator = set.iterator();
+        DtinfoPropuesta retorno = null;
+        while(iterator.hasNext()) {
+            Map.Entry mentry = (Map.Entry)iterator.next();
+            Propuesta aux=(Propuesta) mentry.getValue();
+            if(aux.getTituloP().compareTo(titulo) == 0){
+                retorno = new DtinfoPropuesta(aux.getTituloP(), aux.getDescripcionP(), aux.getImagen(), aux.getCategoria().getNombreC(), aux.getLugar(), aux.getFecha(), aux.getMontoE(), aux.getMontoTot(), aux.getFechaPubl(), aux.getRetorno());
+  //              this.Propuesta = new Propuesta(aux.getTituloP(), aux.getDescripcionP(), aux.getImagen(), aux.getLugar(), aux.getFecha(), aux.getMontoE(), aux.getMontoTot(), aux.getFechaPubl(), aux.get, catRecordada, TipoRetorno.EntGan, uProponente);
+            }
+        }       
+       return retorno;
+    }
+        
     @Override
     public DtinfoPropuesta SeleccionarPropuesta(String titulo) {
         
         Propuesta prop = this.propuestas.get(titulo);
         if (prop != null) {
-            return new DtinfoPropuesta(prop.getTituloP(), prop.getDescripcionP(), prop.getImagen(), prop.getCategoria().getNombreC(), prop.getLugar(), prop.getFecha(), prop.getMontoE(), prop.getMontoTot(), prop.getFechaPubl());
+            return new DtinfoPropuesta(prop.getTituloP(), prop.getDescripcionP(), prop.getImagen(), prop.getCategoria().getNombreC(), prop.getLugar(), prop.getFecha(), prop.getMontoE(), prop.getMontoTot(), prop.getFechaPubl(), prop.getRetorno());
         }
         //excepcion no esta el usuario
         return null;

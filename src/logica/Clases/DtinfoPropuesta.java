@@ -24,8 +24,9 @@ public class DtinfoPropuesta {
     private float Monto;
     private Calendar Fechapubli;
     private String estado;
+    private TipoRetorno tipoRetorno;
 
-    public DtinfoPropuesta(String Titulo, String Descripcion, String imagen, String TipoEspec, String Lugar, Calendar FechaReal, float Precio, float Monto, Calendar Fechapubli) {
+    public DtinfoPropuesta(String Titulo, String Descripcion, String imagen, String TipoEspec, String Lugar, Calendar FechaReal, float Precio, float Monto, Calendar Fechapubli, TipoRetorno tipoRetorno) {
         this.Titulo = Titulo;
         this.Descripcion = Descripcion;
         this.imagen = imagen;
@@ -35,6 +36,7 @@ public class DtinfoPropuesta {
         this.Precio = Precio;
         this.Monto = Monto;
         this.Fechapubli = Fechapubli;
+        this.tipoRetorno = tipoRetorno;
     }
 
     public String getTitulo() {
@@ -71,5 +73,9 @@ public class DtinfoPropuesta {
 
     public Calendar getFechapubli() {
         return Fechapubli;
+    }
+    
+    public TipoRetorno getTipoRetorno(){
+        return tipoRetorno;
     }
 }

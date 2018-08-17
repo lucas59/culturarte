@@ -24,7 +24,7 @@ public class Propuesta {
     private float montoTot;
     private Calendar fechaPubl;
     private Proponente Autor;
-    private TipoRetorno retornos;
+    private TipoRetorno retorno;
     private EstadoPropuesta estadoActual;
     private Map<Integer, Colaboracion> Colaboraciones;
     private Categoria categoria;
@@ -39,7 +39,7 @@ public class Propuesta {
         this.montoTot = montoTot;
         this.fechaPubl = fechaPubl;
         this.categoria = cate;
-        this.retornos = retorno;
+        this.retorno = retorno;
         this.estadoActual = estado;
         this.Autor = autor;
         this.Colaboraciones = new HashMap<>();
@@ -117,8 +117,8 @@ public class Propuesta {
         return this.categoria;
     }
     
-    public TipoRetorno getRetornos(){
-        return this.retornos;
+    public TipoRetorno getRetorno(){
+        return this.retorno;
     }
     
     public Proponente getAutor(){

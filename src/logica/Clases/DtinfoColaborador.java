@@ -6,10 +6,45 @@
 
 package logica.Clases;
 
+import java.util.Calendar;
+
 /**
  * 
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class DtinfoColaborador {
+  private String nickname;
+    private String nombre;
+    private String apellido;
+    private String correo;
+    private Calendar fechaN;
 
+    public DtinfoColaborador(String nickname, String nombre, String apellido, String correo, Calendar fechaN) {
+        this.nickname = nickname;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.correo = correo;
+        this.fechaN = fechaN;
+    }
+
+    
+    public String getNickname() {
+        return nickname;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public Calendar getFechaN() {
+        return fechaN;
+    }
 }

@@ -7,6 +7,7 @@ package Presentacion;
 
 import java.awt.Component;
 import java.util.Locale;
+import javax.swing.JOptionPane;
 import logica.Controladores.ControladorPropCat;
 import logica.Fabrica;
 import logica.Interfaces.IControladorUsuario;
@@ -122,7 +123,26 @@ public class inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        Registrar_Propuesta RP = new Registrar_Propuesta();
+   /*   
+        Fabrica fabrica = Fabrica.getInstance();
+        IControladorUsuario ICU = fabrica.getIControladorUsuario();
+        IPropCat IPC = fabrica.getControladorPropCat();
+       
+        if(ICU.getUsuarios.isEmpty() && IPC.getpropuesta().isEmpty()){
+            JOptionPane.showMessageDialog(null, "No existen Colaboradores ni propuestas en el sistema");
+        }
+        else if (ICU.getUsuarios().isEmpty())
+            JOptionPane.showMessageDialog(null, "No existen Colaboradores en el sistema");
+        else if(IPC.getpropuesta().isEmpty())
+            JOptionPane.showMessageDialog(null, "No existen Propuestas en el sistema");
+        if(!ICU.getUsuarios().isEmpty() && !IPC.getpropuesta().isEmpty()){
+        
+     
+        }
+        */
+      
+        JOptionPane.showMessageDialog(null, "No implementado");
+           Registrar_Colaboracion RP = new Registrar_Colaboracion();
         Escritorio.add(RP);
         RP.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed

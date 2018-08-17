@@ -29,7 +29,9 @@ import java.util.Set;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.StyledEditorKit;
 import logica.Clases.DtProponente;
+import logica.Clases.DtinfoColaborador;
 import logica.Clases.Proponente;
+import logica.Fabrica;
 import logica.Interfaces.IControladorUsuario;
 
 /**
@@ -235,6 +237,28 @@ public class ControladorUsuario implements IControladorUsuario {
             }
         }
         return (ArrayList<DtProponente>) lista;
+    }
+
+    @Override
+    public Proponente ObtenerProponente(String nombreP) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
+    public ArrayList<DtinfoColaborador> ListarColaboradores(){
+        Fabrica fabrica = Fabrica.getInstance();
+        ControladorUsuario CU = new ControladorUsuario();
+        Map<String, Usuario> usuarios = CU.getUsuarios();
+        Set set = Usuarios.entrySet();
+        Iterator iterator = set.iterator();
+        ArrayList<DtinfoColaborador> retorno = new ArrayList();
+        while(iterator.hasNext()) {
+            Map.Entry mentry = (Map.Entry)iterator.next();
+            Colaborador aux=(Colaborador) mentry.getValue();
+            DtinfoColaborador aux2 = new DtinfoColaborador(aux.getNickname(), aux.getNombre(), aux.getApellido(), aux.getCorreo(), aux.getFechaN());
+            retorno.add(aux2);
+        }       
+       return retorno;
     }
 
 }

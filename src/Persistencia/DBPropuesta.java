@@ -51,7 +51,7 @@ public class DBPropuesta {
             stat.setFloat(8, nuevaP.getMontoE());
             stat.setFloat(9, nuevaP.getMontoTot());
             stat.setDate(10, datePP);
-            stat.setInt(11, nuevaP.getRetornos().ordinal());
+            stat.setInt(11, nuevaP.getRetorno().ordinal());
             stat.executeUpdate();
             stat.close();
             
