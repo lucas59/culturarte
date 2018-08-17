@@ -260,7 +260,7 @@ public class Registrar_Propuesta extends javax.swing.JInternalFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rSFotoSquareResize1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -558,7 +558,7 @@ public class Registrar_Propuesta extends javax.swing.JInternalFrame {
             Map.Entry mentry = (Map.Entry)iterator.next();
             Propuesta aux=(Propuesta) mentry.getValue();
             if (aux.getTituloP().contains((String)jTable1.getValueAt(jTable1.getSelectedRow(),0))){
-                Dtinfop = new DtinfoPropuesta(aux.getTituloP(), aux.getDescripcionP(), aux.getImagen(), aux.getCategoria(), aux.getLugar(), aux.getFechaPubl(), aux.getMontoE(), aux.getMontoTot(), aux.getFechaPubl());
+                Dtinfop = new DtinfoPropuesta(aux.getTituloP(), aux.getDescripcionP(), aux.getImagen(), aux.getCategoria().getNombreC(), aux.getLugar(), aux.getFechaPubl(), aux.getMontoE(), aux.getMontoTot(), aux.getFechaPubl());
                 break;
             }
         }

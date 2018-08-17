@@ -68,5 +68,8 @@ public class Proponente extends Usuario {
     public void setsitioweb(String Sitioweb) {
         this.sitioweb = Sitioweb;
     }
-
+    
+    public Map<String, Propuesta> getPropuestasRealizadas(){
+        return this.Propuestas;
+    }
 }
