@@ -8,7 +8,7 @@ package Presentacion;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import logica.Clases.DtinfoColaborador;
-import logica.Clases.NickTitProp;
+import logica.Clases.DtNickTitProp;
 import logica.Controladores.ControladorPropCat;
 import logica.Controladores.ControladorUsuario;
 import logica.Fabrica;

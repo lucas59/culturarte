@@ -27,7 +27,7 @@ import jdk.nashorn.internal.objects.DataPropertyDescriptor;
 import logica.Clases.Colaborador;
 import logica.Clases.DtinfoColaborador;
 import logica.Clases.DtinfoPropuesta;
-import logica.Clases.NickTitProp;
+import logica.Clases.DtNickTitProp;
 import logica.Clases.Propuesta;
 import logica.Clases.TipoRetorno;
 import logica.Clases.Usuario;
@@ -687,11 +687,11 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         Fabrica fabrica = Fabrica.getInstance();
         ControladorPropCat controladorPC = (ControladorPropCat) fabrica.getControladorPropCat();
-        List<NickTitProp> lista = controladorPC.listarPropuestaC();
+        List<DtNickTitProp> lista = controladorPC.listarPropuestaC();
         DefaultTableModel modelo=(DefaultTableModel) jTable1.getModel();
         modelo.setRowCount(0);
         for (int i=0;i<lista.size();i++) {
-            NickTitProp p=(NickTitProp)lista.get(i);
+            DtNickTitProp p=(DtNickTitProp)lista.get(i);
             Object[] dat={p.getTituloP(),p.getProponente()};
             modelo.addRow(dat);
         }         

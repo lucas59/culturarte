@@ -12,7 +12,7 @@ import logica.Clases.Categoria;
 import logica.Clases.DtConsultaPropuesta;
 import logica.Clases.DtinfoColaborador;
 import logica.Clases.DtinfoPropuesta;
-import logica.Clases.NickTitProp;
+import logica.Clases.DtNickTitProp;
 import logica.Clases.Propuesta;
 import logica.Clases.TipoRetorno;
 
@@ -21,7 +21,7 @@ import logica.Clases.TipoRetorno;
  * @author Santiago.S
  */
 public interface IPropCat {
-    public abstract List<NickTitProp> listarPropuestaC() ;
+    public abstract List<DtNickTitProp> listarPropuestaC() ;
     public abstract DtinfoPropuesta SeleccionarPropuesta(String titulo);
     public abstract List<String> ListarColaboradores();
     public abstract List<DtinfoColaborador> SeleccionarColaborador();

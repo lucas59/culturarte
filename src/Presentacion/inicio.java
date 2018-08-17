@@ -136,15 +136,15 @@ public class inicio extends javax.swing.JFrame {
         else if(IPC.getpropuesta().isEmpty())
             JOptionPane.showMessageDialog(null, "No existen Propuestas en el sistema");
         if(!ICU.getUsuarios().isEmpty() && !IPC.getpropuesta().isEmpty()){
-        
+         Registrar_Colaboracion RP = new Registrar_Colaboracion();
+        Escritorio.add(RP);
+        RP.setVisible(true);
      
         }
         */
       
         JOptionPane.showMessageDialog(null, "No implementado");
-           Registrar_Colaboracion RP = new Registrar_Colaboracion();
-        Escritorio.add(RP);
-        RP.setVisible(true);
+          
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed

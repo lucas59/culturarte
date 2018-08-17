@@ -15,19 +15,19 @@ import java.util.Set;
  * 
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
-public class NickTitProp{
+public class DtNickTitProp{
     private String Titulo;
     private String Proponente;
-    public NickTitProp(){
+    public DtNickTitProp(){
         this.Titulo = null;
         this.Proponente = null;
     }
-    public NickTitProp(Propuesta p){
+    public DtNickTitProp(Propuesta p){
         this.Titulo = p.getTituloP();
         this.Proponente=p.getAutor().getNickname();
     
     } 
-    public NickTitProp(String titulo, String descricion){
+    public DtNickTitProp(String titulo, String descricion){
         this.Titulo = titulo;
         this.Proponente = descricion;
     }    

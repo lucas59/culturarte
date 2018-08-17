@@ -18,7 +18,7 @@ import logica.Clases.DtConsultaPropuesta;
 import logica.Clases.DtinfoColaborador;
 import logica.Clases.DtinfoPropuesta;
 import logica.Clases.EstadoPropuesta;
-import logica.Clases.NickTitProp;
+import logica.Clases.DtNickTitProp;
 import logica.Clases.Proponente;
 import logica.Clases.Propuesta;
 import logica.Clases.TipoE;
@@ -52,15 +52,15 @@ public class ControladorPropCat implements IPropCat {
     }
     
     @Override
-    public List<NickTitProp> listarPropuestaC() {
+    public List<DtNickTitProp> listarPropuestaC() {
         Map<String, Propuesta> prop = this.propuestas;
         Set set = prop.entrySet();
         Iterator iterator = set.iterator();
-        List<NickTitProp> retorno = new ArrayList();
+        List<DtNickTitProp> retorno = new ArrayList();
         while (iterator.hasNext()) {
             Map.Entry mentry = (Map.Entry) iterator.next();
             Propuesta aux = (Propuesta) mentry.getValue();
-            NickTitProp aux2 = new NickTitProp(aux);
+            DtNickTitProp aux2 = new DtNickTitProp(aux);
             retorno.add(aux2);
         }
         return retorno;
