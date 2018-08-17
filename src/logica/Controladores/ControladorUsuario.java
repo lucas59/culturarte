@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.File;
 import java.util.Calendar;
+import java.sql.Date;
 import java.util.Map;
 import logica.Clases.Colaborador;
 import logica.Clases.Propuesta;
@@ -50,16 +51,10 @@ public class ControladorUsuario implements IControladorUsuario {
     }
 
     public ControladorUsuario() {
-        this.Usuarios = new HashMap<>();
+        this.Usuarios = new HashMap<String, Usuario>();
         this.dbUsuario = new DBUsuario();
     }
 
-    @Override
-    public Proponente ObtenerProponente(String nombreP) {
-        return (Proponente) this.Usuarios.get(nombreP);
-    }
-
-    
     public Map<String, Usuario> getUsuarios() {
         return Usuarios;
     }
@@ -68,10 +63,10 @@ public class ControladorUsuario implements IControladorUsuario {
         this.Usuarios = Usuarios;
     }
 
-    
-    @Override
     public boolean seguirUsuario(String nickUsu1, String nickUsu2) {
 
+//        try{
+//            
         Usuario aux1 = (Usuario) this.Usuarios.get(nickUsu1);
         Usuario aux2 = (Usuario) this.Usuarios.get(nickUsu2);
 
@@ -103,6 +98,8 @@ public class ControladorUsuario implements IControladorUsuario {
     }
 
     public boolean dejarseguirUsuario(String nickUsu1, String nickUsu2) {
+
+//       try{
         Usuario aux1 = (Usuario) this.Usuarios.get(nickUsu1);
         Usuario aux2 = (Usuario) this.Usuarios.get(nickUsu2);
 
@@ -139,8 +136,8 @@ public class ControladorUsuario implements IControladorUsuario {
             return false;
 
         } else {
-            Map<String, Usuario> seguidores = new HashMap<>();
-            Map<String, Propuesta> favoritas = new HashMap<>();
+            Map<String, Usuario> seguidores = new HashMap<String, Usuario>();
+            Map<String, Propuesta> favoritas = new HashMap<String, Propuesta>();
             Colaborador c = new Colaborador(nickName, nombre, apellido, correo, fechaN, imagen, seguidores, favoritas);
 
             String fotoLocal = c.getImagen();
