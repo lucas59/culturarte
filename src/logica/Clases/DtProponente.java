@@ -7,6 +7,8 @@ package logica.Clases;
 
 import java.util.Calendar;
 import java.util.Map;
+import logica.Clases.Proponente;
+import logica.Clases.Usuario;
 
 /**
  *
@@ -25,5 +27,23 @@ public class DtProponente extends DtUsuario {
         this.direccion = direccion;
         this.sitioweb = sitioweb;
         this.Propuestas = Propuestas;
+    }
+
+    
+
+    public String getBiografia() {
+        return biografia;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public String getSitioweb() {
+        return sitioweb;
+    }
+
+    public Map<String, Propuesta> getPropuestas() {
+        return Propuestas;
     }
 }

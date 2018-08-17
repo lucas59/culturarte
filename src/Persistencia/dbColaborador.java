@@ -23,7 +23,7 @@ public class dbColaborador {
     public boolean agregarColaborador(Colaborador p) {
         try {
             PreparedStatement statement = conexion.prepareStatement("INSERT INTO colaborador "
-                    + "(nickName, nombre, apellido,correo,fechaN,imagen) values(?,?,?,?,?,?)");
+                    + "(NickName, nombre, apellido,correo,fechaN,imagen) values(?,?,?,?,?,?)");
             Calendar a = p.getFechaN();
 
             statement.setString(1, p.getNickname());

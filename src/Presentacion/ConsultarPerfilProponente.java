@@ -5,6 +5,9 @@
  */
 package Presentacion;
 
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -14,10 +17,14 @@ import java.util.Date;
 import java.util.Formattable;
 import java.util.Formatter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import logica.Clases.DtProponente;
-import logica.Clases.Proponente;
 import logica.Fabrica;
 import logica.Interfaces.IControladorUsuario;
 
@@ -34,19 +41,20 @@ public class ConsultarPerfilProponente extends javax.swing.JInternalFrame {
      */
     public ConsultarPerfilProponente() {
         initComponents();
+        jPanelDatos.setVisible(false);
+
         this.ICU = Fabrica.getInstance().getIControladorUsuario();
 
-        List<Proponente> proponentes = ICU.ListarProponentes();
+        List<DtProponente> proponentes = ICU.ListarProponentes();
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.setRowCount(0);
         for (int i = 0; i < proponentes.size(); i++) {
-            Proponente p = proponentes.get(i);
+            DtProponente p = proponentes.get(i);
             Date f = (Date) p.getFechaN().getTime();
             String fecha = new SimpleDateFormat("dd/MMM/yyyy").format(f);
-            Object[] dat = {p.getNickname(), p.getNombre(), p.getApellido(), p.getCorreo(), fecha, p.getDireccion(), p.getBiografia(), p.getSitioweb()};
+            Object[] dat = {p.getNickname(), p.getNombre(), p.getApellido(), p.getCorreo(), fecha, p.getDireccion(), p.getBiografia(), p.getSitioweb(), p.getImagen()};
             modelo.addRow(dat);
         }
-
     }
 
     /**
@@ -64,6 +72,20 @@ public class ConsultarPerfilProponente extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jPanelDatos = new javax.swing.JPanel();
+        jLabelFoto = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabelCorreo = new javax.swing.JLabel();
+        jLabelFecha = new javax.swing.JLabel();
+        jLabelDireccion = new javax.swing.JLabel();
+        jLabelSitioWeb = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextPaneBio = new javax.swing.JTextPane();
+        jLabelNombre = new javax.swing.JLabel();
 
         setTitle("Consulta Perfil de Proponente");
 
@@ -94,20 +116,20 @@ public class ConsultarPerfilProponente extends javax.swing.JInternalFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nick Name", "Nombre", "Apellido", "Correo", "Nacimiento", "Biografia", "Direccion", "Sitio Web"
+                "Nick Name", "Nombre", "Apellido", "Correo", "Nacimiento", "Biografia", "Direccion", "Sitio Web", "Foto"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -116,6 +138,11 @@ public class ConsultarPerfilProponente extends javax.swing.JInternalFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -127,15 +154,13 @@ public class ConsultarPerfilProponente extends javax.swing.JInternalFrame {
             .addGroup(jPanelIniLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelIniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanelIniLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextNick, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2))
-                    .addGroup(jPanelIniLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 204, Short.MAX_VALUE)))
+                        .addComponent(jLabel2)))
                 .addContainerGap())
         );
         jPanelIniLayout.setVerticalGroup(
@@ -153,17 +178,114 @@ public class ConsultarPerfilProponente extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabelFoto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel5.setText("Correo ");
+
+        jLabel6.setText("Fecha de Nacimiento");
+
+        jLabel7.setText("Direccion");
+
+        jLabel8.setText("Sitio Web ");
+
+        jLabel9.setText("Biografia");
+
+        jTextPaneBio.setBackground(new java.awt.Color(204, 204, 204));
+        jScrollPane2.setViewportView(jTextPaneBio);
+
+        javax.swing.GroupLayout jPanelDatosLayout = new javax.swing.GroupLayout(jPanelDatos);
+        jPanelDatos.setLayout(jPanelDatosLayout);
+        jPanelDatosLayout.setHorizontalGroup(
+            jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelDatosLayout.createSequentialGroup()
+                .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelDatosLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabelFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelDatosLayout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelDatosLayout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelSitioWeb, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelDatosLayout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(jPanelDatosLayout.createSequentialGroup()
+                                    .addComponent(jLabel6)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabelFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(jPanelDatosLayout.createSequentialGroup()
+                                    .addComponent(jLabel5)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabelCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jPanelDatosLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(170, Short.MAX_VALUE))
+        );
+        jPanelDatosLayout.setVerticalGroup(
+            jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelDatosLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(jLabelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelDatosLayout.createSequentialGroup()
+                        .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanelDatosLayout.createSequentialGroup()
+                                .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanelDatosLayout.createSequentialGroup()
+                                        .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(jPanelDatosLayout.createSequentialGroup()
+                                                .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel5)
+                                                    .addComponent(jLabelCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel6))
+                                            .addComponent(jLabelFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel7))
+                                    .addComponent(jLabelDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel8))
+                            .addComponent(jLabelSitioWeb, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelDatosLayout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanelDatosLayout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
+                                .addContainerGap())))
+                    .addComponent(jLabelFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelIni, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanelDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanelIni, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanelIni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -174,8 +296,25 @@ public class ConsultarPerfilProponente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextNickActionPerformed
 
     private void jTextNickKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNickKeyTyped
-
+        List<DtProponente> proponentes = ICU.ListarProponentes();
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        modelo.setRowCount(0);
+        for (int i = 0; i < proponentes.size(); i++) {
+            DtProponente p = proponentes.get(i);
+            if (p.getNombre().contains(jTextNick.getText())) {
+                Calendar fechaN = p.getFechaN();
+                Date fecha = fechaN.getTime();
+                String f = this.darFormato(fecha);
+                Object[] dat = {p.getNickname(), p.getNombre(), p.getApellido(), p.getCorreo(), f, p.getDireccion(), p.getBiografia(), p.getSitioweb()};
+                modelo.addRow(dat);
+            }
+        }
     }//GEN-LAST:event_jTextNickKeyTyped
+
+    public static String darFormato(Date date) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+        return simpleDateFormat.format(date).toUpperCase();
+    }
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         // TODO add your handling code here:
@@ -183,26 +322,48 @@ public class ConsultarPerfilProponente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jTextNickKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNickKeyReleased
-        List<Proponente> proponentes = ICU.BuscarProponente(jTextNick.getText());
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
 
-        modelo.setRowCount(0);
-        for (int i = 0; i < proponentes.size(); i++) {
-            Proponente p = proponentes.get(i);
-            Calendar fechaN = p.getFechaN();
-            Object[] dat = {p.getNickname(), p.getNombre(), p.getApellido(), p.getCorreo(), p.getFechaN(), p.getDireccion(), p.getBiografia(), p.getSitioweb()};
-            modelo.addRow(dat);
-
-        }
     }//GEN-LAST:event_jTextNickKeyReleased
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        jPanelDatos.setVisible(true);
+        int seleccion = jTable1.rowAtPoint(evt.getPoint());
+        jLabelNombre.setText(String.valueOf(jTable1.getValueAt(seleccion, 1)) + String.valueOf(jTable1.getValueAt(seleccion, 2)));
+        jLabelCorreo.setText(String.valueOf(jTable1.getValueAt(seleccion, 3)));
+        jLabelSitioWeb.setText(String.valueOf(jTable1.getValueAt(seleccion, 7)));
+        jTextPaneBio.setText(String.valueOf(jTable1.getValueAt(seleccion, 5)));
+        jLabelDireccion.setText(String.valueOf(jTable1.getValueAt(seleccion, 6)));
+        jLabelFecha.setText(String.valueOf(jTable1.getValueAt(seleccion, 4)));
+        String imagen = jTable1.getValueAt(seleccion, 8).toString();
+
+        if (imagen != "") {
+            ImageIcon fot = new ImageIcon(String.valueOf(jTable1.getValueAt(seleccion, 8)));
+            Icon icono = new ImageIcon(fot.getImage().getScaledInstance(jLabelFoto.getWidth(), jLabelFoto.getHeight(), Image.SCALE_DEFAULT));
+            jLabelFoto.setIcon(icono);
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelCorreo;
+    private javax.swing.JLabel jLabelDireccion;
+    private javax.swing.JLabel jLabelFecha;
+    private javax.swing.JLabel jLabelFoto;
+    private javax.swing.JLabel jLabelNombre;
+    private javax.swing.JLabel jLabelSitioWeb;
+    private javax.swing.JPanel jPanelDatos;
     private javax.swing.JPanel jPanelIni;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextNick;
+    private javax.swing.JTextPane jTextPaneBio;
     // End of variables declaration//GEN-END:variables
 }

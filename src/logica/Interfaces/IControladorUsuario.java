@@ -26,8 +26,6 @@ public interface IControladorUsuario {
 
     public abstract boolean AgregarUsuarioProponente(String nickName, String nombre, String apellido, String correo, Calendar fechaN, String imagen, String direccion, String biografia, String sitioWeb);
 
-    public abstract ArrayList<Proponente> BuscarProponente(String nick);
-
-    public abstract ArrayList<Proponente> ListarProponentes();
+    public abstract ArrayList<DtProponente> ListarProponentes();
 
 }
