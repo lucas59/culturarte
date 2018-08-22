@@ -129,4 +129,9 @@ public class Propuesta {
         return this.Autor;
     }
 
+    public DtinfoPropuesta getDtPropuesta() {
+        DtinfoPropuesta dp = new DtinfoPropuesta(this.TituloP, this.descripcionP, this.imagen, this.categoria.getNombreC(), this.lugar, this.fecha, this.montoE, this.montoTot, this.fechaPubl, this.retorno);
+        return dp;
+    }
+
 }

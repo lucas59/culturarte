@@ -26,6 +26,13 @@ public class DtinfoColaborador {
         this.correo = correo;
         this.fechaN = fechaN;
     }
+    public DtinfoColaborador(Usuario aux) {
+        this.nickname=aux.getNickname();
+        this.nombre=aux.getNombre();
+        this.apellido=aux.getApellido();
+        this.correo=aux.getCorreo();
+        this.fechaN=aux.getFechaN();
+    }
 
     
     public String getNickname() {

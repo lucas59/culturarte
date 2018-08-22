@@ -25,9 +25,11 @@ import java.util.Set;
 import logica.Clases.DtProponente;
 import logica.Clases.DtUsuario;
 import logica.Clases.DtinfoColaborador;
+import logica.Clases.DtinfoPropuesta;
 import logica.Clases.Proponente;
 import logica.Fabrica;
 import logica.Interfaces.IControladorUsuario;
+import logica.Interfaces.IPropCat;
 
 /**
  *
@@ -37,7 +39,7 @@ public class ControladorUsuario implements IControladorUsuario {
 
     private static ControladorUsuario instancia;
     private Map<String, Usuario> Usuarios;
-
+    private IPropCat IPC;
     private DBUsuario dbUsuario = null;
 
     public static ControladorUsuario getInstance() {
@@ -50,6 +52,11 @@ public class ControladorUsuario implements IControladorUsuario {
     public ControladorUsuario() {
         this.Usuarios = new HashMap<>();
         this.dbUsuario = new DBUsuario();
+        this.CargarUsuarios();
+    }
+
+    public void ComunicarControladores(IPropCat prop) {
+        this.IPC = prop;
     }
 
     public Map<String, Usuario> getUsuarios() {
@@ -64,7 +71,7 @@ public class ControladorUsuario implements IControladorUsuario {
     public boolean seguirUsuario(String nickUsu1, String nickUsu2) {
 
 //        try{
-//            
+////            
         Usuario aux1 = (Usuario) this.Usuarios.get(nickUsu1);
         Usuario aux2 = (Usuario) this.Usuarios.get(nickUsu2);
 
@@ -136,7 +143,7 @@ public class ControladorUsuario implements IControladorUsuario {
             return false;
         }
 
-        boolean res = this.dbUsuario.seguirUsuario(nickUsu1, nickUsu2);
+        boolean res = this.dbUsuario.dejarseguirUsuario(nickUsu1, nickUsu2);
         if (res) {
             aux1.getSeguidos().remove(nickUsu2, aux2);
             return true;
@@ -263,21 +270,82 @@ public class ControladorUsuario implements IControladorUsuario {
         return (Proponente) this.Usuarios.get(nombreP);
     }
 
-    @Override
-    public ArrayList<DtinfoColaborador> ListarColaboradores() {
-        Fabrica fabrica = Fabrica.getInstance();
+      @Override
+    public ArrayList<DtinfoColaborador> ListarColaboradores(){
         ControladorUsuario CU = new ControladorUsuario();
-        Map<String, Usuario> usuarios = CU.getUsuarios();
         Set set = Usuarios.entrySet();
         Iterator iterator = set.iterator();
         ArrayList<DtinfoColaborador> retorno = new ArrayList();
-        while (iterator.hasNext()) {
-            Map.Entry mentry = (Map.Entry) iterator.next();
-            Colaborador aux = (Colaborador) mentry.getValue();
+        while(iterator.hasNext()) {
+            Map.Entry mentry = (Map.Entry)iterator.next();
+            
+            if(mentry.getValue() instanceof Colaborador){
+                Colaborador aux=(Colaborador) mentry.getValue();
             DtinfoColaborador aux2 = new DtinfoColaborador(aux.getNickname(), aux.getNombre(), aux.getApellido(), aux.getCorreo(), aux.getFechaN());
             retorno.add(aux2);
-        }
-        return retorno;
+            }
+        }       
+       return retorno;
     }
+    
+    @Override
+    public  ArrayList<DtinfoColaborador> BuscarColaborador(String nick){
+       ArrayList<DtinfoColaborador> colEncontrados=new ArrayList<DtinfoColaborador>();
+       Set set = Usuarios.entrySet();
+        Iterator iterator = set.iterator();
+        while(iterator.hasNext()) {
+            Map.Entry mentry = (Map.Entry)iterator.next();
+            if(mentry.getValue() instanceof Colaborador){
+            Colaborador aux=(Colaborador) mentry.getValue();
+            if(aux.getNickname().contains(nick)){
+            DtinfoColaborador aux2 = new DtinfoColaborador(aux);
+            colEncontrados.add(aux2);
+            }
+            } 
+        }
+        return colEncontrados;
+    }
+
+    @Override
+    public Map <String,DtinfoPropuesta> verPropuestas(DtinfoColaborador dtc){
+    Map <String,DtinfoPropuesta> dtpropuestas=null;
+    Set set = this.Usuarios.entrySet();
+        Iterator it=set.iterator();
+        while(it.hasNext()){
+            Map.Entry mentry = (Map.Entry)it.next();
+            if(mentry.getValue() instanceof Colaborador){
+             Colaborador c2=(Colaborador) mentry.getValue();
+            if(c2.getNickname().equals(dtc.getNickname())){
+                dtpropuestas=this.IPC.DarPropuestasCol(c2);
+                break;
+            }  
+        }
+        }
+        
+    return dtpropuestas;
+}
+    
+ public DtinfoColaborador verPerfil(String nick){
+     DtinfoColaborador dtc=null;
+     Set set = Usuarios.entrySet();
+        Iterator iterator = set.iterator();
+        while(iterator.hasNext()) {
+            
+            Map.Entry mentry = (Map.Entry)iterator.next();
+            if(mentry.getValue() instanceof Colaborador){
+            Colaborador aux=(Colaborador) mentry.getValue();
+            
+            if(aux.getNickname().equals(nick)){
+                 dtc=new DtinfoColaborador(aux);
+                break;
+            }
+        }
+        }
+            return dtc;
+ }
+ 
+     public void CargarUsuarios(){
+      this.Usuarios=dbUsuario.cargarUsuarios();
+  }
 
 }
