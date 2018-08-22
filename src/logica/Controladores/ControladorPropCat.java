@@ -41,6 +41,7 @@ public class ControladorPropCat implements IPropCat {
     private Categoria catRecordada;
     private Proponente uProponente;
     private Propuesta Propuesta;
+    private Map<String,EstadoPropuesta> estadospropuesta;
 
     public static ControladorPropCat getInstance() {
         if (instancia == null) {
@@ -222,6 +223,19 @@ public class ControladorPropCat implements IPropCat {
             colaboradores.put(dtC.getNickname(), dtC);
         }
         return colaboradores;
+    }
+    
+    @Override
+     public Map<String, DtinfoPropuesta> DarPropuestasCol(Colaborador c) {
+        Map<String, DtinfoPropuesta> resultado = null;
+        Set set = c.getFavoritas().entrySet();
+        Iterator it = set.iterator();
+        while (it.hasNext()) {
+            Map.Entry mentry = (Map.Entry) it.next();
+            Propuesta p = (Propuesta) mentry.getValue();
+            resultado.put(p.getTituloP(), p.getDtPropuesta());
+        }
+        return resultado;
     }
 
 }

@@ -9,10 +9,13 @@ import java.awt.List;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
 import logica.Clases.DtProponente;
 import logica.Clases.DtUsuario;
 import logica.Clases.DtinfoColaborador;
+import logica.Clases.DtinfoPropuesta;
 import logica.Clases.Proponente;
+import logica.Clases.Usuario;
 
 /**
  *
@@ -35,6 +38,16 @@ public interface IControladorUsuario {
     public abstract ArrayList<DtProponente> ListarProponentes();
 
     public abstract ArrayList<DtinfoColaborador> ListarColaboradores();
+    
+    public abstract void ComunicarControladores(IPropCat prop);
+    
+    public abstract ArrayList<DtinfoColaborador> BuscarColaborador(String nick);
+    
+    public abstract Map <String,DtinfoPropuesta> verPropuestas(DtinfoColaborador dtc);
+    
+    public abstract DtinfoColaborador verPerfil(String nombre);
+    
+    public abstract Map<String, Usuario> getUsuarios();
 
     public abstract java.util.List<DtUsuario> ListarProponentes2();
 

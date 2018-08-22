@@ -9,6 +9,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import logica.Clases.Categoria;
+import logica.Clases.Colaborador;
 import logica.Clases.DtConsultaPropuesta;
 import logica.Clases.DtinfoColaborador;
 import logica.Clases.DtinfoPropuesta;
@@ -35,6 +36,8 @@ public interface IPropCat {
     public abstract void cargarPropuestas();
 
     public abstract Map<String, Propuesta> getpropuesta();
+    
+     public abstract Map<String,DtinfoPropuesta> DarPropuestasCol(Colaborador c);
 
     public abstract boolean seleccionarUC(String nombreP, String tipoEsp);
 
