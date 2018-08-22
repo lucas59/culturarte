@@ -71,7 +71,7 @@ public class ControladorUsuario implements IControladorUsuario {
     public boolean seguirUsuario(String nickUsu1, String nickUsu2) {
 
 //        try{
-//            
+////            
         Usuario aux1 = (Usuario) this.Usuarios.get(nickUsu1);
         Usuario aux2 = (Usuario) this.Usuarios.get(nickUsu2);
 
@@ -143,7 +143,7 @@ public class ControladorUsuario implements IControladorUsuario {
             return false;
         }
 
-        boolean res = this.dbUsuario.seguirUsuario(nickUsu1, nickUsu2);
+        boolean res = this.dbUsuario.dejarseguirUsuario(nickUsu1, nickUsu2);
         if (res) {
             aux1.getSeguidos().remove(nickUsu2, aux2);
             return true;
