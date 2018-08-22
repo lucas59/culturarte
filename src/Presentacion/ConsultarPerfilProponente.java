@@ -62,7 +62,7 @@ public class ConsultarPerfilProponente extends javax.swing.JInternalFrame {
             DtProponente p = proponentes.get(i);
             Date f = (Date) p.getFechaN().getTime();
             String fecha = new SimpleDateFormat("dd/MMM/yyyy").format(f);
-            Object[] dat = {p.getNickname(), p.getNombre(), p.getApellido(), p.getCorreo(), fecha, p.getDireccion()};
+            Object[] dat = {p.getNickName(), p.getNombre(), p.getApellido(), p.getCorreo(), fecha, p.getDireccion()};
             modelo.addRow(dat);
         }
     }
@@ -333,7 +333,7 @@ public class ConsultarPerfilProponente extends javax.swing.JInternalFrame {
                 Calendar fechaN = p.getFechaN();
                 Date fecha = fechaN.getTime();
                 String f = this.darFormato(fecha);
-                Object[] dat = {p.getNickname(), p.getNombre(), p.getApellido(), p.getCorreo(), f, p.getDireccion()};
+                Object[] dat = {p.getNickName(), p.getNombre(), p.getApellido(), p.getCorreo(), f, p.getDireccion()};
                 modelo.addRow(dat);
             }
         }
@@ -359,8 +359,8 @@ public class ConsultarPerfilProponente extends javax.swing.JInternalFrame {
         String nickName = (String) jTable1.getValueAt(seleccion, 0);
         ArrayList<DtProponente> prop = ICU.ListarProponentes();
         for (int i = 0; i < dtproponentes.size(); i++) {
-            if (dtproponentes.get(i).getNickname().equals(nickName)) {
-                this.proponenteSeleccionado = dtproponentes.get(i).getNickname();
+            if (dtproponentes.get(i).getNickName().equals(nickName)) {
+                this.proponenteSeleccionado = dtproponentes.get(i).getNickName();
                 DtProponente p = dtproponentes.get(i);
                 jLabelNombre.setText(p.getNombre() + " " + p.getApellido());
                 jLabelCorreo.setText(p.getCorreo());

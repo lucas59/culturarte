@@ -5,11 +5,7 @@
  */
 package logica.Controladores;
 
-import java.io.File;
-import java.io.FilenameFilter;
-import java.io.File;
 import java.util.Calendar;
-import java.sql.Date;
 import java.util.Map;
 import logica.Clases.Colaborador;
 import logica.Clases.Propuesta;
@@ -26,9 +22,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.text.StyledEditorKit;
 import logica.Clases.DtProponente;
+import logica.Clases.DtUsuario;
 import logica.Clases.DtinfoColaborador;
 import logica.Clases.Proponente;
 import logica.Fabrica;
@@ -53,7 +48,7 @@ public class ControladorUsuario implements IControladorUsuario {
     }
 
     public ControladorUsuario() {
-        this.Usuarios = new HashMap<String, Usuario>();
+        this.Usuarios = new HashMap<>();
         this.dbUsuario = new DBUsuario();
     }
 
@@ -65,6 +60,7 @@ public class ControladorUsuario implements IControladorUsuario {
         this.Usuarios = Usuarios;
     }
 
+    @Override
     public boolean seguirUsuario(String nickUsu1, String nickUsu2) {
 
 //        try{
@@ -99,6 +95,26 @@ public class ControladorUsuario implements IControladorUsuario {
 //        }
     }
 
+    @Override
+    public List<DtUsuario> ListarProponentes2() {
+        List<DtUsuario> listProp = new ArrayList<>();
+
+        Iterator it = this.Usuarios.entrySet().iterator();
+
+        while (it.hasNext()) {
+            Map.Entry mentry = (Map.Entry) it.next();
+
+            if (mentry.getValue() instanceof Proponente) {
+                Proponente aux = (Proponente) mentry.getValue();
+                DtUsuario usu = new DtUsuario(aux.getNickname(), aux.getNombre(), aux.getApellido(), aux.getCorreo(), aux.getFechaN(), aux.getImagen());
+                listProp.add(usu);
+            }
+        }
+
+        return listProp;
+    }
+
+    @Override
     public boolean dejarseguirUsuario(String nickUsu1, String nickUsu2) {
 
 //       try{
@@ -133,17 +149,18 @@ public class ControladorUsuario implements IControladorUsuario {
 //        }
     }
 
+    @Override
     public boolean AgregarUsuarioColaborador(String nickName, String nombre, String apellido, String correo, Calendar fechaN, String imagen) {
         if (this.Usuarios.get(nickName) != null) {
             return false;
 
         } else {
-            Map<String, Usuario> seguidores = new HashMap<String, Usuario>();
-            Map<String, Propuesta> favoritas = new HashMap<String, Propuesta>();
+            Map<String, Usuario> seguidores = new HashMap<>();
+            Map<String, Propuesta> favoritas = new HashMap<>();
             Colaborador c = new Colaborador(nickName, nombre, apellido, correo, fechaN, imagen, seguidores, favoritas);
 
             String fotoLocal = c.getImagen();
-            if (c.getImagen() != "") {
+            if (!"".equals(c.getImagen())) {
                 File fLocal = new File(fotoLocal);
                 String ex = getFileExtension(fLocal);
                 String ruta = System.getProperty("user.dir") + "\\fPerfiles\\" + c.getNickname() + "." + ex;
@@ -153,7 +170,7 @@ public class ControladorUsuario implements IControladorUsuario {
 
             if (res) {
                 this.Usuarios.put(nickName, c);
-                if (c.getImagen() != "") {
+                if (!"".equals(c.getImagen())) {
                     copiarFoto(fotoLocal, nickName);
                 }
             }
@@ -161,16 +178,17 @@ public class ControladorUsuario implements IControladorUsuario {
         }
     }
 
+    @Override
     public boolean AgregarUsuarioProponente(String nickName, String nombre, String apellido, String correo, Calendar fechaN, String imagen, String direccion, String biografia, String sitioWeb) {
         if (this.Usuarios.get(nickName) != null) {
             return false;
         } else {
-            Map<String, Usuario> seguidores = new HashMap<String, Usuario>();
-            Map<String, Propuesta> favoritas = new HashMap<String, Propuesta>();
-            Map<String, Propuesta> propuestas = new HashMap<String, Propuesta>();
+            Map<String, Usuario> seguidores = new HashMap<>();
+            Map<String, Propuesta> favoritas = new HashMap<>();
+            Map<String, Propuesta> propuestas = new HashMap<>();
             Proponente c = new Proponente(biografia, direccion, sitioWeb, propuestas, nickName, nombre, apellido, correo, fechaN, imagen, seguidores, favoritas);
             String fotoLocal = c.getImagen();
-            if (c.getImagen() != "") {
+            if (!"".equals(c.getImagen())) {
 
                 File fLocal = new File(fotoLocal);
                 String ex = getFileExtension(fLocal);
@@ -180,7 +198,7 @@ public class ControladorUsuario implements IControladorUsuario {
             boolean res = this.dbUsuario.agregarProponente(c);
             if (res) {
                 this.Usuarios.put(nickName, c);
-                if (c.getImagen() != "") {
+                if (!"".equals(c.getImagen())) {
                     copiarFoto(fotoLocal, nickName);
                 }
             }
@@ -188,6 +206,7 @@ public class ControladorUsuario implements IControladorUsuario {
         }
     }
 
+    @Override
     public void copiarFoto(String foto, String nick) {
 
         File origen = new File(foto);
@@ -225,13 +244,13 @@ public class ControladorUsuario implements IControladorUsuario {
 
     @Override
     public ArrayList<DtProponente> ListarProponentes() {
-        List<DtProponente> lista = new ArrayList<DtProponente>();
+        List<DtProponente> lista = new ArrayList<>();
         Set set = this.Usuarios.entrySet();
         Iterator iterator = set.iterator();
         while (iterator.hasNext()) {
             Map.Entry mentry = (Map.Entry) iterator.next();
             Proponente aux = (Proponente) mentry.getValue();
-            DtProponente dtProp = new DtProponente(aux.getBiografia(), aux.getDireccion(), aux.getsitioweb(), aux.getPropuestas(), aux.getNickname(), aux.getNombre(), aux.getApellido(), aux.getCorreo(), aux.getFechaN(), aux.getImagen(), aux.getSeguidos(), aux.getFavoritas());
+            DtProponente dtProp = new DtProponente(aux.getBiografia(), aux.getDireccion(), aux.getsitioweb(), aux.getNickname(), aux.getNombre(), aux.getApellido(), aux.getCorreo(), aux.getFechaN(), aux.getImagen());
             if (aux != null) {
                 lista.add(dtProp);
             }
@@ -243,22 +262,22 @@ public class ControladorUsuario implements IControladorUsuario {
     public Proponente ObtenerProponente(String nombreP) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
-    public ArrayList<DtinfoColaborador> ListarColaboradores(){
+    public ArrayList<DtinfoColaborador> ListarColaboradores() {
         Fabrica fabrica = Fabrica.getInstance();
         ControladorUsuario CU = new ControladorUsuario();
         Map<String, Usuario> usuarios = CU.getUsuarios();
         Set set = Usuarios.entrySet();
         Iterator iterator = set.iterator();
         ArrayList<DtinfoColaborador> retorno = new ArrayList();
-        while(iterator.hasNext()) {
-            Map.Entry mentry = (Map.Entry)iterator.next();
-            Colaborador aux=(Colaborador) mentry.getValue();
+        while (iterator.hasNext()) {
+            Map.Entry mentry = (Map.Entry) iterator.next();
+            Colaborador aux = (Colaborador) mentry.getValue();
             DtinfoColaborador aux2 = new DtinfoColaborador(aux.getNickname(), aux.getNombre(), aux.getApellido(), aux.getCorreo(), aux.getFechaN());
             retorno.add(aux2);
-        }       
-       return retorno;
+        }
+        return retorno;
     }
 
 }

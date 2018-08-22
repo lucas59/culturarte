@@ -69,22 +69,43 @@ public class ControladorPropCat implements IPropCat {
     }
 
     @Override
-    public void seleccionarUC(String nombreP, String tipoEsp) {
+    public boolean seleccionarUC(String nombreP, String tipoEsp) {
+
         Fabrica fabrica = Fabrica.getInstance();
 
         this.uProponente = fabrica.getIControladorUsuario().ObtenerProponente(nombreP);
+        if (this.uProponente == null) {
+            return false;
+        }
 
         this.catRecordada = this.categorias.get(tipoEsp);
 
+        return this.catRecordada != null;
     }
 
     @Override
-    public void crearPropuesta(String tituloP, String descripcion, String lugar, String imagen, Calendar fecha, float montoE, float montoTot, Calendar fechaPubl, TipoRetorno retorno) {
-        EstadoPropuesta estado;
+    public List<String> ListarCategorias() {
+        List<String> listCat = new ArrayList();
 
-        if (this.getpropuesta().get(tituloP) != null) {
-            return; // excepcion propuesta existe
+        Iterator it = this.categorias.entrySet().iterator();
+
+        while (it.hasNext()) {
+            Map.Entry mentry = (Map.Entry) it.next();
+            Categoria aux = (Categoria) mentry.getValue();
+            listCat.add(aux.getNombreC());
         }
+
+        return listCat;
+    }
+
+    @Override
+    public boolean crearPropuesta(String tituloP, String descripcion, String lugar, String imagen, Calendar fecha, float montoE, float montoTot, Calendar fechaPubl, TipoRetorno retorno) {
+
+        EstadoPropuesta estado;
+        if (this.getpropuesta().get(tituloP) != null) {
+            return false;
+        }
+
         estado = new EstadoPropuesta(TipoE.Ingresada, fechaPubl);
         Propuesta nuevaP;
         nuevaP = new Propuesta(tituloP, descripcion, imagen, lugar, fecha, montoE, montoTot, fechaPubl, estado, this.catRecordada, retorno, this.uProponente);
@@ -95,11 +116,13 @@ public class ControladorPropCat implements IPropCat {
             this.catRecordada.getPropuestas().put(nuevaP.getTituloP(), nuevaP);
             this.uProponente.getPropuestasRealizadas().put(nuevaP.getTituloP(), nuevaP);
         } else {
-            //excepcion error no cargado en bd
+            return false;
         }
 
         this.uProponente = null;
         this.catRecordada = null;
+
+        return true;
     }
 
     @Override
@@ -118,9 +141,10 @@ public class ControladorPropCat implements IPropCat {
         return listPropuestas;
     }
 
+    @Override
     public DtinfoPropuesta SeleccionarPropuestaR(String titulo) {
-        Map<String, Propuesta> propuestas = this.propuestas;
-        Set set = propuestas.entrySet();
+        Map<String, Propuesta> prop = this.propuestas;
+        Set set = prop.entrySet();
         Iterator iterator = set.iterator();
         DtinfoPropuesta retorno = null;
         while (iterator.hasNext()) {
