@@ -178,9 +178,9 @@ public class AltaPropuesta1 extends javax.swing.JInternalFrame {
 
         this.Categoria = Arrays.toString(jComboBoxCategoria.getSelectedObjects());
 
-        if ( !jTextFieldNickName.getText().isEmpty() && this.Categoria != null) {
+        if (!jTextFieldNickName.getText().isEmpty() && this.Categoria != null) {
 
-            if (ICP.seleccionarUC(jTextFieldNickName.getText(), this.Categoria)) {
+            if (!ICP.seleccionarUC(jTextFieldNickName.getText(), this.Categoria)) {
 
                 AltaPropuesta2 altProp2 = new AltaPropuesta2(jTextFieldNickName.getText(), this.Categoria);
                 inicio.Escritorio.add(altProp2);

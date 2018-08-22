@@ -322,8 +322,7 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
 
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
         // TODO add your handling code here:
-        
-        
+               
         String nick = jTextNick.getText();
         String nombre = jTextNombre.getText();
         String apellido = jTextApellido.getText();
