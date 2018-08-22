@@ -7,6 +7,7 @@ package Persistencia;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.time.LocalDate;
@@ -15,6 +16,9 @@ import logica.Clases.Proponente;
 import java.util.Date;
 import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
+import logica.Clases.Usuario;
 
 /**
  *
@@ -101,6 +105,40 @@ public class DBUsuario {
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
+        }
+
+    }
+    
+    public Map<String, Usuario> cargarUsuarios() {
+        try {
+            PreparedStatement statement = conexion.prepareStatement("SELECT * FROM usuario");
+            ResultSet st = statement.executeQuery();
+            Map<String, Usuario> usuarios = new HashMap<String, Usuario>();
+
+            while (st.next()) {
+                String nick = st.getString(1);
+                String nombre = st.getString(2);
+                String apellido = st.getString(3);
+                String correo = st.getString(4);
+                Date fecha = st.getDate(5);
+                Calendar c = Calendar.getInstance();
+                c.setTime(fecha);
+                String img = st.getString(6);
+                String dir = st.getString(7);
+                String biog = st.getString(8);
+                String web = st.getString(9);
+                if (st.getInt(10) == 1) {
+                    Proponente p = new Proponente(biog, dir, web, null, nick, nombre, apellido, correo, c, img, null, null);
+                    usuarios.put(nick, p);
+                } else {
+                    Colaborador col = new Colaborador(nick, nombre, apellido, correo, c, img, null, null);
+                    usuarios.put(nick, col);
+                }
+            }
+            return usuarios;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
         }
 
     }
