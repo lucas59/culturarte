@@ -73,19 +73,19 @@
                                                   <Component id="jDateChooser1" min="-2" pref="172" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
-                                          <EmptySpace pref="12" max="32767" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
                                           <Component id="jTextSitioWeb" min="-2" pref="125" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="1" attributes="0">
+                                              <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Group type="102" alignment="0" attributes="0">
                                                   <Component id="jRadioProponente" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                                                  <Component id="jRadioColaborador" min="-2" pref="91" max="-2" attributes="0"/>
+                                                  <Component id="jRadioColaborador" min="-2" max="-2" attributes="0"/>
                                               </Group>
-                                              <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace min="0" pref="169" max="32767" attributes="0"/>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
@@ -187,21 +187,33 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Consolas" size="12" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="NickName(*)"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Consolas" size="12" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Nombre(*)"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Consolas" size="12" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Apellido(*)"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Consolas" size="12" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Fecha(*)"/>
           </Properties>
         </Component>
@@ -216,6 +228,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Consolas" size="12" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="E-mail(*)"/>
           </Properties>
         </Component>
@@ -223,6 +238,9 @@
         </Component>
         <Component class="javax.swing.JRadioButton" name="jRadioProponente">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Consolas" size="12" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Proponente"/>
           </Properties>
           <Events>
@@ -231,6 +249,9 @@
         </Component>
         <Component class="javax.swing.JRadioButton" name="jRadioColaborador">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Consolas" size="12" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Colaborador"/>
           </Properties>
           <Events>
@@ -253,6 +274,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Consolas" size="12" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Direccion"/>
           </Properties>
         </Component>
@@ -262,6 +286,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Consolas" size="12" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Sitio Web"/>
           </Properties>
         </Component>
@@ -312,6 +339,9 @@
             </Container>
             <Component class="javax.swing.JLabel" name="jLabel9">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Consolas" size="12" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Biografia"/>
               </Properties>
             </Component>
@@ -324,6 +354,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Consolas" size="14" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Tipo de usuario(*)"/>
           </Properties>
         </Component>

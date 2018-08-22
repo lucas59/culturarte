@@ -101,7 +101,7 @@ public class ConsultarPerfilProponente extends javax.swing.JInternalFrame {
 
         setTitle("Consulta Perfil de Proponente");
 
-        jLabel1.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jLabel1.setText("Buscar nombre");
 
         jTextNombre.addActionListener(new java.awt.event.ActionListener() {
@@ -118,6 +118,7 @@ public class ConsultarPerfilProponente extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 0, 0));
         jLabel2.setText("Salir");
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -191,17 +192,21 @@ public class ConsultarPerfilProponente extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE))
         );
 
-        jLabelFoto.setBorder(null);
         jLabelFoto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        jLabel5.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jLabel5.setText("Correo ");
 
+        jLabel6.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jLabel6.setText("Fecha de Nacimiento");
 
+        jLabel7.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jLabel7.setText("Direccion");
 
+        jLabel8.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jLabel8.setText("Sitio Web ");
 
+        jLabel9.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jLabel9.setText("Biografia");
 
         jButton1.setText("Ver Propuestas");

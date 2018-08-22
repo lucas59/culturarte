@@ -98,12 +98,16 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
 
         jPanel1.setBorder(null);
 
+        jLabel1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jLabel1.setText("NickName(*)");
 
+        jLabel2.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jLabel2.setText("Nombre(*)");
 
+        jLabel3.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jLabel3.setText("Apellido(*)");
 
+        jLabel4.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jLabel4.setText("Fecha(*)");
 
         jTextNick.addActionListener(new java.awt.event.ActionListener() {
@@ -112,8 +116,10 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jLabel5.setText("E-mail(*)");
 
+        jRadioProponente.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jRadioProponente.setText("Proponente");
         jRadioProponente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,6 +127,7 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
             }
         });
 
+        jRadioColaborador.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jRadioColaborador.setText("Colaborador");
         jRadioColaborador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,14 +144,17 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jLabel6.setText("Direccion");
 
+        jLabel7.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jLabel7.setText("Sitio Web");
 
         jTextBiografia.setColumns(20);
         jTextBiografia.setRows(5);
         jScrollPane1.setViewportView(jTextBiografia);
 
+        jLabel9.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jLabel9.setText("Biografia");
 
         javax.swing.GroupLayout jPanelAdicionalesLayout = new javax.swing.GroupLayout(jPanelAdicionales);
@@ -176,6 +186,7 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel8.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel8.setText("Tipo de usuario(*)");
 
         jLabel10.setForeground(new java.awt.Color(255, 51, 51));
@@ -210,16 +221,16 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
                                                 .addComponent(jLabel4)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jTextSitioWeb, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                                 .addComponent(jRadioProponente)
                                                 .addGap(52, 52, 52)
-                                                .addComponent(jRadioColaborador, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING))
-                                        .addGap(0, 169, Short.MAX_VALUE)))
+                                                .addComponent(jRadioColaborador)))
+                                        .addGap(0, 0, Short.MAX_VALUE)))
                                 .addGap(5, 5, 5))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
