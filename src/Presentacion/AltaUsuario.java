@@ -170,6 +170,12 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
+        jDateChooser1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jDateChooser1MouseClicked(evt);
+            }
+        });
+
         jLabel8.setText("Tipo de usuario(*)");
 
         jLabel10.setForeground(new java.awt.Color(255, 51, 51));
@@ -305,6 +311,8 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
 
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
         // TODO add your handling code here:
+        
+        
         String nick = jTextNick.getText();
         String nombre = jTextNombre.getText();
         String apellido = jTextApellido.getText();
@@ -312,6 +320,13 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
         String imagen = rSFotoCircle2.getRutaImagen();
         Calendar fechaN = jDateChooser1.getCalendar();
         boolean ok;
+        
+        int anios=calculaEdad(jDateChooser1.getCalendar());
+
+        if(anios<18){
+            JOptionPane.showMessageDialog(null,"Ustede debe ser mayor de edad");
+            return;
+        }
 
         if ("".equals(nick) || "".equals(nombre) || "".equals(apellido) || "".equals(correo) || fechaN.getTime() == null) {
             JOptionPane.showMessageDialog(null, "Se deben completar todos los campos obligatorios");
@@ -350,6 +365,20 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
+    private int calculaEdad(Calendar fechaNac) {
+        Calendar today = Calendar.getInstance();
+
+        int diff_year = today.get(Calendar.YEAR) -  fechaNac.get(Calendar.YEAR);
+        int diff_month = today.get(Calendar.MONTH) - fechaNac.get(Calendar.MONTH);
+        int diff_day = today.get(Calendar.DAY_OF_MONTH) - fechaNac.get(Calendar.DAY_OF_MONTH);
+
+        //Si está en ese año pero todavía no los ha cumplido
+        if (diff_month < 0 || (diff_month == 0 && diff_day < 0)) {
+            diff_year = diff_year - 1; //no aparecían los dos guiones del postincremento :|
+        }
+        return diff_year;
+}
+    
     private void jRadioProponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioProponenteActionPerformed
         // TODO add your handling code here:
         jTextDireccion.setEnabled(true);
@@ -370,11 +399,11 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_jLabel10MouseClicked
 
-    private Icon createImage(String fotoDefecto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void jDateChooser1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jDateChooser1MouseClicked
 
-    }
-
+        
+    }//GEN-LAST:event_jDateChooser1MouseClicked
+    
     public class validar {
 
         public boolean validarEmail(String email) {
