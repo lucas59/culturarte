@@ -39,6 +39,20 @@ public class DtinfoPropuesta {
         this.tipoRetorno = tipoRetorno;
     }
 
+    public DtinfoPropuesta(Propuesta p) {
+        this.Titulo = p.getTituloP();
+        this.Descripcion = p.getDescripcionP();
+        this.FechaReal = p.getFecha();
+        this.Lugar = p.getLugar();
+        this.Monto = p.getMontoTot();
+        this.TipoEspec = p.getCategoria().getNombreC();
+        this.imagen = p.getImagen();
+    }
+
+    public String getEstado() {
+        return this.estado;
+    }
+
     public String getTitulo() {
         return Titulo;
     }
@@ -74,8 +88,8 @@ public class DtinfoPropuesta {
     public Calendar getFechapubli() {
         return Fechapubli;
     }
-    
-    public TipoRetorno getTipoRetorno(){
+
+    public TipoRetorno getTipoRetorno() {
         return tipoRetorno;
     }
 }

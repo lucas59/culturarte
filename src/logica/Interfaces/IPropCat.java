@@ -21,15 +21,30 @@ import logica.Clases.TipoRetorno;
  * @author Santiago.S
  */
 public interface IPropCat {
-    public abstract List<DtNickTitProp> listarPropuestaC() ;
+
+    public abstract List<DtNickTitProp> listarPropuestaC();
+
     public abstract DtinfoPropuesta SeleccionarPropuesta(String titulo);
+
     public abstract List<String> ListarColaboradores();
+
     public abstract List<DtinfoColaborador> SeleccionarColaborador();
-    public abstract void confirmar(boolean Estado,float monto);
+
+    public abstract void confirmar(boolean Estado, float monto);
+
     public abstract void cargarPropuestas();
+
     public abstract Map<String, Propuesta> getpropuesta();
+
     public abstract void seleccionarUC(String nombreP, String tipoEsp);
-    public abstract void crearPropuesta(String tituloP,String descripcion,String lugar, String imagen,Calendar fecha,float montoE, float montoTot, Calendar fechaPubl, TipoRetorno retorno);
-    public abstract List<DtConsultaPropuesta>listarPropuestas();
+
+    public abstract void crearPropuesta(String tituloP, String descripcion, String lugar, String imagen, Calendar fecha, float montoE, float montoTot, Calendar fechaPubl, TipoRetorno retorno);
+
+    public abstract List<DtConsultaPropuesta> listarPropuestas();
+
     public DtinfoPropuesta SeleccionarPropuestaR(String titulo);
+
+    public abstract Map<String, DtinfoPropuesta> listarTodasPropuestas();
+
+    public abstract Map<String, DtinfoColaborador> ListarColaboradores(String titulo);
 }

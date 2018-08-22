@@ -45,6 +45,10 @@ public class Propuesta {
         this.Colaboraciones = new HashMap<>();
     }
 
+    public Map<Integer, Colaboracion> getColaboraciones() {
+        return Colaboraciones;
+    }
+
     public String getTituloP() {
         return TituloP;
     }
@@ -116,12 +120,12 @@ public class Propuesta {
     public Categoria getCategoria() {
         return this.categoria;
     }
-    
-    public TipoRetorno getRetorno(){
+
+    public TipoRetorno getRetorno() {
         return this.retorno;
     }
-    
-    public Proponente getAutor(){
+
+    public Proponente getAutor() {
         return this.Autor;
     }
 
