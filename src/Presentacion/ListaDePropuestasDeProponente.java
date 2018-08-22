@@ -121,8 +121,10 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
+        jLabel1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jLabel1.setText("Estado de propuesta");
 
+        jRadioButtonCanceladas.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jRadioButtonCanceladas.setText("Canceladas");
         jRadioButtonCanceladas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -130,6 +132,7 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
             }
         });
 
+        jRadioButtonPublicadas.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jRadioButtonPublicadas.setText("Publicadas");
         jRadioButtonPublicadas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -137,6 +140,7 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
             }
         });
 
+        jRadioButtonFinalizacion.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jRadioButtonFinalizacion.setText("En financiacion");
         jRadioButtonFinalizacion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -144,6 +148,7 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
             }
         });
 
+        jRadioButtonFinalizadas.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jRadioButtonFinalizadas.setText("Finalizadas");
         jRadioButtonFinalizadas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -151,6 +156,7 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
             }
         });
 
+        jRadioButtonNoFinalizadas.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jRadioButtonNoFinalizadas.setText("No finalizadas");
         jRadioButtonNoFinalizadas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -158,6 +164,7 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
             }
         });
 
+        jRadioButton1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jRadioButton1.setText("Todas");
         jRadioButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -276,7 +283,7 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanelColaboradores, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                        .addComponent(jPanelColaboradores, javax.swing.GroupLayout.PREFERRED_SIZE, 192, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
