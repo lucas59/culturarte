@@ -260,7 +260,7 @@ public class ControladorUsuario implements IControladorUsuario {
 
     @Override
     public Proponente ObtenerProponente(String nombreP) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (Proponente) this.Usuarios.get(nombreP);
     }
 
     @Override
