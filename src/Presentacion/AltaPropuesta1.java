@@ -36,7 +36,7 @@ public class AltaPropuesta1 extends javax.swing.JInternalFrame {
         Iterator it = listCat.iterator();
 
         while (it.hasNext()) {
-            jComboBoxCategoria.addItem(it.toString());
+            jComboBoxCategoria.addItem(it.next().toString());
         }
 
         List<DtUsuario> listUsu = ICU.ListarProponentes2();
@@ -178,7 +178,7 @@ public class AltaPropuesta1 extends javax.swing.JInternalFrame {
 
         this.Categoria = Arrays.toString(jComboBoxCategoria.getSelectedObjects());
 
-        if (jTextFieldNickName.getText() != null && this.Categoria != null) {
+        if ( !jTextFieldNickName.getText().isEmpty() && this.Categoria != null) {
 
             if (ICP.seleccionarUC(jTextFieldNickName.getText(), this.Categoria)) {
 
