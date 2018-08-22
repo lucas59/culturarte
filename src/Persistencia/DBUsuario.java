@@ -77,7 +77,7 @@ public class DBUsuario {
 
     public boolean seguirUsuario(String nickUsu1, String nickUsu2) {
         try {
-            PreparedStatement statement = conexion.prepareStatement("INSERT INTO seguidores" + "(nickName, uSigue) values(?,?)");
+            PreparedStatement statement = conexion.prepareStatement("INSERT INTO ususigueusu" + "(nickSeguidor, nickSeguido) values(?,?)");
             statement.setString(1, nickUsu1);
             statement.setString(2, nickUsu2);
             statement.executeUpdate();
@@ -92,7 +92,7 @@ public class DBUsuario {
 
     public boolean dejarseguirUsuario(String nickUsu1, String nickUsu2) {
         try {
-            PreparedStatement statement = conexion.prepareStatement("DELETE FROM seguidores" + "(nickName, uSigue) values(?,?)");
+            PreparedStatement statement = conexion.prepareStatement("DELETE FROM ususigueusu WHERE nickSeguidor =? AND nickSeguido=?");
             statement.setString(1, nickUsu1);
             statement.setString(2, nickUsu2);
             statement.executeUpdate();
