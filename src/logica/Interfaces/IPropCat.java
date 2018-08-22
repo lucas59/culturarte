@@ -36,9 +36,11 @@ public interface IPropCat {
 
     public abstract Map<String, Propuesta> getpropuesta();
 
-    public abstract void seleccionarUC(String nombreP, String tipoEsp);
+    public abstract boolean seleccionarUC(String nombreP, String tipoEsp);
 
-    public abstract void crearPropuesta(String tituloP, String descripcion, String lugar, String imagen, Calendar fecha, float montoE, float montoTot, Calendar fechaPubl, TipoRetorno retorno);
+    public abstract boolean crearPropuesta(String tituloP, String descripcion, String lugar, String imagen, Calendar fecha, float montoE, float montoTot, Calendar fechaPubl, TipoRetorno retorno);
+
+    public abstract List<String> ListarCategorias();
 
     public abstract List<DtConsultaPropuesta> listarPropuestas();
 

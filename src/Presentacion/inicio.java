@@ -5,10 +5,7 @@
  */
 package Presentacion;
 
-import java.awt.Component;
-import java.util.Locale;
 import javax.swing.JOptionPane;
-import logica.Controladores.ControladorPropCat;
 import logica.Fabrica;
 import logica.Interfaces.IControladorUsuario;
 import logica.Interfaces.IPropCat;
@@ -18,18 +15,20 @@ import logica.Interfaces.IPropCat;
  * @author Lucas
  */
 public class inicio extends javax.swing.JFrame {
+
     private IPropCat IPC;
     private IControladorUsuario ICU;
+
     /**
      * Creates new form inicio
      */
-    
+
     public inicio() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setExtendedState(inicio.MAXIMIZED_BOTH);
         Fabrica fabrica = Fabrica.getInstance();
-        
+
     }
 
     /**
@@ -49,6 +48,8 @@ public class inicio extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -104,6 +105,17 @@ public class inicio extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem2);
 
+        jMenuItem5.setText("Alta Propuesta");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem5);
+
+        jMenuItem6.setText("Consultar Propuestas");
+        jMenu2.add(jMenuItem6);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -123,7 +135,7 @@ public class inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-   /*   
+        /*   
         Fabrica fabrica = Fabrica.getInstance();
         IControladorUsuario ICU = fabrica.getIControladorUsuario();
         IPropCat IPC = fabrica.getControladorPropCat();
@@ -141,30 +153,39 @@ public class inicio extends javax.swing.JFrame {
         RP.setVisible(true);
      
         }
-        */
-      
+         */
+
         JOptionPane.showMessageDialog(null, "No implementado");
-          
+
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        AltaUsuario alta=new AltaUsuario();
+        AltaUsuario alta = new AltaUsuario();
         Escritorio.add(alta);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        Seguir_Usuario seguir=new Seguir_Usuario();
+        Seguir_Usuario seguir = new Seguir_Usuario();
         Escritorio.add(seguir);
         seguir.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        ConsultarPerfilProponente p=new ConsultarPerfilProponente();
+        ConsultarPerfilProponente p = new ConsultarPerfilProponente();
         Escritorio.add(p);
         p.setVisible(true);
-        
+
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+
+        AltaPropuesta1 altaprop1 = new AltaPropuesta1();
+        Escritorio.add(altaprop1);
+        altaprop1.setVisible(true);
+
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -210,5 +231,7 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     // End of variables declaration//GEN-END:variables
 }

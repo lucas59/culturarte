@@ -6,9 +6,6 @@
 package logica.Clases;
 
 import java.util.Calendar;
-import java.util.Map;
-import logica.Clases.Proponente;
-import logica.Clases.Usuario;
 
 /**
  *
@@ -19,17 +16,13 @@ public class DtProponente extends DtUsuario {
     private String biografia;
     private String direccion;
     private String sitioweb;
-    private Map<String, Propuesta> Propuestas;
 
-    public DtProponente(String biografia, String direccion, String sitioweb, Map<String, Propuesta> Propuestas, String nickname, String nombre, String apellido, String correo, Calendar fechaN, String imagen, Map<String, Usuario> seguidos, Map<String, Propuesta> favoritas) {
-        super(nickname, nombre, apellido, correo, fechaN, imagen, seguidos, favoritas);
+    public DtProponente(String biografia, String direccion, String sitioweb, String nickname, String nombre, String apellido, String correo, Calendar fechaN, String imagen) {
+        super(nickname, nombre, apellido, correo, fechaN, imagen);
         this.biografia = biografia;
         this.direccion = direccion;
         this.sitioweb = sitioweb;
-        this.Propuestas = Propuestas;
     }
-
-    
 
     public String getBiografia() {
         return biografia;
@@ -43,7 +36,4 @@ public class DtProponente extends DtUsuario {
         return sitioweb;
     }
 
-    public Map<String, Propuesta> getPropuestas() {
-        return Propuestas;
-    }
 }
