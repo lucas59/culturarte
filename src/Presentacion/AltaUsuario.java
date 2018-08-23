@@ -8,12 +8,14 @@ package Presentacion;
 import com.mysql.jdbc.StringUtils;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Calendar;
 import java.util.Properties;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
@@ -45,6 +47,8 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
      * @param fotoD
      */
     public AltaUsuario() {
+        
+        this.setLocation(500, 100);
         initComponents();
         this.ICU = Fabrica.getInstance().getIControladorUsuario();
         this.fotoDefecto = System.getProperty("user.dir") + "\\defecto.jpg";
@@ -55,6 +59,7 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
         jTextDireccion.setEnabled(false);
         jTextSitioWeb.setEnabled(false);
         jTextBiografia.setEnabled(false);
+        this.jTextNick.requestFocus();
     }
 
     /**
@@ -135,7 +140,7 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
             }
         });
 
-        jButtonAceptar.setBackground(new java.awt.Color(102, 102, 255));
+        jButtonAceptar.setBackground(new java.awt.Color(255, 255, 255));
         jButtonAceptar.setText("Aceptar");
         jButtonAceptar.setBorder(null);
         jButtonAceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -180,6 +185,8 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
+        jDateChooser1.setMaxSelectableDate(new java.util.Date(253370779282000L));
+        jDateChooser1.setMinSelectableDate(new java.util.Date(-62135755118000L));
         jDateChooser1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jDateChooser1MouseClicked(evt);
@@ -188,6 +195,8 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
 
         jLabel8.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel8.setText("Tipo de usuario(*)");
+
+        rSFotoCircle2.setImagenDefault(new javax.swing.ImageIcon(getClass().getResource("/Persistencia/defecto.jpg"))); // NOI18N
 
         jLabel10.setForeground(new java.awt.Color(255, 51, 51));
         jLabel10.setText("Salir");
@@ -322,7 +331,7 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
 
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
         // TODO add your handling code here:
-               
+
         String nick = jTextNick.getText();
         String nombre = jTextNombre.getText();
         String apellido = jTextApellido.getText();
@@ -330,21 +339,24 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
         String imagen = rSFotoCircle2.getRutaImagen();
         Calendar fechaN = jDateChooser1.getCalendar();
         boolean ok;
-        
-        int anios=calculaEdad(jDateChooser1.getCalendar());
-
-        if(anios<18){
-            JOptionPane.showMessageDialog(null,"Ustede debe ser mayor de edad");
-            return;
-        }
 
         if ("".equals(nick) || "".equals(nombre) || "".equals(apellido) || "".equals(correo) || fechaN.getTime() == null) {
-            JOptionPane.showMessageDialog(null, "Se deben completar todos los campos obligatorios");
+            JOptionPane.showMessageDialog(null, "Se deben completar todos los campos obligatorios", "Advertencia", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        validar validar = new validar();
-        if (validar.validarEmail(correo) == false) {
-            JOptionPane.showMessageDialog(null, "Ese correo no es valido");
+
+        int anios = calculaEdad(jDateChooser1.getCalendar());
+        if (anios < 18) {
+            JOptionPane.showMessageDialog(null, "Ustede debe ser mayor de edad", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (validate(jTextCorreo.getText()) == false) {
+            JOptionPane.showMessageDialog(null, "Ese correo no es valido", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (!jRadioProponente.isSelected() && !jRadioColaborador.isSelected()) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar tipo de persona", "Advertencia", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -378,7 +390,7 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
     private int calculaEdad(Calendar fechaNac) {
         Calendar today = Calendar.getInstance();
 
-        int diff_year = today.get(Calendar.YEAR) -  fechaNac.get(Calendar.YEAR);
+        int diff_year = today.get(Calendar.YEAR) - fechaNac.get(Calendar.YEAR);
         int diff_month = today.get(Calendar.MONTH) - fechaNac.get(Calendar.MONTH);
         int diff_day = today.get(Calendar.DAY_OF_MONTH) - fechaNac.get(Calendar.DAY_OF_MONTH);
 
@@ -387,8 +399,8 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
             diff_year = diff_year - 1; //no aparecían los dos guiones del postincremento :|
         }
         return diff_year;
-}
-    
+    }
+
     private void jRadioProponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioProponenteActionPerformed
         // TODO add your handling code here:
         jTextDireccion.setEnabled(true);
@@ -411,9 +423,17 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
 
     private void jDateChooser1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jDateChooser1MouseClicked
 
-        
+
     }//GEN-LAST:event_jDateChooser1MouseClicked
-    
+
+    public static final Pattern VALID_EMAIL_ADDRESS_REGEX
+            = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+
+    public static boolean validate(String emailStr) {
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
+        return matcher.find();
+    }
+
     public class validar {
 
         public boolean validarEmail(String email) {
