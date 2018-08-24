@@ -343,4 +343,114 @@ public class ControladorPropCat implements IPropCat {
          */
 
     }
+    
+
+@Override
+      public boolean crearPropuestaDatosdePrueba(String tituloP,  String descripcion, Categoria cat, Calendar fecha, String lugar, float montoE, float montoTot, TipoRetorno retorno,Proponente p ,String imagen){
+
+        if (this.getpropuesta().get(tituloP) != null) {
+            return false;
+        }
+
+        Propuesta nuevaP;
+        nuevaP = new Propuesta(tituloP, descripcion, cat, fecha, lugar,  montoE, montoTot, retorno, p, imagen);
+
+        this.dbPropuesta=new DBPropuesta();
+        boolean agregada = this.dbPropuesta.agregarPropuestaDatosdePrueba(nuevaP);
+
+//        if (agregada) {
+////          this.catRecordada.getPropuestas().put(nuevaP.getTituloP(), nuevaP);
+//            this.uProponente.getPropuestasRealizadas().put(nuevaP.getTituloP(), nuevaP);
+//        } else {
+//            return false;
+//        }
+//
+//        this.uProponente = null;
+//        this.catRecordada = null;
+
+        return true;
+   }
+      
+      
+    @Override
+    public Categoria ObtenerCategoria(String nomCat){
+        return (Categoria) this.categorias.get(nomCat);
+    }
+      
+      
+    @Override  
+      public boolean crearCategoriaDatosdePrueba(String nomCat, String nomPadre){
+          Categoria c;
+          c= new Categoria(nomCat);
+          c.setPadre(nomPadre);
+          this.dbPropuesta=new DBPropuesta();
+          boolean agregada = this.dbPropuesta.agregarCategoriaDatosdePrueba(c); 
+       
+          this.categorias.put(nomCat, c);
+          return true;
+      }
+      
+    @Override
+    public boolean agregarColaboracionDatosdePrueba(String TituloP, String nickName, float monto, Calendar fechaRealiz, boolean Entrada) {
+        Fabrica fabrica = Fabrica.getInstance();
+        IControladorUsuario ICU = fabrica.getIControladorUsuario();
+        IPropCat IPC = fabrica.getControladorPropCat();
+        Calendar calendario = new GregorianCalendar();
+        java.util.Date utilDate = new java.util.Date();
+        utilDate = calendario.getTime();
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+        
+//        List<Colaboracion> colaboraciones = this.getPropuesta().getColaboraciones();
+//        float TotalColaboracion = 0;
+//        for (int indice = 0; indice < colaboraciones.size(); indice++) {
+//            if (colaboraciones.get(indice).getPropuesta().getTituloP() == this.getPropuesta().getTituloP()) {
+//                throw new Exception("No puede colaborar en una propuesta mas de una vez");
+//            } else {
+//                TotalColaboracion = TotalColaboracion + colaboraciones.get(indice).getMontoC();
+//            }
+//        }
+//        if ((TotalColaboracion + monto) <= this.getPropuesta().getMontoTot()) {
+//            Colaboracion colaboracion = new Colaboracion(ICU.getColaborador(), monto, calendario, Entrada, this.getPropuesta());
+//            ICU.getColaborador().setColaboraciones(colaboracion);
+//            IPC.getPropuesta().setColaboraciones(colaboracion);
+//            if (TotalColaboracion < this.getPropuesta().getMontoTot()) {
+//                EstadoPropuesta EstadoP = new EstadoPropuesta(TipoE.enFinanciacion, calendario);
+//                this.getPropuesta().setEstadoActual(EstadoP);
+//                this.getPropuesta().setEstados(EstadoP);
+//            } else if (TotalColaboracion == this.getPropuesta().getMontoTot()) {
+//                EstadoPropuesta EstadoP = new EstadoPropuesta(TipoE.Financiada, calendario);
+//                this.getPropuesta().setEstadoActual(EstadoP);
+//                this.getPropuesta().setEstados(EstadoP);
+//            }
+            DBColaboracion DBC = new DBColaboracion();
+            DBC.agregarColaboracionDatosdePrueba(TituloP,nickName, monto, fechaRealiz, Entrada);
+            return true;
+//        } else {
+//            throw new Exception("El monto que ingreso ha superado el limite del monto total, ingrese un monto menor o igual a: $"+ (this.getPropuesta().getMontoTot() - TotalColaboracion));
+//        }
+
+
+    }
+    
+    @Override
+    public boolean nuevoEstadoPropuestaDatosdePrueba(String TituloP, TipoE estado, Calendar fecha){
+        
+        
+        EstadoPropuesta estadop = new EstadoPropuesta (estado, fecha);
+        
+        DBPropuesta DBP = new DBPropuesta();
+        DBP.agregarEstadoPropuestaDatosdePrueba(estadop,TituloP);
+        
+        
+        
+        
+        
+        
+        return true;
+        
+    }
+
+
+
+
 }
