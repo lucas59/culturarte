@@ -71,5 +71,53 @@ public class DBColaboracion {
                 return false;
             }
     }
+    
+    
+         public boolean agregarColaboracionDatosdePrueba(String TituloP, String nickName, float monto, Calendar fechaRealiz, boolean Entrada) {
+        Fabrica fabrica = Fabrica.getInstance();
+        IControladorUsuario CU = (ControladorUsuario) fabrica.getIControladorUsuario();
+        IPropCat CPU = (ControladorPropCat) fabrica.getControladorPropCat();
+        IControladorUsuario ICU = fabrica.getIControladorUsuario();
+        
+        java.util.Date dateR = (java.util.Date) fechaRealiz.getTime();
+        java.sql.Timestamp dateRR = new java.sql.Timestamp(dateR.getTime());
+
+//        List<Colaboracion> colaboraciones = CPU.getPropuesta().getColaboraciones();
+//        float TotalColaboracion = 0;
+//        for (int indice = 0; indice < colaboraciones.size(); indice++) {
+//            TotalColaboracion = TotalColaboracion + colaboraciones.get(indice).getMontoC();
+//        }
+            try {
+                PreparedStatement statement = conexion.prepareStatement("INSERT INTO colaboracion " + "(TituloP, nickName, montoC, fechaRealiz, entradas) values(?,?,?,?,?)");
+                statement.setString(1, TituloP);
+                statement.setString(2, nickName);
+                statement.setFloat(3, monto);
+                statement.setTimestamp(4, dateRR);
+         
+                if (Entrada) {
+                    statement.setInt(5, 1);
+                } else {
+                    statement.setInt(5, 2);
+                }
+                statement.executeUpdate();
+                statement.close();
+                
+//                statement = conexion.prepareStatement("INSERT INTO estadopropuesta " + "(TituloP, FechaInicio, FechaFinal, Estado) values(?,?,?,?)");
+//                statement.setString(1, CPU.getPropuesta().getTituloP());
+//                statement.setDate(2, sqlDate);
+//                if(TotalColaboracion < CPU.getPropuesta().getMontoTot()){
+//                   statement.setInt(4, 4);
+//                }
+//                else if(TotalColaboracion == CPU.getPropuesta().getMontoTot()){
+//                    statement.setInt(4, 6);
+//                }
+
+                return true;
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                return false;
+            }
+    }
 
 }

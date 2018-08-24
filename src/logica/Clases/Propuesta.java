@@ -49,6 +49,21 @@ public class Propuesta {
         this.Autor = autor;
         this.Colaboraciones = new ArrayList<>();
     }
+    
+    public Propuesta(String tituloP, String descripcion, Categoria cat, Calendar fecha, String lugar, float montoE, float montoTot, TipoRetorno retorno, Proponente p, String imagen){
+        this.TituloP = tituloP;
+        this.descripcionP = descripcion;
+        this.categoria = cat;
+        this.fecha = fecha;
+        this.lugar = lugar;
+        this.montoE = montoE;
+        this.montoTot = montoTot;
+        this.retorno = retorno;
+        this.Autor = p;
+        this.imagen = imagen;
+        this.Colaboraciones = new ArrayList<>();
+      
+    }
 
     public String getTituloP() {
         return TituloP;
