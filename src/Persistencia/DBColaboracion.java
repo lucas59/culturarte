@@ -13,6 +13,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import logica.Clases.Colaboracion;
+import logica.Clases.TipoRetorno;
 import logica.Controladores.ControladorPropCat;
 import logica.Controladores.ControladorUsuario;
 import logica.Fabrica;
@@ -26,7 +27,7 @@ import logica.Interfaces.IPropCat;
 public class DBColaboracion {
   private Connection conexion = new ConexionDB().getConexion();
 
-    public boolean agregarColaboracion(boolean Entrada, float monto) {
+    public boolean agregarColaboracion(TipoRetorno Entrada, float monto) {
         Fabrica fabrica = Fabrica.getInstance();
         IControladorUsuario CU = (ControladorUsuario) fabrica.getIControladorUsuario();
         IPropCat CPU = (ControladorPropCat) fabrica.getControladorPropCat();
@@ -46,11 +47,16 @@ public class DBColaboracion {
                 statement.setString(2, CU.getColaborador().getNickname());
                 statement.setFloat(3, monto);
                 statement.setDate(4, sqlDate);
-                if (Entrada) {
+                if (Entrada == TipoRetorno.Entradas) {
                     statement.setInt(5, 1);
                 } else {
                     statement.setInt(5, 2);
                 }
+                statement.executeUpdate();
+                statement.close();
+                
+                statement = conexion.prepareStatement("UPDATE estadopropuesta set FechaFinal = ? where FechaFinal = NULL");
+                statement.setDate(1, sqlDate);
                 statement.executeUpdate();
                 statement.close();
                 
@@ -63,7 +69,10 @@ public class DBColaboracion {
                 else if(TotalColaboracion == CPU.getPropuesta().getMontoTot()){
                     statement.setInt(4, 6);
                 }
-
+                statement.executeUpdate();
+                statement.close();
+                
+                
                 return true;
 
             } catch (SQLException ex) {
