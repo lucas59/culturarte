@@ -135,12 +135,13 @@ public class Fabrica {
     ICU.AgregarUsuarioColaborador("Tiajaci", "Tía", "Jacinta", "jacinta@elpueblo.com", new GregorianCalendar(1990,03,04),"");   
 
 //-----------------------------------------------------Categorias------------------------------------//
-    IPC.crearCategoriaDatosdePrueba("Carnaval", null);
-    IPC.crearCategoriaDatosdePrueba("Cine", null);
-    IPC.crearCategoriaDatosdePrueba("Danza", null);
-    IPC.crearCategoriaDatosdePrueba("Literatura", null);
-    IPC.crearCategoriaDatosdePrueba("Musica",null);
-    IPC.crearCategoriaDatosdePrueba("Teatro", null);
+    IPC.crearCategoriaDatosdePrueba("Categoria", null); 
+    IPC.crearCategoriaDatosdePrueba("Carnaval", "Categoria");
+    IPC.crearCategoriaDatosdePrueba("Cine", "Categoria");
+    IPC.crearCategoriaDatosdePrueba("Danza", "Categoria");
+    IPC.crearCategoriaDatosdePrueba("Literatura", "Categoria");
+    IPC.crearCategoriaDatosdePrueba("Musica","Categoria");
+    IPC.crearCategoriaDatosdePrueba("Teatro", "Categoria");
     IPC.crearCategoriaDatosdePrueba("Humoristas", "Carnaval");
     IPC.crearCategoriaDatosdePrueba("Lubolos", "Carnaval");
     IPC.crearCategoriaDatosdePrueba("Murga", "Carnaval");

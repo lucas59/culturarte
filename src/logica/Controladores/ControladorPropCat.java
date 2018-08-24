@@ -360,7 +360,7 @@ public class ControladorPropCat implements IPropCat {
         boolean agregada = this.dbPropuesta.agregarPropuestaDatosdePrueba(nuevaP);
 
 //        if (agregada) {
-////          this.catRecordada.getPropuestas().put(nuevaP.getTituloP(), nuevaP);
+//          this.catRecordada.getPropuestas().put(nuevaP.getTituloP(), nuevaP);
 //            this.uProponente.getPropuestasRealizadas().put(nuevaP.getTituloP(), nuevaP);
 //        } else {
 //            return false;
@@ -384,6 +384,7 @@ public class ControladorPropCat implements IPropCat {
           Categoria c;
           c= new Categoria(nomCat);
           c.setPadre(nomPadre);
+          
           this.dbPropuesta=new DBPropuesta();
           boolean agregada = this.dbPropuesta.agregarCategoriaDatosdePrueba(c); 
        
@@ -396,10 +397,11 @@ public class ControladorPropCat implements IPropCat {
         Fabrica fabrica = Fabrica.getInstance();
         IControladorUsuario ICU = fabrica.getIControladorUsuario();
         IPropCat IPC = fabrica.getControladorPropCat();
-        Calendar calendario = new GregorianCalendar();
-        java.util.Date utilDate = new java.util.Date();
-        utilDate = calendario.getTime();
-        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+//        
+//        Calendar calendario = new GregorianCalendar();
+//        java.util.Date utilDate = new java.util.Date();
+//        utilDate = calendario.getTime();
+//        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
         
 //        List<Colaboracion> colaboraciones = this.getPropuesta().getColaboraciones();
 //        float TotalColaboracion = 0;
@@ -410,6 +412,7 @@ public class ControladorPropCat implements IPropCat {
 //                TotalColaboracion = TotalColaboracion + colaboraciones.get(indice).getMontoC();
 //            }
 //        }
+
 //        if ((TotalColaboracion + monto) <= this.getPropuesta().getMontoTot()) {
 //            Colaboracion colaboracion = new Colaboracion(ICU.getColaborador(), monto, calendario, Entrada, this.getPropuesta());
 //            ICU.getColaborador().setColaboraciones(colaboracion);

@@ -170,8 +170,8 @@ public class DBPropuesta {
 public boolean agregarPropuestaDatosdePrueba(Propuesta nuevaP) {
         try {
             PreparedStatement stat = conexion.prepareStatement("INSERT INTO propuesta" + "(TituloP, nombreC, proponente, descripcion, imagen, fechaR, lugar, montoE, montoTot, retornos) values (?,?,?,?,?,?,?,?,?,?)");
-            Calendar fechR = nuevaP.getFecha();
-            java.util.Date dateR = (java.util.Date) fechR.getTime();
+           
+            java.util.Date dateR = (java.util.Date) nuevaP.getFecha().getTime();
             java.sql.Date dateRR = new java.sql.Date(dateR.getTime());
             
             stat.setString(1, nuevaP.getTituloP());
@@ -183,7 +183,7 @@ public boolean agregarPropuestaDatosdePrueba(Propuesta nuevaP) {
             stat.setString(7, nuevaP.getLugar());
             stat.setFloat(8, nuevaP.getMontoE());
             stat.setFloat(9, nuevaP.getMontoTot());
-            stat.setInt(10, nuevaP.getRetorno().ordinal());
+            stat.setString(10, nuevaP.getRetorno().toString());
             stat.executeUpdate();
             stat.close();
 
@@ -215,7 +215,7 @@ public boolean agregarCategoriaDatosdePrueba(Categoria c) {
 
 public boolean agregarEstadoPropuestaDatosdePrueba(EstadoPropuesta nuevoEst, String TituloP){
      try {
-            PreparedStatement stat = conexion.prepareStatement("INSERT INTO estadopropuesta" + " (TituoloP, FechaInicio, FechaFinal, Estado) values (?,?,?,?,?)");
+            PreparedStatement stat = conexion.prepareStatement("INSERT INTO estadopropuesta" + " (TituloP, FechaInicio, FechaFinal, Estado) values (?,?,?,?)");
                  
             java.util.Date dateR = (java.util.Date) nuevoEst.getfechaInicio().getTime();
             java.sql.Timestamp dateII = new java.sql.Timestamp(dateR.getTime());
@@ -223,7 +223,7 @@ public boolean agregarEstadoPropuestaDatosdePrueba(EstadoPropuesta nuevoEst, Str
             stat.setString(1, TituloP);
             stat.setTimestamp(2, dateII);
             stat.setTimestamp(3, dateII);
-            stat.setString(4, nuevoEst.toString());
+            stat.setString(4, nuevoEst.getEstado().toString());
             stat.executeUpdate();
             stat.close();
             
