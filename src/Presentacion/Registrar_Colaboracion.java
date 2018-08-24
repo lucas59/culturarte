@@ -34,12 +34,6 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
 
     public Registrar_Colaboracion() {
         initComponents();
-        String dir = System.getProperty("user.dir");
-        String dir2 = dir + "\\src\\Persistencia\\DefColaboracion.jpg";
-
-        ImageIcon fot = new ImageIcon(dir2);
-        Icon icono = new ImageIcon(fot.getImage().getScaledInstance(jLabel20.getWidth(), jLabel20.getHeight(), Image.SCALE_DEFAULT));
-        jLabel20.setIcon(icono);
     }
 
     @SuppressWarnings("unchecked")
@@ -578,7 +572,7 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel11))
                 .addGap(0, 0, 0)
@@ -705,7 +699,7 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
             boolean OK = false;
             if (jComboBox2.getSelectedItem().toString().compareTo("Entradas") == 0) {
                 try {
-                    OK = CPC.agregarColaboracion(true, monto);
+                    OK = CPC.agregarColaboracion(TipoRetorno.Entradas, monto);
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage());
                 }
@@ -714,7 +708,7 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
                 }
             } else if (jComboBox2.getSelectedItem().toString().compareTo("Por Ganancias") == 0) {
                 try {
-                    OK = CPC.agregarColaboracion(false, monto);
+                    OK = CPC.agregarColaboracion(TipoRetorno.porGanancias, monto);
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage());
                 }
