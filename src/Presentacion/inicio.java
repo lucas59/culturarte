@@ -162,7 +162,7 @@ public class inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-    
+    /*
         Fabrica fabrica = Fabrica.getInstance();
         IControladorUsuario ICU = fabrica.getIControladorUsuario();
         IPropCat IPC = fabrica.getControladorPropCat();
@@ -174,10 +174,13 @@ public class inicio extends javax.swing.JFrame {
         } else if (IPC.listarPropuestaC().isEmpty()) {
             JOptionPane.showMessageDialog(null, "No existen Propuestas en el sistema");
         } else {
+        */
             Registrar_Colaboracion RP = new Registrar_Colaboracion();
             Escritorio.add(RP);
             RP.setVisible(true);
+            /*
         }
+            */
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
