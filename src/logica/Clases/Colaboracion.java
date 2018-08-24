@@ -18,6 +18,8 @@ public class Colaboracion {
     private float montoC;
     private Date fechaRealiz;
     private boolean Entradas;
+    private String nickName;
+    private String TituloP;
     
     public Colaboracion(Colaborador UColaborador, String IdColaboracion, float montoC, Date fechaRealiz, boolean Entradas){
         this.UColaborador = UColaborador;
@@ -45,5 +47,17 @@ public class Colaboracion {
     
     public Colaborador getColaborador(){
         return this.UColaborador;
+    }
+    
+    public Colaboracion(String nick,String tit){
+        this.nickName=nick;
+        this.TituloP=tit;
+    }
+     public String getNickName() {
+        return nickName;
+    }
+
+    public String getTituloP() {
+        return TituloP;
     }
 }
