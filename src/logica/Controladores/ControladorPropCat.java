@@ -25,7 +25,9 @@ import logica.Clases.Proponente;
 import logica.Clases.Propuesta;
 import logica.Clases.TipoE;
 import logica.Clases.TipoRetorno;
+import logica.Clases.Usuario;
 import logica.Fabrica;
+import logica.Interfaces.IControladorUsuario;
 import logica.Interfaces.IPropCat;
 
 /**
@@ -41,6 +43,7 @@ public class ControladorPropCat implements IPropCat {
     private Categoria catRecordada;
     private Proponente uProponente;
     private Propuesta Propuesta;
+    private IControladorUsuario ICU;
     private Map<String,EstadoPropuesta> estadospropuesta;
 
     public static ControladorPropCat getInstance() {
@@ -51,7 +54,12 @@ public class ControladorPropCat implements IPropCat {
     }
 
     public ControladorPropCat() {
+        this.dbPropuesta=new DBPropuesta();
         this.categorias = new HashMap<>();
+        
+    }
+    public void ComunicarControladores(IControladorUsuario icu) {
+        this.ICU = icu;
     }
 
     @Override
@@ -228,7 +236,7 @@ public class ControladorPropCat implements IPropCat {
     @Override
      public Map<String, DtinfoPropuesta> DarPropuestasCol(Colaborador c) {
         Map<String, DtinfoPropuesta> resultado = null;
-        Set set = c.getFavoritas().entrySet();
+        Set set = c.getColaboraciones().entrySet();
         Iterator it = set.iterator();
         while (it.hasNext()) {
             Map.Entry mentry = (Map.Entry) it.next();
@@ -237,5 +245,43 @@ public class ControladorPropCat implements IPropCat {
         }
         return resultado;
     }
+     
+     public void CargarPropuestas(){
+         Map<String, Propuesta> prop=dbPropuesta.cargarPropuesta();
+         Map<String,Usuario> usuarios=ICU.getUsuarios();
+         Set set=prop.entrySet();
+         Iterator it=set.iterator();
+         while(it.hasNext()){
+             Map.Entry mentry=(Map.Entry) it.next();
+             Propuesta p=(Propuesta) mentry.getValue();
+             String nick=p.getAutor().getNickname();
+             Set set2=usuarios.entrySet();
+             Iterator it2=set2.iterator();
+             while(it2.hasNext()){
+                 Map.Entry mentry2=(Map.Entry) it2.next();
+                 if(mentry2.getValue() instanceof Proponente){
+                     Proponente pro=(Proponente) mentry2.getValue();
+                     if(pro.getNickname().equals(nick)){
+                         p.setAutor(pro);
+                         pro.getPropuestas().put(p.getTituloP(), p);
+                         break;
+                     }
+                 }else{
+                     Colaborador col=(Colaborador) mentry2.getValue();
+                     Map<String,Colaboracion> colaboraciones=this.ICU.getColaboraciones();
+                     Set set3=colaboraciones.entrySet();
+                     Iterator it3=set3.iterator();
+                     while(it3.hasNext()){
+                       Map.Entry mentry3=(Map.Entry) it3.next(); 
+                       Colaboracion colab=(Colaboracion) mentry3.getValue();
+                       if(colab.getNickName().equals(col.getNickname()) && colab.getTituloP().equals(p.getTituloP())){
+                           col.getColaboraciones().put(p.getTituloP(), p);
+                           break;
+                       }
+                     }
+                 }
+             }
+         }
+     }
 
 }
