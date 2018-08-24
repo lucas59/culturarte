@@ -5,8 +5,9 @@
  */
 package Presentacion;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.beans.PropertyVetoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import logica.Fabrica;
 import logica.Interfaces.IControladorUsuario;
@@ -180,6 +181,12 @@ public class inicio extends javax.swing.JFrame {
         // TODO add your handling code here:
         AltaUsuario alta = new AltaUsuario();
         Escritorio.add(alta);
+        try {
+            alta.setSelected(Boolean.TRUE);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(inicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed

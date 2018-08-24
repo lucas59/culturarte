@@ -59,6 +59,8 @@ public class ControladorPropCat implements IPropCat {
     public ControladorPropCat() {
         this.categorias = new HashMap<>();
         this.propuestas = new HashMap<>();
+        Categoria cat = new Categoria("OTROS");
+        this.categorias.put("Otros", cat);
     }
 
        @Override
