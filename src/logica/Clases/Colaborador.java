@@ -17,9 +17,13 @@ import java.util.Map;
 public class Colaborador extends Usuario{
     private Map <Integer, Colaboracion> Colaboraciones;
     
-    public Colaborador(String nickname, String nombre, String apellido, String correo, Calendar fechaN, String imagen, Map<String, Usuario> seguidos, Map<String, Propuesta> favoritas) {
-        super(nickname, nombre, apellido, correo, fechaN, imagen, seguidos, favoritas);
+    public Colaborador(String nickname, String nombre, String apellido, String correo, Calendar fechaN, String imagen, Map<String, Usuario> seguidos) {
+        super(nickname, nombre, apellido, correo, fechaN, imagen, seguidos);
         this.Colaboraciones = new HashMap <Integer, Colaboracion>();
     }    
+
+    public Map<Integer, Colaboracion> getColaboraciones() {
+        return Colaboraciones;
+    }
     
 }

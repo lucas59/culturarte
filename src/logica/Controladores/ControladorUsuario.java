@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import logica.Clases.Colaboracion;
 import logica.Clases.DtProponente;
 import logica.Clases.DtUsuario;
 import logica.Clases.DtinfoColaborador;
@@ -39,6 +40,7 @@ public class ControladorUsuario implements IControladorUsuario {
 
     private static ControladorUsuario instancia;
     private Map<String, Usuario> Usuarios;
+    private Map<String,Colaboracion> colaboraciones;
     private IPropCat IPC;
     private DBUsuario dbUsuario = null;
 
@@ -164,7 +166,7 @@ public class ControladorUsuario implements IControladorUsuario {
         } else {
             Map<String, Usuario> seguidores = new HashMap<>();
             Map<String, Propuesta> favoritas = new HashMap<>();
-            Colaborador c = new Colaborador(nickName, nombre, apellido, correo, fechaN, imagen, seguidores, favoritas);
+            Colaborador c = new Colaborador(nickName, nombre, apellido, correo, fechaN, imagen, seguidores);
 
             String fotoLocal = c.getImagen();
             if (!"".equals(c.getImagen())) {
@@ -191,9 +193,8 @@ public class ControladorUsuario implements IControladorUsuario {
             return false;
         } else {
             Map<String, Usuario> seguidores = new HashMap<>();
-            Map<String, Propuesta> favoritas = new HashMap<>();
             Map<String, Propuesta> propuestas = new HashMap<>();
-            Proponente c = new Proponente(biografia, direccion, sitioWeb, propuestas, nickName, nombre, apellido, correo, fechaN, imagen, seguidores, favoritas);
+            Proponente c = new Proponente(biografia, direccion, sitioWeb, propuestas, nickName, nombre, apellido, correo, fechaN, imagen, seguidores);
             String fotoLocal = c.getImagen();
             if (!"".equals(c.getImagen())) {
 
@@ -347,5 +348,11 @@ public class ControladorUsuario implements IControladorUsuario {
      public void CargarUsuarios(){
       this.Usuarios=dbUsuario.cargarUsuarios();
   }
-
+ public void CargarColaboraciones(){
+     this.colaboraciones=this.dbUsuario.CargarColaboraciones();
+ }
+ 
+ public Map<String,Colaboracion> getColaboraciones(){
+     return this.colaboraciones;
+ }
 }
