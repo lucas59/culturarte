@@ -17,12 +17,12 @@ public class Colaboracion {
     private Colaborador UColaborador;
     private float montoC;
     private Calendar fechaRealiz;
-    private boolean Entradas;
+    private TipoRetorno Entradas;
     private Propuesta Propuesta;
     private String nickName;
     private String TituloP;
 
-    public Colaboracion(Colaborador UColaborador, float montoC, Calendar fechaRealiz, boolean Entradas, Propuesta propuesta) {
+    public Colaboracion(Colaborador UColaborador, float montoC, Calendar fechaRealiz, TipoRetorno Entradas, Propuesta propuesta) {
         this.UColaborador = UColaborador;
         this.montoC = montoC;
         this.fechaRealiz = fechaRealiz;
@@ -34,7 +34,7 @@ public class Colaboracion {
         return this.montoC;
     }
 
-    public boolean getEntradas() {
+    public TipoRetorno getEntradas() {
         return this.Entradas;
     }
 
@@ -62,7 +62,7 @@ public class Colaboracion {
         this.fechaRealiz = fechaRealiz;
     }
 
-    public void setEntradas(boolean Entradas) {
+    public void setEntradas(TipoRetorno Entradas) {
         this.Entradas = Entradas;
     }
 
