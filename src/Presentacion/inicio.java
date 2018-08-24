@@ -176,11 +176,9 @@ public class inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-    
         Fabrica fabrica = Fabrica.getInstance();
         IControladorUsuario ICU = fabrica.getIControladorUsuario();
         IPropCat IPC = fabrica.getControladorPropCat();
-
         if (ICU.ListarColaboradores().isEmpty() && IPC.listarPropuestaC().isEmpty()) {
             JOptionPane.showMessageDialog(null, "No existen Colaboradores ni propuestas en el sistema");
         } else if (ICU.ListarColaboradores().isEmpty()) {
@@ -191,7 +189,9 @@ public class inicio extends javax.swing.JFrame {
             Registrar_Colaboracion RP = new Registrar_Colaboracion();
             Escritorio.add(RP);
             RP.setVisible(true);
+            
         }
+            
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
