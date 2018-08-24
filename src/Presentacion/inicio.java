@@ -28,9 +28,11 @@ public class inicio extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setExtendedState(inicio.MAXIMIZED_BOTH);
         Fabrica fabrica = Fabrica.getInstance();
-        ICU= Fabrica.getInstance().getIControladorUsuario();
-       IPC= Fabrica.getInstance().getControladorPropCat();
+        ICU= fabrica.getIControladorUsuario();
+       IPC= fabrica.getControladorPropCat();
         ICU.ComunicarControladores(IPC);
+        IPC.ComunicarControladores(ICU);
+        IPC.cargarPropuestas();
 
     }
 
