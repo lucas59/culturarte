@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 import logica.Clases.Colaboracion;
+import logica.Clases.Colaborador;
 import logica.Clases.DtProponente;
 import logica.Clases.DtUsuario;
 import logica.Clases.DtinfoColaborador;
@@ -56,4 +57,8 @@ public interface IControladorUsuario {
 
     public abstract void CargarColaboraciones();
 
+    
+    public abstract Colaborador getColaborador();
+    
+    public DtinfoColaborador SeleccionarColaborador(String nickName);
 }

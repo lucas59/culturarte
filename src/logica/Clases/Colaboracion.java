@@ -5,6 +5,7 @@
  */
 package logica.Clases;
 
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -13,26 +14,22 @@ import java.util.Date;
  */
 public class Colaboracion {
     private Colaborador UColaborador;
-    
-    private String IdColaboracion;
     private float montoC;
-    private Date fechaRealiz;
+    private Calendar fechaRealiz;
     private boolean Entradas;
+    private Propuesta Propuesta;
+
+    public Colaboracion(Colaborador UColaborador, float montoC, Calendar fechaRealiz, boolean Entradas, Propuesta propuesta){
     private String nickName;
     private String TituloP;
     
     public Colaboracion(Colaborador UColaborador, String IdColaboracion, float montoC, Date fechaRealiz, boolean Entradas){
         this.UColaborador = UColaborador;
-        this.IdColaboracion = IdColaboracion;
         this.montoC = montoC;
         this.fechaRealiz = fechaRealiz;
         this.Entradas = Entradas;
+        this.Propuesta = propuesta;
     }
-    
-    public String getIdColaborador(){
-        return this.IdColaboracion;
-    }
-    
     public float getMontoC(){
         return this.montoC;
     }
@@ -41,7 +38,7 @@ public class Colaboracion {
         return this.Entradas;
     }
     
-    public Date getFechaRealiz(){
+    public Calendar getFechaRealiz(){
         return this.fechaRealiz;
     }
     
@@ -49,6 +46,33 @@ public class Colaboracion {
         return this.UColaborador;
     }
     
+    public Propuesta getPropuesta(){
+        return this.Propuesta;
+    }
+        
+    public void setUColaborador(Colaborador UColaborador) {
+        this.UColaborador = UColaborador;
+    }
+
+    public void setMontoC(float montoC) {
+        this.montoC = montoC;
+    }
+
+    public void setFechaRealiz(Calendar fechaRealiz) {
+        this.fechaRealiz = fechaRealiz;
+    }
+
+    public void setEntradas(boolean Entradas) {
+        this.Entradas = Entradas;
+    }
+
+    public void setPropuesta(Propuesta Propuesta) {
+        this.Propuesta = Propuesta;
+    }
+    
+    
+    public Colaborador getUColaborador() {
+        return UColaborador;
     public Colaboracion(String nick,String tit){
         this.nickName=nick;
         this.TituloP=tit;

@@ -18,6 +18,7 @@ import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
+import logica.Clases.Colaboracion;
 import logica.Clases.Usuario;
 
 /**
@@ -128,7 +129,7 @@ public class DBUsuario {
                 String biog = st.getString(8);
                 String web = st.getString(9);
                 if (st.getInt(10) == 1) {
-                    Proponente p = new Proponente(biog, dir, web, null, nick, nombre, apellido, correo, c, img, null, null);
+                    Proponente p = new Proponente(biog, dir, web, null, nick, nombre, apellido, correo, c, img, null);
                     usuarios.put(nick, p);
                 } else {
                     Colaborador col = new Colaborador(nick, nombre, apellido, correo, c, img, null, null);
@@ -141,5 +142,28 @@ public class DBUsuario {
             return null;
         }
 
+    }
+    
+    public Map<String, Usuario> Cargarseguidos(String nick){
+        return null;
+    }
+    
+    public Map<String,Colaboracion> CargarColaboraciones(){
+        try{
+             PreparedStatement statement = conexion.prepareStatement("SELECT * FROM colaboraciones");
+            ResultSet st = statement.executeQuery();
+            Map<String,Colaboracion> colaboraciones=new HashMap<String,Colaboracion>();
+            
+            while(st.next()){
+               String tit=st.getString("TituloP");
+                String nick=st.getString("nickName");
+                Colaboracion col=new Colaboracion(nick,tit);
+                colaboraciones.put(tit, col);
+            }
+            return colaboraciones;
+        }catch(SQLException ex){
+            ex.printStackTrace();
+            return null;
+        }
     }
 }

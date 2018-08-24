@@ -5,9 +5,11 @@
  */
 package logica.Controladores;
 
+import Persistencia.DBColaboracion;
 import Persistencia.DBPropuesta;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -16,6 +18,7 @@ import java.util.Set;
 import logica.Clases.Categoria;
 import logica.Clases.Colaboracion;
 import logica.Clases.Colaborador;
+import logica.Clases.DtColaboraciones;
 import logica.Clases.DtConsultaPropuesta;
 import logica.Clases.DtinfoColaborador;
 import logica.Clases.DtinfoPropuesta;
@@ -60,9 +63,12 @@ public class ControladorPropCat implements IPropCat {
     }
     public void ComunicarControladores(IControladorUsuario icu) {
         this.ICU = icu;
+        this.propuestas = new HashMap<>();
+        Categoria cat = new Categoria("OTROS");
+        this.categorias.put("Otros", cat);
     }
 
-    @Override
+       @Override
     public List<DtNickTitProp> listarPropuestaC() {
         Map<String, Propuesta> prop = this.propuestas;
         Set set = prop.entrySet();
@@ -71,8 +77,12 @@ public class ControladorPropCat implements IPropCat {
         while (iterator.hasNext()) {
             Map.Entry mentry = (Map.Entry) iterator.next();
             Propuesta aux = (Propuesta) mentry.getValue();
-            DtNickTitProp aux2 = new DtNickTitProp(aux);
-            retorno.add(aux2);
+
+            if (aux.getEstadoActual().getEstado() == TipoE.Publicada || aux.getEstadoActual().getEstado() == TipoE.enFinanciacion) {
+                DtNickTitProp aux2 = new DtNickTitProp(aux);
+                retorno.add(aux2);
+            }
+
         }
         return retorno;
     }
@@ -161,7 +171,7 @@ public class ControladorPropCat implements IPropCat {
             Propuesta aux = (Propuesta) mentry.getValue();
             if (aux.getTituloP().compareTo(titulo) == 0) {
                 retorno = new DtinfoPropuesta(aux.getTituloP(), aux.getDescripcionP(), aux.getImagen(), aux.getCategoria().getNombreC(), aux.getLugar(), aux.getFecha(), aux.getMontoE(), aux.getMontoTot(), aux.getFechaPubl(), aux.getRetorno());
-                //              this.Propuesta = new Propuesta(aux.getTituloP(), aux.getDescripcionP(), aux.getImagen(), aux.getLugar(), aux.getFecha(), aux.getMontoE(), aux.getMontoTot(), aux.getFechaPubl(), aux.get, catRecordada, TipoRetorno.EntGan, uProponente);
+                this.Propuesta = new Propuesta(aux.getTituloP(), aux.getDescripcionP(), aux.getImagen(), aux.getLugar(), aux.getFecha(), aux.getMontoE(), aux.getMontoTot(), aux.getFechaPubl(), aux.getEstadoActual(), aux.getCategoria(), aux.getRetorno(), aux.getAutor());
             }
         }
         return retorno;
@@ -178,27 +188,7 @@ public class ControladorPropCat implements IPropCat {
         return null;
     }
 
-    @Override
-    public List<String> ListarColaboradores() {
-        return null;
-    }
-
-    @Override
-    public List<DtinfoColaborador> SeleccionarColaborador() {
-        return null;
-    }
-
-    @Override
-    public void confirmar(boolean Estado, float monto) {
-
-    }
-
-    @Override
-    public void cargarPropuestas() {
-        DBPropuesta DBP = new DBPropuesta();
-        //  this.propuestas = DBP.cargarPropuesta();
-    }
-
+ 
     @Override
     public Map<String, Propuesta> getpropuesta() {
         return this.propuestas;
@@ -219,19 +209,7 @@ public class ControladorPropCat implements IPropCat {
         return retorno;
     }
 
-    @Override
-    public Map<String, DtinfoColaborador> ListarColaboradores(String titulo) {
-        Map<Integer, Colaboracion> colaboraciones = null;
-        Map<String, DtinfoColaborador> colaboradores = null;
-        Propuesta a = this.propuestas.get(titulo);
-        colaboraciones = a.getColaboraciones();
-        for (int i = 0; i < colaboraciones.size(); i++) {
-            Colaborador colab = colaboraciones.get(i).getColaborador();
-            DtinfoColaborador dtC = new DtinfoColaborador(colab.getNickname(), colab.getNombre(), colab.getApellido(), colab.getCorreo(), colab.getFechaN());
-            colaboradores.put(dtC.getNickname(), dtC);
-        }
-        return colaboradores;
-    }
+
     
     @Override
      public Map<String, DtinfoPropuesta> DarPropuestasCol(Colaborador c) {
@@ -284,4 +262,74 @@ public class ControladorPropCat implements IPropCat {
          }
      }
 
-}
+    @Override
+    public boolean agregarColaboracion(boolean Entrada, Float monto) throws Exception{
+        Fabrica fabrica = Fabrica.getInstance();
+        IControladorUsuario ICU = fabrica.getIControladorUsuario();
+        IPropCat IPC = fabrica.getControladorPropCat();
+        Calendar calendario = new GregorianCalendar();
+        java.util.Date utilDate = new java.util.Date();
+        utilDate = calendario.getTime();
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+        
+        List<Colaboracion> colaboraciones = this.getPropuesta().getColaboraciones();
+        float TotalColaboracion = 0;
+        for (int indice = 0; indice < colaboraciones.size(); indice++) {
+            if (colaboraciones.get(indice).getPropuesta().getTituloP() == this.getPropuesta().getTituloP()) {
+                throw new Exception("No puede colaborar en una propuesta mas de una vez");
+            } else {
+                TotalColaboracion = TotalColaboracion + colaboraciones.get(indice).getMontoC();
+            }
+        }
+        if ((TotalColaboracion + monto) <= this.getPropuesta().getMontoTot()) {
+            Colaboracion colaboracion = new Colaboracion(ICU.getColaborador(), monto, calendario, Entrada, this.getPropuesta());
+            ICU.getColaborador().setColaboraciones(colaboracion);
+            IPC.getPropuesta().setColaboraciones(colaboracion);
+            if (TotalColaboracion < this.getPropuesta().getMontoTot()) {
+                EstadoPropuesta EstadoP = new EstadoPropuesta(TipoE.enFinanciacion, calendario);
+                this.getPropuesta().setEstadoActual(EstadoP);
+                this.getPropuesta().setEstados(EstadoP);
+            } else if (TotalColaboracion == this.getPropuesta().getMontoTot()) {
+                EstadoPropuesta EstadoP = new EstadoPropuesta(TipoE.Financiada, calendario);
+                this.getPropuesta().setEstadoActual(EstadoP);
+                this.getPropuesta().setEstados(EstadoP);
+            }
+            DBColaboracion DBC = new DBColaboracion();
+            DBC.agregarColaboracion(Entrada, monto);
+            return true;
+        } else {
+            throw new Exception("El monto que ingreso ha superado el limite del monto total, ingrese un monto menor o igual a: $"+ (this.getPropuesta().getMontoTot() - TotalColaboracion));
+        }
+    }
+
+    @Override
+    public void cargarPropuestas() {
+      //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Map<String, DtinfoColaborador> ListarColaboradores(String titulo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public Propuesta getPropuesta() {
+        return Propuesta;
+    }
+    
+     public List<DtColaboraciones> listarColaboraciones() {
+        return null;
+         /*
+        List<DtColaboraciones> listarcolaboraciones= new ArrayList();
+        Iterator it = this.propuestas.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry mentry = (Map.Entry) it.next();
+            Propuesta prop = (Propuesta) mentry.getValue();
+            DtConsultaPropuesta dtprop = new DtConsultaPropuesta(prop.getTituloP(), prop.getDescripcionP(), prop.getCategoria().getNombreC());
+
+            listarcolaboraciones.add(dtprop);
+        }
+        return listarcolaboraciones;
+*/
+    
+     }
+     }

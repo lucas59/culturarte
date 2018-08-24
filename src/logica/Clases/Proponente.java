@@ -20,8 +20,8 @@ public class Proponente extends Usuario {
     private String sitioweb;
     private Map<String, Propuesta> Propuestas;
 
-    public Proponente(String biografia, String direccion, String sitioweb, Map<String, Propuesta> Propuestas, String nickname, String nombre, String apellido, String correo, Calendar fechaN, String imagen, Map<String, Usuario> seguidos, Map<String, Propuesta> favoritas) {
-        super(nickname, nombre, apellido, correo, fechaN, imagen, seguidos, favoritas);
+    public Proponente(String biografia, String direccion, String sitioweb, Map<String, Propuesta> Propuestas, String nickname, String nombre, String apellido, String correo, Calendar fechaN, String imagen, Map<String, Usuario> seguidos) {
+        super(nickname, nombre, apellido, correo, fechaN, imagen, seguidos);
         this.biografia = biografia;
         this.direccion = direccion;
         this.sitioweb = sitioweb;

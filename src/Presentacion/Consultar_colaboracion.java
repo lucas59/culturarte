@@ -5,14 +5,26 @@
  */
 package Presentacion;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import logica.Clases.Colaboracion;
+import logica.Clases.Colaborador;
 import logica.Clases.DtinfoColaborador;
 import logica.Clases.DtNickTitProp;
+import logica.Clases.DtinfoPropuesta;
+import logica.Clases.Propuesta;
+import logica.Clases.Usuario;
 import logica.Controladores.ControladorPropCat;
 import logica.Controladores.ControladorUsuario;
 import logica.Fabrica;
 import logica.Interfaces.IControladorUsuario;
+import logica.Interfaces.IPropCat;
 
 /**
  *
@@ -24,7 +36,7 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
      * Creates new form Consultar_colaboracion
      */
     public Consultar_colaboracion() {
-        initComponents();        
+        initComponents();
     }
 
     /**
@@ -52,10 +64,10 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
         jLabel1.setText("Seleccionar colaborador");
 
-        jLabel2.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
         jLabel2.setText("Seleccionar Colaboración");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -75,6 +87,11 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
             }
         });
         jTable1.addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -129,20 +146,19 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addContainerGap())
+                        .addComponent(jButton1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(24, 24, 24))))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(113, 113, 113)
+                                .addComponent(jLabel2))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 481, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,7 +175,7 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -191,6 +207,11 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        Calendar calendario = new GregorianCalendar();
+        java.util.Date utilDate = new java.util.Date();
+        utilDate = calendario.getTime();
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+        JOptionPane.showMessageDialog(null, calendario.get(Calendar.HOUR_OF_DAY) + ":" + calendario.get(Calendar.MINUTE));
         this.setVisible(false);
     }//GEN-LAST:event_jButton2MouseClicked
 
@@ -199,18 +220,38 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTable1ComponentShown
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-  Fabrica fabrica = Fabrica.getInstance();
-        DefaultTableModel modelo=(DefaultTableModel) jTable1.getModel();
-        ControladorUsuario controladorU =(ControladorUsuario) fabrica.getIControladorUsuario();
- //       List<DtinfoColaborador> lista2 = controladorU.ListarColaboradores();
+        Fabrica fabrica = Fabrica.getInstance();
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        ControladorUsuario controladorU = (ControladorUsuario) fabrica.getIControladorUsuario();
+        List<DtinfoColaborador> lista2 = controladorU.ListarColaboradores();
         modelo = (DefaultTableModel) jTable1.getModel();
         modelo.setRowCount(0);
-    //    for (int i = 0;i<lista2.size();i++){
-     //       DtinfoColaborador C = (DtinfoColaborador) lista2.get(i);
-     //       Object[] dat = {C.getNickName()};
-    //        modelo.addRow(dat);
-    //    }        // TODO add your handling code here:
+        for (int i = 0;i<lista2.size();i++){
+            DtinfoColaborador C = (DtinfoColaborador) lista2.get(i);
+            Object[] dat = {C.getNickname()};
+            modelo.addRow(dat);
+        } 
     }//GEN-LAST:event_formComponentShown
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        Fabrica fabrica = Fabrica.getInstance();
+        IControladorUsuario ICU = fabrica.getIControladorUsuario();
+        Map<String, Usuario> colaboradores = ICU.getUsuarios();
+        Set set = colaboradores.entrySet();
+        Iterator iterator = set.iterator();
+        iterator = set.iterator();
+        DtinfoColaborador Dtinfocol = null;
+        while (iterator.hasNext()) {
+            Map.Entry mentry = (Map.Entry) iterator.next();
+            Colaborador aux = (Colaborador) mentry.getValue();
+            boolean nicknameOK = aux.getNickname().contains((String) jTable1.getValueAt(jTable1.getSelectedRow(), 0));
+            if (nicknameOK) {
+                Dtinfocol = ICU.SeleccionarColaborador(aux.getNickname());
+                break;
+            }
+        }
+        
+    }//GEN-LAST:event_jTable1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

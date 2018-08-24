@@ -24,20 +24,21 @@ import logica.Interfaces.IControladorUsuario;
  * @author gabri
  */
 public class ConsultarPerfilColaborador extends javax.swing.JInternalFrame {
-private IControladorUsuario ICU;
-    
+
+    private IControladorUsuario ICU;
+
     public ConsultarPerfilColaborador() {
         initComponents();
         this.ICU = Fabrica.getInstance().getIControladorUsuario();
         List<DtinfoColaborador> listaC = ICU.ListarColaboradores();
-        DefaultTableModel modelo=(DefaultTableModel) TablaC.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) TablaC.getModel();
         modelo.setRowCount(0);
-        for (int i=0;i<listaC.size();i++) {
-            DtinfoColaborador dtc=(DtinfoColaborador) listaC.get(i);
-            Object[] dat={dtc.getNickname(),dtc.getNombre(),dtc.getApellido()};
+        for (int i = 0; i < listaC.size(); i++) {
+            DtinfoColaborador dtc = (DtinfoColaborador) listaC.get(i);
+            Object[] dat = {dtc.getNickname(), dtc.getNombre(), dtc.getApellido()};
             modelo.addRow(dat);
-        } 
-        
+        }
+
     }
 
     /**
@@ -58,10 +59,10 @@ private IControladorUsuario ICU;
         DatosColaborador = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         Colaboraciones = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(616, 620));
@@ -73,7 +74,7 @@ private IControladorUsuario ICU;
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Consultar Perfil de Colaborador");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(137, 11, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, -1, -1));
 
         NombreCol.setToolTipText("");
         NombreCol.addActionListener(new java.awt.event.ActionListener() {
@@ -82,11 +83,14 @@ private IControladorUsuario ICU;
             }
         });
         NombreCol.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                NombreColKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 NombreColKeyTyped(evt);
             }
         });
-        jPanel1.add(NombreCol, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 270, -1));
+        jPanel1.add(NombreCol, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 280, -1));
 
         TablaC.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -123,17 +127,17 @@ private IControladorUsuario ICU;
         });
         jScrollPane1.setViewportView(TablaC);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 350, 120));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 350, 120));
 
         DatosColaborador.setColumns(20);
         DatosColaborador.setRows(5);
         jScrollPane2.setViewportView(DatosColaborador);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 240, 350, 120));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, 350, 120));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Datos del colaborador");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 220, -1, -1));
 
         jButton1.setText("Salir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -141,25 +145,21 @@ private IControladorUsuario ICU;
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 550, -1, -1));
-
-        jButton2.setText("Buscar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 60, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 550, -1, -1));
 
         Colaboraciones.setColumns(20);
         Colaboraciones.setRows(5);
         jScrollPane3.setViewportView(Colaboraciones);
 
-        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 400, 350, 130));
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 400, 350, 130));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Colaboraciones");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 370, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 370, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setText("Buscar:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, -1, -1));
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -175,62 +175,64 @@ private IControladorUsuario ICU;
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        String  nick= NombreCol.getText();
-        if("".equals(nick) ){
-            JOptionPane.showMessageDialog(null, "Porfavor ingrese un nombre valido");
-            return;
-        }
-        
-        List<DtinfoColaborador> listaC = ICU.BuscarColaborador(nick);
-        DefaultTableModel modelo=(DefaultTableModel) TablaC.getModel();
-        modelo.setRowCount(0);
-        for (int i=0;i<listaC.size();i++) {
-            DtinfoColaborador dtc=(DtinfoColaborador) listaC.get(i);
-            Object[] dat={dtc.getNickname(),dtc.getNombre(),dtc.getApellido()};
-            modelo.addRow(dat);
-        }         
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void TablaCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaCMouseClicked
         // TODO add your handling code here:
-       
+
         Colaboraciones.setText("");
         DatosColaborador.setText("");
-         DtinfoColaborador dtc=ICU.verPerfil((String)TablaC.getValueAt(TablaC.getSelectedRow(),0));
-         Calendar c=Calendar.getInstance();
-        
-         int dia=c.get(Calendar.DAY_OF_MONTH);
-         int mes=c.get(Calendar.MONTH)+1;
-         int anio=c.get(Calendar.YEAR);
-         DatosColaborador.setText("NickName: "+ dtc.getNickname()+"\n"+"Nombre: "+dtc.getNombre()+"\n"+"Apellido: "+dtc.getApellido()+"\n"+"Correo: "+dtc.getCorreo()+"\n"+"Fecha de nacimiento: "+dia+"/"+mes+"/"+anio+"\n");
-         Map <String,DtinfoPropuesta> dtp=ICU.verPropuestas(dtc);
-         if(dtp==null){
-             Colaboraciones.setText("No posee colaboraciones");
-             return;
-         }
-         Set set=dtp.entrySet();
-         Iterator it=set.iterator();
-         while(it.hasNext()){
-             Map.Entry mentry=(Map.Entry) it.next();
-             DtinfoPropuesta dtp2=(DtinfoPropuesta) mentry.getValue();
-             c=dtp2.getFechapubli();
-              dia=c.get(Calendar.DAY_OF_MONTH);
-          mes=c.get(Calendar.MONTH)+1;
-          anio=c.get(Calendar.YEAR);
-             Colaboraciones.setText("Titulo: "+dtp2.getTitulo()+"\n"+"Categoria: "+dtp2.getTipoEspec()+"\n"+"Fecha de publicacion: "+dia+"/"+mes+"/"+anio+"\n"+"Precio: "+dtp2.getPrecio()+"\n"+"\n");
-         }
-         
-        
+        DtinfoColaborador dtc = ICU.verPerfil((String) TablaC.getValueAt(TablaC.getSelectedRow(), 0));
+        Calendar c = Calendar.getInstance();
+
+        int dia = c.get(Calendar.DAY_OF_MONTH);
+        int mes = c.get(Calendar.MONTH) + 1;
+        int anio = c.get(Calendar.YEAR);
+        DatosColaborador.setText("NickName: " + dtc.getNickname() + "\n" + "Nombre: " + dtc.getNombre() + "\n" + "Apellido: " + dtc.getApellido() + "\n" + "Correo: " + dtc.getCorreo() + "\n" + "Fecha de nacimiento: " + dia + "/" + mes + "/" + anio + "\n");
+        Map<String, DtinfoPropuesta> dtp = ICU.verPropuestas(dtc);
+        if (dtp == null) {
+            Colaboraciones.setText("No posee colaboraciones");
+            return;
+        }
+        Set set = dtp.entrySet();
+        Iterator it = set.iterator();
+        while (it.hasNext()) {
+            Map.Entry mentry = (Map.Entry) it.next();
+            DtinfoPropuesta dtp2 = (DtinfoPropuesta) mentry.getValue();
+            c = dtp2.getFechapubli();
+            dia = c.get(Calendar.DAY_OF_MONTH);
+            mes = c.get(Calendar.MONTH) + 1;
+            anio = c.get(Calendar.YEAR);
+            Colaboraciones.setText("Titulo: " + dtp2.getTitulo() + "\n" + "Categoria: " + dtp2.getTipoEspec() + "\n" + "Fecha de publicacion: " + dia + "/" + mes + "/" + anio + "\n" + "Precio: " + dtp2.getPrecio() + "\n" + "\n");
+        }
+
+
     }//GEN-LAST:event_TablaCMouseClicked
+
+    private void NombreColKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NombreColKeyReleased
+        // TODO add your handling code here:
+               char c = evt.getKeyChar();
+               String d=""+c;
+        if (Character.isLetter(c) || d.equals("\b")) {
+            String nick = NombreCol.getText();
+            List<DtinfoColaborador> listaC = ICU.BuscarColaborador(nick);
+            DefaultTableModel modelo = (DefaultTableModel) TablaC.getModel();
+            modelo.setRowCount(0);
+            for (int i = 0; i < listaC.size(); i++) {
+                DtinfoColaborador dtc = (DtinfoColaborador) listaC.get(i);
+                Object[] dat = {dtc.getNickname(), dtc.getNombre(), dtc.getApellido()};
+                modelo.addRow(dat);
+            }
+        } else {
+            evt.consume();
+        }
+    }//GEN-LAST:event_NombreColKeyReleased
 
     private void NombreColKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NombreColKeyTyped
         // TODO add your handling code here:
-        char c= evt.getKeyChar();
-        if(Character.isLetter(c)){
-            
-        }else{
+                char c = evt.getKeyChar();
+               String d=""+c;
+         if (Character.isLetter(c) || d.equals("\b")) {
+             
+         } else {
             evt.consume();
         }
     }//GEN-LAST:event_NombreColKeyTyped
@@ -276,10 +278,10 @@ private IControladorUsuario ICU;
     private javax.swing.JTextField NombreCol;
     private javax.swing.JTable TablaC;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

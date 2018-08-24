@@ -5,6 +5,9 @@
  */
 package Presentacion;
 
+import java.beans.PropertyVetoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import logica.Fabrica;
 import logica.Interfaces.IControladorUsuario;
@@ -56,6 +59,7 @@ public class inicio extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -130,6 +134,14 @@ public class inicio extends javax.swing.JFrame {
         jMenuItem6.setText("Consultar Propuestas");
         jMenu2.add(jMenuItem6);
 
+        jMenuItem8.setText("Consultar colaboración");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem8);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -149,34 +161,34 @@ public class inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        /*   
+    
         Fabrica fabrica = Fabrica.getInstance();
         IControladorUsuario ICU = fabrica.getIControladorUsuario();
         IPropCat IPC = fabrica.getControladorPropCat();
-       
-        if(ICU.getUsuarios.isEmpty() && IPC.getpropuesta().isEmpty()){
+
+        if (ICU.ListarColaboradores().isEmpty() && IPC.listarPropuestaC().isEmpty()) {
             JOptionPane.showMessageDialog(null, "No existen Colaboradores ni propuestas en el sistema");
-        }
-        else if (ICU.getUsuarios().isEmpty())
+        } else if (ICU.ListarColaboradores().isEmpty()) {
             JOptionPane.showMessageDialog(null, "No existen Colaboradores en el sistema");
-        else if(IPC.getpropuesta().isEmpty())
+        } else if (IPC.listarPropuestaC().isEmpty()) {
             JOptionPane.showMessageDialog(null, "No existen Propuestas en el sistema");
-        if(!ICU.getUsuarios().isEmpty() && !IPC.getpropuesta().isEmpty()){
-         Registrar_Colaboracion RP = new Registrar_Colaboracion();
-        Escritorio.add(RP);
-        RP.setVisible(true);
-     
+        } else {
+            Registrar_Colaboracion RP = new Registrar_Colaboracion();
+            Escritorio.add(RP);
+            RP.setVisible(true);
         }
-         */
-
-        JOptionPane.showMessageDialog(null, "No implementado");
-
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
         AltaUsuario alta = new AltaUsuario();
         Escritorio.add(alta);
+        try {
+            alta.setSelected(Boolean.TRUE);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(inicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -207,6 +219,12 @@ public class inicio extends javax.swing.JFrame {
         Escritorio.add(PC);
         PC.setVisible(true);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        Consultar_colaboracion CU = new Consultar_colaboracion();
+        Escritorio.add(CU);
+        CU.setVisible(true);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -255,5 +273,6 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     // End of variables declaration//GEN-END:variables
 }

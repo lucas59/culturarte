@@ -21,9 +21,9 @@ public class Usuario {
     private Calendar fechaN;
     private String imagen;
     private Map <String, Usuario> seguidos;
-    private Map <String, Propuesta> favoritas;
+    
 
-    public Usuario(String nickname, String nombre, String apellido, String correo, Calendar fechaN, String imagen, Map<String, Usuario> seguidos, Map<String, Propuesta> favoritas) {
+    public Usuario(String nickname, String nombre, String apellido, String correo, Calendar fechaN, String imagen, Map<String, Usuario> seguidos) {
         this.nickname = nickname;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -31,9 +31,8 @@ public class Usuario {
         this.fechaN = fechaN;
         this.imagen = imagen;
         this.seguidos = seguidos;
-        this.favoritas = favoritas;
         this.seguidos = new HashMap <String, Usuario>();
-        this.favoritas = new HashMap <String, Propuesta>();
+
     }
 
     public String getNickname() {
@@ -91,15 +90,5 @@ public class Usuario {
     public void setSeguidos(Map<String, Usuario> seguidos) {
         this.seguidos = seguidos;
     }
-
-    public Map<String, Propuesta> getFavoritas() {
-        return favoritas;
-    }
-
-    public void setFavoritas(Map<String, Propuesta> favoritas) {
-        this.favoritas = favoritas;
-    }
-    
-    
 
 }

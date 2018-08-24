@@ -12,6 +12,9 @@ package logica.Clases;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Calendar;
+import java.util.List;
+import java.util.ArrayList;
+import logica.Clases.Colaboracion;
 
 public class Propuesta {
 
@@ -26,7 +29,9 @@ public class Propuesta {
     private Proponente Autor;
     private TipoRetorno retorno;
     private EstadoPropuesta estadoActual;
-    private Map<Integer, Colaboracion> Colaboraciones;
+    private List<EstadoPropuesta> Estados;
+
+    private List<Colaboracion> Colaboraciones;
     private Categoria categoria;
 
     public Propuesta(String tituloP, String descripcion, String imagen, String lugar, Calendar fecha, float montoE, float montoTot, Calendar fechaPubl, EstadoPropuesta estado, Categoria cate, TipoRetorno retorno, Proponente autor) {
@@ -42,11 +47,7 @@ public class Propuesta {
         this.retorno = retorno;
         this.estadoActual = estado;
         this.Autor = autor;
-        this.Colaboraciones = new HashMap<>();
-    }
-
-    public Map<Integer, Colaboracion> getColaboraciones() {
-        return Colaboraciones;
+        this.Colaboraciones = new ArrayList<>();
     }
 
     public String getTituloP() {
@@ -135,6 +136,22 @@ public class Propuesta {
     }
     public void setAutor(Proponente Autor) {
         this.Autor = Autor;
+        public EstadoPropuesta getEstadoActual() {
+        return estadoActual;
     }
 
+    public void setEstadoActual(EstadoPropuesta estadoActual) {
+        this.estadoActual = estadoActual;
+    }
+    
+    public void setEstados(EstadoPropuesta Estado) {
+        this.Estados.add(Estado);
+    }
+    
+    public List<Colaboracion> getColaboraciones() {
+        return Colaboraciones;
+    }
+    public void setColaboraciones(Colaboracion Colaboracion) {
+        this.Colaboraciones.add(Colaboracion);
+    }
 }
