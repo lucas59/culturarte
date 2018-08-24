@@ -52,4 +52,6 @@ public interface IPropCat {
     public abstract Map<String, DtinfoPropuesta> listarTodasPropuestas();
 
     public abstract Map<String, DtinfoColaborador> ListarColaboradores(String titulo);
+    
+    public void ComunicarControladores(IControladorUsuario icu);
 }
