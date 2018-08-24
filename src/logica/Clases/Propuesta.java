@@ -134,23 +134,27 @@ public class Propuesta {
         DtinfoPropuesta dp = new DtinfoPropuesta(this.TituloP, this.descripcionP, this.imagen, this.categoria.getNombreC(), this.lugar, this.fecha, this.montoE, this.montoTot, this.fechaPubl, this.retorno);
         return dp;
     }
+
     public void setAutor(Proponente Autor) {
         this.Autor = Autor;
-        public EstadoPropuesta getEstadoActual() {
+    }
+
+    public EstadoPropuesta getEstadoActual() {
         return estadoActual;
     }
 
     public void setEstadoActual(EstadoPropuesta estadoActual) {
         this.estadoActual = estadoActual;
     }
-    
+
     public void setEstados(EstadoPropuesta Estado) {
         this.Estados.add(Estado);
     }
-    
+
     public List<Colaboracion> getColaboraciones() {
         return Colaboraciones;
     }
+
     public void setColaboraciones(Colaboracion Colaboracion) {
         this.Colaboraciones.add(Colaboracion);
     }

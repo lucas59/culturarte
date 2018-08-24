@@ -47,7 +47,7 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
      * @param fotoD
      */
     public AltaUsuario() {
-        
+
         this.setLocation(500, 100);
         initComponents();
         this.ICU = Fabrica.getInstance().getIControladorUsuario();

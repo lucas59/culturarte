@@ -209,8 +209,8 @@ public class ConsultarPerfilColaborador extends javax.swing.JInternalFrame {
 
     private void NombreColKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NombreColKeyReleased
         // TODO add your handling code here:
-               char c = evt.getKeyChar();
-               String d=""+c;
+        char c = evt.getKeyChar();
+        String d = "" + c;
         if (Character.isLetter(c) || d.equals("\b")) {
             String nick = NombreCol.getText();
             List<DtinfoColaborador> listaC = ICU.BuscarColaborador(nick);
@@ -228,11 +228,11 @@ public class ConsultarPerfilColaborador extends javax.swing.JInternalFrame {
 
     private void NombreColKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NombreColKeyTyped
         // TODO add your handling code here:
-                char c = evt.getKeyChar();
-               String d=""+c;
-         if (Character.isLetter(c) || d.equals("\b")) {
-             
-         } else {
+        char c = evt.getKeyChar();
+        String d = "" + c;
+        if (Character.isLetter(c) || d.equals("\b")) {
+
+        } else {
             evt.consume();
         }
     }//GEN-LAST:event_NombreColKeyTyped

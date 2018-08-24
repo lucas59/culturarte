@@ -41,15 +41,17 @@ public interface IPropCat {
 
     public abstract List<DtConsultaPropuesta> listarPropuestas();
 
-    public DtinfoPropuesta SeleccionarPropuestaR(String titulo);
+    public abstract DtinfoPropuesta SeleccionarPropuestaR(String titulo);
 
     public abstract Map<String, DtinfoPropuesta> listarTodasPropuestas();
 
     public abstract Map<String, DtinfoColaborador> ListarColaboradores(String titulo);
     
-    public void ComunicarControladores(IControladorUsuario icu);
+    public abstract void ComunicarControladores(IControladorUsuario icu);
 
     public abstract boolean agregarColaboracion(boolean Entrada, Float monto) throws Exception;
     
     public abstract Propuesta getPropuesta();
+    
+    public abstract void CargarPropuestas();
 }

@@ -13,15 +13,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Calendar;
 
-public class Usuario {  
+public class Usuario {
+
     private String nickname;
     private String nombre;
     private String apellido;
     private String correo;
     private Calendar fechaN;
     private String imagen;
-    private Map <String, Usuario> seguidos;
-    
+    private Map<String, Usuario> seguidos;
 
     public Usuario(String nickname, String nombre, String apellido, String correo, Calendar fechaN, String imagen, Map<String, Usuario> seguidos) {
         this.nickname = nickname;
@@ -31,7 +31,7 @@ public class Usuario {
         this.fechaN = fechaN;
         this.imagen = imagen;
         this.seguidos = seguidos;
-        this.seguidos = new HashMap <String, Usuario>();
+        this.seguidos = new HashMap<String, Usuario>();
 
     }
 
@@ -42,7 +42,7 @@ public class Usuario {
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
-    
+
     public String getNombre() {
         return nombre;
     }

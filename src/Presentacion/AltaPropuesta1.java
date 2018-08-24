@@ -24,8 +24,6 @@ public class AltaPropuesta1 extends javax.swing.JInternalFrame {
     private IPropCat ICP;
     private String nickProp;
     private String Categoria;
-    
-    
 
     public AltaPropuesta1() {
         initComponents();

@@ -19,6 +19,8 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 import logica.Clases.Colaboracion;
+import logica.Clases.Propuesta;
+import logica.Clases.Seguidos;
 import logica.Clases.Usuario;
 
 /**
@@ -109,7 +111,7 @@ public class DBUsuario {
         }
 
     }
-    
+
     public Map<String, Usuario> cargarUsuarios() {
         try {
             PreparedStatement statement = conexion.prepareStatement("SELECT * FROM usuario");
@@ -128,11 +130,13 @@ public class DBUsuario {
                 String dir = st.getString(7);
                 String biog = st.getString(8);
                 String web = st.getString(9);
+                Map <String,Usuario> seguidos=new HashMap();
+                Map <String,Propuesta> prop=new HashMap();
                 if (st.getInt(10) == 1) {
-                    Proponente p = new Proponente(biog, dir, web, null, nick, nombre, apellido, correo, c, img, null);
+                    Proponente p = new Proponente(biog, dir, web, prop, nick, nombre, apellido, correo, c, img, seguidos);
                     usuarios.put(nick, p);
                 } else {
-                    Colaborador col = new Colaborador(nick, nombre, apellido, correo, c, img, null, null);
+                    Colaborador col = new Colaborador(nick, nombre, apellido, correo, c, img, seguidos);
                     usuarios.put(nick, col);
                 }
             }
@@ -143,25 +147,39 @@ public class DBUsuario {
         }
 
     }
-    
-    public Map<String, Usuario> Cargarseguidos(String nick){
-        return null;
-    }
-    
-    public Map<String,Colaboracion> CargarColaboraciones(){
+
+    public Map<String, Seguidos> Cargarseguidos() {
         try{
-             PreparedStatement statement = conexion.prepareStatement("SELECT * FROM colaboraciones");
+            PreparedStatement statement = conexion.prepareStatement("SELECT * FROM ususigueusu");
             ResultSet st = statement.executeQuery();
-            Map<String,Colaboracion> colaboraciones=new HashMap<String,Colaboracion>();
-            
+            Map<String, Seguidos> seguidos=new HashMap();
             while(st.next()){
-               String tit=st.getString("TituloP");
-                String nick=st.getString("nickName");
-                Colaboracion col=new Colaboracion(nick,tit);
+                String seguidor=st.getString("nickSeguidor");
+                String seguido=st.getString("nickSeguido");
+                Seguidos s=new Seguidos(seguidor,seguido);
+                seguidos.put(seguidor, s);
+            }
+            return seguidos;
+        }catch(SQLException ex){
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    public Map<String, Colaboracion> CargarColaboraciones() {
+        try {
+            PreparedStatement statement = conexion.prepareStatement("SELECT * FROM colaboraciones");
+            ResultSet st = statement.executeQuery();
+            Map<String, Colaboracion> colaboraciones = new HashMap<String, Colaboracion>();
+
+            while (st.next()) {
+                String tit = st.getString("TituloP");
+                String nick = st.getString("nickName");
+                Colaboracion col = new Colaboracion(nick, tit);
                 colaboraciones.put(tit, col);
             }
             return colaboraciones;
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             ex.printStackTrace();
             return null;
         }

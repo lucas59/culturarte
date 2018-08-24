@@ -47,7 +47,7 @@ public class ControladorPropCat implements IPropCat {
     private Proponente uProponente;
     private Propuesta Propuesta;
     private IControladorUsuario ICU;
-    private Map<String,EstadoPropuesta> estadospropuesta;
+    private Map<String, EstadoPropuesta> estadospropuesta;
 
     public static ControladorPropCat getInstance() {
         if (instancia == null) {
@@ -57,18 +57,21 @@ public class ControladorPropCat implements IPropCat {
     }
 
     public ControladorPropCat() {
-        this.dbPropuesta=new DBPropuesta();
+        this.dbPropuesta = new DBPropuesta();
         this.categorias = new HashMap<>();
-        
-    }
-    public void ComunicarControladores(IControladorUsuario icu) {
-        this.ICU = icu;
-        this.propuestas = new HashMap<>();
+          this.propuestas = new HashMap<>();
         Categoria cat = new Categoria("OTROS");
         this.categorias.put("Otros", cat);
+
     }
 
-       @Override
+    @Override
+    public void ComunicarControladores(IControladorUsuario icu) {
+        this.ICU = icu;
+      
+    }
+
+    @Override
     public List<DtNickTitProp> listarPropuestaC() {
         Map<String, Propuesta> prop = this.propuestas;
         Set set = prop.entrySet();
@@ -154,7 +157,6 @@ public class ControladorPropCat implements IPropCat {
             Map.Entry mentry = (Map.Entry) it.next();
             Propuesta prop = (Propuesta) mentry.getValue();
             DtConsultaPropuesta dtprop = new DtConsultaPropuesta(prop.getTituloP(), prop.getDescripcionP(), prop.getCategoria().getNombreC());
-
             listPropuestas.add(dtprop);
         }
         return listPropuestas;
@@ -188,7 +190,6 @@ public class ControladorPropCat implements IPropCat {
         return null;
     }
 
- 
     @Override
     public Map<String, Propuesta> getpropuesta() {
         return this.propuestas;
@@ -209,61 +210,70 @@ public class ControladorPropCat implements IPropCat {
         return retorno;
     }
 
-
-    
     @Override
-     public Map<String, DtinfoPropuesta> DarPropuestasCol(Colaborador c) {
+    public Map<String, DtinfoPropuesta> DarPropuestasCol(Colaborador c) {
         Map<String, DtinfoPropuesta> resultado = null;
-        Set set = c.getColaboraciones().entrySet();
+        Iterator it = c.getColaboraciones().iterator();
+        while (it.hasNext()) {
+            Map.Entry mentry = (Map.Entry) it.next();
+            Colaboracion col = (Colaboracion) mentry.getValue();
+            Set set=this.propuestas.entrySet();
+            Iterator it2=set.iterator();
+            while(it2.hasNext()){
+                Map.Entry mentry2 = (Map.Entry) it2.next();
+                Propuesta prop=(Propuesta) mentry2.getValue();
+                if(prop.getTituloP().equals(col.getTituloP())){
+                    DtinfoPropuesta dtp=new DtinfoPropuesta(prop);
+                    resultado.put(dtp.getTitulo(), dtp);
+                    break;
+                }
+            }
+            
+        }
+        return resultado;
+    }
+
+    @Override
+    public void CargarPropuestas() {
+        Map<String, Propuesta> prop = dbPropuesta.cargarPropuesta();
+        Map<String, Usuario> usuarios = ICU.getUsuarios();
+        Set set = prop.entrySet();
         Iterator it = set.iterator();
         while (it.hasNext()) {
             Map.Entry mentry = (Map.Entry) it.next();
             Propuesta p = (Propuesta) mentry.getValue();
-            resultado.put(p.getTituloP(), p.getDtPropuesta());
+            String nick = p.getAutor().getNickname();
+            Set set2 = usuarios.entrySet();
+            Iterator it2 = set2.iterator();
+            while (it2.hasNext()) {
+                Map.Entry mentry2 = (Map.Entry) it2.next();
+                if (mentry2.getValue() instanceof Proponente) {
+                    Proponente pro = (Proponente) mentry2.getValue();
+                    if (pro.getNickname().equals(nick)) {
+                        p.setAutor(pro);
+                        pro.getPropuestas().put(p.getTituloP(), p);
+                        break;
+                    }
+                } else {
+                    Colaborador col = (Colaborador) mentry2.getValue();
+                    Map<String, Colaboracion> colaboraciones = this.ICU.getColaboraciones();
+                    Set set3 = colaboraciones.entrySet();
+                    Iterator it3 = set3.iterator();
+                    while (it3.hasNext()) {
+                        Map.Entry mentry3 = (Map.Entry) it3.next();
+                        Colaboracion colab = (Colaboracion) mentry3.getValue();
+                        if (colab.getNickName().equals(col.getNickname()) && colab.getTituloP().equals(p.getTituloP())) {
+                            col.getColaboraciones().add(colab);
+                            break;
+                        }
+                    }
+                }
+            }
         }
-        return resultado;
     }
-     
-     public void CargarPropuestas(){
-         Map<String, Propuesta> prop=dbPropuesta.cargarPropuesta();
-         Map<String,Usuario> usuarios=ICU.getUsuarios();
-         Set set=prop.entrySet();
-         Iterator it=set.iterator();
-         while(it.hasNext()){
-             Map.Entry mentry=(Map.Entry) it.next();
-             Propuesta p=(Propuesta) mentry.getValue();
-             String nick=p.getAutor().getNickname();
-             Set set2=usuarios.entrySet();
-             Iterator it2=set2.iterator();
-             while(it2.hasNext()){
-                 Map.Entry mentry2=(Map.Entry) it2.next();
-                 if(mentry2.getValue() instanceof Proponente){
-                     Proponente pro=(Proponente) mentry2.getValue();
-                     if(pro.getNickname().equals(nick)){
-                         p.setAutor(pro);
-                         pro.getPropuestas().put(p.getTituloP(), p);
-                         break;
-                     }
-                 }else{
-                     Colaborador col=(Colaborador) mentry2.getValue();
-                     Map<String,Colaboracion> colaboraciones=this.ICU.getColaboraciones();
-                     Set set3=colaboraciones.entrySet();
-                     Iterator it3=set3.iterator();
-                     while(it3.hasNext()){
-                       Map.Entry mentry3=(Map.Entry) it3.next(); 
-                       Colaboracion colab=(Colaboracion) mentry3.getValue();
-                       if(colab.getNickName().equals(col.getNickname()) && colab.getTituloP().equals(p.getTituloP())){
-                           col.getColaboraciones().put(p.getTituloP(), p);
-                           break;
-                       }
-                     }
-                 }
-             }
-         }
-     }
 
     @Override
-    public boolean agregarColaboracion(boolean Entrada, Float monto) throws Exception{
+    public boolean agregarColaboracion(boolean Entrada, Float monto) throws Exception {
         Fabrica fabrica = Fabrica.getInstance();
         IControladorUsuario ICU = fabrica.getIControladorUsuario();
         IPropCat IPC = fabrica.getControladorPropCat();
@@ -271,7 +281,7 @@ public class ControladorPropCat implements IPropCat {
         java.util.Date utilDate = new java.util.Date();
         utilDate = calendario.getTime();
         java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-        
+
         List<Colaboracion> colaboraciones = this.getPropuesta().getColaboraciones();
         float TotalColaboracion = 0;
         for (int indice = 0; indice < colaboraciones.size(); indice++) {
@@ -298,27 +308,28 @@ public class ControladorPropCat implements IPropCat {
             DBC.agregarColaboracion(Entrada, monto);
             return true;
         } else {
-            throw new Exception("El monto que ingreso ha superado el limite del monto total, ingrese un monto menor o igual a: $"+ (this.getPropuesta().getMontoTot() - TotalColaboracion));
+            throw new Exception("El monto que ingreso ha superado el limite del monto total, ingrese un monto menor o igual a: $" + (this.getPropuesta().getMontoTot() - TotalColaboracion));
         }
     }
 
     @Override
     public void cargarPropuestas() {
-      //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public Map<String, DtinfoColaborador> ListarColaboradores(String titulo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+    @Override
     public Propuesta getPropuesta() {
         return Propuesta;
     }
-    
-     public List<DtColaboraciones> listarColaboraciones() {
+
+    public List<DtColaboraciones> listarColaboraciones() {
         return null;
-         /*
+        /*
         List<DtColaboraciones> listarcolaboraciones= new ArrayList();
         Iterator it = this.propuestas.entrySet().iterator();
         while (it.hasNext()) {
@@ -329,7 +340,7 @@ public class ControladorPropCat implements IPropCat {
             listarcolaboraciones.add(dtprop);
         }
         return listarcolaboraciones;
-*/
-    
-     }
-     }
+         */
+
+    }
+}

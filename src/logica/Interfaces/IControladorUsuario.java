@@ -57,8 +57,9 @@ public interface IControladorUsuario {
 
     public abstract void CargarColaboraciones();
 
-    
     public abstract Colaborador getColaborador();
+
+    public abstract DtinfoColaborador SeleccionarColaborador(String nickName);
     
-    public DtinfoColaborador SeleccionarColaborador(String nickName);
+    public abstract void CargarUsuarios();
 }

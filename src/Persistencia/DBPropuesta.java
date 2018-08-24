@@ -100,7 +100,7 @@ public class DBPropuesta {
                 } else {
                     tip = tip.EntGan;
                 }
-                Proponente prop=new Proponente("","","",null,rs.getString("proponente"),"","","",null,"",null,null);
+                Proponente prop=new Proponente("","","",null,rs.getString("proponente"),"","","",null,"",null);
                 EstadoPropuesta estado = this.cargarEstadoPropuesta(rs.getString("tituloP"));
                 Categoria cat = this.CargarCategoria(rs.getString("nombreC"));
                 Propuesta p = new Propuesta(Titulo, rs.getString("descripcion"), rs.getString("imagen"), rs.getString("lugar"), fecha, rs.getFloat("montoE"), rs.getFloat("montoTot"), fechaPubl, estado, cat, tip, prop);

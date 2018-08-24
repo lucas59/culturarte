@@ -13,43 +13,43 @@ import java.util.Date;
  * @author Santiago.S
  */
 public class Colaboracion {
+
     private Colaborador UColaborador;
     private float montoC;
     private Calendar fechaRealiz;
     private boolean Entradas;
     private Propuesta Propuesta;
-
-    public Colaboracion(Colaborador UColaborador, float montoC, Calendar fechaRealiz, boolean Entradas, Propuesta propuesta){
     private String nickName;
     private String TituloP;
-    
-    public Colaboracion(Colaborador UColaborador, String IdColaboracion, float montoC, Date fechaRealiz, boolean Entradas){
+
+    public Colaboracion(Colaborador UColaborador, float montoC, Calendar fechaRealiz, boolean Entradas, Propuesta propuesta) {
         this.UColaborador = UColaborador;
         this.montoC = montoC;
         this.fechaRealiz = fechaRealiz;
         this.Entradas = Entradas;
         this.Propuesta = propuesta;
     }
-    public float getMontoC(){
+
+    public float getMontoC() {
         return this.montoC;
     }
-    
-    public boolean getEntradas(){
+
+    public boolean getEntradas() {
         return this.Entradas;
     }
-    
-    public Calendar getFechaRealiz(){
+
+    public Calendar getFechaRealiz() {
         return this.fechaRealiz;
     }
-    
-    public Colaborador getColaborador(){
+
+    public Colaborador getColaborador() {
         return this.UColaborador;
     }
-    
-    public Propuesta getPropuesta(){
+
+    public Propuesta getPropuesta() {
         return this.Propuesta;
     }
-        
+
     public void setUColaborador(Colaborador UColaborador) {
         this.UColaborador = UColaborador;
     }
@@ -69,15 +69,17 @@ public class Colaboracion {
     public void setPropuesta(Propuesta Propuesta) {
         this.Propuesta = Propuesta;
     }
-    
-    
+
     public Colaborador getUColaborador() {
         return UColaborador;
-    public Colaboracion(String nick,String tit){
-        this.nickName=nick;
-        this.TituloP=tit;
     }
-     public String getNickName() {
+
+    public Colaboracion(String nick, String tit) {
+        this.nickName = nick;
+        this.TituloP = tit;
+    }
+
+    public String getNickName() {
         return nickName;
     }
 

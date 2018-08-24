@@ -43,7 +43,6 @@ public class Proponente extends Usuario {
     public void setPropuestas(Map<String, Propuesta> Propuestas) {
         this.Propuestas = Propuestas;
     }
-    
 
     public String getDireccion() {
         return this.direccion;
@@ -68,8 +67,8 @@ public class Proponente extends Usuario {
     public void setsitioweb(String Sitioweb) {
         this.sitioweb = Sitioweb;
     }
-    
-    public Map<String, Propuesta> getPropuestasRealizadas(){
+
+    public Map<String, Propuesta> getPropuestasRealizadas() {
         return this.Propuestas;
     }
 }

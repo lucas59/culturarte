@@ -16,19 +16,20 @@ import java.util.Map;
  *
  * @author Santiago.S
  */
-public class Colaborador extends Usuario{
+public class Colaborador extends Usuario {
+
     private List<Colaboracion> Colaboraciones;
-    
+
     public Colaborador(String nickname, String nombre, String apellido, String correo, Calendar fechaN, String imagen, Map<String, Usuario> seguidos) {
         super(nickname, nombre, apellido, correo, fechaN, imagen, seguidos);
-        this.Colaboraciones = new HashMap <Integer, Colaboracion>();
-    }    
+        this.Colaboraciones = new ArrayList();
+    }
 
-    public Map<Integer, Colaboracion> getColaboraciones() {
+    public List<Colaboracion> getColaboraciones() {
         return Colaboraciones;
     }
-    
-      public void setColaboraciones(Colaboracion Colaboraciones) {
+
+    public void setColaboraciones(Colaboracion Colaboraciones) {
         this.Colaboraciones.add(Colaboraciones);
     }
 }
