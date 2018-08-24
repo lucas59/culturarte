@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
+import logica.Clases.Colaborador;
 import logica.Clases.DtProponente;
 import logica.Clases.DtUsuario;
 import logica.Clases.DtinfoColaborador;
@@ -50,5 +51,8 @@ public interface IControladorUsuario {
     public abstract Map<String, Usuario> getUsuarios();
 
     public abstract java.util.List<DtUsuario> ListarProponentes2();
-
+    
+    public abstract Colaborador getColaborador();
+    
+    public DtinfoColaborador SeleccionarColaborador(String nickName);
 }

@@ -27,17 +27,11 @@ public interface IPropCat {
 
     public abstract DtinfoPropuesta SeleccionarPropuesta(String titulo);
 
-    public abstract List<String> ListarColaboradores();
-
-    public abstract List<DtinfoColaborador> SeleccionarColaborador();
-
-    public abstract void confirmar(boolean Estado, float monto);
-
     public abstract void cargarPropuestas();
 
     public abstract Map<String, Propuesta> getpropuesta();
-    
-     public abstract Map<String,DtinfoPropuesta> DarPropuestasCol(Colaborador c);
+
+    public abstract Map<String, DtinfoPropuesta> DarPropuestasCol(Colaborador c);
 
     public abstract boolean seleccionarUC(String nombreP, String tipoEsp);
 
@@ -52,4 +46,8 @@ public interface IPropCat {
     public abstract Map<String, DtinfoPropuesta> listarTodasPropuestas();
 
     public abstract Map<String, DtinfoColaborador> ListarColaboradores(String titulo);
+
+    public abstract boolean agregarColaboracion(boolean Entrada, Float monto) throws Exception;
+    
+    public abstract Propuesta getPropuesta();
 }

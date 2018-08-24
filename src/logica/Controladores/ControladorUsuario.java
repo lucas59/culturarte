@@ -41,13 +41,14 @@ public class ControladorUsuario implements IControladorUsuario {
     private Map<String, Usuario> Usuarios;
     private IPropCat IPC;
     private DBUsuario dbUsuario = null;
-
+  private Colaborador Colaborador;
     public static ControladorUsuario getInstance() {
         if (instancia == null) {
             instancia = new ControladorUsuario();
         }
         return instancia;
     }
+  
 
     public ControladorUsuario() {
         this.Usuarios = new HashMap<>();
@@ -347,5 +348,32 @@ public class ControladorUsuario implements IControladorUsuario {
      public void CargarUsuarios(){
       this.Usuarios=dbUsuario.cargarUsuarios();
   }
+     
+
+
+    @Override
+    public DtinfoColaborador SeleccionarColaborador(String nickName) {
+        this.getUsuarios();
+        Set set = Usuarios.entrySet();
+        Iterator iterator = set.iterator();
+        ArrayList<DtinfoColaborador> retorno = new ArrayList();
+        while (iterator.hasNext()) {
+            Map.Entry mentry = (Map.Entry) iterator.next();
+            Colaborador aux = (Colaborador) mentry.getValue();
+            if (aux.getNickname().equals(nickName)) {
+                this.setColaborador(aux);
+                return new DtinfoColaborador(aux.getNickname(), aux.getNombre(), aux.getApellido(), aux.getCorreo(), aux.getFechaN());
+            }
+        }
+        return null;
+    }
+
+    public Colaborador getColaborador() {
+        return this.Colaborador;
+    }
+
+    public void setColaborador(Colaborador colaborador) {
+        this.Colaborador = colaborador;
+    }
 
 }
