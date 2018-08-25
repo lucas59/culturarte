@@ -27,7 +27,7 @@ import logica.Interfaces.IPropCat;
 public class DBColaboracion {
   private Connection conexion = new ConexionDB().getConexion();
 
-    public boolean agregarColaboracion(TipoRetorno Entrada, float monto) {
+    public boolean agregarColaboracion(boolean Entrada, float monto) {
         Fabrica fabrica = Fabrica.getInstance();
         IControladorUsuario CU = (ControladorUsuario) fabrica.getIControladorUsuario();
         IPropCat CPU = (ControladorPropCat) fabrica.getControladorPropCat();
@@ -47,7 +47,7 @@ public class DBColaboracion {
                 statement.setString(2, CU.getColaborador().getNickname());
                 statement.setFloat(3, monto);
                 statement.setDate(4, sqlDate);
-                if (Entrada == TipoRetorno.Entradas) {
+                if (Entrada == true) {
                     statement.setInt(5, 1);
                 } else {
                     statement.setInt(5, 2);

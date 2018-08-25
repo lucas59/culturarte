@@ -699,7 +699,7 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
             boolean OK = false;
             if (jComboBox2.getSelectedItem().toString().compareTo("Entradas") == 0) {
                 try {
-                    OK = CPC.agregarColaboracion(TipoRetorno.Entradas, monto);
+                    OK = CPC.agregarColaboracion(true, monto);
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage());
                 }
@@ -708,7 +708,7 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
                 }
             } else if (jComboBox2.getSelectedItem().toString().compareTo("Por Ganancias") == 0) {
                 try {
-                    OK = CPC.agregarColaboracion(TipoRetorno.porGanancias, monto);
+                    OK = CPC.agregarColaboracion(false, monto);
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage());
                 }
