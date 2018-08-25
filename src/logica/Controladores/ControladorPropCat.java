@@ -273,7 +273,7 @@ public class ControladorPropCat implements IPropCat {
     }
 
     @Override
-    public boolean agregarColaboracion(TipoRetorno Entrada, Float monto) throws Exception {
+    public boolean agregarColaboracion(boolean Entrada, Float monto) throws Exception {
         Fabrica fabrica = Fabrica.getInstance();
         IControladorUsuario ICU = fabrica.getIControladorUsuario();
         IPropCat IPC = fabrica.getControladorPropCat();

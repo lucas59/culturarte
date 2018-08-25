@@ -51,7 +51,7 @@ public interface IPropCat {
     
     public abstract void ComunicarControladores(IControladorUsuario icu);
 
-    public abstract boolean agregarColaboracion(TipoRetorno Entrada, Float monto) throws Exception;
+    public abstract boolean agregarColaboracion(boolean Entrada, Float monto) throws Exception;
     
     public abstract Propuesta getPropuesta();
     
