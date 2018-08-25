@@ -5,6 +5,9 @@
  */
 package logica;
 
+import Persistencia.DBUsuario;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.GregorianCalendar;
 import logica.Clases.TipoE;
 import logica.Clases.TipoRetorno;
@@ -56,7 +59,11 @@ public class Fabrica {
     IControladorUsuario ICU = this.getIControladorUsuario();
     IPropCat IPC = this.getControladorPropCat();
     String ruta = System.getProperty("user.dir");
-    
+//    
+//    DBUsuario d=new DBUsuario();
+//    d.limpiarBD();
+//           
+        
  //-----------------------------------------------------Proponentes------------------------------------//   
     ICU.AgregarUsuarioProponente("hrubino", "Horacio", "Rubino", "horacio.rubino@guambia.com.uy", new GregorianCalendar(1962,01,25),
     ruta+"\\fotosdp\\hrubino.jpg","18 de Julio 1234", "Horacio Rubino Torres nace el 25 de " + "febrero de 1962, es conductor, actor y libretista.  Debuta en "
