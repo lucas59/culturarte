@@ -376,13 +376,11 @@ public class ConsultarPerfilProponente extends javax.swing.JInternalFrame {
                 jLabelDireccion.setText(p.getDireccion());
                 jLabelFecha.setText(p.getFechaN().getTime().toString());
                 String imagen = p.getImagen();
-                if (imagen != "") {
-
-                } else {
+                
                     ImageIcon fot = new ImageIcon(imagen);
                     Icon icono = new ImageIcon(fot.getImage().getScaledInstance(jLabelFoto.getWidth(), jLabelFoto.getHeight(), Image.SCALE_DEFAULT));
                     jLabelFoto.setIcon(icono);
-                }
+               
                 return;
             }
         }

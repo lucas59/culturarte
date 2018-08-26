@@ -30,7 +30,6 @@ public class Propuesta {
     private TipoRetorno retorno;
     private EstadoPropuesta estadoActual;
     private List<EstadoPropuesta> Estados;
-
     private List<Colaboracion> Colaboraciones;
     private Categoria categoria;
 
@@ -172,5 +171,9 @@ public class Propuesta {
 
     public void setColaboraciones(Colaboracion Colaboracion) {
         this.Colaboraciones.add(Colaboracion);
+    }
+    
+        public List<EstadoPropuesta> getEstados() {
+        return Estados;
     }
 }

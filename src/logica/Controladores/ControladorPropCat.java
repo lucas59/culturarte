@@ -173,7 +173,7 @@ public class ControladorPropCat implements IPropCat {
             Propuesta aux = (Propuesta) mentry.getValue();
             if (aux.getTituloP().compareTo(titulo) == 0) {
                 retorno = new DtinfoPropuesta(aux.getTituloP(), aux.getDescripcionP(), aux.getImagen(), aux.getCategoria().getNombreC(), aux.getLugar(), aux.getFecha(), aux.getMontoE(), aux.getMontoTot(), aux.getFechaPubl(), aux.getRetorno());
-                this.Propuesta = new Propuesta(aux.getTituloP(), aux.getDescripcionP(), aux.getImagen(), aux.getLugar(), aux.getFecha(), aux.getMontoE(), aux.getMontoTot(), aux.getFechaPubl(), aux.getEstadoActual(), aux.getCategoria(), aux.getRetorno(), aux.getAutor());
+                this.Propuesta = aux;
             }
         }
         return retorno;
@@ -281,7 +281,6 @@ public class ControladorPropCat implements IPropCat {
         java.util.Date utilDate = new java.util.Date();
         utilDate = calendario.getTime();
         java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-
         List<Colaboracion> colaboraciones = this.getPropuesta().getColaboraciones();
         float TotalColaboracion = 0;
         for (int indice = 0; indice < colaboraciones.size(); indice++) {
@@ -297,12 +296,14 @@ public class ControladorPropCat implements IPropCat {
             IPC.getPropuesta().setColaboraciones(colaboracion);
             if (TotalColaboracion < this.getPropuesta().getMontoTot()) {
                 EstadoPropuesta EstadoP = new EstadoPropuesta(TipoE.enFinanciacion, calendario);
-                this.getPropuesta().setEstadoActual(EstadoP);
-                this.getPropuesta().setEstados(EstadoP);
+                this.getPropuesta().setEstados(this.Propuesta.getEstadoActual());
+                this.getPropuesta().getEstados().get(this.getPropuesta().getEstados().size() - 1).setfechaFinal(calendario);
+                this.getPropuesta().setEstadoActual(EstadoP);           
             } else if (TotalColaboracion == this.getPropuesta().getMontoTot()) {
                 EstadoPropuesta EstadoP = new EstadoPropuesta(TipoE.Financiada, calendario);
+                this.getPropuesta().setEstados(this.Propuesta.getEstadoActual());
+                this.getPropuesta().getEstados().get(this.getPropuesta().getEstados().size() - 1).setfechaFinal(calendario);
                 this.getPropuesta().setEstadoActual(EstadoP);
-                this.getPropuesta().setEstados(EstadoP);
             }
             DBColaboracion DBC = new DBColaboracion();
             DBC.agregarColaboracion(Entrada, monto);
@@ -354,12 +355,12 @@ public class ControladorPropCat implements IPropCat {
 
         Propuesta nuevaP;
         nuevaP = new Propuesta(tituloP, descripcion, cat, fecha, lugar,  montoE, montoTot, retorno, p, imagen);
-
+        this.propuestas.put(tituloP, nuevaP);
         this.dbPropuesta=new DBPropuesta();
         boolean agregada = this.dbPropuesta.agregarPropuestaDatosdePrueba(nuevaP);
 
 //        if (agregada) {
-////          this.catRecordada.getPropuestas().put(nuevaP.getTituloP(), nuevaP);
+//          this.catRecordada.getPropuestas().put(nuevaP.getTituloP(), nuevaP);
 //            this.uProponente.getPropuestasRealizadas().put(nuevaP.getTituloP(), nuevaP);
 //        } else {
 //            return false;
@@ -383,6 +384,7 @@ public class ControladorPropCat implements IPropCat {
           Categoria c;
           c= new Categoria(nomCat);
           c.setPadre(nomPadre);
+          
           this.dbPropuesta=new DBPropuesta();
           boolean agregada = this.dbPropuesta.agregarCategoriaDatosdePrueba(c); 
        
@@ -395,39 +397,45 @@ public class ControladorPropCat implements IPropCat {
         Fabrica fabrica = Fabrica.getInstance();
         IControladorUsuario ICU = fabrica.getIControladorUsuario();
         IPropCat IPC = fabrica.getControladorPropCat();
-        Calendar calendario = new GregorianCalendar();
-        java.util.Date utilDate = new java.util.Date();
-        utilDate = calendario.getTime();
-        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+//        
+//        Calendar calendario = new GregorianCalendar();
+//        java.util.Date utilDate = new java.util.Date();
+//        utilDate = calendario.getTime();
+//        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+        Propuesta p = (Propuesta) this.getpropuesta().get(TituloP);
+        Colaborador c=(Colaborador) ICU.getUsuarios().get(nickName);
         
-//        List<Colaboracion> colaboraciones = this.getPropuesta().getColaboraciones();
-//        float TotalColaboracion = 0;
-//        for (int indice = 0; indice < colaboraciones.size(); indice++) {
+        List<Colaboracion> colaboraciones = p.getColaboraciones();
+        float TotalColaboracion = 0;
+        for (int indice = 0; indice < colaboraciones.size(); indice++) {
 //            if (colaboraciones.get(indice).getPropuesta().getTituloP() == this.getPropuesta().getTituloP()) {
 //                throw new Exception("No puede colaborar en una propuesta mas de una vez");
 //            } else {
-//                TotalColaboracion = TotalColaboracion + colaboraciones.get(indice).getMontoC();
+                TotalColaboracion = TotalColaboracion + colaboraciones.get(indice).getMontoC();
 //            }
-//        }
-//        if ((TotalColaboracion + monto) <= this.getPropuesta().getMontoTot()) {
-//            Colaboracion colaboracion = new Colaboracion(ICU.getColaborador(), monto, calendario, Entrada, this.getPropuesta());
-//            ICU.getColaborador().setColaboraciones(colaboracion);
-//            IPC.getPropuesta().setColaboraciones(colaboracion);
-//            if (TotalColaboracion < this.getPropuesta().getMontoTot()) {
-//                EstadoPropuesta EstadoP = new EstadoPropuesta(TipoE.enFinanciacion, calendario);
+        }
+
+        if ((TotalColaboracion + monto) <=p.getMontoTot()) {
+            Colaboracion colaboracion = new Colaboracion(ICU.getColaborador(), monto, fechaRealiz, Entrada, p);
+            c.setColaboraciones(colaboracion);
+            p.setColaboraciones(colaboracion);
+//            if (TotalColaboracion <p.getMontoTot()) {
+//                EstadoPropuesta EstadoP = new EstadoPropuesta(TipoE.enFinanciacion, fechaRealiz);
 //                this.getPropuesta().setEstadoActual(EstadoP);
 //                this.getPropuesta().setEstados(EstadoP);
 //            } else if (TotalColaboracion == this.getPropuesta().getMontoTot()) {
-//                EstadoPropuesta EstadoP = new EstadoPropuesta(TipoE.Financiada, calendario);
-//                this.getPropuesta().setEstadoActual(EstadoP);
-//                this.getPropuesta().setEstados(EstadoP);
+//                EstadoPropuesta EstadoP = new EstadoPropuesta(TipoE.Financiada, fechaRealiz);
+//                p.setEstadoActual(EstadoP);
+//                p.setEstados(EstadoP);
 //            }
             DBColaboracion DBC = new DBColaboracion();
             DBC.agregarColaboracionDatosdePrueba(TituloP,nickName, monto, fechaRealiz, Entrada);
             return true;
-//        } else {
+        } 
+//        else {
 //            throw new Exception("El monto que ingreso ha superado el limite del monto total, ingrese un monto menor o igual a: $"+ (this.getPropuesta().getMontoTot() - TotalColaboracion));
 //        }
+        return true;
 
 
     }
@@ -440,12 +448,7 @@ public class ControladorPropCat implements IPropCat {
         
         DBPropuesta DBP = new DBPropuesta();
         DBP.agregarEstadoPropuestaDatosdePrueba(estadop,TituloP);
-        
-        
-        
-        
-        
-        
+
         return true;
         
     }
