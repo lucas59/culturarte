@@ -338,7 +338,7 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
         String correo = jTextCorreo.getText();
         String imagen = rSFotoCircle2.getRutaImagen();
         Calendar fechaN = jDateChooser1.getCalendar();
-        boolean ok;
+        boolean ingreso;
 
         if ("".equals(nick) || "".equals(nombre) || "".equals(apellido) || "".equals(correo) || fechaN.getTime() == null) {
             JOptionPane.showMessageDialog(null, "Se deben completar todos los campos obligatorios", "Advertencia", JOptionPane.WARNING_MESSAGE);
@@ -364,12 +364,12 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
             String biografia = jTextBiografia.getText();
             String sitioWeb = jTextSitioWeb.getText();
             String direccion = jTextDireccion.getText();
-            ok = ICU.AgregarUsuarioProponente(nick, nombre, apellido, correo, fechaN, imagen, direccion, biografia, sitioWeb);
+            ingreso = ICU.AgregarUsuarioProponente(nick, nombre, apellido, correo, fechaN, imagen, direccion, biografia, sitioWeb);
         } else {
-            ok = ICU.AgregarUsuarioColaborador(nick, nombre, apellido, correo, fechaN, imagen);
+            ingreso = ICU.AgregarUsuarioColaborador(nick, nombre, apellido, correo, fechaN, imagen);
         }
 
-        if (ok) {
+        if (ingreso) {
             javax.swing.JOptionPane.showMessageDialog(null, "Persona Dada de alta");
             jTextNick.setText("");
             jTextNombre.setText("");
@@ -382,9 +382,16 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
             rSFotoCircle2.setImagenDefault(null);
         } else {
             javax.swing.JOptionPane.showMessageDialog(null, "Error al dar de alta la persona o la persona ya existe");
+            jTextNick.setText("");
+            jTextNombre.setText("");
+            jTextApellido.setText("");
+            jTextCorreo.setText("");
+            jTextSitioWeb.setText("");
+            jTextDireccion.setText("");
+            jTextBiografia.setText("");
+            jDateChooser1.setCalendar(null);
+            rSFotoCircle2.setImagenDefault(null);
         }
-
-
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
     private int calculaEdad(Calendar fechaNac) {
