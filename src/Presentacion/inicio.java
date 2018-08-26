@@ -170,7 +170,7 @@ public class inicio extends javax.swing.JFrame {
         jMenuItem11.setText("Limpiar Base de Datos");
         jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem10ActionPerformed(evt);
+                jMenuItem11ActionPerformed(evt);
             }
         });
         jMenu3.add(jMenuItem11);
@@ -272,16 +272,20 @@ public class inicio extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
-    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-        
-    }//GEN-LAST:event_jMenuItem10ActionPerformed
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+
+    }                                           
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
-        // TODO add your handling code here:
         CancelarColaboracionPropuesta form = new CancelarColaboracionPropuesta();
         Escritorio.add(form);
         form.setVisible(true);
     }//GEN-LAST:event_jMenuItem12ActionPerformed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        DBUsuario d = new DBUsuario();
+        d.limpiarBD();
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     /**
      * @param args the command line arguments
