@@ -40,7 +40,7 @@ public class DtColaboraciones {
         return fechaRealiz;
     }
 
-    public boolean isEntradas() {
+    public boolean getEntradas() {
         return Entradas;
     }
 
