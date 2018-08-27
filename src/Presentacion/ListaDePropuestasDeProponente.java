@@ -52,7 +52,7 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
         grupo.add(jRadioButtonPublicadas);
         this.nickProponente = proponente;
         this.propuestas = new HashMap<String, DtinfoPropuesta>();
-        this.propuestas = this.ICP.listarTodasPropuestas();
+        propuestas = this.ICP.listarTodasPropuestas();
 
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.setRowCount(0);
@@ -63,10 +63,6 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
             Object[] dat = {p.getTitulo(), p.getTipoEspec(), p.getEstado(), p.getMonto(), p.getLugar(), p.getFecgaReal()};
             modelo.addRow(dat);
         }
-    }
-
-    public ListaDePropuestasDeProponente() {
-        initComponents();
     }
 
     /**
@@ -89,6 +85,7 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
         jRadioButtonFinalizadas = new javax.swing.JRadioButton();
         jRadioButtonNoFinalizadas = new javax.swing.JRadioButton();
         jRadioButton1 = new javax.swing.JRadioButton();
+        jButton1 = new javax.swing.JButton();
         jPanelColaboradores = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -172,6 +169,13 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton1.setText("Salir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -186,7 +190,8 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1)
                         .addComponent(jRadioButtonPublicadas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jRadioButtonNoFinalizadas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jRadioButton1))
+                    .addComponent(jRadioButton1)
+                    .addComponent(jButton1))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -206,7 +211,9 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
                 .addComponent(jRadioButtonFinalizadas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jRadioButtonNoFinalizadas)
-                .addContainerGap(205, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
 
         jLabel2.setText("Colaboradores");
@@ -388,9 +395,15 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup grupo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
