@@ -23,6 +23,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import logica.Clases.Colaboracion;
+import logica.Clases.DtColaboraciones;
 import logica.Clases.DtProponente;
 import logica.Clases.DtUsuario;
 import logica.Clases.DtinfoColaborador;
@@ -417,4 +418,22 @@ public class ControladorUsuario implements IControladorUsuario {
         this.Colaborador = colaborador;
     }
 
+    @Override
+    public List ListarColaboraciones(String nickName){
+   Fabrica fabrica = Fabrica.getInstance();
+        IControladorUsuario ICU = fabrica.getIControladorUsuario();
+        Map<String, Usuario> Usuarios = ICU.getUsuarios();
+        Set set = Usuarios.entrySet();
+        Iterator iterator = set.iterator();
+        List<DtColaboraciones> retorno;
+        while (iterator.hasNext()) {
+            Map.Entry mentry = (Map.Entry) iterator.next();
+            if (mentry.getValue() instanceof Colaborador) {
+                if ((((Usuario) mentry.getValue()).getNickname().compareTo(nickName) == 0)) {
+                    return ((Colaborador) mentry.getValue()).getColaboraciones();
+                }
+            }
+        }
+    return null;
+    }
 }

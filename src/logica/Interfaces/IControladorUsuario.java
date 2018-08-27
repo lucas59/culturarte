@@ -5,13 +5,14 @@
  */
 package logica.Interfaces;
 
-import java.awt.List;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 import logica.Clases.Colaboracion;
 import logica.Clases.Colaborador;
+import logica.Clases.DtColaboraciones;
 import logica.Clases.DtProponente;
 import logica.Clases.DtUsuario;
 import logica.Clases.DtinfoColaborador;
@@ -62,4 +63,6 @@ public interface IControladorUsuario {
     public abstract DtinfoColaborador SeleccionarColaborador(String nickName);
     
     public abstract void CargarUsuarios();
+    
+    public abstract List ListarColaboraciones(String nickname);
 }

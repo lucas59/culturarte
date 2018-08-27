@@ -251,12 +251,19 @@ public class inicio extends javax.swing.JFrame {
         ConsultarPerfilColaborador PC = new ConsultarPerfilColaborador();
         Escritorio.add(PC);
         PC.setVisible(true);
+
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        Consultar_colaboracion CU = new Consultar_colaboracion();
-        Escritorio.add(CU);
-        CU.setVisible(true);
+        Fabrica fabrica = Fabrica.getInstance();
+        IControladorUsuario ICU = fabrica.getIControladorUsuario();
+        if (ICU.ListarColaboradores().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No existen Colaboradores en el sistema");
+        } else {
+            Consultar_colaboracion CU = new Consultar_colaboracion();
+            Escritorio.add(CU);
+            CU.setVisible(true);
+        }
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
@@ -272,9 +279,9 @@ public class inicio extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
-    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {
 
-    }                                           
+    }
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
         CancelarColaboracionPropuesta form = new CancelarColaboracionPropuesta();
