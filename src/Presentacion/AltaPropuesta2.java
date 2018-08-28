@@ -16,26 +16,25 @@ import logica.Interfaces.IPropCat;
  * @author Martin
  */
 public class AltaPropuesta2 extends javax.swing.JInternalFrame {
-
+    
     private IPropCat ICP;
-
+    
     public AltaPropuesta2(String categoria, String nickName) {
         initComponents();
-
+        
         this.jTextCategoria.setText(categoria);
         this.jTextProponente.setText(nickName);
-        jComboBoxTipoRetorno.addItem("Entradas");
-        jComboBoxTipoRetorno.addItem("porGanancias");
-        jComboBoxTipoRetorno.addItem("EntGan");
-
+        
         this.ICP = Fabrica.getInstance().getControladorPropCat();
     }
-
+    
     public void LimpiarComponentes() {
         jTextTitulo.setText("");
         jTextMontoTot.setText("");
         jTextMontoEnt.setText("");
         jTextAreaDescripcion.setText("");
+        jCheckBoxEntradas.setSelected(false);
+        jCheckBoxGanancias.setSelected(false);
     }
 
     /**
@@ -47,6 +46,8 @@ public class AltaPropuesta2 extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanelAltaProp2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextProponente = new javax.swing.JTextField();
@@ -69,20 +70,23 @@ public class AltaPropuesta2 extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaDescripcion = new javax.swing.JTextArea();
         rSFotoCirclePropuesta = new rojerusan.RSFotoCircle();
-        jComboBoxTipoRetorno = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
+        jCheckBoxEntradas = new javax.swing.JCheckBox();
+        jCheckBoxGanancias = new javax.swing.JCheckBox();
 
         setTitle("CREAR NUEVA PROPUESTA");
         setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
 
         jLabel1.setText("Proponente:");
 
+        jTextProponente.setEditable(false);
         jTextProponente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextProponenteActionPerformed(evt);
             }
         });
 
+        jTextCategoria.setEditable(false);
         jTextCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextCategoriaActionPerformed(evt);
@@ -97,7 +101,7 @@ public class AltaPropuesta2 extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel3.setText("Lugar:");
+        jLabel3.setText("Lugar(*):");
 
         jTextLugar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,7 +109,7 @@ public class AltaPropuesta2 extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel4.setText("Titulo:");
+        jLabel4.setText("Titulo(*):");
 
         jTextMontoTot.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,9 +117,10 @@ public class AltaPropuesta2 extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel5.setText("Monto Total:");
+        jLabel5.setText("Monto Total(*):");
+        jLabel5.setToolTipText("");
 
-        jLabel6.setText("Formas de retorno:");
+        jLabel6.setText("Formas de retorno(*):");
 
         jTextMontoEnt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,9 +128,9 @@ public class AltaPropuesta2 extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel7.setText("Monto Entrada:");
+        jLabel7.setText("Monto Entrada(*):");
 
-        jLabel8.setText("Fecha de Realizacion del evento");
+        jLabel8.setText("Fecha de Realizacion del evento(*):");
 
         jButtonCrearProp.setText("Crear propuesta");
         jButtonCrearProp.addActionListener(new java.awt.event.ActionListener() {
@@ -155,6 +160,15 @@ public class AltaPropuesta2 extends javax.swing.JInternalFrame {
             }
         });
 
+        jCheckBoxEntradas.setText("Entradas");
+        jCheckBoxEntradas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxEntradasActionPerformed(evt);
+            }
+        });
+
+        jCheckBoxGanancias.setText("Porcentaje de ganancias");
+
         javax.swing.GroupLayout jPanelAltaProp2Layout = new javax.swing.GroupLayout(jPanelAltaProp2);
         jPanelAltaProp2.setLayout(jPanelAltaProp2Layout);
         jPanelAltaProp2Layout.setHorizontalGroup(
@@ -164,15 +178,12 @@ public class AltaPropuesta2 extends javax.swing.JInternalFrame {
                     .addGroup(jPanelAltaProp2Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addGroup(jPanelAltaProp2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanelAltaProp2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanelAltaProp2Layout.createSequentialGroup()
-                                    .addGap(25, 25, 25)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel7))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanelAltaProp2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jTextMontoEnt, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -188,12 +199,11 @@ public class AltaPropuesta2 extends javax.swing.JInternalFrame {
                             .addComponent(jLabel9)
                             .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanelAltaProp2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanelAltaProp2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanelAltaProp2Layout.createSequentialGroup()
-                                .addComponent(jComboBoxTipoRetorno, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(58, 58, 58)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                            .addComponent(jCheckBoxEntradas)
+                            .addComponent(jCheckBoxGanancias))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addGroup(jPanelAltaProp2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAltaProp2Layout.createSequentialGroup()
                         .addGroup(jPanelAltaProp2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,7 +229,7 @@ public class AltaPropuesta2 extends javax.swing.JInternalFrame {
                 .addGroup(jPanelAltaProp2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelAltaProp2Layout.createSequentialGroup()
                         .addComponent(rSFotoCirclePropuesta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCalendarFechaReal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -245,7 +255,7 @@ public class AltaPropuesta2 extends javax.swing.JInternalFrame {
                             .addComponent(jTextLugar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelAltaProp2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanelAltaProp2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextMontoTot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -255,8 +265,10 @@ public class AltaPropuesta2 extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanelAltaProp2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBoxTipoRetorno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jCheckBoxEntradas))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBoxGanancias)
+                        .addGap(15, 15, 15)
                         .addGroup(jPanelAltaProp2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -303,33 +315,65 @@ public class AltaPropuesta2 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextMontoEntActionPerformed
 
     private void jButtonCrearPropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearPropActionPerformed
-
+        boolean datosBien = true;
+        
         String tituloP = jTextTitulo.getText();
         String lugar = jTextLugar.getText();
         float montoE = Float.parseFloat(jTextMontoEnt.getText());
         float montoTot = Float.parseFloat(jTextMontoTot.getText());
         String descripcion = jTextAreaDescripcion.getText();
-        TipoRetorno tipoRet = (TipoRetorno) jComboBoxTipoRetorno.getSelectedItem();
         Calendar fechaR = jCalendarFechaReal.getCalendar();
         String imagen = rSFotoCirclePropuesta.getRutaImagen();
-        TipoRetorno tipoR;
-
-        Date fechaPubl = new Date();
-        Calendar fechaPub = Calendar.getInstance();
-        fechaPub.setTime(fechaPubl);
-
-        if ("".equals(tituloP) || "".equals(lugar) || "".equals(montoE) || "".equals(descripcion) || tipoRet == null || fechaR.getTime() == null) {
-            javax.swing.JOptionPane.showMessageDialog(null, "Debe completar los campos marcados con (*) para continuar");
-            this.LimpiarComponentes();
-            
+        TipoRetorno tipoR = null;
+        
+        if ("".equals(tituloP)) {
+            javax.swing.JOptionPane.showMessageDialog(null, "Ingrese un titulo");
+            jTextTitulo.requestFocus();
+            datosBien = false;
+        } else if ("".equals(lugar)) {
+            javax.swing.JOptionPane.showMessageDialog(null, "Ingrese un Lugar ");
+            jTextLugar.requestFocus();
+            datosBien = false;
+        } else if (montoE == 0) {
+            javax.swing.JOptionPane.showMessageDialog(null, "Ingrese el precio de las entradas");
+            jTextMontoEnt.requestFocus();
+            datosBien = false;
+        } else if (montoTot == 0) {
+            javax.swing.JOptionPane.showMessageDialog(null, "Ingrese el monto total del evento");
+            jTextMontoTot.requestFocus();
+            datosBien = false;
+        } else if (fechaR.getTime() == null) {
+            javax.swing.JOptionPane.showMessageDialog(null, "Ingrese la fecha de realizacion del evento");
+            datosBien = false;
+        } else if (montoTot < (montoE / 10)) {
+            javax.swing.JOptionPane.showMessageDialog(null, "Debe ingresar montos validos");
+            jTextMontoTot.setText("");
+            jTextMontoEnt.setText("");
+            jTextMontoTot.requestFocus();
+            datosBien = false;
+        } else if (jCheckBoxEntradas.isSelected() && jCheckBoxGanancias.isSelected()) {
+            tipoR = TipoRetorno.EntGan;
+        } else if (jCheckBoxGanancias.isSelected()) {
+            tipoR = TipoRetorno.porGanancias;
+        } else if (jCheckBoxEntradas.isSelected()) {
+            tipoR = TipoRetorno.Entradas;
         } else {
-            boolean ok = ICP.crearPropuesta(tituloP, descripcion, lugar, imagen, fechaR, montoE, montoTot, fechaPub, tipoRet);
-
-            if (ok) {
-                javax.swing.JOptionPane.showMessageDialog(null, "La propuesta a sido creada con Exito");
-            } else {
-                javax.swing.JOptionPane.showMessageDialog(null, "La propuesta no pudo ser cargada ");
-                this.LimpiarComponentes();
+            javax.swing.JOptionPane.showMessageDialog(null, "Debe seleccionar una forma de retribucion de colaboraciones");
+            datosBien = false;
+        }
+        if (datosBien) {
+            try {
+                boolean ok = ICP.crearPropuesta(tituloP, descripcion, lugar, imagen, fechaR, montoE, montoTot, tipoR);
+                
+                if (ok) {
+                    javax.swing.JOptionPane.showMessageDialog(null, "La propuesta a sido creada con Exito");
+                    this.LimpiarComponentes();
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(null, "La propuesta no pudo ser cargada ");
+                    this.LimpiarComponentes();
+                }
+            } catch (Exception e) {
+                javax.swing.JOptionPane.showMessageDialog(null, e);
             }
         }
     }//GEN-LAST:event_jButtonCrearPropActionPerformed
@@ -343,13 +387,20 @@ public class AltaPropuesta2 extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jCheckBoxEntradasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxEntradasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBoxEntradasActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonCrearProp;
     private com.toedter.calendar.JCalendar jCalendarFechaReal;
-    private javax.swing.JComboBox<String> jComboBoxTipoRetorno;
+    private javax.swing.JCheckBox jCheckBoxEntradas;
+    private javax.swing.JCheckBox jCheckBoxGanancias;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

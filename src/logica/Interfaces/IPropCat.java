@@ -27,43 +27,41 @@ public interface IPropCat {
 
     public abstract List<DtNickTitProp> listarPropuestaC();
 
-    public abstract DtinfoPropuesta SeleccionarPropuesta(String titulo);
-
-    public abstract void cargarPropuestas();
+    public abstract DtConsultaPropuesta SeleccionarPropuesta(String titulo) throws Exception;
 
     public abstract Map<String, Propuesta> getpropuesta();
 
     public abstract Map<String, DtinfoPropuesta> DarPropuestasCol(Colaborador c);
 
-    public abstract boolean seleccionarUC(String nombreP, String tipoEsp);
+    public abstract boolean seleccionarUC(String nombreP, String tipoEsp) throws Exception;
 
-    public abstract boolean crearPropuesta(String tituloP, String descripcion, String lugar, String imagen, Calendar fecha, float montoE, float montoTot, Calendar fechaPubl, TipoRetorno retorno);
+    public abstract boolean crearPropuesta(String tituloP, String descripcion, String lugar, String imagen, Calendar fecha, float montoE, float montoTot, TipoRetorno retorno) throws Exception;
 
     public abstract List<String> ListarCategorias();
 
-    public abstract List<DtConsultaPropuesta> listarPropuestas();
+    public abstract List<DtNickTitProp> listarPropuestas();
 
     public abstract DtinfoPropuesta SeleccionarPropuestaR(String titulo);
 
-    public abstract Map<String, DtinfoPropuesta> listarTodasPropuestas();
-
     public abstract Map<String, DtinfoColaborador> ListarColaboradores(String titulo);
-    
-    public abstract void ComunicarControladores(IControladorUsuario icu);
 
     public abstract boolean agregarColaboracion(boolean Entrada, Float monto) throws Exception;
-    
+
     public abstract Propuesta getPropuesta();
-    
+
     public abstract void CargarPropuestas();
-    
-    public abstract boolean crearPropuestaDatosdePrueba(String tituloP,  String descripcion, Categoria cat, Calendar fecha, String lugar, float montoE, float montoTot, TipoRetorno retorno, Proponente p, String imagen);
-    
+
+    public abstract boolean crearPropuestaDatosdePrueba(String tituloP, String descripcion, Categoria cat, Calendar fecha, String lugar, float montoE, float montoTot, TipoRetorno retorno, Proponente p, String imagen);
+
     public abstract boolean crearCategoriaDatosdePrueba(String nomCat, String nomPadre);
-    
+
     public abstract Categoria ObtenerCategoria(String nomCat);
-    
+
     public abstract boolean agregarColaboracionDatosdePrueba(String TituloP, String nickName, float montoC, Calendar fechaRealiz, boolean Entrada);
-    
+
     public abstract boolean nuevoEstadoPropuestaDatosdePrueba(String TituloP, TipoE estado, Calendar fecha);
+
+    public abstract void altaCategoria(String nombre, String padre) throws Exception;
+
+    public abstract Map<String, Categoria> getCategorias();
 }

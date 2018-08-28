@@ -36,12 +36,10 @@ public class Fabrica {
     private Fabrica() {
         this.cargarDatosPropuesta();
     }
-
-    ;
     
     private void cargarDatosPropuesta() {
         IPropCat ip = this.getControladorPropCat();
-        ip.cargarPropuestas();
+        //ip.CargarPropuestas();
     }
 
     public IPropCat getControladorPropCat() {

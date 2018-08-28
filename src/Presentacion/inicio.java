@@ -5,7 +5,6 @@
  */
 package Presentacion;
 
-import Persistencia.DBUsuario;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,10 +32,8 @@ public class inicio extends javax.swing.JFrame {
         Fabrica fabrica = Fabrica.getInstance();
         ICU = fabrica.getIControladorUsuario();
         IPC = fabrica.getControladorPropCat();
-        ICU.ComunicarControladores(IPC);
-        IPC.ComunicarControladores(ICU);
         ICU.CargarUsuarios();
-        IPC.cargarPropuestas();
+        IPC.CargarPropuestas();
 
     }
 
@@ -61,10 +58,9 @@ public class inicio extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem12 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem11 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -137,6 +133,11 @@ public class inicio extends javax.swing.JFrame {
         jMenu2.add(jMenuItem5);
 
         jMenuItem6.setText("Consultar Propuestas");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem6);
 
         jMenuItem8.setText("Consultar colaboración");
@@ -147,13 +148,13 @@ public class inicio extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem8);
 
-        jMenuItem12.setText("Cancelar colaboracion");
-        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem10.setText("Consultar Colaboracion");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem12ActionPerformed(evt);
+                jMenuItem10ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem12);
+        jMenu2.add(jMenuItem10);
 
         jMenuBar1.add(jMenu2);
 
@@ -166,14 +167,6 @@ public class inicio extends javax.swing.JFrame {
             }
         });
         jMenu3.add(jMenuItem9);
-
-        jMenuItem11.setText("Limpiar Base de Datos");
-        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem11ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem11);
 
         jMenuBar1.add(jMenu3);
 
@@ -194,9 +187,11 @@ public class inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+
         Fabrica fabrica = Fabrica.getInstance();
         IControladorUsuario ICU = fabrica.getIControladorUsuario();
         IPropCat IPC = fabrica.getControladorPropCat();
+
         if (ICU.ListarColaboradores().isEmpty() && IPC.listarPropuestaC().isEmpty()) {
             JOptionPane.showMessageDialog(null, "No existen Colaboradores ni propuestas en el sistema");
         } else if (ICU.ListarColaboradores().isEmpty()) {
@@ -207,9 +202,7 @@ public class inicio extends javax.swing.JFrame {
             Registrar_Colaboracion RP = new Registrar_Colaboracion();
             Escritorio.add(RP);
             RP.setVisible(true);
-
         }
-
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -231,7 +224,7 @@ public class inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        ConsultarPerfilProponente p = new ConsultarPerfilProponente();
+        ConsultarPerfilProponentes p = new ConsultarPerfilProponentes();
         Escritorio.add(p);
         p.setVisible(true);
 
@@ -251,19 +244,12 @@ public class inicio extends javax.swing.JFrame {
         ConsultarPerfilColaborador PC = new ConsultarPerfilColaborador();
         Escritorio.add(PC);
         PC.setVisible(true);
-
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        Fabrica fabrica = Fabrica.getInstance();
-        IControladorUsuario ICU = fabrica.getIControladorUsuario();
-        if (ICU.ListarColaboradores().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "No existen Colaboradores en el sistema");
-        } else {
-            Consultar_colaboracion CU = new Consultar_colaboracion();
-            Escritorio.add(CU);
-            CU.setVisible(true);
-        }
+        Consultar_colaboracion CU = new Consultar_colaboracion();
+        Escritorio.add(CU);
+        CU.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
@@ -279,20 +265,20 @@ public class inicio extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
-    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        // TODO add your handling code here:
+        
+        ConsultaPropuesta CP = new ConsultaPropuesta();
+        Escritorio.add(CP);
+        CP.setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
-    }
-
-    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
-        CancelarColaboracionPropuesta form = new CancelarColaboracionPropuesta();
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        Consultar_colaboracion form= new Consultar_colaboracion();
         Escritorio.add(form);
         form.setVisible(true);
-    }//GEN-LAST:event_jMenuItem12ActionPerformed
-
-    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
-        DBUsuario d = new DBUsuario();
-        d.limpiarBD();
-    }//GEN-LAST:event_jMenuItem11ActionPerformed
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -336,8 +322,7 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

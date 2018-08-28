@@ -20,9 +20,9 @@ public class Colaborador extends Usuario {
 
     private List<Colaboracion> Colaboraciones;
 
-    public Colaborador(String nickname, String nombre, String apellido, String correo, Calendar fechaN, String imagen, Map<String, Usuario> seguidos) {
-        super(nickname, nombre, apellido, correo, fechaN, imagen, seguidos);
-        this.Colaboraciones = new ArrayList();
+    public Colaborador(String nickname, String nombre, String apellido, String correo, Calendar fechaN, String imagen) {
+        super(nickname, nombre, apellido, correo, fechaN, imagen);
+        this.Colaboraciones = new ArrayList();     
     }
 
     public List<Colaboracion> getColaboraciones() {

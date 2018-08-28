@@ -170,7 +170,7 @@ public class ControladorUsuario implements IControladorUsuario {
             return false;
 
         } else {
-            Colaborador c = new Colaborador(nickName, nombre, apellido, correo, fechaN, imagen, new HashMap<String, Usuario>());
+            Colaborador c = new Colaborador(nickName, nombre, apellido, correo, fechaN, imagen);
 
             String fotoLocal = c.getImagen();
             if (!"".equals(c.getImagen())) {
@@ -198,7 +198,7 @@ public class ControladorUsuario implements IControladorUsuario {
         } else {
             //Map<String, Usuario> seguidores = new HashMap<>();
             //Map<String, Propuesta> propuestas = new HashMap<>();
-            Proponente c = new Proponente(biografia, direccion, sitioWeb, new HashMap<String, Propuesta>(), nickName, nombre, apellido, correo, fechaN, imagen, new HashMap<String, Usuario>());
+            Proponente c = new Proponente(biografia, direccion, sitioWeb, nickName, nombre, apellido, correo, fechaN, imagen);
             String fotoLocal = c.getImagen();
             if (!"".equals(c.getImagen())) {
 

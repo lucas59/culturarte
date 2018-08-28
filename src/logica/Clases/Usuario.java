@@ -23,14 +23,13 @@ public class Usuario {
     private String imagen;
     private Map<String, Usuario> seguidos;
 
-    public Usuario(String nickname, String nombre, String apellido, String correo, Calendar fechaN, String imagen, Map<String, Usuario> seguidos) {
+    public Usuario(String nickname, String nombre, String apellido, String correo, Calendar fechaN, String imagen) {
         this.nickname = nickname;
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
         this.fechaN = fechaN;
         this.imagen = imagen;
-        this.seguidos = seguidos;
         this.seguidos = new HashMap<String, Usuario>();
 
     }

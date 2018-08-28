@@ -25,15 +25,14 @@ public class Propuesta {
     private Calendar fecha;
     private float montoE;
     private float montoTot;
-    private Calendar fechaPubl;
     private Proponente Autor;
     private TipoRetorno retorno;
     private EstadoPropuesta estadoActual;
-    private List<EstadoPropuesta> Estados;
+    private List<EstadoPropuesta> historialEstados;
     private List<Colaboracion> Colaboraciones;
     private Categoria categoria;
 
-    public Propuesta(String tituloP, String descripcion, String imagen, String lugar, Calendar fecha, float montoE, float montoTot, Calendar fechaPubl, EstadoPropuesta estado, Categoria cate, TipoRetorno retorno, Proponente autor) {
+    public Propuesta(String tituloP, String descripcion, String imagen, String lugar, Calendar fecha, float montoE, float montoTot, EstadoPropuesta estado, Categoria cate, TipoRetorno retorno, Proponente autor) {
         this.TituloP = tituloP;
         this.descripcionP = descripcion;
         this.imagen = imagen;
@@ -41,27 +40,12 @@ public class Propuesta {
         this.fecha = fecha;
         this.montoE = montoE;
         this.montoTot = montoTot;
-        this.fechaPubl = fechaPubl;
         this.categoria = cate;
         this.retorno = retorno;
         this.estadoActual = estado;
         this.Autor = autor;
         this.Colaboraciones = new ArrayList<>();
-    }
-    
-    public Propuesta(String tituloP, String descripcion, Categoria cat, Calendar fecha, String lugar, float montoE, float montoTot, TipoRetorno retorno, Proponente p, String imagen){
-        this.TituloP = tituloP;
-        this.descripcionP = descripcion;
-        this.categoria = cat;
-        this.fecha = fecha;
-        this.lugar = lugar;
-        this.montoE = montoE;
-        this.montoTot = montoTot;
-        this.retorno = retorno;
-        this.Autor = p;
-        this.imagen = imagen;
-        this.Colaboraciones = new ArrayList<>();
-      
+        this.historialEstados = new ArrayList<>();
     }
 
     public String getTituloP() {
@@ -70,6 +54,10 @@ public class Propuesta {
 
     public void setTituloP(String TituloP) {
         this.TituloP = TituloP;
+    }
+
+    public List<EstadoPropuesta> getHistorialEst() {
+        return this.historialEstados;
     }
 
     public String getDescripcionP() {
@@ -120,14 +108,6 @@ public class Propuesta {
         this.montoTot = montoTot;
     }
 
-    public Calendar getFechaPubl() {
-        return fechaPubl;
-    }
-
-    public void setFechaPubl(Calendar fechaPubl) {
-        this.fechaPubl = fechaPubl;
-    }
-
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
@@ -145,7 +125,7 @@ public class Propuesta {
     }
 
     public DtinfoPropuesta getDtPropuesta() {
-        DtinfoPropuesta dp = new DtinfoPropuesta(this.TituloP, this.descripcionP, this.imagen, this.categoria.getNombreC(), this.lugar, this.fecha, this.montoE, this.montoTot, this.fechaPubl, this.retorno);
+        DtinfoPropuesta dp = new DtinfoPropuesta(this.TituloP, this.descripcionP, this.imagen, this.categoria.getNombreC(), this.lugar, this.fecha, this.montoE, this.montoTot, this.retorno);
         return dp;
     }
 
@@ -162,7 +142,7 @@ public class Propuesta {
     }
 
     public void setEstados(EstadoPropuesta Estado) {
-        this.Estados.add(Estado);
+        this.historialEstados.add(Estado);
     }
 
     public List<Colaboracion> getColaboraciones() {
@@ -171,9 +151,5 @@ public class Propuesta {
 
     public void setColaboraciones(Colaboracion Colaboracion) {
         this.Colaboraciones.add(Colaboracion);
-    }
-    
-        public List<EstadoPropuesta> getEstados() {
-        return Estados;
     }
 }

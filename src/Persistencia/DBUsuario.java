@@ -130,13 +130,11 @@ public class DBUsuario {
                 String dir = st.getString(7);
                 String biog = st.getString(8);
                 String web = st.getString(9);
-                Map <String,Usuario> seguidos=new HashMap();
-                Map <String,Propuesta> prop=new HashMap();
                 if (st.getInt(10) == 1) {
-                    Proponente p = new Proponente(biog, dir, web, prop, nick, nombre, apellido, correo, c, img, seguidos);
+                    Proponente p = new Proponente(biog, dir, web, nick, nombre, apellido, correo, c, img);
                     usuarios.put(nick, p);
                 } else {
-                    Colaborador col = new Colaborador(nick, nombre, apellido, correo, c, img, seguidos);
+                    Colaborador col = new Colaborador(nick, nombre, apellido, correo, c, img);
                     usuarios.put(nick, col);
                 }
             }

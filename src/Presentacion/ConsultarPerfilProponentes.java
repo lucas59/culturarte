@@ -39,7 +39,7 @@ import logica.Interfaces.IControladorUsuario;
  *
  * @author Lucas
  */
-public class ConsultarPerfilProponente extends javax.swing.JInternalFrame {
+public class ConsultarPerfilProponentes extends javax.swing.JInternalFrame {
 
     private IControladorUsuario ICU;
     private ArrayList<DtProponente> dtproponentes;
@@ -48,7 +48,7 @@ public class ConsultarPerfilProponente extends javax.swing.JInternalFrame {
     /**
      * Creates new form ConsultarPerfilColaborador
      */
-    public ConsultarPerfilProponente() {
+    public ConsultarPerfilProponentes() {
         initComponents();
         jPanelDatos.setVisible(false);
 

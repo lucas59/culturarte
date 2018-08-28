@@ -22,11 +22,10 @@ public class DtinfoPropuesta {
     private Calendar FechaReal;
     private float Precio;
     private float Monto;
-    private Calendar Fechapubli;
     private String estado;
     private TipoRetorno tipoRetorno;
 
-    public DtinfoPropuesta(String Titulo, String Descripcion, String imagen, String TipoEspec, String Lugar, Calendar FechaReal, float Precio, float Monto, Calendar Fechapubli, TipoRetorno tipoRetorno) {
+    public DtinfoPropuesta(String Titulo, String Descripcion, String imagen, String TipoEspec, String Lugar, Calendar FechaReal, float Precio, float Monto,  TipoRetorno tipoRetorno) {
         this.Titulo = Titulo;
         this.Descripcion = Descripcion;
         this.imagen = imagen;
@@ -35,7 +34,6 @@ public class DtinfoPropuesta {
         this.FechaReal = FechaReal;
         this.Precio = Precio;
         this.Monto = Monto;
-        this.Fechapubli = Fechapubli;
         this.tipoRetorno = tipoRetorno;
     }
 
@@ -47,10 +45,6 @@ public class DtinfoPropuesta {
         this.Monto = p.getMontoTot();
         this.TipoEspec = p.getCategoria().getNombreC();
         this.imagen = p.getImagen();
-    }
-
-    public String getEstado() {
-        return this.estado;
     }
 
     public String getTitulo() {
@@ -73,7 +67,7 @@ public class DtinfoPropuesta {
         return Lugar;
     }
 
-    public Calendar getFecgaReal() {
+    public Calendar getFechaReal() {
         return FechaReal;
     }
 
@@ -85,11 +79,13 @@ public class DtinfoPropuesta {
         return Monto;
     }
 
-    public Calendar getFechapubli() {
-        return Fechapubli;
+    public String getEstado() {
+        return estado;
     }
 
     public TipoRetorno getTipoRetorno() {
         return tipoRetorno;
     }
+
+    
 }

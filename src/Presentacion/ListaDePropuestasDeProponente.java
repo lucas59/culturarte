@@ -52,15 +52,15 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
         grupo.add(jRadioButtonPublicadas);
         this.nickProponente = proponente;
         this.propuestas = new HashMap<String, DtinfoPropuesta>();
-        propuestas = this.ICP.listarTodasPropuestas();
+        propuestas =null;// this.ICP.listarTodasPropuestas();
 
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.setRowCount(0);
         for (int i = 0; i < propuestas.size(); i++) {
             DtinfoPropuesta p = propuestas.get(i);
-            Date f = (Date) p.getFecgaReal().getTime();
+            Date f = (Date) p.getFechaReal().getTime();
             String fecha = new SimpleDateFormat("dd/MMM/yyyy").format(f);
-            Object[] dat = {p.getTitulo(), p.getTipoEspec(), p.getEstado(), p.getMonto(), p.getLugar(), p.getFecgaReal()};
+            Object[] dat = {p.getTitulo(), p.getTipoEspec(), p.getEstado(), p.getMonto(), p.getLugar(), p.getFechaReal()};
             modelo.addRow(dat);
         }
     }
@@ -303,9 +303,9 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
         for (int i = 0; i < this.propuestas.size(); i++) {
             if (this.propuestas.get(i).getEstado().contains("Canceladas")) {
                 DtinfoPropuesta dtP = this.propuestas.get(i);
-                Date f = (Date) dtP.getFecgaReal().getTime();
+                Date f = (Date) dtP.getFechaReal().getTime();
                 String fecha = new SimpleDateFormat("dd/MMM/yyyy").format(f);
-                Object[] dat = {dtP.getTitulo(), dtP.getTipoEspec(), dtP.getEstado(), dtP.getMonto(), dtP.getLugar(), dtP.getFecgaReal()};
+                Object[] dat = {dtP.getTitulo(), dtP.getTipoEspec(), dtP.getEstado(), dtP.getMonto(), dtP.getLugar(), dtP.getFechaReal()};
                 modelo.addRow(dat);
             }
         }
@@ -317,9 +317,9 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
         for (int i = 0; i < this.propuestas.size(); i++) {
             if (this.propuestas.get(i).getEstado().contains("Publicadas")) {
                 DtinfoPropuesta dtP = this.propuestas.get(i);
-                Date f = (Date) dtP.getFecgaReal().getTime();
+                Date f = (Date) dtP.getFechaReal().getTime();
                 String fecha = new SimpleDateFormat("dd/MMM/yyyy").format(f);
-                Object[] dat = {dtP.getTitulo(), dtP.getTipoEspec(), dtP.getEstado(), dtP.getMonto(), dtP.getLugar(), dtP.getFecgaReal()};
+                Object[] dat = {dtP.getTitulo(), dtP.getTipoEspec(), dtP.getEstado(), dtP.getMonto(), dtP.getLugar(), dtP.getFechaReal()};
                 modelo.addRow(dat);
             }
         }
@@ -331,9 +331,9 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
         for (int i = 0; i < this.propuestas.size(); i++) {
             if (this.propuestas.get(i).getEstado().contains("enFinalizacion")) {
                 DtinfoPropuesta dtP = this.propuestas.get(i);
-                Date f = (Date) dtP.getFecgaReal().getTime();
+                Date f = (Date) dtP.getFechaReal().getTime();
                 String fecha = new SimpleDateFormat("dd/MMM/yyyy").format(f);
-                Object[] dat = {dtP.getTitulo(), dtP.getTipoEspec(), dtP.getEstado(), dtP.getMonto(), dtP.getLugar(), dtP.getFecgaReal()};
+                Object[] dat = {dtP.getTitulo(), dtP.getTipoEspec(), dtP.getEstado(), dtP.getMonto(), dtP.getLugar(), dtP.getFechaReal()};
                 modelo.addRow(dat);
             }
         }
@@ -345,9 +345,9 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
         for (int i = 0; i < this.propuestas.size(); i++) {
             if (this.propuestas.get(i).getEstado().contains("finalizada")) {
                 DtinfoPropuesta dtP = this.propuestas.get(i);
-                Date f = (Date) dtP.getFecgaReal().getTime();
+                Date f = (Date) dtP.getFechaReal().getTime();
                 String fecha = new SimpleDateFormat("dd/MMM/yyyy").format(f);
-                Object[] dat = {dtP.getTitulo(), dtP.getTipoEspec(), dtP.getEstado(), dtP.getMonto(), dtP.getLugar(), dtP.getFecgaReal()};
+                Object[] dat = {dtP.getTitulo(), dtP.getTipoEspec(), dtP.getEstado(), dtP.getMonto(), dtP.getLugar(), dtP.getFechaReal()};
                 modelo.addRow(dat);
             }
         }
@@ -359,9 +359,9 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
         for (int i = 0; i < this.propuestas.size(); i++) {
             if (this.propuestas.get(i).getEstado().contains("noFinalizada")) {
                 DtinfoPropuesta dtP = this.propuestas.get(i);
-                Date f = (Date) dtP.getFecgaReal().getTime();
+                Date f = (Date) dtP.getFechaReal().getTime();
                 String fecha = new SimpleDateFormat("dd/MMM/yyyy").format(f);
-                Object[] dat = {dtP.getTitulo(), dtP.getTipoEspec(), dtP.getEstado(), dtP.getMonto(), dtP.getLugar(), dtP.getFecgaReal()};
+                Object[] dat = {dtP.getTitulo(), dtP.getTipoEspec(), dtP.getEstado(), dtP.getMonto(), dtP.getLugar(), dtP.getFechaReal()};
                 modelo.addRow(dat);
             }
         }
@@ -372,9 +372,9 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
         modelo.setRowCount(0);
         for (int i = 0; i < this.propuestas.size(); i++) {
             DtinfoPropuesta dtP = this.propuestas.get(i);
-            Date f = (Date) dtP.getFecgaReal().getTime();
+            Date f = (Date) dtP.getFechaReal().getTime();
             String fecha = new SimpleDateFormat("dd/MMM/yyyy").format(f);
-            Object[] dat = {dtP.getTitulo(), dtP.getTipoEspec(), dtP.getEstado(), dtP.getMonto(), dtP.getLugar(), dtP.getFecgaReal()};
+            Object[] dat = {dtP.getTitulo(), dtP.getTipoEspec(), dtP.getEstado(), dtP.getMonto(), dtP.getLugar(), dtP.getFechaReal()};
             modelo.addRow(dat);
         }
     }//GEN-LAST:event_jRadioButton1MouseClicked

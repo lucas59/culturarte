@@ -9,20 +9,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.time.Instant;
 import java.util.Calendar;
-import java.sql.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.Date;
 import logica.Clases.Categoria;
 import logica.Clases.EstadoPropuesta;
 import logica.Clases.Proponente;
 import logica.Clases.Propuesta;
 import logica.Clases.TipoE;
 import logica.Clases.TipoRetorno;
+import logica.Fabrica;
 
 /**
  *
@@ -34,40 +30,13 @@ public class DBPropuesta {
     //private Connection conexion = ConexionDB.getConexion();
     private Connection conexion = new ConexionDB().getConexion();
 
-    public boolean agregarPropuesta(Propuesta nuevaP, EstadoPropuesta nuevoEst) {
+    public boolean agregarCategoria(String catNueva, String catPadre) {
+
         try {
-            PreparedStatement stat = conexion.prepareStatement("INSERT INTO propuesta" + "(TituloP, nombreC, Autor, descripcion, imagen, fechaR, lugar, montoE, montoTot, fechaPubl, Retornos) values (?,?,?,?,?,?,?,?,?,?,?)");
-            Calendar fechR = nuevaP.getFecha();
-            Date dateR = (Date) fechR.getTime();
-            java.sql.Date dateRR = new java.sql.Date(dateR.getTime());
+            PreparedStatement stat = conexion.prepareStatement("INSERT INTO categoria " + "(nombreC,nomCatPadre) values (?,?)");
 
-            Calendar fechaP = nuevaP.getFechaPubl();
-            Date dateP = (Date) fechaP.getTime();
-            java.sql.Date datePP = new java.sql.Date(dateP.getTime());
-
-            stat.setString(1, nuevaP.getTituloP());
-            stat.setString(2, nuevaP.getCategoria().getNombreC());
-            stat.setString(3, nuevaP.getAutor().getNickname());
-            stat.setString(4, nuevaP.getDescripcionP());
-            stat.setString(5, nuevaP.getImagen());
-            stat.setDate(6, dateRR);
-            stat.setString(7, nuevaP.getLugar());
-            stat.setFloat(8, nuevaP.getMontoE());
-            stat.setFloat(9, nuevaP.getMontoTot());
-            stat.setDate(10, datePP);
-            stat.setInt(11, nuevaP.getRetorno().ordinal());
-            stat.executeUpdate();
-            stat.close();
-
-            stat = conexion.prepareStatement("INSERT INTO estadopropuesta" + " (TituoloP, nombreC, FechaInicio, FechaFinal, Estado) values (?,?,?,?,?)");
-            Calendar fechaI = nuevoEst.getfechaInicio();
-            Date dateI = (Date) fechaI.getTime();
-            java.sql.Date dateII = new java.sql.Date(dateI.getTime());
-
-            stat.setString(1, nuevaP.getTituloP());
-            stat.setString(2, nuevaP.getCategoria().getNombreC());
-            stat.setDate(3, dateII);
-            stat.setInt(4, 1);
+            stat.setString(1, catNueva);
+            stat.setString(2, catPadre);
             stat.executeUpdate();
             stat.close();
 
@@ -78,102 +47,190 @@ public class DBPropuesta {
         return true;
     }
 
-    public Map<String, Propuesta> cargarPropuesta() {
+    public boolean agregarPropuesta(Propuesta nuevaP, EstadoPropuesta nuevoEst) {
         try {
-            Map<String, Propuesta> lista = new HashMap<>();
+            PreparedStatement stat = conexion.prepareStatement("INSERT INTO propuesta (TituloP, nombreC, proponente, descripcion, imagen, fechaR, lugar, montoE, montoTot, retornos) VALUES (?,?,?,?,?,?,?,?,?,?)");
+
+            Calendar calen = nuevaP.getFecha();
+            Date fechaR = (Date) calen.getTime();
+            java.sql.Date dateRR = new java.sql.Date(fechaR.getTime());
+
+            stat.setString(1, nuevaP.getTituloP());
+            stat.setString(2, nuevaP.getCategoria().getNombreC());
+            stat.setString(3, nuevaP.getAutor().getNickname());
+            stat.setString(4, nuevaP.getDescripcionP());
+            stat.setString(5, nuevaP.getImagen());
+            stat.setDate(6, dateRR);
+            stat.setString(7, nuevaP.getLugar());
+            stat.setFloat(8, nuevaP.getMontoE());
+            stat.setFloat(9, nuevaP.getMontoTot());
+            stat.setInt(10, nuevaP.getRetorno().ordinal());
+            stat.executeUpdate();
+            stat.close();
+
+            stat = conexion.prepareStatement("INSERT INTO estadopropuesta" + " (TituloP, FechaInicio, Estado) values (?,?,?)");
+
+            Calendar cal = nuevoEst.getfechaInicio();
+            Date fechaI = (Date) cal.getTime();
+            java.sql.Date fechaII = new java.sql.Date(fechaI.getTime());
+
+            stat.setString(1, nuevaP.getTituloP());
+            stat.setDate(2, fechaII);
+            stat.setInt(3, 2);
+            stat.executeUpdate();
+            stat.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public void cargarCategorias() {
+
+        try {
+            PreparedStatement st1 = conexion.prepareStatement("SELECT nombreC FROM categoria");
+            ResultSet rs1 = st1.executeQuery();
+
+            while (rs1.next()) {
+                String nombreCat = rs1.getString("nombreC");
+
+                Fabrica.getInstance().getControladorPropCat().getCategorias().put(nombreCat, new Categoria(nombreCat));
+
+            }
+            rs1.close();
+            st1.close();
+
+            PreparedStatement st2 = conexion.prepareStatement("SELECT * FROM categoria WHERE nombreC <> 'Categoria' ");
+            ResultSet rs2 = st2.executeQuery();
+
+            while (rs2.next()) {
+                String nombreH = rs2.getString("nombreC");
+                String nombreP = rs2.getString("nomCatPadre");
+
+                if (!"".equals(nombreP)) {
+                    Categoria catP = Fabrica.getInstance().getControladorPropCat().getCategorias().get(nombreP);
+                    Categoria catH = Fabrica.getInstance().getControladorPropCat().getCategorias().get(nombreH);
+
+                    catP.getCategoriasH().put(nombreH, catH);
+                }
+            }
+            rs2.close();
+            st2.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        this.cargarPropuesta();
+    }
+
+    public void cargarPropuesta() {
+        try {
+
             PreparedStatement st = conexion.prepareStatement("SELECT * FROM propuesta");
             ResultSet rs = st.executeQuery();
+
             while (rs.next()) {
-                String Titulo = rs.getString("tituloP");
 
-                Calendar fechaPubl = Calendar.getInstance();
-                fechaPubl.setTime(rs.getDate("fechaPubl"));
-
-                Calendar fecha = Calendar.getInstance();
-                fecha.setTime(rs.getDate("fecha"));
-                TipoRetorno tip = null;
+                TipoRetorno tip;
                 int i = rs.getInt("retornos");
-                if (i == 1) {
-                    tip = tip.Entradas;
-                } else if (i == 2) {
-                    tip = tip.porGanancias;
-                } else {
-                    tip = tip.EntGan;
+                switch (i) {
+                    case 1:
+                        tip = TipoRetorno.Entradas;
+                        break;
+                    case 2:
+                        tip = TipoRetorno.porGanancias;
+                        break;
+                    default:
+                        tip = TipoRetorno.EntGan;
+                        break;
                 }
-                Proponente prop=new Proponente("","","",null,rs.getString("proponente"),"","","",null,"",null);
-                EstadoPropuesta estado = this.cargarEstadoPropuesta(rs.getString("tituloP"));
-                Categoria cat = this.CargarCategoria(rs.getString("nombreC"));
-                Propuesta p = new Propuesta(Titulo, rs.getString("descripcion"), rs.getString("imagen"), rs.getString("lugar"), fecha, rs.getFloat("montoE"), rs.getFloat("montoTot"), fechaPubl, estado, cat, tip, prop);
-                lista.put(Titulo, p);
+
+                java.util.Date fecha = rs.getDate("fechaR");
+                Calendar fechaRR = Calendar.getInstance();
+                fechaRR.setTime(fecha);
+
+                Categoria cat = Fabrica.getInstance().getControladorPropCat().getCategorias().get(rs.getString("nombreC"));
+                Proponente prop = (Proponente) Fabrica.getInstance().getIControladorUsuario().getUsuarios().get(rs.getString("proponente"));
+                Propuesta nuevaP = new Propuesta(rs.getString("tituloP"), rs.getString("descripcion"), rs.getString("imagen"), rs.getString("lugar"), fechaRR, rs.getFloat("montoE"), rs.getFloat("montoTot"), null, cat, TipoRetorno.EntGan, prop);
+
+                cat.getPropuestas().put(nuevaP.getTituloP(), nuevaP);
+                prop.getPropuestasRealizadas().put(nuevaP.getTituloP(), nuevaP);
+                Fabrica.getInstance().getControladorPropCat().getpropuesta().put(nuevaP.getTituloP(), nuevaP);
             }
             rs.close();
             st.close();
-            return lista;
         } catch (SQLException ex) {
             ex.printStackTrace();
-            return null;
         }
     }
 
-    public EstadoPropuesta cargarEstadoPropuesta(String titulo) {
+    public void cargarEstadoPropuesta(Propuesta prop) {
         try {
-            PreparedStatement st = conexion.prepareStatement("SELECT * FROM estadopropuesta WHERE TituloP=" + titulo);
-            ResultSet rs = st.executeQuery();
-            Calendar c = Calendar.getInstance();
-            TipoE est = null;
-            while (rs.next()) {
-                Date Fechaini = rs.getDate("FechaInicio");
-                c.set(Fechaini.getYear(), Fechaini.getMonth(), Fechaini.getDay());
-                //Date Fechafin = rs.getDate("FechaFinal");
-                int i = rs.getInt("Estado");
-                if (i == 1) {
-                    est = est.Ingresada;
-                } else if (i == 2) {
-                    est = est.Publicada;
-                } else if (i == 3) {
-                    est = est.noFinanciada;
-                } else if (i == 4) {
-                    est = est.enFinanciacion;
-                } else if (i == 5) {
-                    est = est.Cancelada;
+            PreparedStatement pSt = conexion.prepareStatement("SELECT * FROM estadopropuesta WHERE TituloP = '" + prop.getTituloP() + "'");
+            ResultSet rs2 = pSt.executeQuery();
+
+            while (rs2.next()) {
+
+                Date Fechaini = rs2.getDate("FechaInicio");
+                Calendar fechaI = Calendar.getInstance();
+                fechaI.setTime(Fechaini);
+
+                TipoE est;
+
+                int i = rs2.getInt("Estado");
+
+                switch (i) {
+                    case 1:
+                        est = TipoE.Ingresada;
+                        break;
+                    case 2:
+                        est = TipoE.Publicada;
+                        break;
+                    case 3:
+                        est = TipoE.noFinanciada;
+                        break;
+                    case 4:
+                        est = TipoE.enFinanciacion;
+                        break;
+                    case 5:
+                        est = TipoE.Cancelada;
+                        break;
+                    default:
+                        est = TipoE.Financiada;
+                        break;
+                }
+
+                EstadoPropuesta Estado = new EstadoPropuesta(est, fechaI);
+
+                Date fechaf = rs2.getDate("fechaFinal");
+
+                if (fechaf != null) {
+                    Calendar fechaFin = Calendar.getInstance();
+                    fechaFin.setTime(fechaf);
+                    Estado.setfechaFinal(fechaFin);
+                    prop.getHistorialEst().add(Estado);
                 } else {
-                    est = est.Financiada;
+                    prop.setEstadoActual(Estado);
                 }
             }
-            return new EstadoPropuesta(est, c);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-    }
-
-    public Categoria CargarCategoria(String nombre) {
-        try {
-            PreparedStatement st = conexion.prepareStatement("SELECT * FROM categoria WHERE nombreC=" + nombre);
-            ResultSet rs = st.executeQuery();
-            String nom = "";
-            while (rs.next()) {
-                nom = rs.getString("nombreC");
-
-            }
-            return new Categoria(nom);
+            rs2.close();
+            pSt.close();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
-            return null;
+
         }
     }
-    
-    
-    
-    
-public boolean agregarPropuestaDatosdePrueba(Propuesta nuevaP) {
+
+    public boolean agregarPropuestaDatosdePrueba(Propuesta nuevaP) {
         try {
             PreparedStatement stat = conexion.prepareStatement("INSERT INTO propuesta" + "(TituloP, nombreC, proponente, descripcion, imagen, fechaR, lugar, montoE, montoTot, retornos) values (?,?,?,?,?,?,?,?,?,?)");
-           
-            java.util.Date dateR = (java.util.Date) nuevaP.getFecha().getTime();
+            Calendar fechR = nuevaP.getFecha();
+            java.util.Date dateR = (java.util.Date) fechR.getTime();
             java.sql.Date dateRR = new java.sql.Date(dateR.getTime());
-            
+
             stat.setString(1, nuevaP.getTituloP());
             stat.setString(2, nuevaP.getCategoria().getNombreC());
             stat.setString(3, nuevaP.getAutor().getNickname());
@@ -183,55 +240,36 @@ public boolean agregarPropuestaDatosdePrueba(Propuesta nuevaP) {
             stat.setString(7, nuevaP.getLugar());
             stat.setFloat(8, nuevaP.getMontoE());
             stat.setFloat(9, nuevaP.getMontoTot());
-            stat.setString(10, nuevaP.getRetorno().toString());
+            stat.setInt(10, nuevaP.getRetorno().ordinal());
             stat.executeUpdate();
             stat.close();
 
-} catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
-        }
-        return true;
-    }
-
-public boolean agregarCategoriaDatosdePrueba(Categoria c) {
-        try {
-            PreparedStatement stat = conexion.prepareStatement("INSERT INTO categoria" + "(nombreC, nomCatInt) values (?,?)");
-                       
-            stat.setString(1, c.getNombreC());
-            stat.setString(2, c.getPadre());
-            
-            stat.executeUpdate();
-            stat.close();
-
-} catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
-        }
-        return true;
-    }
-
-
-
-public boolean agregarEstadoPropuestaDatosdePrueba(EstadoPropuesta nuevoEst, String TituloP){
-     try {
-            PreparedStatement stat = conexion.prepareStatement("INSERT INTO estadopropuesta" + " (TituloP, FechaInicio, FechaFinal, Estado) values (?,?,?,?)");
-                 
-            java.util.Date dateR = (java.util.Date) nuevoEst.getfechaInicio().getTime();
-            java.sql.Timestamp dateII = new java.sql.Timestamp(dateR.getTime());
-            
-            stat.setString(1, TituloP);
-            stat.setTimestamp(2, dateII);
-            stat.setTimestamp(3, dateII);
-            stat.setString(4, nuevoEst.getEstado().toString());
-            stat.executeUpdate();
-            stat.close();
-            
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
         }
         return true;
-}
+    }
+
+    public boolean agregarEstadoPropuestaDatosdePrueba(EstadoPropuesta nuevoEst, String TituloP) {
+        try {
+            PreparedStatement stat = conexion.prepareStatement("INSERT INTO estadopropuesta" + " (TituoloP, FechaInicio, FechaFinal, Estado) values (?,?,?,?,?)");
+
+            java.util.Date dateR = (java.util.Date) nuevoEst.getfechaInicio().getTime();
+            java.sql.Timestamp dateII = new java.sql.Timestamp(dateR.getTime());
+
+            stat.setString(1, TituloP);
+            stat.setTimestamp(2, dateII);
+            stat.setTimestamp(3, dateII);
+            stat.setString(4, nuevoEst.toString());
+            stat.executeUpdate();
+            stat.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 
 }

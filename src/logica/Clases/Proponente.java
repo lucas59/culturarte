@@ -20,12 +20,12 @@ public class Proponente extends Usuario {
     private String sitioweb;
     private Map<String, Propuesta> Propuestas;
 
-    public Proponente(String biografia, String direccion, String sitioweb, Map<String, Propuesta> Propuestas, String nickname, String nombre, String apellido, String correo, Calendar fechaN, String imagen, Map<String, Usuario> seguidos) {
-        super(nickname, nombre, apellido, correo, fechaN, imagen, seguidos);
+    public Proponente(String biografia, String direccion, String sitioweb, String nickname, String nombre, String apellido, String correo, Calendar fechaN, String imagen) {
+        super(nickname, nombre, apellido, correo, fechaN, imagen);
         this.biografia = biografia;
         this.direccion = direccion;
         this.sitioweb = sitioweb;
-        this.Propuestas = Propuestas;
+        this.Propuestas = new HashMap<>();
     }
 
     public String getSitioweb() {
@@ -40,8 +40,8 @@ public class Proponente extends Usuario {
         return Propuestas;
     }
 
-    public void setPropuestas(Map<String, Propuesta> Propuestas) {
-        this.Propuestas = Propuestas;
+    public void setPropuesta(Propuesta prop) {
+        this.Propuestas.put(prop.getTituloP(), prop);
     }
 
     public String getDireccion() {

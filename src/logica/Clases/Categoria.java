@@ -15,7 +15,6 @@ import java.util.Map;
 public class Categoria {
 
     private String nombreC;
-    private String Padre;
     private Map<String, Categoria> Categorias;
     private Map<String, Propuesta> Propuestas;
 
@@ -23,15 +22,6 @@ public class Categoria {
         this.nombreC = nombreC;
         this.Categorias = new HashMap<>();
         this.Propuestas = new HashMap<>();
-        this.Padre=null;
-    }
-
-    public String getPadre() {
-        return Padre;
-    }
-
-    public void setPadre(String Padre) {
-        this.Padre = Padre;
     }
     
     public String getNombreC() {

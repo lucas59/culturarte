@@ -14,11 +14,23 @@ public class DtConsultaPropuesta {
     private String titulo;
     private String descripcion;
     private String categoria;
+    private String lugar;
+    private String fechaR;
+    private String imagen;
+    private float montoActual;
+    private String EstadoActual;
+    private float montoE;
 
-    public DtConsultaPropuesta(String tit, String desc, String cat) {
+    public DtConsultaPropuesta(String tit, String cat, String lugar, String fecha, float monto, float montoe, String estado, String desc, String img) {
         this.titulo = tit;
         this.categoria = cat;
         this.descripcion = desc;
+        this.EstadoActual = estado;
+        this.montoE = montoe;
+        this.montoActual = monto;
+        this.imagen = img;
+        this.fechaR = fecha;
+        this.lugar = lugar;
     }
 
     public String getTitulo() {
@@ -31,5 +43,29 @@ public class DtConsultaPropuesta {
 
     public String getCategoria() {
         return this.categoria;
+    }
+
+    public String getEstadoActual() {
+        return this.EstadoActual;
+    }
+
+    public String getFechaR() {
+        return this.fechaR;
+    }
+
+    public float getMontoActual() {
+        return this.montoActual;
+    }
+
+    public String getLugar() {
+        return this.lugar;
+    }
+
+    public String getImagen() {
+        return this.imagen;
+    }
+
+    public float getMontoE() {
+        return this.montoE;
     }
 }

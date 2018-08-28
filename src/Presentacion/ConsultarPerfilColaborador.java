@@ -197,7 +197,6 @@ public class ConsultarPerfilColaborador extends javax.swing.JInternalFrame {
         while (it.hasNext()) {
             Map.Entry mentry = (Map.Entry) it.next();
             DtinfoPropuesta dtp2 = (DtinfoPropuesta) mentry.getValue();
-            c = dtp2.getFechapubli();
             dia = c.get(Calendar.DAY_OF_MONTH);
             mes = c.get(Calendar.MONTH) + 1;
             anio = c.get(Calendar.YEAR);
