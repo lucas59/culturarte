@@ -284,7 +284,7 @@ public class ControladorPropCat implements IPropCat {
         List<Colaboracion> colaboraciones = this.getPropuesta().getColaboraciones();
         float TotalColaboracion = 0;
         for (int indice = 0; indice < colaboraciones.size(); indice++) {
-            if (colaboraciones.get(indice).getPropuesta().getTituloP() == this.getPropuesta().getTituloP()) {
+            if (colaboraciones.get(indice).getPropuesta().getTituloP().compareTo(this.getPropuesta().getTituloP()) == 0) {
                 throw new Exception("No puede colaborar en una propuesta mas de una vez");
             } else {
                 TotalColaboracion = TotalColaboracion + colaboraciones.get(indice).getMontoC();

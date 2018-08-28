@@ -137,7 +137,15 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
             new String [] {
                 "Titulo de la propuesta", "Nombre del colaborador"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable2MouseClicked(evt);
@@ -258,26 +266,6 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(jLabel1)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(110, 110, 110)
-                        .addComponent(jLabel2)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(96, 96, 96)
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -293,6 +281,26 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(115, 115, 115))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(jLabel1)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(110, 110, 110)
+                                .addComponent(jLabel2))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(96, 96, 96)
+                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton2)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -332,10 +340,10 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -442,33 +450,21 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
         }
         Fabrica fabrica = Fabrica.getInstance();
         IControladorUsuario ICU = fabrica.getIControladorUsuario();
-        Map<String, Usuario> Usuarios = ICU.getUsuarios();
-        Set set = Usuarios.entrySet();
-        Iterator iterator = set.iterator();
-        while (iterator.hasNext()) {
-            Map.Entry mentry = (Map.Entry) iterator.next();
-            if (mentry.getValue() instanceof Colaborador) {
-                if ((((Usuario) mentry.getValue()).getNickname().compareTo((String) jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString())) == 0) {
-                    List<Colaboracion> colaboraciones = ((Colaborador) mentry.getValue()).getColaboraciones();
-                    if (!colaboraciones.isEmpty()) {
-                        modelo.setRowCount(0);
-                        for (int indice = 0; indice < colaboraciones.size(); indice++) {
-                            if ((!jTextField8.getText().isEmpty()) && colaboraciones.get(indice).getTituloP().contains(jTextField8.getText())) {
-                                Object[] dat = {colaboraciones.get(indice).getTituloP(), colaboraciones.get(indice).getColaborador().getNickname()};
-                                modelo.addRow(dat);
-                            } else if (jTextField8.getText().isEmpty()) {
-                                Object[] dat = {colaboraciones.get(indice).getTituloP(), colaboraciones.get(indice).getColaborador().getNickname()};
-                                modelo.addRow(dat);
-                            }
-                        }
-                    } else {
-                        JOptionPane.showMessageDialog(null, "El colaborador no tiene colaboraciones");
-                    }
-                    break;
+        List<Colaboracion> colaboraciones = ICU.ListarColaboraciones(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
+        if (!colaboraciones.isEmpty()) {
+            modelo.setRowCount(0);
+            for (int indice = 0; indice < colaboraciones.size(); indice++) {
+                if ((!jTextField8.getText().isEmpty()) && colaboraciones.get(indice).getTituloP().contains(jTextField8.getText())) {
+                    Object[] dat = {colaboraciones.get(indice).getTituloP(), colaboraciones.get(indice).getColaborador().getNickname()};
+                    modelo.addRow(dat);
+                } else if (jTextField8.getText().isEmpty()) {
+                    Object[] dat = {colaboraciones.get(indice).getTituloP(), colaboraciones.get(indice).getColaborador().getNickname()};
+                    modelo.addRow(dat);
                 }
             }
-
-        }
+        } else {
+            JOptionPane.showMessageDialog(null, "El colaborador no tiene colaboraciones");
+        }    
     }//GEN-LAST:event_jTextField8KeyReleased
 
 
