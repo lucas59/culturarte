@@ -60,14 +60,14 @@ public class DBColaboracion {
                 statement.executeUpdate();
                 statement.close();
                 
-                statement = conexion.prepareStatement("INSERT INTO estadopropuesta " + "(TituloP, FechaInicio, FechaFinal, Estado) values(?,?,?,?)");
+                statement = conexion.prepareStatement("INSERT INTO estadopropuesta " + "(TituloP, FechaInicio, Estado) values(?,?,?)");
                 statement.setString(1, CPU.getPropuesta().getTituloP());
                 statement.setDate(2, sqlDate);
                 if(TotalColaboracion < CPU.getPropuesta().getMontoTot()){
-                   statement.setInt(4, 4);
+                   statement.setInt(3, 4);
                 }
                 else if(TotalColaboracion == CPU.getPropuesta().getMontoTot()){
-                    statement.setInt(4, 6);
+                    statement.setInt(3, 6);
                 }
                 statement.executeUpdate();
                 statement.close();

@@ -277,29 +277,29 @@ public class ControladorPropCat implements IPropCat {
         Fabrica fabrica = Fabrica.getInstance();
         IControladorUsuario ICU = fabrica.getIControladorUsuario();
         IPropCat IPC = fabrica.getControladorPropCat();
-        Calendar calendario = new GregorianCalendar();
+        Calendar calendario = new GregorianCalendar();  //Saco la fecha actual del sistema (
         java.util.Date utilDate = new java.util.Date();
         utilDate = calendario.getTime();
-        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-        List<Colaboracion> colaboraciones = this.getPropuesta().getColaboraciones();
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime()); //)
+        List<Colaboracion> colaboraciones = this.getPropuesta().getColaboraciones(); //listo las colaboraciones de la propuesta seleccionada
         float TotalColaboracion = 0;
-        for (int indice = 0; indice < colaboraciones.size(); indice++) {
-            if (colaboraciones.get(indice).getPropuesta().getTituloP().compareTo(this.getPropuesta().getTituloP()) == 0) {
+        for (int indice = 0; indice < colaboraciones.size(); indice++) {  //sumo los montos de las colaboraciones de la propuesta
+            if (colaboraciones.get(indice).getPropuesta().getTituloP().compareTo(this.getPropuesta().getTituloP()) == 0) { //si el colaborador ya colaboro con una propuesta
                 throw new Exception("No puede colaborar en una propuesta mas de una vez");
             } else {
                 TotalColaboracion = TotalColaboracion + colaboraciones.get(indice).getMontoC();
             }
         }
-        if ((TotalColaboracion + monto) <= this.getPropuesta().getMontoTot()) {
+        if ((TotalColaboracion + monto) <= this.getPropuesta().getMontoTot()) { //si la suma de los montos mas el monto que ingresará es menor o igual al monto total
             Colaboracion colaboracion = new Colaboracion(ICU.getColaborador(), monto, calendario, Entrada, this.getPropuesta());
             ICU.getColaborador().setColaboraciones(colaboracion);
             IPC.getPropuesta().setColaboraciones(colaboracion);
-            if (TotalColaboracion < this.getPropuesta().getMontoTot()) {
+            if ((TotalColaboracion + monto) < this.getPropuesta().getMontoTot()) { //si es menor 
                 EstadoPropuesta EstadoP = new EstadoPropuesta(TipoE.enFinanciacion, calendario);
-                this.getPropuesta().setEstados(this.Propuesta.getEstadoActual());
-                this.getPropuesta().getEstados().get(this.getPropuesta().getEstados().size() - 1).setfechaFinal(calendario);
-                this.getPropuesta().setEstadoActual(EstadoP);           
-            } else if (TotalColaboracion == this.getPropuesta().getMontoTot()) {
+                this.getPropuesta().getEstadoActual().setfechaFinal(calendario); // seteo la fecha actual a la fecha de fin del estado actual
+                this.getPropuesta().setEstados(this.getPropuesta().getEstadoActual()); //agrego el estado actual al historial de estados
+                this.getPropuesta().setEstadoActual(EstadoP); //seteo el estado nuevo al estado actual  
+            } else if ((TotalColaboracion + monto) == this.getPropuesta().getMontoTot()) { //si es igual
                 EstadoPropuesta EstadoP = new EstadoPropuesta(TipoE.Financiada, calendario);
                 this.getPropuesta().setEstados(this.Propuesta.getEstadoActual());
                 this.getPropuesta().getEstados().get(this.getPropuesta().getEstados().size() - 1).setfechaFinal(calendario);

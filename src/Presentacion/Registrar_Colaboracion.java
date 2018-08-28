@@ -41,10 +41,6 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jInternalFrame1 = new javax.swing.JInternalFrame();
-        jLabel21 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jPanel5 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -89,54 +85,12 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
         jComboBox2 = new javax.swing.JComboBox<>();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-
-        jInternalFrame1.setVisible(true);
-
-        jLabel21.setText("jLabel21");
-
-        jRadioButton1.setText("jRadioButton1");
-
-        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
-        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
-        jInternalFrame1Layout.setHorizontalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel21)
-                .addGap(255, 255, 255))
-            .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                .addGap(277, 277, 277)
-                .addComponent(jRadioButton1)
-                .addContainerGap(335, Short.MAX_VALUE))
-        );
-        jInternalFrame1Layout.setVerticalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                .addGap(163, 163, 163)
-                .addComponent(jLabel21)
-                .addGap(112, 112, 112)
-                .addComponent(jRadioButton1)
-                .addContainerGap(128, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -374,7 +328,7 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         jButton1.setText("Siguiente");
@@ -445,44 +399,15 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
                 .addGap(0, 24, Short.MAX_VALUE))
         );
 
-        jTable1.setFont(new java.awt.Font("Century Gothic", 0, 13)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Titulo de Propuesta", "Nickname"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
+        jLabel11.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
+        jLabel11.setText("Colaboradores del sistema");
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButton2.setText("Salir");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+                jButton2MouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-        }
-
-        jScrollPane3.setViewportView(jScrollPane1);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -492,7 +417,7 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
                 {null, null}
             },
             new String [] {
-                "NickName", "Nombre"
+                "NickName del colaborador", "Nombre del colaborador"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -514,66 +439,74 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
             jTable2.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        jScrollPane4.setViewportView(jScrollPane2);
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Titulo de la propuesta", "Nickname del proponente"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
 
-        jLabel11.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
-        jLabel11.setText("Colaboradores del sistema");
-
-        jButton2.setText("Salir");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
+        jScrollPane6.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(222, 222, 222)
-                .addComponent(jLabel1)
-                .addGap(379, 379, 379)
-                .addComponent(jLabel11)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(158, 158, 158)
+                        .addGap(111, 111, 111)
                         .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton2)
+                        .addGap(17, 17, 17)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane3))))
+                            .addComponent(jButton2)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, 0)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(110, 110, 110)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(136, 136, 136)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(136, 136, 136)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(194, 194, 194)
+                                .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(90, 90, 90)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jButton1))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(194, 194, 194)
-                                        .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(90, 90, 90)
-                                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 37, Short.MAX_VALUE))))
+                                .addComponent(jButton1)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(0, 28, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(169, 169, 169)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel11)
+                .addGap(164, 164, 164))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel11))
                 .addGap(0, 0, 0)
@@ -581,23 +514,21 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
                     .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2))
-                        .addContainerGap(51, Short.MAX_VALUE))))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         jScrollPane5.setViewportView(jPanel1);
@@ -606,9 +537,10 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 1164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 1122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -640,54 +572,6 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
             modelo.addRow(dat);
         }
     }//GEN-LAST:event_formComponentShown
-
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        Fabrica fabrica = Fabrica.getInstance();
-        IPropCat controladorPC = fabrica.getControladorPropCat();
-        Map<String, Propuesta> propuestas = controladorPC.getpropuesta();
-        Set set = propuestas.entrySet();
-        Iterator iterator = set.iterator();
-        iterator = set.iterator();
-        DtinfoPropuesta Dtinfop = null;
-        while (iterator.hasNext()) {
-            Map.Entry mentry = (Map.Entry) iterator.next();
-            Propuesta aux = (Propuesta) mentry.getValue();
-            boolean tituloOK = aux.getTituloP().contains((String) jTable1.getValueAt(jTable1.getSelectedRow(), 0));
-            if (tituloOK) {
-                Dtinfop = controladorPC.SeleccionarPropuestaR(aux.getTituloP());
-                break;
-            }
-        }
-        if (Dtinfop.getTipoRetorno().compareTo(TipoRetorno.Entradas) == 0) {
-            jComboBox2.removeAllItems();
-            jComboBox2.addItem("Entradas");
-        } else if (Dtinfop.getTipoRetorno().compareTo(TipoRetorno.porGanancias) == 0) {
-            jComboBox2.removeAllItems();
-            jComboBox2.addItem("Por Ganancias");
-        } else {
-            jComboBox2.removeAllItems();
-            jComboBox2.addItem("Entradas");
-            jComboBox2.addItem("Por Ganancias");
-        }
-        String dir = System.getProperty("user.dir");
-        String dir2 = dir.concat(Dtinfop.getImagen());
-
-        ImageIcon fot = new ImageIcon(dir2);
-        Icon icono = new ImageIcon(fot.getImage().getScaledInstance(jLabel20.getWidth(), jLabel20.getHeight(), Image.SCALE_DEFAULT));
-        jLabel20.setIcon(icono);
-
-        String[] textField = null;
-        jTextField1.setText((String) jTable1.getValueAt(jTable1.getSelectedRow(), 0));
-        jTextField2.setText(String.valueOf(Dtinfop.getDescripcion()));
-        jTextField3.setText((String) Dtinfop.getTipoEspec());
-        jTextField4.setText((String) Dtinfop.getLugar());
-        Date now = new Date();
-        SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy");
-        jTextField5.setText(sf.format(Dtinfop.getFecgaReal().getTime()));
-        jTextField6.setText(String.valueOf(Dtinfop.getPrecio()));
-        jTextField7.setText(String.valueOf(Dtinfop.getMonto()));
-        jTextField8.setText(sf.format(Dtinfop.getFechapubli().getTime()));
-    }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         Fabrica fabrica = Fabrica.getInstance();
@@ -739,37 +623,6 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jButton1MouseClicked
 
-    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
-        Fabrica fabrica = Fabrica.getInstance();
-        IControladorUsuario controladorU = fabrica.getIControladorUsuario();
-        Map<String, Usuario> Usuarios = controladorU.getUsuarios();
-
-        Set set = Usuarios.entrySet();
-        Iterator iterator = set.iterator();
-        iterator = set.iterator();
-        DtinfoColaborador DtinfoCol = null;
-        while (iterator.hasNext()) {
-            Map.Entry mentry = (Map.Entry) iterator.next();
-            Usuario aux = (Usuario) mentry.getValue();
-            if (aux.getNickname().contains((String) jTable2.getValueAt(jTable2.getSelectedRow(), 0))) {
-                DtinfoCol = new DtinfoColaborador(aux.getNickname(), aux.getNombre(), aux.getApellido(), aux.getCorreo(), aux.getFechaN());
-                controladorU.SeleccionarColaborador(aux.getNickname());
-                break;
-            }
-        }
-
-        String[] textField = null;
-        jTextField9.setText((String) jTable2.getValueAt(jTable2.getSelectedRow(), 0));
-        jTextField10.setText((String) DtinfoCol.getNombre());
-        Date now = new Date();
-        jTextField11.setText((String) (DtinfoCol.getApellido()));
-        jTextField12.setText((String) (DtinfoCol.getCorreo()));
-        SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy");
-        jTextField13.setText(sf.format(DtinfoCol.getFechaN().getTime()));
-
-
-    }//GEN-LAST:event_jTable2MouseClicked
-
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         this.setVisible(false);
     }//GEN-LAST:event_jButton2MouseClicked
@@ -806,38 +659,69 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
     private void jTextField15KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField15KeyReleased
         DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
         modelo.setRowCount(0);
-        if (this.jTextField15.getText().isEmpty()) {
-            for (int i = 0; i < jTable2.getRowCount(); i++) {
-                modelo.removeRow(i);
-                i -= 1;
-            }
-        } else {
-            Fabrica fabrica = Fabrica.getInstance();
-            IControladorUsuario CU = fabrica.getIControladorUsuario();
-            String usu = this.jTextField15.getText();
-            Map<String, Usuario> usuarios = CU.getUsuarios();
-            Set set = usuarios.entrySet();
-            Iterator iterator = set.iterator();
-            jTable2.clearSelection();
-            while (iterator.hasNext()) {
-                Map.Entry mentry = (Map.Entry) iterator.next();
-                Usuario aux = (Usuario) mentry.getValue();
-                if (aux.getNickname().contains(jTextField15.getText())) {
-                    Object[] dat = {aux.getNickname(), aux.getNombre()};
-                    modelo.addRow(dat);
-                }
-            }
-            this.jTable2.setModel(modelo);
-
+        for (int i = 0; i < jTable2.getRowCount(); i++) {
+            modelo.removeRow(i);
+            i -= 1;
         }
+        Fabrica fabrica = Fabrica.getInstance();
+        IControladorUsuario CU = fabrica.getIControladorUsuario();
+        String usu = this.jTextField15.getText();
+        Map<String, Usuario> usuarios = CU.getUsuarios();
+        Set set = usuarios.entrySet();
+        Iterator iterator = set.iterator();
+        jTable2.clearSelection();
+        while (iterator.hasNext()) {
+            Map.Entry mentry = (Map.Entry) iterator.next();
+            Usuario aux = (Usuario) mentry.getValue();
+            if (!jTextField15.getText().isEmpty() && aux.getNickname().contains(jTextField15.getText())) {
+                Object[] dat = {aux.getNickname(), aux.getNombre()};
+                modelo.addRow(dat);
+            }
+            else if(jTextField15.getText().isEmpty()){
+                Object[] dat = {aux.getNickname(), aux.getNombre()};
+                modelo.addRow(dat);
+            }
+        }
+        this.jTable2.setModel(modelo);
+
+
     }//GEN-LAST:event_jTextField15KeyReleased
+
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+        Fabrica fabrica = Fabrica.getInstance();
+        IControladorUsuario controladorU = fabrica.getIControladorUsuario();
+        Map<String, Usuario> Usuarios = controladorU.getUsuarios();
+
+        Set set = Usuarios.entrySet();
+        Iterator iterator = set.iterator();
+        iterator = set.iterator();
+        DtinfoColaborador DtinfoCol = null;
+        while (iterator.hasNext()) {
+            Map.Entry mentry = (Map.Entry) iterator.next();
+            Usuario aux = (Usuario) mentry.getValue();
+            if (aux.getNickname().contains((String) jTable2.getValueAt(jTable2.getSelectedRow(), 0))) {
+                DtinfoCol = new DtinfoColaborador(aux.getNickname(), aux.getNombre(), aux.getApellido(), aux.getCorreo(), aux.getFechaN());
+                controladorU.SeleccionarColaborador(aux.getNickname());
+                break;
+            }
+        }
+
+        String[] textField = null;
+        jTextField9.setText((String) jTable2.getValueAt(jTable2.getSelectedRow(), 0));
+        jTextField10.setText((String) DtinfoCol.getNombre());
+        Date now = new Date();
+        jTextField11.setText((String) (DtinfoCol.getApellido()));
+        jTextField12.setText((String) (DtinfoCol.getCorreo()));
+        SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy");
+        jTextField13.setText(sf.format(DtinfoCol.getFechaN().getTime()));
+
+    }//GEN-LAST:event_jTable2MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -851,7 +735,6 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
@@ -865,13 +748,9 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
