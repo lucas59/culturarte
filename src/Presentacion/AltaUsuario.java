@@ -196,7 +196,7 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
         jLabel8.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel8.setText("Tipo de usuario(*)");
 
-        rSFotoCircle2.setImagenDefault(new javax.swing.ImageIcon(getClass().getResource("/Persistencia/defecto.jpg"))); // NOI18N
+        rSFotoCircle2.setImagenDefault(null);
 
         jLabel10.setForeground(new java.awt.Color(255, 51, 51));
         jLabel10.setText("Salir");

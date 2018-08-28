@@ -371,7 +371,7 @@
         <Component class="rojerusan.RSFotoCircle" name="rSFotoCircle2">
           <Properties>
             <Property name="imagenDefault" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Persistencia/defecto.jpg"/>
+              <Image iconType="0" name="null"/>
             </Property>
           </Properties>
         </Component>
