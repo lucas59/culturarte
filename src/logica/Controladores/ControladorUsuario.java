@@ -75,6 +75,7 @@ public class ControladorUsuario implements IControladorUsuario {
         this.Usuarios = Usuarios;
     }
 
+
     @Override
     public boolean seguirUsuario(String nickUsu1, String nickUsu2) {
 
@@ -265,7 +266,7 @@ public class ControladorUsuario implements IControladorUsuario {
 
             if (mentry.getValue() instanceof Proponente) {
                 Proponente aux = (Proponente) mentry.getValue();
-                DtProponente aux2 = new DtProponente(aux.getBiografia(),aux.getDireccion(), aux.getSitioweb(),aux.getNickname(), aux.getNombre(),aux.getApellido(), aux.getCorreo(), aux.getFechaN(), aux.getImagen());
+                DtProponente aux2 = new DtProponente(aux.getBiografia(), aux.getDireccion(), aux.getSitioweb(), aux.getNickname(), aux.getNombre(), aux.getApellido(), aux.getCorreo(), aux.getFechaN(), aux.getImagen());
                 retorno.add(aux2);
             }
         }
@@ -419,8 +420,8 @@ public class ControladorUsuario implements IControladorUsuario {
     }
 
     @Override
-    public List ListarColaboraciones(String nickName){
-   Fabrica fabrica = Fabrica.getInstance();
+    public List ListarColaboraciones(String nickName) {
+        Fabrica fabrica = Fabrica.getInstance();
         IControladorUsuario ICU = fabrica.getIControladorUsuario();
         Map<String, Usuario> Usuarios = ICU.getUsuarios();
         Set set = Usuarios.entrySet();
@@ -434,6 +435,6 @@ public class ControladorUsuario implements IControladorUsuario {
                 }
             }
         }
-    return null;
+        return null;
     }
 }

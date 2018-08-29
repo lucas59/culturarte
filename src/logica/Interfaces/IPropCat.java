@@ -43,7 +43,7 @@ public interface IPropCat {
 
     public abstract DtinfoPropuesta SeleccionarPropuestaR(String titulo);
 
-    public abstract Map<String, DtinfoColaborador> ListarColaboradores(String titulo);
+    public abstract List<DtinfoColaborador> ListarColaboradores(String titulo);
 
     public abstract boolean agregarColaboracion(boolean Entrada, Float monto) throws Exception;
 
@@ -64,4 +64,6 @@ public interface IPropCat {
     public abstract void altaCategoria(String nombre, String padre) throws Exception;
 
     public abstract Map<String, Categoria> getCategorias();
+    
+    public abstract List<DtinfoPropuesta> ListarPropuestasDeProponenteX(String nick);
 }
