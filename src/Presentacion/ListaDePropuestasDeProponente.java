@@ -64,8 +64,8 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
         jComboBox.addItem("Canceladas");
         jComboBox.addItem("Publicadas");
         jComboBox.addItem("En financiacion");
-        jComboBox.addItem("Finalizadas");
-        jComboBox.addItem("No finalizadas");
+        jComboBox.addItem("Financiada");
+        jComboBox.addItem("No financiada");
     }
 
     /**
@@ -83,6 +83,7 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jComboBox = new javax.swing.JComboBox<>();
+        jButton2 = new javax.swing.JButton();
         jPanelColaboradores = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -143,16 +144,28 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton2.setText("Buscar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jButton1)
-                    .addComponent(jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jButton1)
+                            .addComponent(jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jButton2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -162,7 +175,9 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 294, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 260, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -279,7 +294,48 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jComboBoxActionPerformed
 
     private void jComboBoxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxMouseClicked
-        String seleccion = jComboBox.getSelectedItem().toString();
+//        String seleccion = jComboBox.getSelectedItem().toString();
+//        propuestas = this.ICP.ListarPropuestasDeProponenteX(nickProponente);
+//        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+//        if (seleccion == "Todas") {
+//            modelo.setRowCount(0);
+//            for (int i = 0; i < propuestas.size(); i++) {
+//                DtinfoPropuesta p = propuestas.get(i);
+//                Date f = (Date) p.getFechaReal().getTime();
+//                SimpleDateFormat fecha = new SimpleDateFormat("dd/MMM/yyyy");
+//                EstadoPropuesta estado = ICP.verEstadoPropuesta(p.getTitulo());
+//               Object[] dat = {p.getTitulo(), p.getTipoEspec(), estado.getEstado(), p.getMonto(), p.getLugar(), fecha.format(f)};
+//                modelo.addRow(dat);
+//            }
+//        } else {
+//            if (seleccion.equals("Canceladas")) {
+//                seleccion = "Cancelada";
+//            } else if (seleccion.equals("Publicadas")) {
+//                seleccion = "Publicada";
+//            } else if (seleccion.equals("En financiacion")) {
+//                seleccion = "enFinanciacion";
+//            } else if (seleccion.equals("Financiada")) {
+//                seleccion = "Fiananciada";
+//            } else if (seleccion.equals("No finalizada")) {
+//                seleccion = "noFinanciada";
+//            }
+//
+//            modelo.setRowCount(0);
+//            for (int x = 0; x < propuestas.size(); x++) {
+//                if (propuestas.get(x).getEstado().equals(seleccion)) {
+//                    DtinfoPropuesta p = propuestas.get(x);
+//                    Date f = (Date) p.getFechaReal().getTime();
+//                    SimpleDateFormat fecha = new SimpleDateFormat("dd/MMM/yyyy");
+//                    EstadoPropuesta estado = ICP.verEstadoPropuesta(p.getTitulo());
+//                    Object[] dat = {p.getTitulo(), p.getTipoEspec(), estado.getEstado(), p.getMonto(), p.getLugar(), fecha.format(f)};
+//                    modelo.addRow(dat);
+//                }
+//            }
+//        }
+    }//GEN-LAST:event_jComboBoxMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+         String seleccion = jComboBox.getSelectedItem().toString();
         propuestas = this.ICP.ListarPropuestasDeProponenteX(nickProponente);
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         if (seleccion == "Todas") {
@@ -294,20 +350,20 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
             }
         } else {
             if (seleccion.equals("Canceladas")) {
-                seleccion = "cancelada";
+                seleccion = "Cancelada";
             } else if (seleccion.equals("Publicadas")) {
                 seleccion = "Publicada";
             } else if (seleccion.equals("En financiacion")) {
                 seleccion = "enFinanciacion";
-            } else if (seleccion.equals("Finalizada")) {
-                seleccion = "finalizada";
+            } else if (seleccion.equals("Financiada")) {
+                seleccion = "Fiananciada";
             } else if (seleccion.equals("No finalizada")) {
-                seleccion = "noFinalizada";
+                seleccion = "noFinanciada";
             }
 
             modelo.setRowCount(0);
             for (int x = 0; x < propuestas.size(); x++) {
-                if (propuestas.get(x).getEstado().equals(seleccion)) {
+                if (seleccion.equals(propuestas.get(x).getEstado())) {
                     DtinfoPropuesta p = propuestas.get(x);
                     Date f = (Date) p.getFechaReal().getTime();
                     SimpleDateFormat fecha = new SimpleDateFormat("dd/MMM/yyyy");
@@ -317,11 +373,12 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
                 }
             }
         }
-    }//GEN-LAST:event_jComboBoxMouseClicked
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
