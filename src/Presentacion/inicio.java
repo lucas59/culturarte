@@ -18,7 +18,7 @@ import logica.Interfaces.IPropCat;
  * @author Lucas
  */
 public class inicio extends javax.swing.JFrame {
-    
+
     private IPropCat IPC;
     private IControladorUsuario ICU;
 
@@ -36,7 +36,7 @@ public class inicio extends javax.swing.JFrame {
         IPC.ComunicarControladores(ICU);
         ICU.CargarUsuarios();
         IPC.CargarPropuestas();
-        
+
         IPC.CargarColaboraciones();
     }
 
@@ -61,7 +61,6 @@ public class inicio extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
 
@@ -151,14 +150,6 @@ public class inicio extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem8);
 
-        jMenuItem10.setText("Consultar Colaboracion");
-        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem10ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem10);
-
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Otros");
@@ -190,11 +181,11 @@ public class inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        
+
         Fabrica fabrica = Fabrica.getInstance();
         IControladorUsuario ICU = fabrica.getIControladorUsuario();
         IPropCat IPC = fabrica.getControladorPropCat();
-        
+
         if (ICU.ListarColaboradores().isEmpty() && IPC.listarPropuestaC().isEmpty()) {
             JOptionPane.showMessageDialog(null, "No existen Colaboradores ni propuestas en el sistema");
         } else if (ICU.ListarColaboradores().isEmpty()) {
@@ -250,16 +241,23 @@ public class inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        Consultar_colaboracion CU = new Consultar_colaboracion();
-        Escritorio.add(CU);
-        CU.setVisible(true);
+        Fabrica fabrica = Fabrica.getInstance();
+        IControladorUsuario ICU = fabrica.getIControladorUsuario();
+        IPropCat IPC = fabrica.getControladorPropCat();
+        if (ICU.ListarColaboradores().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No existen Colaboradores en el sistema");
+        } else {
+            Consultar_colaboracion CU = new Consultar_colaboracion();
+            Escritorio.add(CU);
+            CU.setVisible(true);
+        }
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
         Fabrica fabrica = Fabrica.getInstance();
-        
+
         int respuesta = JOptionPane.showConfirmDialog(null, "Se borraran todos los datos de la base de datos\n Desea continuar?", "ADVERTENCIA", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-        
+
         if (respuesta == 0) {
             fabrica.cargarDatosdePrueba();
             JOptionPane.showMessageDialog(null, "Datos Cargados Exitosamente!!!");
@@ -270,18 +268,12 @@ public class inicio extends javax.swing.JFrame {
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
-        
+
         ConsultaPropuesta CP = new ConsultaPropuesta();
         Escritorio.add(CP);
         CP.setVisible(true);
-        
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
-    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-        Consultar_colaboracion form = new Consultar_colaboracion();
-        Escritorio.add(form);
-        form.setVisible(true);
-    }//GEN-LAST:event_jMenuItem10ActionPerformed
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -325,7 +317,6 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
