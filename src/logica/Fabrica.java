@@ -38,6 +38,11 @@ public class Fabrica {
         this.cargardatosColaboracion();
     }
     
+    public void limpiarBaseDeDatos(){
+        DBUsuario d = new DBUsuario();
+        d.limpiarBD();
+    }
+    
     private void cargarDatosPropuesta() {
         IPropCat ip = this.getControladorPropCat();
         //ip.CargarPropuestas();

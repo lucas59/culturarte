@@ -263,7 +263,7 @@ public class DBPropuesta {
 
     public boolean agregarEstadoPropuestaDatosdePrueba(EstadoPropuesta nuevoEst, String TituloP) {
         try {
-            PreparedStatement stat = conexion.prepareStatement("INSERT INTO estadopropuesta" + " (TituoloP, FechaInicio, FechaFinal, Estado) values (?,?,?,?,?)");
+            PreparedStatement stat = conexion.prepareStatement("INSERT INTO estadopropuesta" + " (TituloP, FechaInicio, FechaFinal, Estado) values (?,?,?,?)");
 
             java.util.Date dateR = (java.util.Date) nuevoEst.getfechaInicio().getTime();
             java.sql.Timestamp dateII = new java.sql.Timestamp(dateR.getTime());
@@ -271,7 +271,7 @@ public class DBPropuesta {
             stat.setString(1, TituloP);
             stat.setTimestamp(2, dateII);
             stat.setTimestamp(3, dateII);
-            stat.setString(4, nuevoEst.toString());
+            stat.setInt(4, nuevoEst.getEstado().ordinal());
             stat.executeUpdate();
             stat.close();
 
