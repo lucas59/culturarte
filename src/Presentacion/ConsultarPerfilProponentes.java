@@ -195,19 +195,19 @@ public class ConsultarPerfilProponentes extends javax.swing.JInternalFrame {
         jLabelFoto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel5.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jLabel5.setText("Correo ");
+        jLabel5.setText("Correo:");
 
         jLabel6.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jLabel6.setText("Fecha de Nacimiento");
+        jLabel6.setText("Fecha de Nacimiento:");
 
         jLabel7.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jLabel7.setText("Direccion");
+        jLabel7.setText("Direccion:");
 
         jLabel8.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jLabel8.setText("Sitio Web ");
+        jLabel8.setText("Sitio Web:");
 
         jLabel9.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jLabel9.setText("Biografia");
+        jLabel9.setText("Biografia:");
 
         jButton1.setText("Ver Propuestas");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -374,13 +374,15 @@ public class ConsultarPerfilProponentes extends javax.swing.JInternalFrame {
                 jLabelSitioWeb.setText(p.getSitioweb());
                 jTextAreaBiografia.setText(p.getBiografia());
                 jLabelDireccion.setText(p.getDireccion());
-                jLabelFecha.setText(p.getFechaN().getTime().toString());
+                Date fechaNaci = p.getFechaN().getTime();
+                SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy");                
+                jLabelFecha.setText(f.format(fechaNaci));
                 String imagen = p.getImagen();
-                
-                    ImageIcon fot = new ImageIcon(imagen);
-                    Icon icono = new ImageIcon(fot.getImage().getScaledInstance(jLabelFoto.getWidth(), jLabelFoto.getHeight(), Image.SCALE_DEFAULT));
-                    jLabelFoto.setIcon(icono);
-               
+
+                ImageIcon fot = new ImageIcon(imagen);
+                Icon icono = new ImageIcon(fot.getImage().getScaledInstance(jLabelFoto.getWidth(), jLabelFoto.getHeight(), Image.SCALE_DEFAULT));
+                jLabelFoto.setIcon(icono);
+
                 return;
             }
         }

@@ -36,7 +36,7 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
      */
     private String nickProponente;
     private IPropCat ICP;
-    private Map<String, DtinfoPropuesta> propuestas;
+    private List<DtinfoPropuesta> propuestas;
     private DtinfoPropuesta propSeleccionada;
 
     public ListaDePropuestasDeProponente(String proponente, String title) {
@@ -51,16 +51,15 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
         grupo.add(jRadioButtonNoFinalizadas);
         grupo.add(jRadioButtonPublicadas);
         this.nickProponente = proponente;
-        this.propuestas = new HashMap<String, DtinfoPropuesta>();
-        propuestas =null;// this.ICP.listarTodasPropuestas();
+        propuestas = this.ICP.ListarPropuestasDeProponenteX(nickProponente);
 
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.setRowCount(0);
         for (int i = 0; i < propuestas.size(); i++) {
             DtinfoPropuesta p = propuestas.get(i);
             Date f = (Date) p.getFechaReal().getTime();
-            String fecha = new SimpleDateFormat("dd/MMM/yyyy").format(f);
-            Object[] dat = {p.getTitulo(), p.getTipoEspec(), p.getEstado(), p.getMonto(), p.getLugar(), p.getFechaReal()};
+            SimpleDateFormat fecha = new SimpleDateFormat("dd/MMM/yyyy");
+            Object[] dat = {p.getTitulo(), p.getTipoEspec(), p.getEstado(), p.getMonto(), p.getLugar(), fecha.format(f)};
             modelo.addRow(dat);
         }
     }
@@ -84,7 +83,7 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
         jRadioButtonFinalizacion = new javax.swing.JRadioButton();
         jRadioButtonFinalizadas = new javax.swing.JRadioButton();
         jRadioButtonNoFinalizadas = new javax.swing.JRadioButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButtonTodas = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
         jPanelColaboradores = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -106,9 +105,16 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -161,11 +167,11 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
             }
         });
 
-        jRadioButton1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jRadioButton1.setText("Todas");
-        jRadioButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jRadioButtonTodas.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        jRadioButtonTodas.setText("Todas");
+        jRadioButtonTodas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jRadioButton1MouseClicked(evt);
+                jRadioButtonTodasMouseClicked(evt);
             }
         });
 
@@ -190,7 +196,7 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1)
                         .addComponent(jRadioButtonPublicadas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jRadioButtonNoFinalizadas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButtonTodas)
                     .addComponent(jButton1))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
@@ -200,7 +206,7 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
                 .addGap(23, 23, 23)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jRadioButton1)
+                .addComponent(jRadioButtonTodas)
                 .addGap(4, 4, 4)
                 .addComponent(jRadioButtonCanceladas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -367,7 +373,12 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jRadioButtonNoFinalizadasMouseClicked
 
-    private void jRadioButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton1MouseClicked
+    private void jRadioButtonTodasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButtonTodasMouseClicked
+        jRadioButtonCanceladas.setSelected(false);
+        jRadioButtonFinalizacion.setSelected(false);
+        jRadioButtonFinalizadas.setSelected(false);
+        jRadioButtonNoFinalizadas.setSelected(false);
+        jRadioButtonPublicadas.setSelected(false);
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.setRowCount(0);
         for (int i = 0; i < this.propuestas.size(); i++) {
@@ -377,14 +388,15 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
             Object[] dat = {dtP.getTitulo(), dtP.getTipoEspec(), dtP.getEstado(), dtP.getMonto(), dtP.getLugar(), dtP.getFechaReal()};
             modelo.addRow(dat);
         }
-    }//GEN-LAST:event_jRadioButton1MouseClicked
+    }//GEN-LAST:event_jRadioButtonTodasMouseClicked
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        jPanelColaboradores.setVisible(true);
         DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
         modelo.setRowCount(0);
         int seleccion = jTable1.rowAtPoint(evt.getPoint());
         String titulo = (String) jTable1.getValueAt(seleccion, 0);
-        Map<String, DtinfoColaborador> colaboradores;
+        List<DtinfoColaborador> colaboradores;
         colaboradores = ICP.ListarColaboradores(titulo);
         for (int i = 0; i < colaboradores.size(); i++) {
             DtinfoColaborador dtC = colaboradores.get(i);
@@ -408,12 +420,12 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelColaboradores;
-    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButtonCanceladas;
     private javax.swing.JRadioButton jRadioButtonFinalizacion;
     private javax.swing.JRadioButton jRadioButtonFinalizadas;
     private javax.swing.JRadioButton jRadioButtonNoFinalizadas;
     private javax.swing.JRadioButton jRadioButtonPublicadas;
+    private javax.swing.JRadioButton jRadioButtonTodas;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

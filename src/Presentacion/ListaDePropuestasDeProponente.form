@@ -66,12 +66,12 @@
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="6" rowCount="4">
-                <Column editable="true" title="Titulo" type="java.lang.String"/>
-                <Column editable="true" title="Categoria" type="java.lang.String"/>
-                <Column editable="true" title="Estado" type="java.lang.String"/>
-                <Column editable="true" title="Monto Total" type="java.lang.Float"/>
-                <Column editable="true" title="Lugar" type="java.lang.String"/>
-                <Column editable="true" title="Fecha Realizacion" type="java.lang.String"/>
+                <Column editable="false" title="Titulo" type="java.lang.String"/>
+                <Column editable="false" title="Categoria" type="java.lang.String"/>
+                <Column editable="false" title="Estado" type="java.lang.String"/>
+                <Column editable="false" title="Monto Total" type="java.lang.Float"/>
+                <Column editable="false" title="Lugar" type="java.lang.String"/>
+                <Column editable="false" title="Fecha Realizacion" type="java.lang.String"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -134,7 +134,7 @@
                           <Component id="jRadioButtonPublicadas" alignment="0" max="32767" attributes="0"/>
                           <Component id="jRadioButtonNoFinalizadas" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="jRadioButton1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jRadioButtonTodas" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jButton1" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="28" max="32767" attributes="0"/>
@@ -147,7 +147,7 @@
                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jRadioButton1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonTodas" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                   <Component id="jRadioButtonCanceladas" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -229,7 +229,7 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jRadioButtonNoFinalizadasMouseClicked"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="jRadioButton1">
+        <Component class="javax.swing.JRadioButton" name="jRadioButtonTodas">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Consolas" size="12" style="0"/>
@@ -237,7 +237,7 @@
             <Property name="text" type="java.lang.String" value="Todas"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jRadioButton1MouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jRadioButtonTodasMouseClicked"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton1">
