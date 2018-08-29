@@ -35,6 +35,7 @@ public class Fabrica {
 
     private Fabrica() {
         this.cargarDatosPropuesta();
+        this.cargardatosColaboracion();
     }
     
     private void cargarDatosPropuesta() {
@@ -42,6 +43,9 @@ public class Fabrica {
         //ip.CargarPropuestas();
     }
 
+    private void cargardatosColaboracion(){
+        IPropCat IP = this.getControladorPropCat();
+    }
     public IPropCat getControladorPropCat() {
         IPropCat ControladorPC = ControladorPropCat.getInstance();
         return ControladorPC;

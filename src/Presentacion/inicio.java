@@ -34,7 +34,7 @@ public class inicio extends javax.swing.JFrame {
         IPC = fabrica.getControladorPropCat();
         ICU.CargarUsuarios();
         IPC.CargarPropuestas();
-
+        IPC.CargarColaboraciones();
     }
 
     /**

@@ -65,8 +65,10 @@ public interface IPropCat {
     public abstract void altaCategoria(String nombre, String padre) throws Exception;
 
     public abstract Map<String, Categoria> getCategorias();
-    
+
     public abstract List<DtinfoPropuesta> ListarPropuestasDeProponenteX(String nick);
-    
+
     public abstract EstadoPropuesta verEstadoPropuesta(String titulo);
+
+    public abstract void CargarColaboraciones();
 }
