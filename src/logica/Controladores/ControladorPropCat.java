@@ -200,6 +200,12 @@ public class ControladorPropCat implements IPropCat {
         }
         return listPropuestas;
     }
+    
+    @Override
+     public EstadoPropuesta verEstadoPropuesta(String titulo){
+         EstadoPropuesta estActual=this.propuestas.get(titulo).getEstadoActual();
+         return estActual;  
+     }
 
     @Override
     public DtinfoPropuesta SeleccionarPropuestaR(String titulo) {
@@ -340,7 +346,8 @@ public class ControladorPropCat implements IPropCat {
     @Override
     public List<DtinfoColaborador> ListarColaboradores(String titulo) {
         List<DtinfoColaborador> retorno = new ArrayList<>();
-        List<Colaboracion> colaboraciones = this.propuestas.get(titulo).getColaboraciones();
+        Propuesta a = this.propuestas.get(titulo);
+        List<Colaboracion> colaboraciones = a.getColaboraciones();
         Iterator iter = colaboraciones.iterator();
         while (iter.hasNext()) {
             Map.Entry mentry = (Map.Entry) iter.next();

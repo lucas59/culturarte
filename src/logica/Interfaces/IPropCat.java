@@ -14,6 +14,7 @@ import logica.Clases.DtConsultaPropuesta;
 import logica.Clases.DtinfoColaborador;
 import logica.Clases.DtinfoPropuesta;
 import logica.Clases.DtNickTitProp;
+import logica.Clases.EstadoPropuesta;
 import logica.Clases.Proponente;
 import logica.Clases.Propuesta;
 import logica.Clases.TipoE;
@@ -66,4 +67,6 @@ public interface IPropCat {
     public abstract Map<String, Categoria> getCategorias();
     
     public abstract List<DtinfoPropuesta> ListarPropuestasDeProponenteX(String nick);
+    
+    public abstract EstadoPropuesta verEstadoPropuesta(String titulo);
 }

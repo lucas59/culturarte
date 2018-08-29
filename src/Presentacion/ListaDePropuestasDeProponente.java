@@ -11,11 +11,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.Clases.DtConsultaPropuesta;
 import logica.Clases.DtProponente;
 import logica.Clases.DtinfoColaborador;
 import logica.Clases.DtinfoPropuesta;
+import logica.Clases.EstadoPropuesta;
 import logica.Clases.Proponente;
 import logica.Clases.TipoRetorno;
 import logica.Clases.Usuario;
@@ -45,11 +47,6 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
         this.ICP = fab.getControladorPropCat();
         initComponents();
         jPanelColaboradores.setVisible(false);
-        grupo.add(jRadioButtonCanceladas);
-        grupo.add(jRadioButtonFinalizacion);
-        grupo.add(jRadioButtonFinalizadas);
-        grupo.add(jRadioButtonNoFinalizadas);
-        grupo.add(jRadioButtonPublicadas);
         this.nickProponente = proponente;
         propuestas = this.ICP.ListarPropuestasDeProponenteX(nickProponente);
 
@@ -59,9 +56,16 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
             DtinfoPropuesta p = propuestas.get(i);
             Date f = (Date) p.getFechaReal().getTime();
             SimpleDateFormat fecha = new SimpleDateFormat("dd/MMM/yyyy");
-            Object[] dat = {p.getTitulo(), p.getTipoEspec(), p.getEstado(), p.getMonto(), p.getLugar(), fecha.format(f)};
+            EstadoPropuesta estado = ICP.verEstadoPropuesta(p.getTitulo());
+            Object[] dat = {p.getTitulo(), p.getTipoEspec(), estado.getEstado(), p.getMonto(), p.getLugar(), fecha.format(f)};
             modelo.addRow(dat);
         }
+        jComboBox.addItem("Todas");
+        jComboBox.addItem("Canceladas");
+        jComboBox.addItem("Publicadas");
+        jComboBox.addItem("En financiacion");
+        jComboBox.addItem("Finalizadas");
+        jComboBox.addItem("No finalizadas");
     }
 
     /**
@@ -73,18 +77,12 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        grupo = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jRadioButtonCanceladas = new javax.swing.JRadioButton();
-        jRadioButtonPublicadas = new javax.swing.JRadioButton();
-        jRadioButtonFinalizacion = new javax.swing.JRadioButton();
-        jRadioButtonFinalizadas = new javax.swing.JRadioButton();
-        jRadioButtonNoFinalizadas = new javax.swing.JRadioButton();
-        jRadioButtonTodas = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
+        jComboBox = new javax.swing.JComboBox<>();
         jPanelColaboradores = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -127,58 +125,21 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jLabel1.setText("Estado de propuesta");
 
-        jRadioButtonCanceladas.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jRadioButtonCanceladas.setText("Canceladas");
-        jRadioButtonCanceladas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jRadioButtonCanceladasMouseClicked(evt);
-            }
-        });
-
-        jRadioButtonPublicadas.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jRadioButtonPublicadas.setText("Publicadas");
-        jRadioButtonPublicadas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jRadioButtonPublicadasMouseClicked(evt);
-            }
-        });
-
-        jRadioButtonFinalizacion.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jRadioButtonFinalizacion.setText("En financiacion");
-        jRadioButtonFinalizacion.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jRadioButtonFinalizacionMouseClicked(evt);
-            }
-        });
-
-        jRadioButtonFinalizadas.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jRadioButtonFinalizadas.setText("Finalizadas");
-        jRadioButtonFinalizadas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jRadioButtonFinalizadasMouseClicked(evt);
-            }
-        });
-
-        jRadioButtonNoFinalizadas.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jRadioButtonNoFinalizadas.setText("No finalizadas");
-        jRadioButtonNoFinalizadas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jRadioButtonNoFinalizadasMouseClicked(evt);
-            }
-        });
-
-        jRadioButtonTodas.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jRadioButtonTodas.setText("Todas");
-        jRadioButtonTodas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jRadioButtonTodasMouseClicked(evt);
-            }
-        });
-
         jButton1.setText("Salir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        jComboBox.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBoxMouseClicked(evt);
+            }
+        });
+        jComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxActionPerformed(evt);
             }
         });
 
@@ -189,16 +150,10 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jRadioButtonCanceladas)
-                        .addComponent(jRadioButtonFinalizacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jRadioButtonFinalizadas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addComponent(jRadioButtonPublicadas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jRadioButtonNoFinalizadas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jRadioButtonTodas)
-                    .addComponent(jButton1))
-                .addContainerGap(28, Short.MAX_VALUE))
+                    .addComponent(jLabel1)
+                    .addComponent(jButton1)
+                    .addComponent(jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,18 +161,8 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
                 .addGap(23, 23, 23)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jRadioButtonTodas)
-                .addGap(4, 4, 4)
-                .addComponent(jRadioButtonCanceladas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButtonPublicadas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButtonFinalizacion)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButtonFinalizadas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButtonNoFinalizadas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
+                .addComponent(jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 294, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -255,7 +200,7 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane2)
                     .addGroup(jPanelColaboradoresLayout.createSequentialGroup()
                         .addGap(659, 659, 659)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))
                     .addGroup(jPanelColaboradoresLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -296,108 +241,25 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanelColaboradores, javax.swing.GroupLayout.PREFERRED_SIZE, 192, Short.MAX_VALUE)))
+                        .addComponent(jPanelColaboradores, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButtonCanceladasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButtonCanceladasMouseClicked
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-        modelo.setRowCount(0);
-        for (int i = 0; i < this.propuestas.size(); i++) {
-            if (this.propuestas.get(i).getEstado().contains("Canceladas")) {
-                DtinfoPropuesta dtP = this.propuestas.get(i);
-                Date f = (Date) dtP.getFechaReal().getTime();
-                String fecha = new SimpleDateFormat("dd/MMM/yyyy").format(f);
-                Object[] dat = {dtP.getTitulo(), dtP.getTipoEspec(), dtP.getEstado(), dtP.getMonto(), dtP.getLugar(), dtP.getFechaReal()};
-                modelo.addRow(dat);
-            }
-        }
-    }//GEN-LAST:event_jRadioButtonCanceladasMouseClicked
-
-    private void jRadioButtonPublicadasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButtonPublicadasMouseClicked
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-        modelo.setRowCount(0);
-        for (int i = 0; i < this.propuestas.size(); i++) {
-            if (this.propuestas.get(i).getEstado().contains("Publicadas")) {
-                DtinfoPropuesta dtP = this.propuestas.get(i);
-                Date f = (Date) dtP.getFechaReal().getTime();
-                String fecha = new SimpleDateFormat("dd/MMM/yyyy").format(f);
-                Object[] dat = {dtP.getTitulo(), dtP.getTipoEspec(), dtP.getEstado(), dtP.getMonto(), dtP.getLugar(), dtP.getFechaReal()};
-                modelo.addRow(dat);
-            }
-        }
-    }//GEN-LAST:event_jRadioButtonPublicadasMouseClicked
-
-    private void jRadioButtonFinalizacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButtonFinalizacionMouseClicked
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-        modelo.setRowCount(0);
-        for (int i = 0; i < this.propuestas.size(); i++) {
-            if (this.propuestas.get(i).getEstado().contains("enFinalizacion")) {
-                DtinfoPropuesta dtP = this.propuestas.get(i);
-                Date f = (Date) dtP.getFechaReal().getTime();
-                String fecha = new SimpleDateFormat("dd/MMM/yyyy").format(f);
-                Object[] dat = {dtP.getTitulo(), dtP.getTipoEspec(), dtP.getEstado(), dtP.getMonto(), dtP.getLugar(), dtP.getFechaReal()};
-                modelo.addRow(dat);
-            }
-        }
-    }//GEN-LAST:event_jRadioButtonFinalizacionMouseClicked
-
-    private void jRadioButtonFinalizadasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButtonFinalizadasMouseClicked
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-        modelo.setRowCount(0);
-        for (int i = 0; i < this.propuestas.size(); i++) {
-            if (this.propuestas.get(i).getEstado().contains("finalizada")) {
-                DtinfoPropuesta dtP = this.propuestas.get(i);
-                Date f = (Date) dtP.getFechaReal().getTime();
-                String fecha = new SimpleDateFormat("dd/MMM/yyyy").format(f);
-                Object[] dat = {dtP.getTitulo(), dtP.getTipoEspec(), dtP.getEstado(), dtP.getMonto(), dtP.getLugar(), dtP.getFechaReal()};
-                modelo.addRow(dat);
-            }
-        }
-    }//GEN-LAST:event_jRadioButtonFinalizadasMouseClicked
-
-    private void jRadioButtonNoFinalizadasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButtonNoFinalizadasMouseClicked
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-        modelo.setRowCount(0);
-        for (int i = 0; i < this.propuestas.size(); i++) {
-            if (this.propuestas.get(i).getEstado().contains("noFinalizada")) {
-                DtinfoPropuesta dtP = this.propuestas.get(i);
-                Date f = (Date) dtP.getFechaReal().getTime();
-                String fecha = new SimpleDateFormat("dd/MMM/yyyy").format(f);
-                Object[] dat = {dtP.getTitulo(), dtP.getTipoEspec(), dtP.getEstado(), dtP.getMonto(), dtP.getLugar(), dtP.getFechaReal()};
-                modelo.addRow(dat);
-            }
-        }
-    }//GEN-LAST:event_jRadioButtonNoFinalizadasMouseClicked
-
-    private void jRadioButtonTodasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButtonTodasMouseClicked
-        jRadioButtonCanceladas.setSelected(false);
-        jRadioButtonFinalizacion.setSelected(false);
-        jRadioButtonFinalizadas.setSelected(false);
-        jRadioButtonNoFinalizadas.setSelected(false);
-        jRadioButtonPublicadas.setSelected(false);
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-        modelo.setRowCount(0);
-        for (int i = 0; i < this.propuestas.size(); i++) {
-            DtinfoPropuesta dtP = this.propuestas.get(i);
-            Date f = (Date) dtP.getFechaReal().getTime();
-            String fecha = new SimpleDateFormat("dd/MMM/yyyy").format(f);
-            Object[] dat = {dtP.getTitulo(), dtP.getTipoEspec(), dtP.getEstado(), dtP.getMonto(), dtP.getLugar(), dtP.getFechaReal()};
-            modelo.addRow(dat);
-        }
-    }//GEN-LAST:event_jRadioButtonTodasMouseClicked
-
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        jPanelColaboradores.setVisible(true);
         DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
         modelo.setRowCount(0);
         int seleccion = jTable1.rowAtPoint(evt.getPoint());
         String titulo = (String) jTable1.getValueAt(seleccion, 0);
         List<DtinfoColaborador> colaboradores;
         colaboradores = ICP.ListarColaboradores(titulo);
+        if (colaboradores.size() == 0) {
+            JOptionPane.showMessageDialog(null, "Esta propuesta no ontiene colaboradores");
+            return;
+        }
+        jPanelColaboradores.setVisible(true);
         for (int i = 0; i < colaboradores.size(); i++) {
             DtinfoColaborador dtC = colaboradores.get(i);
             Date f = (Date) dtC.getFechaN().getTime();
@@ -412,20 +274,59 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxActionPerformed
+
+    private void jComboBoxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxMouseClicked
+        String seleccion = jComboBox.getSelectedItem().toString();
+        propuestas = this.ICP.ListarPropuestasDeProponenteX(nickProponente);
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        if (seleccion == "Todas") {
+            modelo.setRowCount(0);
+            for (int i = 0; i < propuestas.size(); i++) {
+                DtinfoPropuesta p = propuestas.get(i);
+                Date f = (Date) p.getFechaReal().getTime();
+                SimpleDateFormat fecha = new SimpleDateFormat("dd/MMM/yyyy");
+                EstadoPropuesta estado = ICP.verEstadoPropuesta(p.getTitulo());
+                Object[] dat = {p.getTitulo(), p.getTipoEspec(), estado.getEstado(), p.getMonto(), p.getLugar(), fecha.format(f)};
+                modelo.addRow(dat);
+            }
+        } else {
+            if (seleccion.equals("Canceladas")) {
+                seleccion = "cancelada";
+            } else if (seleccion.equals("Publicadas")) {
+                seleccion = "Publicada";
+            } else if (seleccion.equals("En financiacion")) {
+                seleccion = "enFinanciacion";
+            } else if (seleccion.equals("Finalizada")) {
+                seleccion = "finalizada";
+            } else if (seleccion.equals("No finalizada")) {
+                seleccion = "noFinalizada";
+            }
+
+            modelo.setRowCount(0);
+            for (int x = 0; x < propuestas.size(); x++) {
+                if (propuestas.get(x).getEstado().equals(seleccion)) {
+                    DtinfoPropuesta p = propuestas.get(x);
+                    Date f = (Date) p.getFechaReal().getTime();
+                    SimpleDateFormat fecha = new SimpleDateFormat("dd/MMM/yyyy");
+                    EstadoPropuesta estado = ICP.verEstadoPropuesta(p.getTitulo());
+                    Object[] dat = {p.getTitulo(), p.getTipoEspec(), estado.getEstado(), p.getMonto(), p.getLugar(), fecha.format(f)};
+                    modelo.addRow(dat);
+                }
+            }
+        }
+    }//GEN-LAST:event_jComboBoxMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup grupo;
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelColaboradores;
-    private javax.swing.JRadioButton jRadioButtonCanceladas;
-    private javax.swing.JRadioButton jRadioButtonFinalizacion;
-    private javax.swing.JRadioButton jRadioButtonFinalizadas;
-    private javax.swing.JRadioButton jRadioButtonNoFinalizadas;
-    private javax.swing.JRadioButton jRadioButtonPublicadas;
-    private javax.swing.JRadioButton jRadioButtonTodas;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
