@@ -170,10 +170,11 @@ public class DBColaboracion {
                         ((Propuesta) mentry.getValue()).setColaboraciones(colaboracion);
                     }
                 }
-                stat.close();
+                
+            }
+            stat.close();
                 rs.close();
                 conexion.close();
-            }
         } catch (SQLException ex) {
             ex.printStackTrace();
             
