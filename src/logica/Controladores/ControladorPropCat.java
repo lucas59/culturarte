@@ -267,7 +267,7 @@ public class ControladorPropCat implements IPropCat {
 
     @Override
     public List<DtinfoPropuesta> DarPropuestasCol(Colaborador c) {
-        List<DtinfoPropuesta> resultado = null;
+        List<DtinfoPropuesta> resultado = new ArrayList<DtinfoPropuesta>();
         Iterator it = c.getColaboraciones().iterator();
         while (it.hasNext()) {
             Colaboracion col = (Colaboracion) it.next();

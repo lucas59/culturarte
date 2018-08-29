@@ -188,18 +188,18 @@ public class ConsultarPerfilColaborador extends javax.swing.JInternalFrame {
         int anio = c.get(Calendar.YEAR);
         DatosColaborador.setText("NickName: " + dtc.getNickname() + "\n" + "Nombre: " + dtc.getNombre() + "\n" + "Apellido: " + dtc.getApellido() + "\n" + "Correo: " + dtc.getCorreo() + "\n" + "Fecha de nacimiento: " + dia + "/" + mes + "/" + anio + "\n");
         List<DtinfoPropuesta> dtp = ICU.verPropuestas(dtc);
-        if (dtp == null) {
+        if (dtp == null || dtp.size() == 0) {
             Colaboraciones.setText("No posee colaboraciones");
             return;
         }
         Iterator it = dtp.iterator();
         while (it.hasNext()) {
-            Map.Entry mentry = (Map.Entry) it.next();
-            DtinfoPropuesta dtp2 = (DtinfoPropuesta) mentry.getValue();
+           // Map.Entry mentry = (Map.Entry) it.next();
+            DtinfoPropuesta dtp2 = (DtinfoPropuesta) it.next();
             dia = c.get(Calendar.DAY_OF_MONTH);
             mes = c.get(Calendar.MONTH) + 1;
             anio = c.get(Calendar.YEAR);
-            Colaboraciones.setText("Titulo: " + dtp2.getTitulo() + "\n" + "Categoria: " + dtp2.getTipoEspec() + "\n" + "Fecha de publicacion: " + dia + "/" + mes + "/" + anio + "\n" + "Precio: " + dtp2.getPrecio() + "\n" + "\n");
+            Colaboraciones.setText("Titulo: " + dtp2.getTitulo() + "\n" + "Categoria: " + dtp2.getTipoEspec() + "\n" + "Fecha de publicacion: " + dia + "/" + mes + "/" + anio + "\n" + "Monto: " + dtp2.getMonto() + "\n" +"Precio de entrada: "+dtp2.getPrecio()+"\n");
         }
 
 
