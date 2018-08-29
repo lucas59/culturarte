@@ -366,7 +366,7 @@ public class AltaPropuesta2 extends javax.swing.JInternalFrame {
                 boolean ok = ICP.crearPropuesta(tituloP, descripcion, lugar, imagen, fechaR, montoE, montoTot, tipoR);
                 
                 if (ok) {
-                    javax.swing.JOptionPane.showMessageDialog(null, "La propuesta a sido creada con Exito");
+                    javax.swing.JOptionPane.showMessageDialog(null, "La propuesta ha sido creada con Exito");
                     this.LimpiarComponentes();
                 } else {
                     javax.swing.JOptionPane.showMessageDialog(null, "La propuesta no pudo ser cargada ");

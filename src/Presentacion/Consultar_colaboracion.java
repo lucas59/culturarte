@@ -39,12 +39,14 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
     /**
      * Creates new form Consultar_colaboracion
      */
+    
+    String nickname = null;
     public Consultar_colaboracion() {
         initComponents();
         this.setTitle("Consultar colaboraciones del colaborador");
         jTable1.addMouseListener(new MouseAdapter() {
         });
-        jTable2.addMouseListener(new MouseAdapter() {
+        Tabla_propuesta.addMouseListener(new MouseAdapter() {
         });
     }
 
@@ -63,7 +65,7 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        Tabla_propuesta = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -131,8 +133,8 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
         }
 
-        jTable2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(251, 0, 125)));
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        Tabla_propuesta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(251, 0, 125)));
+        Tabla_propuesta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -143,24 +145,27 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
                 "Titulo de la propuesta", "Nombre del colaborador"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+        Tabla_propuesta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable2MouseClicked(evt);
+                Tabla_propuestaMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setResizable(false);
-            jTable2.getColumnModel().getColumn(1).setResizable(false);
-        }
+        jScrollPane2.setViewportView(Tabla_propuesta);
 
         jButton2.setText("Salir");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -388,8 +393,9 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
         Fabrica fabrica = Fabrica.getInstance();
         IControladorUsuario ICU = fabrica.getIControladorUsuario();
         List<Colaboracion> colaboraciones = ICU.ListarColaboraciones(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
+        this.nickname = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
         if (!colaboraciones.isEmpty()) {
-            DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
+            DefaultTableModel modelo = (DefaultTableModel) Tabla_propuesta.getModel();
             modelo.setRowCount(0);
             for (int indice = 0; indice < colaboraciones.size(); indice++) {
                 Object[] dat = {colaboraciones.get(indice).getTituloP(), colaboraciones.get(indice).getColaborador().getNickname()};
@@ -399,32 +405,6 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "El colaborador no tiene colaboraciones");
         }
     }//GEN-LAST:event_jTable1MouseClicked
-
-    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
-        Fabrica fabrica = Fabrica.getInstance();
-        IControladorUsuario ICU = fabrica.getIControladorUsuario();
-        List<Colaboracion> colaboraciones = ICU.ListarColaboraciones(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
-        if (!colaboraciones.isEmpty()) {
-            DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
-            modelo.setRowCount(0);
-            for (int indice = 0; indice < colaboraciones.size(); indice++) {
-                String OK = ((String) jTable2.getValueAt(jTable2.getSelectedRow(), 0));
-                if (colaboraciones.get(indice).getPropuesta().getTituloP().compareTo((String) jTable2.getValueAt(jTable2.getSelectedRow(), 0)) == 0) {
-                    DtColaboraciones ColaboracionesM = new DtColaboraciones(colaboraciones.get(indice).getNickName(), colaboraciones.get(indice).getMontoC(), colaboraciones.get(indice).getFechaRealiz(), colaboraciones.get(indice).getEntradas(), colaboraciones.get(indice).getTituloP());
-                    jTextField2.setText(ColaboracionesM.getPropuesta());
-                    if (ColaboracionesM.getEntradas() == true) {
-                        jTextField3.setText("Entradas");
-                    } else {
-                        jTextField4.setText("Por Ganancias");
-                    }
-                    jTextField4.setText(String.valueOf(ColaboracionesM.getMontoC()));
-                    jTextField5.setText(String.valueOf(ColaboracionesM.getFechaRealiz()));
-                    jTextField5.setText(String.valueOf(ColaboracionesM.getFechaRealiz().getTime()));
-                    break;
-                }
-            }
-        }
-    }//GEN-LAST:event_jTable2MouseClicked
 
     private void jTextField7KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField7KeyReleased
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
@@ -452,7 +432,7 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextField7KeyReleased
 
     private void jTextField8KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField8KeyReleased
-        DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) Tabla_propuesta.getModel();
         modelo.setRowCount(0);
         for (int i = 0; i < jTable1.getRowCount(); i++) {
             modelo.removeRow(i);
@@ -474,11 +454,38 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
             }
         } else {
             JOptionPane.showMessageDialog(null, "El colaborador no tiene colaboraciones");
-        }    
+        }
     }//GEN-LAST:event_jTextField8KeyReleased
+
+    private void Tabla_propuestaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla_propuestaMouseClicked
+        Fabrica fabrica = Fabrica.getInstance();
+        IControladorUsuario ICU = fabrica.getIControladorUsuario();
+        List<Colaboracion> colaboraciones = ICU.ListarColaboraciones(this.nickname);
+        if (!colaboraciones.isEmpty()) {
+            DefaultTableModel modelo = (DefaultTableModel) Tabla_propuesta.getModel();
+            modelo.setRowCount(0);
+            for (int indice = 0; indice < colaboraciones.size(); indice++) {
+                if (colaboraciones.get(indice).getPropuesta().getTituloP().compareTo((String) Tabla_propuesta.getValueAt(Tabla_propuesta.getSelectedRow(), 0)) == 0) {
+                    DtColaboraciones ColaboracionesM = new DtColaboraciones(colaboraciones.get(indice).getNickName(), colaboraciones.get(indice).getMontoC(), colaboraciones.get(indice).getFechaRealiz(), colaboraciones.get(indice).getEntradas(), colaboraciones.get(indice).getTituloP());
+                    jTextField2.setText(ColaboracionesM.getPropuesta());
+                    if (ColaboracionesM.getEntradas() == true) {
+                        jTextField3.setText("Entradas");
+                    } else {
+                        jTextField4.setText("Por Ganancias");
+                    }
+                    jTextField4.setText(String.valueOf(ColaboracionesM.getMontoC()));
+                    jTextField5.setText(String.valueOf(ColaboracionesM.getFechaRealiz()));
+                    jTextField5.setText(String.valueOf(ColaboracionesM.getFechaRealiz().getTime()));
+                    break;
+                }
+                }
+            
+        }
+    }//GEN-LAST:event_Tabla_propuestaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable Tabla_propuesta;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -493,7 +500,6 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;

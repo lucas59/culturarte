@@ -17,6 +17,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import logica.Clases.Colaborador;
 import logica.Clases.DtinfoColaborador;
 import logica.Clases.DtinfoPropuesta;
 import logica.Clases.DtNickTitProp;
@@ -637,29 +638,29 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
     private void jTextField14KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField14KeyReleased
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.setRowCount(0);
-        if (this.jTextField14.getText().isEmpty()) {
-            for (int i = 0; i < jTable1.getRowCount(); i++) {
-                modelo.removeRow(i);
-                i -= 1;
-            }
-        } else {
-            Fabrica fabrica = Fabrica.getInstance();
-            IPropCat IPC = fabrica.getControladorPropCat();
-            String usu = this.jTextField14.getText();
-            Map<String, Propuesta> Propuestas = IPC.getpropuesta();
-            Set set = Propuestas.entrySet();
-            Iterator iterator = set.iterator();
-            jTable1.clearSelection();
-            while (iterator.hasNext()) {
-                Map.Entry mentry = (Map.Entry) iterator.next();
-                Propuesta aux = (Propuesta) mentry.getValue();
-                if (aux.getTituloP().contains(jTextField14.getText())) {
-                    Object[] dat = {aux.getTituloP()};
-                    modelo.addRow(dat);
-                }
-            }
-            this.jTable1.setModel(modelo);
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+            modelo.removeRow(i);
+            i -= 1;
         }
+        Fabrica fabrica = Fabrica.getInstance();
+        IPropCat IPC = fabrica.getControladorPropCat();
+        String usu = this.jTextField14.getText();
+        Map<String, Propuesta> Propuestas = IPC.getpropuesta();
+        Set set = Propuestas.entrySet();
+        Iterator iterator = set.iterator();
+        jTable1.clearSelection();
+        while (iterator.hasNext()) {
+            Map.Entry mentry = (Map.Entry) iterator.next();
+            Propuesta aux = (Propuesta) mentry.getValue();
+            if ((!jTextField14.getText().isEmpty()) && aux.getTituloP().contains(jTextField14.getText())) {
+                Object[] dat = {aux.getTituloP()};
+                modelo.addRow(dat);
+            } else if (jTextField14.getText().isEmpty()) {
+                Object[] dat = {aux.getTituloP()};
+                modelo.addRow(dat);
+            }
+        }
+        this.jTable1.setModel(modelo);
 
     }//GEN-LAST:event_jTextField14KeyReleased
 
@@ -679,14 +680,15 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
         jTable2.clearSelection();
         while (iterator.hasNext()) {
             Map.Entry mentry = (Map.Entry) iterator.next();
+            if(mentry.getValue() instanceof Colaborador){
             Usuario aux = (Usuario) mentry.getValue();
             if (!jTextField15.getText().isEmpty() && aux.getNickname().contains(jTextField15.getText())) {
                 Object[] dat = {aux.getNickname(), aux.getNombre()};
                 modelo.addRow(dat);
-            }
-            else if(jTextField15.getText().isEmpty()){
+            } else if (jTextField15.getText().isEmpty()) {
                 Object[] dat = {aux.getNickname(), aux.getNombre()};
                 modelo.addRow(dat);
+            }
             }
         }
         this.jTable2.setModel(modelo);
@@ -726,7 +728,7 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
 
-          Fabrica fabrica = Fabrica.getInstance();
+        Fabrica fabrica = Fabrica.getInstance();
         IPropCat controladorPC = fabrica.getControladorPropCat();
         Map<String, Propuesta> propuestas = controladorPC.getpropuesta();
         Set set = propuestas.entrySet();
