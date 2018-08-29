@@ -46,6 +46,7 @@ public class ControladorPropCat implements IPropCat {
     private static ControladorPropCat instancia;
     private Map<String, Propuesta> propuestas;
     private Map<String, Categoria> categorias;
+    private IControladorUsuario ICU;
     private DBPropuesta dbPropuesta = null;
     private Categoria catRecordada;
     private Proponente uProponente;
@@ -65,6 +66,9 @@ public class ControladorPropCat implements IPropCat {
         Categoria cat = new Categoria("Categoria");
         this.categorias.put("Categoria", cat);
         this.dbPropuesta.agregarCategoria("Categoria", null);
+    }
+    public void ComunicarControladores(IControladorUsuario icu){
+        this.ICU=icu;
     }
 
     @Override
@@ -263,12 +267,11 @@ public class ControladorPropCat implements IPropCat {
     }
 
     @Override
-    public Map<String, DtinfoPropuesta> DarPropuestasCol(Colaborador c) {
-        Map<String, DtinfoPropuesta> resultado = null;
+    public List<DtinfoPropuesta> DarPropuestasCol(Colaborador c) {
+        List<DtinfoPropuesta> resultado = null;
         Iterator it = c.getColaboraciones().iterator();
         while (it.hasNext()) {
-            Map.Entry mentry = (Map.Entry) it.next();
-            Colaboracion col = (Colaboracion) mentry.getValue();
+            Colaboracion col = (Colaboracion) it.next();
             Set set = this.propuestas.entrySet();
             Iterator it2 = set.iterator();
             while (it2.hasNext()) {
@@ -276,7 +279,7 @@ public class ControladorPropCat implements IPropCat {
                 Propuesta prop = (Propuesta) mentry2.getValue();
                 if (prop.getTituloP().equals(col.getTituloP())) {
                     DtinfoPropuesta dtp = new DtinfoPropuesta(prop);
-                    resultado.put(dtp.getTitulo(), dtp);
+                    resultado.add(dtp);
                     break;
                 }
             }

@@ -46,7 +46,7 @@ public interface IControladorUsuario {
 
     public abstract ArrayList<DtinfoColaborador> BuscarColaborador(String nick);
 
-    public abstract Map<String, DtinfoPropuesta> verPropuestas(DtinfoColaborador dtc);
+    public abstract List<DtinfoPropuesta> verPropuestas(DtinfoColaborador dtc);
 
     public abstract DtinfoColaborador verPerfil(String nombre);
 
