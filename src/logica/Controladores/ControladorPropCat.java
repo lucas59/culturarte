@@ -354,8 +354,7 @@ public class ControladorPropCat implements IPropCat {
         List<Colaboracion> colaboraciones = a.getColaboraciones();
         Iterator iter = colaboraciones.iterator();
         while (iter.hasNext()) {
-            Map.Entry mentry = (Map.Entry) iter.next();
-            Colaboracion colaboracion = (Colaboracion) mentry.getValue();
+            Colaboracion colaboracion = (Colaboracion) iter.next();
             Colaborador colaborador = colaboracion.getColaborador();
             DtinfoColaborador dtCol = new DtinfoColaborador(colaborador);
             retorno.add(dtCol);

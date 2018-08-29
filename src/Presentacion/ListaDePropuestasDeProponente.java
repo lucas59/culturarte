@@ -253,10 +253,10 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
         modelo.setRowCount(0);
         int seleccion = jTable1.rowAtPoint(evt.getPoint());
         String titulo = (String) jTable1.getValueAt(seleccion, 0);
-        List<DtinfoColaborador> colaboradores;
+        List<DtinfoColaborador> colaboradores=new ArrayList<>();
         colaboradores = ICP.ListarColaboradores(titulo);
         if (colaboradores.size() == 0) {
-            JOptionPane.showMessageDialog(null, "Esta propuesta no ontiene colaboradores");
+            JOptionPane.showMessageDialog(null, "Esta propuesta no obtiene colaboradores");
             return;
         }
         jPanelColaboradores.setVisible(true);
@@ -289,7 +289,7 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
                 Date f = (Date) p.getFechaReal().getTime();
                 SimpleDateFormat fecha = new SimpleDateFormat("dd/MMM/yyyy");
                 EstadoPropuesta estado = ICP.verEstadoPropuesta(p.getTitulo());
-                Object[] dat = {p.getTitulo(), p.getTipoEspec(), estado.getEstado(), p.getMonto(), p.getLugar(), fecha.format(f)};
+               Object[] dat = {p.getTitulo(), p.getTipoEspec(), estado.getEstado(), p.getMonto(), p.getLugar(), fecha.format(f)};
                 modelo.addRow(dat);
             }
         } else {

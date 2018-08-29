@@ -263,7 +263,6 @@ public class ControladorUsuario implements IControladorUsuario {
         ArrayList<DtProponente> retorno = new ArrayList();
         while (iterator.hasNext()) {
             Map.Entry mentry = (Map.Entry) iterator.next();
-
             if (mentry.getValue() instanceof Proponente) {
                 Proponente aux = (Proponente) mentry.getValue();
                 DtProponente aux2 = new DtProponente(aux.getBiografia(), aux.getDireccion(), aux.getSitioweb(), aux.getNickname(), aux.getNombre(), aux.getApellido(), aux.getCorreo(), aux.getFechaN(), aux.getImagen());
