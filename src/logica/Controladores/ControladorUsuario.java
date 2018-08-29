@@ -256,18 +256,20 @@ public class ControladorUsuario implements IControladorUsuario {
 
     @Override
     public ArrayList<DtProponente> ListarProponentes() {
-        List<DtProponente> lista = new ArrayList<>();
-        Set set = this.Usuarios.entrySet();
+        ControladorUsuario CU = new ControladorUsuario();
+        Set set = Usuarios.entrySet();
         Iterator iterator = set.iterator();
+        ArrayList<DtProponente> retorno = new ArrayList();
         while (iterator.hasNext()) {
             Map.Entry mentry = (Map.Entry) iterator.next();
-            Proponente aux = (Proponente) mentry.getValue();
-            DtProponente dtProp = new DtProponente(aux.getBiografia(), aux.getDireccion(), aux.getsitioweb(), aux.getNickname(), aux.getNombre(), aux.getApellido(), aux.getCorreo(), aux.getFechaN(), aux.getImagen());
-            if (aux != null) {
-                lista.add(dtProp);
+
+            if (mentry.getValue() instanceof Proponente) {
+                Proponente aux = (Proponente) mentry.getValue();
+                DtProponente aux2 = new DtProponente(aux.getBiografia(),aux.getDireccion(), aux.getSitioweb(),aux.getNickname(), aux.getNombre(),aux.getApellido(), aux.getCorreo(), aux.getFechaN(), aux.getImagen());
+                retorno.add(aux2);
             }
         }
-        return (ArrayList<DtProponente>) lista;
+        return retorno;
     }
 
     @Override
