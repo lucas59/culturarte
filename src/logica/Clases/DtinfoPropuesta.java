@@ -45,6 +45,7 @@ public class DtinfoPropuesta {
         this.Monto = p.getMontoTot();
         this.TipoEspec = p.getCategoria().getNombreC();
         this.imagen = p.getImagen();
+        this.Precio=p.getMontoE();
     }
 
     public String getTitulo() {

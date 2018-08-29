@@ -314,8 +314,8 @@ public class ControladorUsuario implements IControladorUsuario {
     }
 
     @Override
-    public Map<String, DtinfoPropuesta> verPropuestas(DtinfoColaborador dtc) {
-        Map<String, DtinfoPropuesta> dtpropuestas = null;
+    public List<DtinfoPropuesta> verPropuestas(DtinfoColaborador dtc) {
+        List<DtinfoPropuesta> dtpropuestas = null;
         Set set = this.Usuarios.entrySet();
         Iterator it = set.iterator();
         while (it.hasNext()) {

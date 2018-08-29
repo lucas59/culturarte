@@ -32,7 +32,7 @@ public interface IPropCat {
 
     public abstract Map<String, Propuesta> getpropuesta();
 
-    public abstract Map<String, DtinfoPropuesta> DarPropuestasCol(Colaborador c);
+    public abstract List<DtinfoPropuesta> DarPropuestasCol(Colaborador c);
 
     public abstract boolean seleccionarUC(String nombreP, String tipoEsp) throws Exception;
 
@@ -69,6 +69,8 @@ public interface IPropCat {
     public abstract List<DtinfoPropuesta> ListarPropuestasDeProponenteX(String nick);
 
     public abstract EstadoPropuesta verEstadoPropuesta(String titulo);
+    
+    public void ComunicarControladores(IControladorUsuario icu);
 
     public abstract void CargarColaboraciones();
 }
