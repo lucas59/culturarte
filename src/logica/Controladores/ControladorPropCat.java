@@ -51,7 +51,6 @@ public class ControladorPropCat implements IPropCat {
     private Categoria catRecordada;
     private Proponente uProponente;
     private Propuesta Propuesta;
-
     public static ControladorPropCat getInstance() {
         if (instancia == null) {
             instancia = new ControladorPropCat();
@@ -222,7 +221,7 @@ public class ControladorPropCat implements IPropCat {
             Propuesta aux = (Propuesta) mentry.getValue();
             if (aux.getTituloP().compareTo(titulo) == 0) {
                 retorno = new DtinfoPropuesta(aux.getTituloP(), aux.getDescripcionP(), aux.getImagen(), aux.getCategoria().getNombreC(), aux.getLugar(), aux.getFecha(), aux.getMontoE(), aux.getMontoTot(), aux.getRetorno());
-                this.Propuesta = new Propuesta(aux.getTituloP(), aux.getDescripcionP(), aux.getImagen(), aux.getLugar(), aux.getFecha(), aux.getMontoE(), aux.getMontoTot(), aux.getEstadoActual(), aux.getCategoria(), aux.getRetorno(), aux.getAutor());
+                this.Propuesta = aux;
             }
         }
         return retorno;
@@ -301,6 +300,11 @@ public class ControladorPropCat implements IPropCat {
             this.dbPropuesta.cargarEstadoPropuesta(aux);
         }
 
+    }
+    
+    public void CargarColaboraciones(){
+        DBColaboracion DBC = new DBColaboracion();
+        DBC.CargarColaboraciones();
     }
 
     @Override

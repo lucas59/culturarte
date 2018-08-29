@@ -157,6 +157,10 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane2.setViewportView(jTable2);
+        if (jTable2.getColumnModel().getColumnCount() > 0) {
+            jTable2.getColumnModel().getColumn(0).setResizable(false);
+            jTable2.getColumnModel().getColumn(1).setResizable(false);
+        }
 
         jButton2.setText("Salir");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -404,7 +408,8 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
             DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
             modelo.setRowCount(0);
             for (int indice = 0; indice < colaboraciones.size(); indice++) {
-                if (colaboraciones.get(indice).getTituloP().compareTo(jTable2.getValueAt(jTable2.getSelectedRow(), 0).toString()) == 0) {
+                String OK = ((String) jTable2.getValueAt(jTable2.getSelectedRow(), 0));
+                if (colaboraciones.get(indice).getPropuesta().getTituloP().compareTo((String) jTable2.getValueAt(jTable2.getSelectedRow(), 0)) == 0) {
                     DtColaboraciones ColaboracionesM = new DtColaboraciones(colaboraciones.get(indice).getNickName(), colaboraciones.get(indice).getMontoC(), colaboraciones.get(indice).getFechaRealiz(), colaboraciones.get(indice).getEntradas(), colaboraciones.get(indice).getTituloP());
                     jTextField2.setText(ColaboracionesM.getPropuesta());
                     if (ColaboracionesM.getEntradas() == true) {
