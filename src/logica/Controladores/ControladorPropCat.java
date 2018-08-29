@@ -60,9 +60,9 @@ public class ControladorPropCat implements IPropCat {
         this.dbPropuesta = new DBPropuesta();
         this.categorias = new HashMap<>();
         this.propuestas = new HashMap<>();
-        //Categoria cat = new Categoria("Categoria");
-        //this.categorias.put("Categoria", cat);
-        //this.dbPropuesta.agregarCategoria("Categoria", null);
+        Categoria cat = new Categoria("Categoria");
+        this.categorias.put("Categoria", cat);
+        this.dbPropuesta.agregarCategoria("Categoria", null);
     }
     
     @Override
@@ -280,16 +280,14 @@ public class ControladorPropCat implements IPropCat {
     public boolean agregarColaboracion(boolean Entrada, Float monto) throws Exception {
         Fabrica fabrica = Fabrica.getInstance();
         IControladorUsuario ICU = fabrica.getIControladorUsuario();
-        IPropCat IPC = fabrica.getControladorPropCat();
         Calendar calendario = new GregorianCalendar();
         java.util.Date utilDate = new java.util.Date();
         utilDate = calendario.getTime();
         java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-        
         List<Colaboracion> colaboraciones = this.getPropuesta().getColaboraciones();
         float TotalColaboracion = 0;
         for (int indice = 0; indice < colaboraciones.size(); indice++) {
-            if (colaboraciones.get(indice).getPropuesta().getTituloP() == this.getPropuesta().getTituloP()) {
+            if (colaboraciones.get(indice).getPropuesta().getTituloP().compareTo(this.getPropuesta().getTituloP()) == 0) {
                 throw new Exception("No puede colaborar en una propuesta mas de una vez");
             } else {
                 TotalColaboracion = TotalColaboracion + colaboraciones.get(indice).getMontoC();
@@ -298,7 +296,7 @@ public class ControladorPropCat implements IPropCat {
         if ((TotalColaboracion + monto) <= this.getPropuesta().getMontoTot()) {
             Colaboracion colaboracion = new Colaboracion(ICU.getColaborador(), monto, calendario, Entrada, this.getPropuesta());
             ICU.getColaborador().setColaboraciones(colaboracion);
-            IPC.getPropuesta().setColaboraciones(colaboracion);
+            this.getPropuesta().setColaboraciones(colaboracion);
             if (TotalColaboracion < this.getPropuesta().getMontoTot()) {
                 EstadoPropuesta EstadoP = new EstadoPropuesta(TipoE.enFinanciacion, calendario);
                 this.getPropuesta().setEstadoActual(EstadoP);

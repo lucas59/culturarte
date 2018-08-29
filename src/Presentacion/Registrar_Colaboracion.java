@@ -6,6 +6,7 @@
 package Presentacion;
 
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
@@ -35,6 +36,10 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
     public Registrar_Colaboracion() {
         initComponents();
         this.setTitle("Registrar colaboración");
+        jTable1.addMouseListener(new MouseAdapter() {
+        });
+        jTable2.addMouseListener(new MouseAdapter() {
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -458,6 +463,11 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane6.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -490,11 +500,8 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(90, 90, 90)
                                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jButton1)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(jButton1)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 28, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(169, 169, 169)
@@ -699,7 +706,7 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
         while (iterator.hasNext()) {
             Map.Entry mentry = (Map.Entry) iterator.next();
             Usuario aux = (Usuario) mentry.getValue();
-            if (aux.getNickname().contains((String) jTable2.getValueAt(jTable2.getSelectedRow(), 0))) {
+            if (aux.getNickname().compareTo((String) jTable2.getValueAt(jTable2.getSelectedRow(), 0)) == 0) {
                 DtinfoCol = new DtinfoColaborador(aux.getNickname(), aux.getNombre(), aux.getApellido(), aux.getCorreo(), aux.getFechaN());
                 controladorU.SeleccionarColaborador(aux.getNickname());
                 break;
@@ -716,6 +723,55 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
         jTextField13.setText(sf.format(DtinfoCol.getFechaN().getTime()));
 
     }//GEN-LAST:event_jTable2MouseClicked
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+
+          Fabrica fabrica = Fabrica.getInstance();
+        IPropCat controladorPC = fabrica.getControladorPropCat();
+        Map<String, Propuesta> propuestas = controladorPC.getpropuesta();
+        Set set = propuestas.entrySet();
+        Iterator iterator = set.iterator();
+        iterator = set.iterator();
+        DtinfoPropuesta Dtinfop = null;
+        while (iterator.hasNext()) {
+            Map.Entry mentry = (Map.Entry) iterator.next();
+            Propuesta aux = (Propuesta) mentry.getValue();
+            boolean tituloOK = aux.getTituloP().compareTo((String) jTable1.getValueAt(jTable1.getSelectedRow(), 0)) == 0;
+            if (tituloOK) {
+                Dtinfop = controladorPC.SeleccionarPropuestaR(aux.getTituloP());
+                break;
+            }
+        }
+        if (Dtinfop.getTipoRetorno().compareTo(TipoRetorno.Entradas) == 0) {
+            jComboBox2.removeAllItems();
+            jComboBox2.addItem("Entradas");
+        } else if (Dtinfop.getTipoRetorno().compareTo(TipoRetorno.porGanancias) == 0) {
+            jComboBox2.removeAllItems();
+            jComboBox2.addItem("Por Ganancias");
+        } else {
+            jComboBox2.removeAllItems();
+            jComboBox2.addItem("Entradas");
+            jComboBox2.addItem("Por Ganancias");
+        }
+        String dir = System.getProperty("user.dir");
+        String dir2 = dir.concat(Dtinfop.getImagen());
+
+        ImageIcon fot = new ImageIcon(dir2);
+        Icon icono = new ImageIcon(fot.getImage().getScaledInstance(jLabel20.getWidth(), jLabel20.getHeight(), Image.SCALE_DEFAULT));
+        jLabel20.setIcon(icono);
+
+        String[] textField = null;
+        jTextField1.setText((String) jTable1.getValueAt(jTable1.getSelectedRow(), 0));
+        jTextField2.setText(String.valueOf(Dtinfop.getDescripcion()));
+        jTextField3.setText((String) Dtinfop.getTipoEspec());
+        jTextField4.setText((String) Dtinfop.getLugar());
+        Date now = new Date();
+        SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy");
+        jTextField5.setText(sf.format(Dtinfop.getFechaReal().getTime()));
+        jTextField6.setText(String.valueOf(Dtinfop.getPrecio()));
+        jTextField7.setText(String.valueOf(Dtinfop.getMonto()));
+        jTextField8.setText(sf.format(Dtinfop.getFechaReal().getTime()));
+    }//GEN-LAST:event_jTable1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

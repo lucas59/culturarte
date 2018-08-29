@@ -19,8 +19,6 @@ public class Colaboracion {
     private Calendar fechaRealiz;
     private boolean Entradas;
     private Propuesta Propuesta;
-    private String nickName;
-    private String TituloP;
 
     public Colaboracion(Colaborador UColaborador, float montoC, Calendar fechaRealiz, boolean Entradas, Propuesta propuesta) {
         this.UColaborador = UColaborador;
@@ -74,16 +72,11 @@ public class Colaboracion {
         return UColaborador;
     }
 
-    public Colaboracion(String nick, String tit) {
-        this.nickName = nick;
-        this.TituloP = tit;
-    }
-
     public String getNickName() {
-        return nickName;
+        return UColaborador.getNickname();
     }
 
     public String getTituloP() {
-        return TituloP;
+        return Propuesta.getTituloP();
     }
 }

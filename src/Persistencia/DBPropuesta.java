@@ -12,13 +12,23 @@ import java.sql.SQLException;
 import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import logica.Clases.Categoria;
+import logica.Clases.Colaboracion;
+import logica.Clases.Colaborador;
+import logica.Clases.DtColaboraciones;
 import logica.Clases.EstadoPropuesta;
 import logica.Clases.Proponente;
 import logica.Clases.Propuesta;
 import logica.Clases.TipoE;
 import logica.Clases.TipoRetorno;
+import logica.Clases.Usuario;
 import logica.Fabrica;
+import logica.Interfaces.IControladorUsuario;
+import logica.Interfaces.IPropCat;
 
 /**
  *
@@ -270,6 +280,46 @@ public class DBPropuesta {
             return false;
         }
         return true;
+    }
+
+    public boolean CargarColaboraciones() {
+        try {
+            PreparedStatement stat = conexion.prepareStatement("SELECT * FROM colaboracion");
+            ResultSet rs = stat.executeQuery();
+            Fabrica fabrica = Fabrica.getInstance();
+            IPropCat IPC = fabrica.getControladorPropCat();
+            IControladorUsuario ICU = fabrica.getIControladorUsuario();
+            while (rs.next()) {
+                java.util.Date fecha = rs.getDate("fechaRealiz");
+                Calendar fechaRC = Calendar.getInstance();
+                fechaRC.setTime(fecha);
+                Colaboracion colaboracion = new Colaboracion(null, rs.getFloat("montoC"), fechaRC, rs.getBoolean("entradas"), null);
+                Map<String, Usuario> usuarios = ICU.getUsuarios();
+                Set set = usuarios.entrySet();
+                Iterator iterator = set.iterator();
+                while (iterator.hasNext()) {
+                    Map.Entry mentry = (Map.Entry) iterator.next();
+                    if (mentry.getValue() instanceof Colaborador) {
+                        if(((Colaborador) mentry.getValue()).getNickname().compareTo(rs.getString("nickName")) == 0){
+                        colaboracion.setUColaborador(((Colaborador) mentry.getValue()));
+                        ((Colaborador) mentry.getValue()).setColaboraciones(colaboracion);
+                        }
+                    }
+                }
+                Map<String, Propuesta> propuestas = IPC.getpropuesta();
+                set = propuestas.entrySet();
+                iterator = set.iterator();
+                while (iterator.hasNext()) {
+                    Map.Entry mentry = (Map.Entry) iterator.next();
+                    
+                }
+                
+            }
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
     }
 
 }

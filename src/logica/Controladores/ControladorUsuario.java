@@ -382,11 +382,6 @@ public class ControladorUsuario implements IControladorUsuario {
     }
 
     @Override
-    public void CargarColaboraciones() {
-        this.colaboraciones = this.dbUsuario.CargarColaboraciones();
-    }
-
-    @Override
     public Map<String, Colaboracion> getColaboraciones() {
         return this.colaboraciones;
     }
@@ -399,10 +394,12 @@ public class ControladorUsuario implements IControladorUsuario {
         ArrayList<DtinfoColaborador> retorno = new ArrayList();
         while (iterator.hasNext()) {
             Map.Entry mentry = (Map.Entry) iterator.next();
-            Colaborador aux = (Colaborador) mentry.getValue();
-            if (aux.getNickname().equals(nickName)) {
-                this.setColaborador(aux);
-                return new DtinfoColaborador(aux.getNickname(), aux.getNombre(), aux.getApellido(), aux.getCorreo(), aux.getFechaN());
+            if (mentry.getValue() instanceof Colaborador) {
+                Colaborador aux = (Colaborador) mentry.getValue();
+                if (aux.getNickname().equals(nickName)) {
+                    this.setColaborador(aux);
+                    return new DtinfoColaborador(aux.getNickname(), aux.getNombre(), aux.getApellido(), aux.getCorreo(), aux.getFechaN());
+                }
             }
         }
         return null;
@@ -417,8 +414,8 @@ public class ControladorUsuario implements IControladorUsuario {
     }
 
     @Override
-    public List ListarColaboraciones(String nickName){
-   Fabrica fabrica = Fabrica.getInstance();
+    public List ListarColaboraciones(String nickName) {
+        Fabrica fabrica = Fabrica.getInstance();
         IControladorUsuario ICU = fabrica.getIControladorUsuario();
         Map<String, Usuario> Usuarios = ICU.getUsuarios();
         Set set = Usuarios.entrySet();
@@ -432,6 +429,6 @@ public class ControladorUsuario implements IControladorUsuario {
                 }
             }
         }
-    return null;
+        return null;
     }
 }

@@ -5,6 +5,7 @@
  */
 package Presentacion;
 
+import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -41,6 +42,10 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
     public Consultar_colaboracion() {
         initComponents();
         this.setTitle("Consultar colaboraciones del colaborador");
+        jTable1.addMouseListener(new MouseAdapter() {
+        });
+        jTable2.addMouseListener(new MouseAdapter() {
+        });
     }
 
     /**

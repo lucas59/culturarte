@@ -163,25 +163,6 @@ public class DBUsuario {
             return null;
         }
     }
-
-    public Map<String, Colaboracion> CargarColaboraciones() {
-        try {
-            PreparedStatement statement = conexion.prepareStatement("SELECT * FROM colaboraciones");
-            ResultSet st = statement.executeQuery();
-            Map<String, Colaboracion> colaboraciones = new HashMap<String, Colaboracion>();
-
-            while (st.next()) {
-                String tit = st.getString("TituloP");
-                String nick = st.getString("nickName");
-                Colaboracion col = new Colaboracion(nick, tit);
-                colaboraciones.put(tit, col);
-            }
-            return colaboraciones;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-    }
     
     
     public boolean limpiarBD(){
