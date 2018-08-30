@@ -64,4 +64,5 @@ public interface IControladorUsuario {
 
     public abstract List ListarColaboraciones(String nickname);
 
+    public abstract void LimpiarUsuarios();
 }

@@ -73,4 +73,6 @@ public interface IPropCat {
     public void ComunicarControladores(IControladorUsuario icu);
 
     public abstract void CargarColaboraciones();
+
+    public abstract void LimpiarPropCat();
 }

@@ -332,7 +332,12 @@ public class Fabrica {
         
 }
 
-     
+public void LimpiarLogica(){
+    
+    
+    
+    
+}  
     
     
 }
