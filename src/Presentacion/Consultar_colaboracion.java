@@ -6,6 +6,7 @@
 package Presentacion;
 
 import java.awt.event.MouseAdapter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -15,6 +16,7 @@ import java.util.Map;
 import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import logica.Clases.Colaboracion;
 import logica.Clases.Colaborador;
 import logica.Clases.DtColaboraciones;
@@ -39,8 +41,8 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
     /**
      * Creates new form Consultar_colaboracion
      */
-    
     String nickname = null;
+
     public Consultar_colaboracion() {
         initComponents();
         this.setTitle("Consultar colaboraciones del colaborador");
@@ -73,8 +75,6 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
         jTextField6 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -195,13 +195,8 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
 
         jTextField5.setEditable(false);
 
-        jLabel9.setFont(new java.awt.Font("Consolas", 1, 12)); // NOI18N
-        jLabel9.setText("Hora de la colaboración:");
-
-        jTextField4.setEditable(false);
-
         jLabel6.setFont(new java.awt.Font("Consolas", 1, 12)); // NOI18N
-        jLabel6.setText("Fecha de la colaboración:");
+        jLabel6.setText("Fecha y hora de la colaboración:");
 
         jTextField3.setEditable(false);
 
@@ -216,25 +211,18 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel6))
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel6))
-                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField4)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.LEADING)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jTextField2)
+                    .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                    .addComponent(jTextField3)
+                    .addComponent(jTextField5))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -256,11 +244,7 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
         jTextField7.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -404,6 +388,7 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(null, "El colaborador no tiene colaboraciones");
         }
+
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jTextField7KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField7KeyReleased
@@ -462,24 +447,28 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
         IControladorUsuario ICU = fabrica.getIControladorUsuario();
         List<Colaboracion> colaboraciones = ICU.ListarColaboraciones(this.nickname);
         if (!colaboraciones.isEmpty()) {
-            DefaultTableModel modelo = (DefaultTableModel) Tabla_propuesta.getModel();
-            modelo.setRowCount(0);
+            TableModel modelo = (TableModel) Tabla_propuesta.getModel();
+
             for (int indice = 0; indice < colaboraciones.size(); indice++) {
-                if (colaboraciones.get(indice).getPropuesta().getTituloP().compareTo((String) Tabla_propuesta.getValueAt(Tabla_propuesta.getSelectedRow(), 0)) == 0) {
+                if (colaboraciones.get(indice).getPropuesta().getTituloP().compareTo((String) modelo.getValueAt(Tabla_propuesta.getSelectedRow(), 0)) == 0) {
                     DtColaboraciones ColaboracionesM = new DtColaboraciones(colaboraciones.get(indice).getNickName(), colaboraciones.get(indice).getMontoC(), colaboraciones.get(indice).getFechaRealiz(), colaboraciones.get(indice).getEntradas(), colaboraciones.get(indice).getTituloP());
                     jTextField2.setText(ColaboracionesM.getPropuesta());
                     if (ColaboracionesM.getEntradas() == true) {
-                        jTextField3.setText("Entradas");
+                        jTextField5.setText("Entradas");
                     } else {
-                        jTextField4.setText("Por Ganancias");
+                        jTextField5.setText("Por Ganancias");
                     }
-                    jTextField4.setText(String.valueOf(ColaboracionesM.getMontoC()));
-                    jTextField5.setText(String.valueOf(ColaboracionesM.getFechaRealiz()));
-                    jTextField5.setText(String.valueOf(ColaboracionesM.getFechaRealiz().getTime()));
+                    jTextField3.setText(String.valueOf(ColaboracionesM.getMontoC()));
+                    Calendar calendario = ColaboracionesM.getFechaRealiz();
+                    java.util.Date utilDate = new java.util.Date();
+                    utilDate = calendario.getTime();
+                    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+                    SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy hh:MM");
+                    jTextField6.setText(f.format(utilDate));
                     break;
                 }
-                }
-            
+            }
+
         }
     }//GEN-LAST:event_Tabla_propuestaMouseClicked
 
@@ -494,7 +483,6 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -502,7 +490,6 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;

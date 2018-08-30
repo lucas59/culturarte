@@ -259,12 +259,13 @@ public class inicio extends javax.swing.JFrame {
         int respuesta = JOptionPane.showConfirmDialog(null, "Se borraran todos los datos de la base de datos\n Desea continuar?", "ADVERTENCIA", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
        if (respuesta == 0) {
-            fabrica.limpiarBaseDeDatos();
+        /*    fabrica.limpiarBaseDeDatos();
             try {
                 Thread.sleep(5000);
             } catch (InterruptedException ex) {
                 Logger.getLogger(inicio.class.getName()).log(Level.SEVERE, null, ex);
             }
+           */
             fabrica.cargarDatosdePrueba();
             JOptionPane.showMessageDialog(null, "Datos Cargados Exitosamente!!!");
         } else {
