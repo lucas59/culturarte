@@ -104,12 +104,9 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-
         jLabel1.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
         jLabel1.setText("Propuestas del sistema");
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(251, 0, 125)));
 
         jLabel2.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
@@ -248,7 +245,6 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(251, 0, 125)));
 
         jLabel12.setFont(new java.awt.Font("Consolas", 1, 12)); // NOI18N
