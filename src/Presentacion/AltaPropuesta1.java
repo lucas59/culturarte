@@ -120,7 +120,7 @@ public class AltaPropuesta1 extends javax.swing.JInternalFrame {
             }
         });
 
-        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.setText("Salir");
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCancelarActionPerformed(evt);

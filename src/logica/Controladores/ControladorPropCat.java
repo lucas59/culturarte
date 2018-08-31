@@ -464,4 +464,8 @@ public class ControladorPropCat implements IPropCat {
 
     }
 
+    @Override
+    public void LimpiarPropCat(){
+        
+    }
 }
