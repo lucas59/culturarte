@@ -374,11 +374,13 @@ public class ConsultarPerfilProponentes extends javax.swing.JInternalFrame {
                 jTextAreaBiografia.setText(p.getBiografia());
                 jLabelDireccion.setText(p.getDireccion());
                 Date fechaNaci = p.getFechaN().getTime();
-                SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy");                
+                SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy");
                 jLabelFecha.setText(f.format(fechaNaci));
                 String imagen = p.getImagen();
 
-                ImageIcon fot = new ImageIcon(imagen);
+                String foto = System.getProperty("user.dir") + "\\fPerfiles\\" + imagen;
+
+                ImageIcon fot = new ImageIcon(foto);
                 Icon icono = new ImageIcon(fot.getImage().getScaledInstance(jLabelFoto.getWidth(), jLabelFoto.getHeight(), Image.SCALE_DEFAULT));
                 jLabelFoto.setIcon(icono);
 
