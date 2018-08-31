@@ -453,8 +453,9 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
                     java.util.Date utilDate = new java.util.Date();
                     utilDate = calendario.getTime();
                     java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-                    SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy hh:mm");
-                    jTextField6.setText(f.format(utilDate));
+                    SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy");
+                    SimpleDateFormat g = new SimpleDateFormat("hh:mm:ss a");
+                    jTextField6.setText(f.format(utilDate) + " " + g.format(utilDate.getTime()));
                     break;
                 }
             }
