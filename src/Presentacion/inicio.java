@@ -36,7 +36,6 @@ public class inicio extends javax.swing.JFrame {
         IPC.ComunicarControladores(ICU);
         ICU.CargarUsuarios();
         IPC.CargarPropuestas();
-
         IPC.CargarColaboraciones();
     }
 

@@ -5,6 +5,7 @@
  */
 package Presentacion;
 
+import static Presentacion.inicio.Escritorio;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -126,7 +127,7 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jLabel1.setText("Estado de propuesta");
 
-        jButton1.setText("Salir");
+        jButton1.setText("Volver");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -144,7 +145,7 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setText("Buscar");
+        jButton2.setText("Ver");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -164,7 +165,7 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
                             .addComponent(jButton1)
                             .addComponent(jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
+                        .addGap(46, 46, 46)
                         .addComponent(jButton2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -268,7 +269,7 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
         modelo.setRowCount(0);
         int seleccion = jTable1.rowAtPoint(evt.getPoint());
         String titulo = (String) jTable1.getValueAt(seleccion, 0);
-        List<DtinfoColaborador> colaboradores=new ArrayList<>();
+        List<DtinfoColaborador> colaboradores = new ArrayList<>();
         colaboradores = ICP.ListarColaboradores(titulo);
         if (colaboradores.size() == 0) {
             JOptionPane.showMessageDialog(null, "Esta propuesta no obtiene colaboradores");
@@ -285,7 +286,9 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        ConsultarPerfilProponentes p = new ConsultarPerfilProponentes();
+        Escritorio.add(p);
+        p.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -335,7 +338,7 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jComboBoxMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         String seleccion = jComboBox.getSelectedItem().toString();
+        String seleccion = jComboBox.getSelectedItem().toString();
         propuestas = this.ICP.ListarPropuestasDeProponenteX(nickProponente);
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         if (seleccion == "Todas") {
@@ -345,7 +348,7 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
                 Date f = (Date) p.getFechaReal().getTime();
                 SimpleDateFormat fecha = new SimpleDateFormat("dd/MMM/yyyy");
                 EstadoPropuesta estado = ICP.verEstadoPropuesta(p.getTitulo());
-               Object[] dat = {p.getTitulo(), p.getTipoEspec(), estado.getEstado(), p.getMonto(), p.getLugar(), fecha.format(f)};
+                Object[] dat = {p.getTitulo(), p.getTipoEspec(), estado.getEstado(), p.getMonto(), p.getLugar(), fecha.format(f)};
                 modelo.addRow(dat);
             }
         } else {

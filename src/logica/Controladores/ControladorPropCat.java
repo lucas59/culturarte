@@ -51,6 +51,7 @@ public class ControladorPropCat implements IPropCat {
     private Categoria catRecordada;
     private Proponente uProponente;
     private Propuesta Propuesta;
+
     public static ControladorPropCat getInstance() {
         if (instancia == null) {
             instancia = new ControladorPropCat();
@@ -64,10 +65,12 @@ public class ControladorPropCat implements IPropCat {
         this.propuestas = new HashMap<>();
         Categoria cat = new Categoria("Categoria");
         this.categorias.put("Categoria", cat);
-     //   this.dbPropuesta.agregarCategoria("Categoria", null);
+        this.dbPropuesta.agregarCategoria("Categoria", null);
+        this.Propuesta = null;
     }
-    public void ComunicarControladores(IControladorUsuario icu){
-        this.ICU=icu;
+
+    public void ComunicarControladores(IControladorUsuario icu) {
+        this.ICU = icu;
     }
 
     @Override
@@ -203,12 +206,12 @@ public class ControladorPropCat implements IPropCat {
         }
         return listPropuestas;
     }
-    
+
     @Override
-     public EstadoPropuesta verEstadoPropuesta(String titulo){
-         EstadoPropuesta estActual=this.propuestas.get(titulo).getEstadoActual();
-         return estActual;  
-     }
+    public EstadoPropuesta verEstadoPropuesta(String titulo) {
+        EstadoPropuesta estActual = this.propuestas.get(titulo).getEstadoActual();
+        return estActual;
+    }
 
     @Override
     public DtinfoPropuesta SeleccionarPropuestaR(String titulo) {
@@ -301,8 +304,8 @@ public class ControladorPropCat implements IPropCat {
         }
 
     }
-    
-    public void CargarColaboraciones(){
+
+    public void CargarColaboraciones() {
         DBColaboracion DBC = new DBColaboracion();
         DBC.CargarColaboraciones();
     }
@@ -316,12 +319,15 @@ public class ControladorPropCat implements IPropCat {
         utilDate = calendario.getTime();
         java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
         List<Colaboracion> colaboraciones = this.getPropuesta().getColaboraciones();
+        List<Colaboracion> colaboracionesC = ICU.getColaborador().getColaboraciones();
         float TotalColaboracion = 0;
         for (int indice = 0; indice < colaboraciones.size(); indice++) {
-            if (colaboraciones.get(indice).getPropuesta().getTituloP().compareTo(this.getPropuesta().getTituloP()) == 0) {
+            TotalColaboracion = TotalColaboracion + colaboraciones.get(indice).getMontoC();
+        }
+
+        for (int indice2 = 0; indice2 < colaboracionesC.size(); indice2++) {
+            if (colaboracionesC.get(indice2).getTituloP().compareTo(this.getPropuesta().getTituloP()) == 0) {
                 throw new Exception("No puede colaborar en una propuesta mas de una vez");
-            } else {
-                TotalColaboracion = TotalColaboracion + colaboraciones.get(indice).getMontoC();
             }
         }
         if ((TotalColaboracion + monto) <= this.getPropuesta().getMontoTot()) {
@@ -392,7 +398,7 @@ public class ControladorPropCat implements IPropCat {
         Propuesta nuevaP;
         nuevaP = new Propuesta(tituloP, descripcion, imagen, lugar, fecha, montoE, montoTot, null, cat, retorno, p);
         this.propuestas.put(tituloP, nuevaP);
-        
+
         this.dbPropuesta = new DBPropuesta();
         boolean agregada = this.dbPropuesta.agregarPropuestaDatosdePrueba(nuevaP);
 
@@ -405,15 +411,16 @@ public class ControladorPropCat implements IPropCat {
     }
 
     @Override
-     public boolean crearCategoriaDatosdePrueba(String nomCat, String nomPadre) {
+    public boolean crearCategoriaDatosdePrueba(String nomCat, String nomPadre) {
 
         boolean agregada = this.dbPropuesta.agregarCategoria(nomCat, nomPadre);
 
         if (agregada) {
             Categoria hijo = new Categoria(nomCat);
             Categoria padre = this.categorias.get(nomPadre);
-            if(padre!=null){
-            padre.getCategoriasH().put(nomCat, hijo);}
+            if (padre != null) {
+                padre.getCategoriasH().put(nomCat, hijo);
+            }
             this.categorias.put(nomCat, hijo);
             return true;
         }
@@ -426,33 +433,33 @@ public class ControladorPropCat implements IPropCat {
         Fabrica fabrica = Fabrica.getInstance();
         IControladorUsuario ICU = fabrica.getIControladorUsuario();
         IPropCat IPC = fabrica.getControladorPropCat();
-        
+
         Propuesta p = (Propuesta) this.propuestas.get(TituloP);
-        Colaborador c=(Colaborador) ICU.getUsuarios().get(nickName);
-        
+        Colaborador c = (Colaborador) ICU.getUsuarios().get(nickName);
+
         Colaboracion colaboracion = new Colaboracion(c, monto, fechaRealiz, Entrada, p);
         c.setColaboraciones(colaboracion);
 //        colaboracion.setPropuesta(p);
         p.setColaboraciones(colaboracion);
-        
+
         DBColaboracion DBC = new DBColaboracion();
         DBC.agregarColaboracionDatosdePrueba(TituloP, nickName, monto, fechaRealiz, Entrada);
-        
+
         return true;
 
     }
+
     @Override
     public boolean nuevoEstadoPropuestaDatosdePrueba(String TituloP, TipoE estado, Calendar fecha) {
 
-       
         EstadoPropuesta estadop = new EstadoPropuesta(estado, fecha);
         Propuesta p = (Propuesta) this.propuestas.get(TituloP);
         p.setEstados(estadop);
         p.setEstadoActual(estadop);
-        
+
         DBPropuesta DBP = new DBPropuesta();
         DBP.agregarEstadoPropuestaDatosdePrueba(estadop, TituloP);
-        
+
         return true;
 
     }
