@@ -145,7 +145,7 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setText("Buscar");
+        jButton2.setText("Ver");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -165,7 +165,7 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
                             .addComponent(jButton1)
                             .addComponent(jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
+                        .addGap(46, 46, 46)
                         .addComponent(jButton2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
