@@ -78,7 +78,7 @@ public class ConsultarPerfilProponentes extends javax.swing.JInternalFrame {
 
         jPanelIni = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextNombre = new javax.swing.JTextField();
+        jTextNick = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -104,17 +104,17 @@ public class ConsultarPerfilProponentes extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jLabel1.setText("Buscar nombre");
 
-        jTextNombre.addActionListener(new java.awt.event.ActionListener() {
+        jTextNick.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextNombreActionPerformed(evt);
+                jTextNickActionPerformed(evt);
             }
         });
-        jTextNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTextNick.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextNombreKeyReleased(evt);
+                jTextNickKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextNombreKeyTyped(evt);
+                jTextNickKeyTyped(evt);
             }
         });
 
@@ -172,7 +172,7 @@ public class ConsultarPerfilProponentes extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextNick, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2))
                     .addComponent(jScrollPane3))
@@ -185,7 +185,7 @@ public class ConsultarPerfilProponentes extends javax.swing.JInternalFrame {
                     .addGroup(jPanelIniLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanelIniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextNick, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)))
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
@@ -244,7 +244,7 @@ public class ConsultarPerfilProponentes extends javax.swing.JInternalFrame {
                         .addComponent(jLabelCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelDatosLayout.createSequentialGroup()
                         .addComponent(jLabel8)
-                        .addGap(322, 322, 322)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabelSitioWeb, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelDatosLayout.createSequentialGroup()
                         .addComponent(jLabel9)
@@ -255,7 +255,7 @@ public class ConsultarPerfilProponentes extends javax.swing.JInternalFrame {
                 .addContainerGap())
             .addGroup(jPanelDatosLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jLabelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelDatosLayout.setVerticalGroup(
@@ -269,8 +269,6 @@ public class ConsultarPerfilProponentes extends javax.swing.JInternalFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDatosLayout.createSequentialGroup()
-                                .addComponent(jLabelSitioWeb, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel9)
                                 .addGap(66, 66, 66))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDatosLayout.createSequentialGroup()
@@ -286,13 +284,14 @@ public class ConsultarPerfilProponentes extends javax.swing.JInternalFrame {
                                 .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabelDireccion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanelDatosLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel8)
                                         .addGap(89, 89, 89))
                                     .addGroup(jPanelDatosLayout.createSequentialGroup()
-                                        .addGap(29, 29, 29)
+                                        .addComponent(jLabelSitioWeb, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(9, 9, 9)
                                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                         .addGap(6, 6, 6))))))
                     .addGroup(jPanelDatosLayout.createSequentialGroup()
@@ -326,17 +325,17 @@ public class ConsultarPerfilProponentes extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextNombreActionPerformed
+    private void jTextNickActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextNickActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextNombreActionPerformed
+    }//GEN-LAST:event_jTextNickActionPerformed
 
-    private void jTextNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNombreKeyTyped
+    private void jTextNickKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNickKeyTyped
         List<DtProponente> proponentes = ICU.ListarProponentes();
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.setRowCount(0);
         for (int i = 0; i < proponentes.size(); i++) {
             DtProponente p = proponentes.get(i);
-            if (p.getNombre().contains(jTextNombre.getText())) {
+            if (p.getNickName().contains(jTextNick.getText())) {
                 Calendar fechaN = p.getFechaN();
                 Date fecha = fechaN.getTime();
                 String f = this.darFormato(fecha);
@@ -344,7 +343,7 @@ public class ConsultarPerfilProponentes extends javax.swing.JInternalFrame {
                 modelo.addRow(dat);
             }
         }
-    }//GEN-LAST:event_jTextNombreKeyTyped
+    }//GEN-LAST:event_jTextNickKeyTyped
 
     public static String darFormato(Date date) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MMM/yyyy");
@@ -356,9 +355,9 @@ public class ConsultarPerfilProponentes extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_jLabel2MouseClicked
 
-    private void jTextNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNombreKeyReleased
+    private void jTextNickKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNickKeyReleased
 
-    }//GEN-LAST:event_jTextNombreKeyReleased
+    }//GEN-LAST:event_jTextNickKeyReleased
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         jPanelDatos.setVisible(true);
@@ -419,6 +418,6 @@ public class ConsultarPerfilProponentes extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextAreaBiografia;
-    private javax.swing.JTextField jTextNombre;
+    private javax.swing.JTextField jTextNick;
     // End of variables declaration//GEN-END:variables
 }

@@ -75,7 +75,6 @@ public class ControladorUsuario implements IControladorUsuario {
         this.Usuarios = Usuarios;
     }
 
-
     @Override
     public boolean seguirUsuario(String nickUsu1, String nickUsu2) {
 
@@ -178,7 +177,7 @@ public class ControladorUsuario implements IControladorUsuario {
                 File fLocal = new File(fotoLocal);
                 String ex = getFileExtension(fLocal);
                 String ruta = System.getProperty("user.dir") + "\\fPerfiles\\" + c.getNickname() + "." + ex;
-                c.setImagen(ruta);
+                c.setImagen(nickName + "." + ex);
             }
             boolean res = this.dbUsuario.agregarColaborador(c);
 
@@ -197,16 +196,13 @@ public class ControladorUsuario implements IControladorUsuario {
         if (this.Usuarios.get(nickName) != null) {
             return false;
         } else {
-            //Map<String, Usuario> seguidores = new HashMap<>();
-            //Map<String, Propuesta> propuestas = new HashMap<>();
             Proponente c = new Proponente(biografia, direccion, sitioWeb, nickName, nombre, apellido, correo, fechaN, imagen);
             String fotoLocal = c.getImagen();
             if (!"".equals(c.getImagen())) {
-
                 File fLocal = new File(fotoLocal);
                 String ex = getFileExtension(fLocal);
                 String ruta = System.getProperty("user.dir") + "\\fPerfiles\\" + c.getNickname() + "." + ex;
-                c.setImagen(ruta);
+                c.setImagen(nickName + "." + ex);
             }
             boolean res = this.dbUsuario.agregarProponente(c);
             if (res) {
