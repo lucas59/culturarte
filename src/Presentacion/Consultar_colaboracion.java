@@ -109,7 +109,7 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -129,6 +129,7 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
         }
 
         Tabla_propuesta.setModel(new javax.swing.table.DefaultTableModel(
@@ -163,6 +164,10 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane2.setViewportView(Tabla_propuesta);
+        if (Tabla_propuesta.getColumnModel().getColumnCount() > 0) {
+            Tabla_propuesta.getColumnModel().getColumn(0).setResizable(false);
+            Tabla_propuesta.getColumnModel().getColumn(1).setResizable(false);
+        }
 
         jButton2.setText("Salir");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {

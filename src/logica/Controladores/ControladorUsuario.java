@@ -59,6 +59,7 @@ public class ControladorUsuario implements IControladorUsuario {
         this.Usuarios = new HashMap<>();
         this.dbUsuario = new DBUsuario();
         this.CargarUsuarios();
+        this.Colaborador = null;
     }
 
     @Override

@@ -66,6 +66,7 @@ public class ControladorPropCat implements IPropCat {
         Categoria cat = new Categoria("Categoria");
         this.categorias.put("Categoria", cat);
         this.dbPropuesta.agregarCategoria("Categoria", null);
+        this.Propuesta = null;
     }
 
     public void ComunicarControladores(IControladorUsuario icu) {

@@ -352,7 +352,6 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
             }
         });
 
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(251, 0, 125)));
 
         jLabel18.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
@@ -583,7 +582,17 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
         IControladorUsuario CU = fabrica.getIControladorUsuario();
         if (jTextField17.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingrese el monto de la colaboración");
-        } else {
+        }
+        else if(jTable1.getSelectedRow() < 0 && jTable2.getSelectedRow() < 0){
+            JOptionPane.showMessageDialog(null, "Seleccione un colaborador y una propuesta");
+        }
+        else if(jTable1.getSelectedRow() < 0){
+            JOptionPane.showMessageDialog(null, "Seleccione un colaborador");
+        }
+        else if(jTable2.getSelectedRow() < 0){
+            JOptionPane.showMessageDialog(null, "Seleccione una propuesta");
+        }
+        else {
             float monto = Float.parseFloat(jTextField17.getText());
             boolean OK = false;
             if (jComboBox2.getSelectedItem().toString().compareTo("Entradas") == 0) {
@@ -622,6 +631,8 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
             jTextField14.setText("");
             jTextField15.setText("");
             jTextField17.setText("");
+            jTable1.clearSelection();
+            jTable2.clearSelection();
 
         }
 
@@ -676,15 +687,15 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
         jTable2.clearSelection();
         while (iterator.hasNext()) {
             Map.Entry mentry = (Map.Entry) iterator.next();
-            if(mentry.getValue() instanceof Colaborador){
-            Usuario aux = (Usuario) mentry.getValue();
-            if (!jTextField15.getText().isEmpty() && aux.getNickname().contains(jTextField15.getText())) {
-                Object[] dat = {aux.getNickname(), aux.getNombre()};
-                modelo.addRow(dat);
-            } else if (jTextField15.getText().isEmpty()) {
-                Object[] dat = {aux.getNickname(), aux.getNombre()};
-                modelo.addRow(dat);
-            }
+            if (mentry.getValue() instanceof Colaborador) {
+                Usuario aux = (Usuario) mentry.getValue();
+                if (!jTextField15.getText().isEmpty() && aux.getNickname().contains(jTextField15.getText())) {
+                    Object[] dat = {aux.getNickname(), aux.getNombre()};
+                    modelo.addRow(dat);
+                } else if (jTextField15.getText().isEmpty()) {
+                    Object[] dat = {aux.getNickname(), aux.getNombre()};
+                    modelo.addRow(dat);
+                }
             }
         }
         this.jTable2.setModel(modelo);
@@ -757,8 +768,6 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
         ImageIcon fot = new ImageIcon(dir2);
         Icon icono = new ImageIcon(fot.getImage().getScaledInstance(jLabel20.getWidth(), jLabel20.getHeight(), Image.SCALE_DEFAULT));
         jLabel20.setIcon(icono);
-
-        String[] textField = null;
         jTextField1.setText((String) jTable1.getValueAt(jTable1.getSelectedRow(), 0));
         jTextField2.setText(String.valueOf(Dtinfop.getDescripcion()));
         jTextField3.setText((String) Dtinfop.getTipoEspec());
