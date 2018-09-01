@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package logica.Clases;
 
 import java.util.Calendar;
 
 /**
- * 
+ *
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class DtColaboraciones {
+
     private String UColaborador;
     private float montoC;
     private Calendar fechaRealiz;
@@ -26,8 +26,15 @@ public class DtColaboraciones {
         this.Entradas = Entradas;
         this.Propuesta = Propuesta;
     }
-    
-    
+
+    public DtColaboraciones(Colaboracion col) {
+        this.UColaborador = col.getColaborador().getNickname();
+        this.montoC = col.getMontoC();
+        this.fechaRealiz = col.getFechaRealiz();
+        this.Entradas = col.getEntradas();
+        this.Propuesta = col.getPropuesta().getTituloP();
+    }
+
     public String getUColaborador() {
         return UColaborador;
     }
@@ -47,5 +54,5 @@ public class DtColaboraciones {
     public String getPropuesta() {
         return Propuesta;
     }
-    
+
 }

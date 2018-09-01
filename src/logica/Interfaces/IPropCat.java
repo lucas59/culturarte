@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import logica.Clases.Categoria;
 import logica.Clases.Colaborador;
+import logica.Clases.DtColaboraciones;
 import logica.Clases.DtConsultaPropuesta;
 import logica.Clases.DtinfoColaborador;
 import logica.Clases.DtinfoPropuesta;
@@ -69,10 +70,14 @@ public interface IPropCat {
     public abstract List<DtinfoPropuesta> ListarPropuestasDeProponenteX(String nick);
 
     public abstract EstadoPropuesta verEstadoPropuesta(String titulo);
-    
+
     public void ComunicarControladores(IControladorUsuario icu);
 
     public abstract void CargarColaboraciones();
 
     public abstract void LimpiarPropCat();
+
+    public abstract List<DtColaboraciones> listarColaboraciones(String titulo) throws Exception;
+
+    public abstract boolean eliminarColaboracion(String titulo, String nick);
 }

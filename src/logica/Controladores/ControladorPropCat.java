@@ -8,6 +8,7 @@ package logica.Controladores;
 import Persistencia.DBColaboracion;
 import Persistencia.DBPropuesta;
 import com.sun.javafx.scene.control.skin.VirtualFlow;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -18,6 +19,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.text.html.HTMLDocument;
 import logica.Clases.Categoria;
 import logica.Clases.Colaboracion;
@@ -51,6 +54,7 @@ public class ControladorPropCat implements IPropCat {
     private Categoria catRecordada;
     private Proponente uProponente;
     private Propuesta Propuesta;
+    private DBColaboracion dbColaboracion = null;
 
     public static ControladorPropCat getInstance() {
         if (instancia == null) {
@@ -61,6 +65,7 @@ public class ControladorPropCat implements IPropCat {
 
     public ControladorPropCat() {
         this.dbPropuesta = new DBPropuesta();
+        this.dbColaboracion = new DBColaboracion();
         this.categorias = new HashMap<>();
         this.propuestas = new HashMap<>();
         Categoria cat = new Categoria("Categoria");
@@ -465,7 +470,48 @@ public class ControladorPropCat implements IPropCat {
     }
 
     @Override
-    public void LimpiarPropCat(){
-        
+    public void LimpiarPropCat() {
+
+    }
+
+    @Override
+    public List<DtColaboraciones> listarColaboraciones(String titulo) throws Exception {
+        List<DtColaboraciones> retorno = new ArrayList<DtColaboraciones>();
+        Propuesta prop = this.propuestas.get(titulo);
+        List<Colaboracion> colaboraciones = prop.getColaboraciones();
+        Iterator it = colaboraciones.iterator();
+        while (it.hasNext()) {
+            Colaboracion col = (Colaboracion) it.next();
+            DtColaboraciones dtcol = new DtColaboraciones(col);
+            retorno.add(dtcol);
+        }
+        if (retorno.size() < 1) {
+            throw new Exception("No existen colaboraciones en la propuesta " + titulo);
+        } else {
+            return retorno;
+        }
+    }
+
+    @Override
+    public boolean eliminarColaboracion(String titulo, String nick) {
+        boolean ok = false;
+        Propuesta a = this.propuestas.get(titulo);
+        for (Colaboracion col : a.getColaboraciones()) {
+            if (col.getUColaborador().getNickname().equals(nick)) {
+                ok = col.borrarme();
+                break;
+            }
+        }
+        if (ok) {
+            try {
+                ok = this.dbColaboracion.eliminarColaboracion(titulo, nick);
+                if (ok) {
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(ControladorPropCat.class.getName()).log(Level.SEVERE, null, ex);
+
+            }
+        }
+        return ok;
     }
 }
