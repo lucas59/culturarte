@@ -253,23 +253,30 @@ public class inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        Fabrica fabrica = Fabrica.getInstance();
+       Fabrica fabrica = Fabrica.getInstance();
 
-        int respuesta = JOptionPane.showConfirmDialog(null, "Se borraran todos los datos de la base de datos\n Desea continuar?", "ADVERTENCIA", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+       if(fabrica.getdatosCargados()==true){
+           JOptionPane.showMessageDialog(null, "Datos de Prueba ya fueron cargados durante la ejecucion,\n debe reiniciar la aplicacion para continuar. ", "ERROR: Datos de Prueba ya cargados", JOptionPane.ERROR_MESSAGE); 
+       }
+       else{
+       
+       int respuesta = JOptionPane.showConfirmDialog(null, "Se borraran todos los datos de la base de datos\n Desea continuar?", "ADVERTENCIA", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
        if (respuesta == 0) {
-        /*    fabrica.limpiarBaseDeDatos();
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(inicio.class.getName()).log(Level.SEVERE, null, ex);
-            }
-           */
+            boolean ok = fabrica.limpiarBaseDeDatos();
+            if(ok){
             fabrica.cargarDatosdePrueba();
             JOptionPane.showMessageDialog(null, "Datos Cargados Exitosamente!!!");
-        } else {
+            }
+        } 
+       
+       else {           
             JOptionPane.showMessageDialog(null, "Carga de Datos de Prueba fue cancelada");
         }
+       
+       
+       }
+       
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed

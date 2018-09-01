@@ -443,4 +443,12 @@ public class ControladorUsuario implements IControladorUsuario {
         }
         return retorno;
     }
+    
+    public boolean limpiarBaseDeDatos(){
+        
+        DBUsuario d = new DBUsuario();
+        boolean ok= d.limpiarBD();
+
+        return ok;
+    }
 }

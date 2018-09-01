@@ -18,6 +18,8 @@ import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import logica.Clases.Colaboracion;
 import logica.Clases.Propuesta;
 import logica.Clases.Seguidos;
@@ -166,39 +168,58 @@ public class DBUsuario {
     
     
     public boolean limpiarBD(){
+        
+    PreparedStatement statement;
+    
         try {
-            PreparedStatement statement = conexion.prepareStatement("SET FOREIGN_KEY_CHECKS = 0");
-            PreparedStatement statement1 = conexion.prepareStatement("TRUNCATE TABLE usuario");
-            PreparedStatement statement2 = conexion.prepareStatement("TRUNCATE TABLE ususigueusu");
-            PreparedStatement statement3 = conexion.prepareStatement("TRUNCATE TABLE propuesta");
-            PreparedStatement statement4 = conexion.prepareStatement("TRUNCATE TABLE colaboracion");
-            PreparedStatement statement6 = conexion.prepareStatement("TRUNCATE TABLE estadopropuesta");
-            PreparedStatement statement5 = conexion.prepareStatement("TRUNCATE TABLE categoria");
-            PreparedStatement statement7 = conexion.prepareStatement("SET FOREIGN_KEY_CHECKS = 1");
-            
+            statement = conexion.prepareStatement("SET FOREIGN_KEY_CHECKS = 0");
             statement.executeQuery();
             statement.close();
-            statement1.executeQuery();
-            statement1.close();
-            statement2.executeQuery();
-            statement2.close();
-            statement3.executeQuery();
-            statement3.close();
-            statement4.executeQuery();
-            statement4.close();
-            statement5.executeQuery();
-            statement5.close();
-            statement6.executeQuery();
-            statement6.close();
-            statement7.executeQuery();
-            statement7.close();
+
+
+            statement = conexion.prepareStatement("TRUNCATE TABLE estadopropuesta");
+            statement.executeQuery();
+            statement.close();
+            
+           
+            statement = conexion.prepareStatement("TRUNCATE TABLE ususigueusu");
+            statement.executeQuery();
+            statement.close();
             
             
+            statement = conexion.prepareStatement("TRUNCATE TABLE colaboracion");
+            statement.executeQuery();
+            statement.close();
+            
+            statement = conexion.prepareStatement("TRUNCATE TABLE propuesta");
+            statement.executeQuery();
+            statement.close();
+            
+            
+            statement = conexion.prepareStatement("TRUNCATE TABLE categoria");
+            statement.executeQuery();
+            statement.close();
+            
+            
+            statement = conexion.prepareStatement("TRUNCATE TABLE usuario"); 
+            statement.executeQuery();
+            statement.close();
+            
+            
+            statement = conexion.prepareStatement("SET FOREIGN_KEY_CHECKS = 1");
+            statement.executeQuery();
+            statement.close();
+            
+                    
             return true;
-        }
-     catch (SQLException ex) {
-            ex.printStackTrace();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DBUsuario.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
+     
+           
+    }
+    
 }
-}
+

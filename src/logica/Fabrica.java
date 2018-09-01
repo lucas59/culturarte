@@ -27,7 +27,8 @@ public class Fabrica {
 
     //SINGLETON
     private static Fabrica instancia;
-
+    boolean datosCargados=false;
+    
     public static Fabrica getInstance() {
         if (instancia == null) {
             instancia = new Fabrica();
@@ -40,13 +41,19 @@ public class Fabrica {
         this.cargardatosColaboracion();
     }
     
-    public void limpiarBaseDeDatos(){
-        DBUsuario d = new DBUsuario();
-        d.limpiarBD();
+    public boolean limpiarBaseDeDatos(){
+         IControladorUsuario ICU = this.getIControladorUsuario();
+         boolean ok=ICU.limpiarBaseDeDatos();
+         return ok;
+    }
+    
+    public boolean getdatosCargados(){
+       return this.datosCargados;
     }
     
     private void cargarDatosPropuesta() {
         IPropCat ip = this.getControladorPropCat();
+        
         //ip.CargarPropuestas();
     }
 
@@ -335,6 +342,8 @@ public class Fabrica {
     IPC.nuevoEstadoPropuestaDatosdePrueba("Durazno Rock", TipoE.Ingresada, new GregorianCalendar(2018,07,23,2,12,0));
 
 //    
+
+    this.datosCargados=true;
         
 }
 

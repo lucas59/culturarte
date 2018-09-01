@@ -67,4 +67,6 @@ public interface IControladorUsuario {
     public abstract void LimpiarUsuarios();
     
     public abstract ArrayList<DtUsuario> ListarUsuarios();
+    
+    public abstract boolean limpiarBaseDeDatos();
 }
