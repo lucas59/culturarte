@@ -9,6 +9,8 @@ import Persistencia.DBUsuario;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import logica.Clases.TipoE;
 import logica.Clases.TipoRetorno;
 import logica.Interfaces.IPropCat;
@@ -215,10 +217,9 @@ public class Fabrica {
     + "para\\r\\nsiempre." ,IPC.ObtenerCategoria("Murga"), new GregorianCalendar(2018,10,16),"Landia",  650, 300000, TipoRetorno.EntGan, ICU.ObtenerProponente("tabarec"),ruta+"\\fotosdp\\Un día de Julio.jpg");
 
 
-//------------------------------------------Seguidores--------------------------------------------------//
-
-
-    ICU.seguirUsuario("cachilas","hrubino");
+        
+            //------------------------------------------Seguidores--------------------------------------------------//
+    try {       
     ICU.seguirUsuario("chino","tonyp");
     ICU.seguirUsuario("diegop","durazno");
     ICU.seguirUsuario("diegop","hrubino");
@@ -260,6 +261,11 @@ public class Fabrica {
     ICU.seguirUsuario("Tiajaci","juliob");
     ICU.seguirUsuario("Tiajaci","kairoh");
     ICU.seguirUsuario("Tiajaci","sergiop");
+    ICU.seguirUsuario("cachilas","hrubino");
+    } catch (Exception ex) {
+        Logger.getLogger(Fabrica.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    
 
 
 //------------------------------------------Colaboraciones--------------------------------------------------//

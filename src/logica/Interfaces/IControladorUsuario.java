@@ -26,11 +26,11 @@ import logica.Clases.Usuario;
  */
 public interface IControladorUsuario {
 
-    public abstract boolean seguirUsuario(String nickUsu1, String nickUsu2);
+    public abstract boolean seguirUsuario(String nickUsu1, String nickUsu2)throws Exception;
 
     public abstract void copiarFoto(String foto, String nick);
 
-    public abstract boolean dejarseguirUsuario(String nickUsu1, String nickUsu2);
+    public abstract boolean dejarseguirUsuario(String nickUsu1, String nickUsu2)throws Exception;
 
     public abstract boolean AgregarUsuarioColaborador(String nickName, String nombre, String apellido, String correo, Calendar fechaN, String imagen);
 
@@ -65,4 +65,6 @@ public interface IControladorUsuario {
     public abstract List ListarColaboraciones(String nickname);
 
     public abstract void LimpiarUsuarios();
+    
+    public abstract ArrayList<DtUsuario> ListarUsuarios();
 }

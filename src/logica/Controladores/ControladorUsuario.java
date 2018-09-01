@@ -77,26 +77,26 @@ public class ControladorUsuario implements IControladorUsuario {
     }
     
     @Override
-    public boolean seguirUsuario(String nickUsu1, String nickUsu2) {
+    public boolean seguirUsuario(String nickUsu1, String nickUsu2) throws Exception{
 
-//        try{
-////            
         Usuario aux1 = (Usuario) this.Usuarios.get(nickUsu1);
         Usuario aux2 = (Usuario) this.Usuarios.get(nickUsu2);
-
-//            throw new Exception("El Usuario "+ nickUsu1 + " ya sigue a " +nickUsu2);}
+        
         if (aux1 == null) {
-            return false;
+           throw new Exception("El Usuario " + nickUsu1 + " NO existe");
         }
-//            throw new Exception("El Usuario " + nickUsu1 + " NO existe");
 
         if (aux2 == null) {
-            return false;
-        }
-//             throw new Exception("El Usuario " + nickUsu2 + " NO existe");
+            throw new Exception("El Usuario " + nickUsu2 + " NO existe");
+        }            
         if (aux1.getSeguidos().containsKey(nickUsu2)) {
-            return false;
+            throw new Exception("El Usuario "+ nickUsu1 + " ya sigue a " +nickUsu2);
         }
+        
+        if (aux1 == aux2) {
+            throw new Exception("Un Usuario no puede seguirse a si mismo");
+        }   
+          
         
         boolean res = this.dbUsuario.seguirUsuario(nickUsu1, nickUsu2);
         if (res) {
@@ -105,10 +105,6 @@ public class ControladorUsuario implements IControladorUsuario {
         }
         
         return res;
-
-//        }catch (Exception error){
-//           
-//        }
     }
     
     @Override
@@ -131,25 +127,23 @@ public class ControladorUsuario implements IControladorUsuario {
     }
     
     @Override
-    public boolean dejarseguirUsuario(String nickUsu1, String nickUsu2) {
+    public boolean dejarseguirUsuario(String nickUsu1, String nickUsu2) throws Exception {
 
-//       try{
         Usuario aux1 = (Usuario) this.Usuarios.get(nickUsu1);
         Usuario aux2 = (Usuario) this.Usuarios.get(nickUsu2);
 
-//            throw new Exception("El Usuario "+ nickUsu1 + " NO sigue a " +nickUsu2);}
+            
         if (aux1 == null) {
-            return false;
+            throw new Exception("El Usuario " + nickUsu1 + " NO existe");
         }
-        //throw new Exception("El Usuario " + nickUsu1 + " NO existe");}
+      
 
         if (aux2 == null) {
-            return false;
-            //throw new Exception("El Usuario " + nickUsu2 + " NO existe");
+            throw new Exception("El Usuario " + nickUsu2 + " NO existe");
         }
         
         if (aux1.getSeguidos().containsKey(nickUsu2) == false) {
-            return false;
+            throw new Exception("El Usuario "+ nickUsu1 + " NO sigue a " +nickUsu2);
         }
         
         boolean res = this.dbUsuario.dejarseguirUsuario(nickUsu1, nickUsu2);
@@ -159,10 +153,6 @@ public class ControladorUsuario implements IControladorUsuario {
         }
         
         return res;
-
-//        }catch (Exception error){
-//           
-//        }
     }
     
     @Override
@@ -436,5 +426,21 @@ public class ControladorUsuario implements IControladorUsuario {
     @Override
     public void LimpiarUsuarios(){
         
+    }
+    
+    public ArrayList<DtUsuario> ListarUsuarios(){
+        ControladorUsuario CU = new ControladorUsuario();
+        Set set = Usuarios.entrySet();
+        Iterator iterator = set.iterator();
+        ArrayList<DtUsuario> retorno = new ArrayList();
+        while (iterator.hasNext()) {
+        Map.Entry mentry = (Map.Entry) iterator.next();
+            if (mentry.getValue() instanceof Usuario) {
+                Usuario aux = (Usuario) mentry.getValue();
+                DtUsuario aux2 = new DtUsuario (aux.getNickname(), aux.getNombre(), aux.getApellido(), aux.getCorreo(), aux.getFechaN(),aux.getImagen());
+                retorno.add(aux2);
+            }
+        }
+        return retorno;
     }
 }
