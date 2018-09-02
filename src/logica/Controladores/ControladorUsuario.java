@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import logica.Clases.Categoria;
 import logica.Clases.Colaboracion;
 import logica.Clases.DtColaboraciones;
 import logica.Clases.DtProponente;
@@ -95,6 +96,7 @@ public class ControladorUsuario implements IControladorUsuario {
         boolean res = this.dbUsuario.seguirUsuario(nickUsu1, nickUsu2);
         if (res) {
             aux1.getSeguidos().put(nickUsu2, aux2);
+            aux2.getSeguidores().put(nickUsu1, aux1);
             return true;
         }
 
@@ -141,6 +143,7 @@ public class ControladorUsuario implements IControladorUsuario {
         boolean res = this.dbUsuario.dejarseguirUsuario(nickUsu1, nickUsu2);
         if (res) {
             aux1.getSeguidos().remove(nickUsu2, aux2);
+            aux2.getSeguidores().remove(nickUsu1, aux1);
             return true;
         }
 
@@ -487,4 +490,108 @@ public class ControladorUsuario implements IControladorUsuario {
 
         return ok;
     }
+    
+    @Override
+    public void borrarProponente(String nickProp) {
+		Fabrica fabrica = Fabrica.getInstance();
+                IPropCat iContPro = fabrica.getControladorPropCat();
+		IControladorUsuario ControladorU = fabrica.getIControladorUsuario();
+
+		Proponente usr = ControladorU.ObtenerProponente(nickProp);
+                if(usr!=null){
+                
+		//se elimina el usuario como seguido de sus seguidores
+		Map<String, Usuario> eliminarseg = usr.getSeguidores();
+		List<Usuario> listaSeguidores = new ArrayList<Usuario>(eliminarseg.values());
+		Iterator<Usuario> iter = listaSeguidores.iterator();
+		while (iter.hasNext()) {
+			Usuario sigue = iter.next();
+			sigue.getSeguidos().remove(nickProp);
+		}
+                usr.getSeguidores().clear();
+                usr.getSeguidos().clear();
+
+			
+		//se eliminan las propuestas en las que participa el proponente
+		Map<String, Propuesta> eliminarprop = usr.getPropuestas();
+                Set set = eliminarprop.entrySet();
+                Iterator iterProp = set.iterator();
+                
+		while (iterProp.hasNext()) {
+                    Map.Entry mentry = (Map.Entry) iterProp.next();
+                    if (mentry.getValue() instanceof Propuesta){
+                    Propuesta propActual = (Propuesta) mentry.getValue();           
+                    iContPro.getPropuestas().remove(propActual.getTituloP());
+                    iterProp.remove();
+                    }
+		}
+                usr.getPropuestas().clear();
+                usr.getPropuestasRealizadas().clear();
+                } 
+      
+	}
+    
+    
+    @Override
+    public Colaborador ObtenerColaborador(String nombreC) {
+        return (Colaborador) this.Usuarios.get(nombreC);
+    }
+    
+    @Override
+    public void borrarColaborador(String nickColab){
+        Fabrica fabrica = Fabrica.getInstance();
+        IPropCat iContPro = fabrica.getControladorPropCat();
+        IControladorUsuario ControladorU = fabrica.getIControladorUsuario();
+
+        Colaborador usr = ControladorU.ObtenerColaborador(nickColab);
+        if(usr!=null){
+        
+        //se elimina el usuario como seguido de sus seguidores
+        Map<String, Usuario> eliminarseg = usr.getSeguidores();
+        List<Usuario> listaSeguidores = new ArrayList<Usuario>(eliminarseg.values());
+        Iterator<Usuario> iter = listaSeguidores.iterator();
+        while (iter.hasNext()) {
+            Usuario sigue = iter.next();
+            sigue.getSeguidos().remove(nickColab);
+        }
+        usr.getSeguidores().clear();
+        usr.getSeguidos().clear();
+         
+        //se eliminan las colaboraciones para ese colaborador
+
+        List<Colaboracion> lCol = usr.getColaboraciones();
+        Iterator it = lCol.iterator();
+        while (it.hasNext()) {
+        Colaboracion col = (Colaboracion) it.next();
+        it.remove();
+        }
+        usr.getColaboraciones().clear();
+        
+        }    
+         
+    }
+    
+    
+    @Override
+    public void eliminarCategorias(){
+        Fabrica fabrica = Fabrica.getInstance();
+        IPropCat IPC = fabrica.getControladorPropCat();
+       
+                
+        Map<String, Categoria> categorias = IPC.getCategorias();
+        Set set = categorias.entrySet();
+        Iterator iterator = set.iterator();
+        while (iterator.hasNext()) {
+            Map.Entry mentry = (Map.Entry) iterator.next();
+            if (mentry.getValue() instanceof Categoria) {
+                Categoria c=(Categoria) mentry.getValue();
+                iterator.remove();//aca se van borrando todas las categorias
+                }
+                        
+            }
+        IPC.getCategorias().clear();//limpia todo el map por si querdo algo
+
+        }
+        
+ 
 }

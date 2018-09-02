@@ -580,20 +580,19 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
         Fabrica fabrica = Fabrica.getInstance();
         IPropCat CPC = fabrica.getControladorPropCat();
         IControladorUsuario CU = fabrica.getIControladorUsuario();
+        float monto = Float.parseFloat(jTextField17.getText());
         if (jTextField17.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingrese el monto de la colaboración");
-        }
-        else if(jTable1.getSelectedRow() < 0 && jTable2.getSelectedRow() < 0){
+        } else if (monto <= 0) {
+            JOptionPane.showMessageDialog(null, "No puede ingresar montos menores o iguales a 0");
+        } else if (jTable1.getSelectedRow() < 0 && jTable2.getSelectedRow() < 0) {
             JOptionPane.showMessageDialog(null, "Seleccione un colaborador y una propuesta");
-        }
-        else if(jTable1.getSelectedRow() < 0){
+        } else if (jTable1.getSelectedRow() < 0) {
             JOptionPane.showMessageDialog(null, "Seleccione un colaborador");
-        }
-        else if(jTable2.getSelectedRow() < 0){
+        } else if (jTable2.getSelectedRow() < 0) {
             JOptionPane.showMessageDialog(null, "Seleccione una propuesta");
-        }
-        else {
-            float monto = Float.parseFloat(jTextField17.getText());
+        } else {
+
             boolean OK = false;
             if (jComboBox2.getSelectedItem().toString().compareTo("Entradas") == 0) {
                 try {
@@ -660,10 +659,10 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
             Map.Entry mentry = (Map.Entry) iterator.next();
             Propuesta aux = (Propuesta) mentry.getValue();
             if ((!jTextField14.getText().isEmpty()) && aux.getTituloP().contains(jTextField14.getText())) {
-                Object[] dat = {aux.getTituloP()};
+                Object[] dat = {aux.getTituloP(), aux.getAutor().getNickname()};
                 modelo.addRow(dat);
             } else if (jTextField14.getText().isEmpty()) {
-                Object[] dat = {aux.getTituloP()};
+                Object[] dat = {aux.getTituloP(), aux.getAutor().getNickname()};
                 modelo.addRow(dat);
             }
         }
