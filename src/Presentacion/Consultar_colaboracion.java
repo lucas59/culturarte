@@ -387,15 +387,22 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
         IControladorUsuario ICU = fabrica.getIControladorUsuario();
         List<Colaboracion> colaboraciones = ICU.ListarColaboraciones(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
         this.nickname = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
+         DefaultTableModel modelo = (DefaultTableModel) Tabla_propuesta.getModel();
         if (!colaboraciones.isEmpty()) {
-            DefaultTableModel modelo = (DefaultTableModel) Tabla_propuesta.getModel();
             modelo.setRowCount(0);
             for (int indice = 0; indice < colaboraciones.size(); indice++) {
                 Object[] dat = {colaboraciones.get(indice).getTituloP(), colaboraciones.get(indice).getColaborador().getNickname()};
                 modelo.addRow(dat);
             }
         } else {
+            modelo.setRowCount(0);
+            jTextField1.setText("");
+            jTextField2.setText("");
+            jTextField3.setText("");
+            jTextField5.setText("");
+            jTextField6.setText("");
             JOptionPane.showMessageDialog(null, "El colaborador no tiene colaboraciones");
+            
         }
 
     }//GEN-LAST:event_jTable1MouseClicked
@@ -474,7 +481,8 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
                     java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
                     SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy");
                     SimpleDateFormat g = new SimpleDateFormat("hh:mm:ss a");
-                    jTextField6.setText(f.format(utilDate) + " " + g.format(utilDate.getTime()));
+                    jTextField6.setText(f.format(utilDate));
+                    jTextField1.setText(g.format(utilDate.getTime()));
                     break;
                 }
             }
