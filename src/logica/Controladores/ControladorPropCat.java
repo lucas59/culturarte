@@ -92,7 +92,7 @@ public class ControladorPropCat implements IPropCat {
             Map.Entry mentry = (Map.Entry) iterator.next();
             Propuesta aux = (Propuesta) mentry.getValue();
 
-            if (aux.getEstadoActual().getEstado() == TipoE.Publicada || aux.getEstadoActual().getEstado() == TipoE.enFinanciacion) {
+            if (aux.getEstadoActual().getEstado() == TipoE.Publicada || aux.getEstadoActual().getEstado() == TipoE.enFinanciacion || aux.getEstadoActual().getEstado() == TipoE.Ingresada) {
                 DtNickTitProp aux2 = new DtNickTitProp(aux);
                 retorno.add(aux2);
             }
