@@ -278,6 +278,7 @@ public class inicio extends javax.swing.JFrame {
        if (respuesta == 0) {
             boolean ok = fabrica.limpiarBaseDeDatos();
             if(ok){
+            fabrica.LimpiarLogica();
             fabrica.cargarDatosdePrueba();
             JOptionPane.showMessageDialog(null, "Datos Cargados Exitosamente!!!");
            }
