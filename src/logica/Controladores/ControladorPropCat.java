@@ -8,6 +8,12 @@ package logica.Controladores;
 import Persistencia.DBColaboracion;
 import Persistencia.DBPropuesta;
 import com.sun.javafx.scene.control.skin.VirtualFlow;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -63,10 +69,10 @@ public class ControladorPropCat implements IPropCat {
         this.dbPropuesta = new DBPropuesta();
         this.categorias = new HashMap<>();
         this.propuestas = new HashMap<>();
-        Categoria cat = new Categoria("Categoria");
+        /*  Categoria cat = new Categoria("Categoria");
         this.categorias.put("Categoria", cat);
         this.dbPropuesta.agregarCategoria("Categoria", null);
-        this.Propuesta = null;
+         */ this.Propuesta = null;
     }
 
     public void ComunicarControladores(IControladorUsuario icu) {
@@ -157,17 +163,34 @@ public class ControladorPropCat implements IPropCat {
         if (this.propuestas.get(tituloP) != null) {
             throw new Exception("Ya existe una propuesta bajo ese Nombre");
         }
+        String nuevaRutaI;
 
         TipoE tipo = TipoE.Publicada;
         Calendar fechaI = new GregorianCalendar();
         EstadoPropuesta estado = new EstadoPropuesta(tipo, fechaI);
-        Propuesta nuevaP = new Propuesta(tituloP, descripcion, imagen, lugar, fecha, montoE, montoTot, estado, this.catRecordada, retorno, this.uProponente);
+
+        if (!"".equals(imagen)) {
+            File fotoL = new File(imagen);
+            String extension = getFileExtension(fotoL);
+            String ruta = System.getProperty("user.dir") + "\\fPropuestas\\" + tituloP + "." + extension;
+
+            nuevaRutaI = (tituloP + "." + extension);
+        } else {
+            nuevaRutaI = "Culturarte.png";
+        }
+
+        Propuesta nuevaP = new Propuesta(tituloP, descripcion, nuevaRutaI, lugar, fecha, montoE, montoTot, estado, this.catRecordada, retorno, this.uProponente);
 
         boolean agregada = this.dbPropuesta.agregarPropuesta(nuevaP, estado);
         if (agregada) {
             this.propuestas.put(tituloP, nuevaP);
             this.catRecordada.setPropuesta(nuevaP);
             this.uProponente.setPropuesta(nuevaP);
+
+            if (!"".equals(nuevaP.getImagen())) {
+                copiarFoto(nuevaRutaI, tituloP);
+            }
+
         } else {
             this.catRecordada = null;
             this.uProponente = null;
@@ -254,17 +277,26 @@ public class ControladorPropCat implements IPropCat {
             estado = prop.getEstadoActual().getEstado().name();
             float monto = this.CalcularMontoPropuesta(prop);
 
+            String tipoR;
+
+            if (prop.getRetorno() == TipoRetorno.EntGan) {
+                tipoR = "Entradas y Porcentaje";
+            } else {
+                tipoR = prop.getRetorno().name();
+
+            }
+
             Date fecha = (Date) prop.getFecha().getTime();
             String fechaR = new SimpleDateFormat("dd/MMM/yyyy").format(fecha);
 
-            return new DtConsultaPropuesta(prop.getTituloP(), prop.getCategoria().getNombreC(), prop.getLugar(), fechaR, monto, prop.getMontoE(), estado, prop.getDescripcionP(), prop.getImagen());
+            return new DtConsultaPropuesta(prop.getTituloP(), prop.getCategoria().getNombreC(), prop.getLugar(), fechaR, monto, prop.getMontoE(), estado, prop.getDescripcionP(), prop.getImagen(), prop.getMontoTot(), tipoR);
         } else {
             throw new Exception("La propuesta ingresada no esta en el sistema");
         }
     }
 
     @Override
-    public Map<String, Propuesta> getpropuesta() {
+    public Map<String, Propuesta> getPropuestas() {
         return this.propuestas;
     }
 
@@ -305,6 +337,7 @@ public class ControladorPropCat implements IPropCat {
 
     }
 
+    @Override
     public void CargarColaboraciones() {
         DBColaboracion DBC = new DBColaboracion();
         DBC.CargarColaboraciones();
@@ -391,7 +424,7 @@ public class ControladorPropCat implements IPropCat {
     @Override
     public boolean crearPropuestaDatosdePrueba(String tituloP, String descripcion, Categoria cat, Calendar fecha, String lugar, float montoE, float montoTot, TipoRetorno retorno, Proponente p, String imagen) {
 
-        if (this.getpropuesta().get(tituloP) != null) {
+        if (this.getPropuestas().get(tituloP) != null) {
             return false;
         }
 
@@ -465,7 +498,88 @@ public class ControladorPropCat implements IPropCat {
     }
 
     @Override
-    public void LimpiarPropCat(){
-        
+    public void LimpiarPropCat() {
+        Iterator it = this.categorias.entrySet().iterator();
+
+        while (it.hasNext()) {
+            Map.Entry mtry = (Map.Entry) it.next();
+            Categoria cat = (Categoria) mtry.getValue();
+
+            if (cat.getPropuestas().size() > 0) {
+                Iterator itP = cat.getPropuestas().entrySet().iterator();
+                while (itP.hasNext()) {
+                    Map.Entry mtryP = (Map.Entry) it.next();
+                    Propuesta prop = (Propuesta) mtryP.getValue();
+                    this.LimpiarProp(prop);
+                    this.getPropuestas().remove(prop.getTituloP(), prop);
+                    cat.getPropuestas().remove(prop.getTituloP(), prop);
+                }
+            }
+        }
+
+    }
+
+    public void LimpiarProp(Propuesta prop) {
+
+        for (Colaboracion col : prop.getColaboraciones()) {
+            prop.getColaboraciones().remove(col);
+            col.setPropuesta(null);
+            col.setUColaborador(null);
+        }
+
+        for (EstadoPropuesta estP : prop.getHistorialEst()) {
+            prop.getHistorialEst().remove(estP);
+        }
+        prop.setCategoria(null);
+        prop.setEstadoActual(null);
+        prop.setAutor(null);
+    }
+
+    @Override
+    public void comprobarBaseCat() {
+        this.dbPropuesta.ComprobarBaseCat();
+    }
+
+    private static String getFileExtension(File file) {
+        String fileName = file.getName();
+        if (fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0) {
+            return fileName.substring(fileName.lastIndexOf(".") + 1);
+        } else {
+            return "";
+        }
+    }
+
+    @Override
+    public void copiarFoto(String foto, String tituloP) {
+
+        File origen = new File(foto);
+        String extension = getFileExtension(origen);
+        String rutaLocal = System.getProperty("user.dir") + "\\fPerfiles\\" + tituloP + "." + extension;
+        File destino = new File(rutaLocal);
+
+        try {
+            InputStream in = new FileInputStream(origen);
+            OutputStream out = new FileOutputStream(destino);
+
+            byte[] buf = new byte[1024];
+            int len;
+
+            while ((len = in.read(buf)) > 0) {
+                out.write(buf, 0, len);
+            }
+
+            in.close();
+            out.close();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void setEstadoActualDatosDePrueba(String titulo, EstadoPropuesta estadoActual) {
+
+        Propuesta prop = this.getPropuestas().get(titulo);
+        prop.setEstadoActual(estadoActual);
     }
 }
