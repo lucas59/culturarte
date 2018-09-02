@@ -67,4 +67,12 @@ public interface IControladorUsuario {
     public abstract ArrayList<DtUsuario> ListarUsuarios();
     
     public abstract boolean limpiarBaseDeDatos();
+    
+    public abstract void borrarProponente(String nickProp);
+    
+    public abstract void borrarColaborador(String nickColab);
+    
+    public abstract Colaborador ObtenerColaborador(String nombreC);
+    
+    public abstract void eliminarCategorias();
 }

@@ -6,11 +6,17 @@
 package logica;
 
 import java.util.GregorianCalendar;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import logica.Clases.Colaborador;
 import logica.Clases.EstadoPropuesta;
+import logica.Clases.Proponente;
 import logica.Clases.TipoE;
 import logica.Clases.TipoRetorno;
+import logica.Clases.Usuario;
 import logica.Interfaces.IPropCat;
 import logica.Controladores.ControladorUsuario;
 import logica.Controladores.ControladorPropCat;
@@ -114,11 +120,10 @@ public class Fabrica {
                 + "propia Comparsa de negros y lubolos \\\"Cuareim 1080\\\". Director responsable, compositor y cantante de la misma. ",
                 "https://www.facebook.com/C1080?ref=br_rs");
 
-        ICU.AgregarUsuarioProponente("juliob", "Julio", "Bocca", "juliobocca@sodre.com.uy", new GregorianCalendar(1967, 02, 16),
-                "", "Benito Blanco 4321", "", "");
+        ICU.AgregarUsuarioProponente("juliob", "Julio", "Bocca", "juliobocca@sodre.com.uy", new GregorianCalendar(1967, 02, 16),ruta + "\\fotosdp\\nadie.png",
+                "Benito Blanco 4321", "", "");
 
-        ICU.AgregarUsuarioProponente("diegop", "Diego", "Parodi", "diego@efectocine.com", new GregorianCalendar(1975, 00, 01),
-                "", "Emilio Frugoni 1138 Ap. 02", "", "http://www.efectocine.com");
+        ICU.AgregarUsuarioProponente("diegop", "Diego", "Parodi", "diego@efectocine.com", new GregorianCalendar(1975, 00, 01), ruta + "\\fotosdp\\nadie.png", "Emilio Frugoni 1138 Ap. 02", "", "http://www.efectocine.com");
 
         ICU.AgregarUsuarioProponente("kairoh", "Kairo", "Herrera", "kairoher@pilsenrock.com.uy", new GregorianCalendar(1840, 03, 25),
                 ruta + "\\fotosdp\\kairoh.jpg", "Paraguay 1423", "", "");
@@ -331,7 +336,34 @@ public class Fabrica {
     }
 
     public void LimpiarLogica() {
+        
+        IControladorUsuario ICU = this.getIControladorUsuario();
+        IPropCat IPC = this.getControladorPropCat();
+     
+                
+        Map<String, Usuario> usuarios = ICU.getUsuarios();
+        Set set = usuarios.entrySet();
+        Iterator iterator = set.iterator();
+        while (iterator.hasNext()) {
+            Map.Entry mentry = (Map.Entry) iterator.next();
+            if (mentry.getValue() instanceof Proponente) {
+                Proponente p=(Proponente) mentry.getValue();
+                ICU.borrarProponente(p.getNickname());
+                iterator.remove();//aca se van borrando los usuarios proponentes
+                }
+            
+            if (mentry.getValue() instanceof Colaborador) {
+                Colaborador c=(Colaborador) mentry.getValue();
+                ICU.borrarColaborador(c.getNickname());
+                iterator.remove();//aca se van borrando los usuarios colaboradores
+                }
+               
+            }
+            ICU.getUsuarios().clear();
+            IPC.getPropuestas().clear();//para limpiar el map dsp que borre todo
+            ICU.eliminarCategorias();
 
+        }
+        
+        
     }
-
-}
