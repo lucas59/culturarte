@@ -27,13 +27,13 @@ public class inicio extends javax.swing.JFrame {
      */
     public inicio() {
         initComponents();
+
         this.setLocationRelativeTo(null);
         this.setExtendedState(inicio.MAXIMIZED_BOTH);
         Fabrica fabrica = Fabrica.getInstance();
         ICU = fabrica.getIControladorUsuario();
         IPC = fabrica.getControladorPropCat();
-        ICU.ComunicarControladores(IPC);
-        IPC.ComunicarControladores(ICU);
+        //IPC.comprobarBaseCat();
         ICU.CargarUsuarios();
         IPC.CargarPropuestas();
         IPC.CargarColaboraciones();
@@ -220,6 +220,7 @@ public class inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+
         Seguir_Usuario seguir = new Seguir_Usuario();
         Escritorio.add(seguir);
         seguir.setVisible(true);
@@ -262,7 +263,10 @@ public class inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-       Fabrica fabrica = Fabrica.getInstance();
+
+        //this.ICU.LimpiarUsuarios();
+        //this.IPC.LimpiarPropCat();
+        Fabrica fabrica = Fabrica.getInstance();
 
        if(fabrica.getdatosCargados()==true){
            JOptionPane.showMessageDialog(null, "Datos de Prueba ya fueron cargados durante la ejecucion,\n debe reiniciar la aplicacion para continuar. ", "ERROR: Datos de Prueba ya cargados", JOptionPane.ERROR_MESSAGE); 
@@ -276,7 +280,7 @@ public class inicio extends javax.swing.JFrame {
             if(ok){
             fabrica.cargarDatosdePrueba();
             JOptionPane.showMessageDialog(null, "Datos Cargados Exitosamente!!!");
-            }
+           }
         } 
        
        else {           
@@ -285,7 +289,7 @@ public class inicio extends javax.swing.JFrame {
        
        
        }
-       
+         
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed

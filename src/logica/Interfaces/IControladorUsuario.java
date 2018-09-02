@@ -42,8 +42,6 @@ public interface IControladorUsuario {
 
     public abstract ArrayList<DtinfoColaborador> ListarColaboradores();
 
-    public abstract void ComunicarControladores(IPropCat prop);
-
     public abstract ArrayList<DtinfoColaborador> BuscarColaborador(String nick);
 
     public abstract List<DtinfoPropuesta> verPropuestas(DtinfoColaborador dtc);

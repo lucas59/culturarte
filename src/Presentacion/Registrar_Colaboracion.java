@@ -651,7 +651,7 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
         Fabrica fabrica = Fabrica.getInstance();
         IPropCat IPC = fabrica.getControladorPropCat();
         String usu = this.jTextField14.getText();
-        Map<String, Propuesta> Propuestas = IPC.getpropuesta();
+        Map<String, Propuesta> Propuestas = IPC.getPropuestas();
         Set set = Propuestas.entrySet();
         Iterator iterator = set.iterator();
         jTable1.clearSelection();
@@ -736,7 +736,7 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
 
         Fabrica fabrica = Fabrica.getInstance();
         IPropCat controladorPC = fabrica.getControladorPropCat();
-        Map<String, Propuesta> propuestas = controladorPC.getpropuesta();
+        Map<String, Propuesta> propuestas = controladorPC.getPropuestas();
         Set set = propuestas.entrySet();
         Iterator iterator = set.iterator();
         iterator = set.iterator();

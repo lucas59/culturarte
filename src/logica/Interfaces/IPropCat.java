@@ -31,7 +31,7 @@ public interface IPropCat {
 
     public abstract DtConsultaPropuesta SeleccionarPropuesta(String titulo) throws Exception;
 
-    public abstract Map<String, Propuesta> getpropuesta();
+    public abstract Map<String, Propuesta> getPropuestas();
 
     public abstract List<DtinfoPropuesta> DarPropuestasCol(Colaborador c);
 
@@ -77,6 +77,11 @@ public interface IPropCat {
 
     public abstract void LimpiarPropCat();
 
+    public abstract void comprobarBaseCat();
+
+    public abstract void copiarFoto(String foto, String tituloP);
+
+    public abstract void setEstadoActualDatosDePrueba(String titulo, EstadoPropuesta estadoActual);
     public abstract List<DtColaboraciones> listarColaboraciones(String titulo) throws Exception;
 
     public abstract boolean eliminarColaboracion(String titulo, String nick);

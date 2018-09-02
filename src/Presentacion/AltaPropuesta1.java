@@ -19,38 +19,42 @@ import logica.Clases.DtUsuario;
  * @author Martin
  */
 public class AltaPropuesta1 extends javax.swing.JInternalFrame {
-
+    
     private IControladorUsuario ICU;
     private IPropCat ICP;
     private String nickProp;
     private String Categoria;
-
+    private List<DtUsuario> listUsu;
+    
     public AltaPropuesta1() {
         initComponents();
         this.ICU = Fabrica.getInstance().getIControladorUsuario();
         this.ICP = Fabrica.getInstance().getControladorPropCat();
-
+        
+        jLabelAyuda.setVisible(false);
+        
         jPanelNuevaCategoria.setVisible(false);
-
+        
         List listCat = ICP.ListarCategorias();
         Iterator it = listCat.iterator();
-
+        
         while (it.hasNext()) {
             jComboBoxCategoria.addItem(it.next().toString());
         }
-
-        List<DtUsuario> listUsu = ICU.ListarProponentes2();
+        
+        this.listUsu = ICU.ListarProponentes2();
+        
         DefaultTableModel modelo = (DefaultTableModel) jTableAltaProp1.getModel();
-
+        
         modelo.setRowCount(0);
-
+        
         for (int i = 0; i < listUsu.size(); i++) {
             DtUsuario usu = (DtUsuario) listUsu.get(i);
             Object[] datos = {usu.getNickName(), usu.getNombre(), usu.getApellido(), usu.getCorreo()};
-
+            
             modelo.addRow(datos);
         }
-
+        
     }
 
     /**
@@ -81,6 +85,7 @@ public class AltaPropuesta1 extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jButtonCrearCat = new javax.swing.JButton();
         jButtonCancelarCat = new javax.swing.JButton();
+        jLabelAyuda = new javax.swing.JLabel();
 
         jTableAltaProp1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -103,6 +108,12 @@ public class AltaPropuesta1 extends javax.swing.JInternalFrame {
         jComboBoxCategoria.setBorder(null);
 
         jLabel1.setText("Categoria:");
+
+        jTextFieldNickName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldNickNameKeyReleased(evt);
+            }
+        });
 
         jLabel2.setText("Nickname del proponente a seleccionar:");
 
@@ -210,6 +221,9 @@ public class AltaPropuesta1 extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabelAyuda.setForeground(new java.awt.Color(51, 51, 255));
+        jLabelAyuda.setText("(Debe escribir el NickName completo para continuar.)");
+
         javax.swing.GroupLayout jPanelAlProp1Layout = new javax.swing.GroupLayout(jPanelAlProp1);
         jPanelAlProp1.setLayout(jPanelAlProp1Layout);
         jPanelAlProp1Layout.setHorizontalGroup(
@@ -232,9 +246,11 @@ public class AltaPropuesta1 extends javax.swing.JInternalFrame {
                     .addGroup(jPanelAlProp1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextFieldNickName, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextFieldNickName, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabelAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
             .addComponent(jPanelNuevaCategoria, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanelAlProp1Layout.setVerticalGroup(
@@ -243,7 +259,8 @@ public class AltaPropuesta1 extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelAlProp1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextFieldNickName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldNickName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelAyuda))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -277,7 +294,7 @@ public class AltaPropuesta1 extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
 
         this.Categoria = String.valueOf(jComboBoxCategoria.getSelectedItem());
-
+        
         if (!jTextFieldNickName.getText().isEmpty() && this.Categoria != null) {
             try {
                 if (!ICP.seleccionarUC(jTextFieldNickName.getText(), this.Categoria)) {
@@ -311,14 +328,14 @@ public class AltaPropuesta1 extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
 
         jPanelNuevaCategoria.setVisible(true);
-
+        
         List listC = ICP.ListarCategorias();
         Iterator it = listC.iterator();
-
+        
         while (it.hasNext()) {
             jComboBoxCatAnte.addItem(it.next().toString());
         }
-
+        
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -327,19 +344,19 @@ public class AltaPropuesta1 extends javax.swing.JInternalFrame {
 
         String cat = String.valueOf(jComboBoxCatAnte.getSelectedItem());
         String nomCatN = jTextFieldNewCat.getText();
-
+        
         try {
-
+            
             if ("".equals(jTextFieldNewCat.getText())) {
                 javax.swing.JOptionPane.showMessageDialog(null, "Debe ingresar el nombre de la nueva categoria");
-
+                
             }
-
+            
             ICP.altaCategoria(nomCatN, cat);
             javax.swing.JOptionPane.showMessageDialog(null, "La categoria fue agregada con exito");
             jComboBoxCategoria.addItem(nomCatN);
             jPanelNuevaCategoria.setVisible(false);
-
+            
         } catch (Exception e) {
             javax.swing.JOptionPane.showMessageDialog(null, e);
         }
@@ -349,6 +366,35 @@ public class AltaPropuesta1 extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         jPanelNuevaCategoria.setVisible(false);
     }//GEN-LAST:event_jButtonCancelarCatActionPerformed
+
+    private void jTextFieldNickNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNickNameKeyReleased
+        
+        DefaultTableModel model = (DefaultTableModel) jTableAltaProp1.getModel();
+        
+        model.setRowCount(0);
+        
+        for (int i = 0; i < jTableAltaProp1.getRowCount(); i++) {
+            model.removeRow(i);
+            i -= 1;
+        }
+        
+        model = (DefaultTableModel) jTableAltaProp1.getModel();
+        model.setRowCount(0);
+        
+        for (int i = 0; i < this.listUsu.size(); i++) {
+            DtUsuario usu = (DtUsuario) this.listUsu.get(i);
+            if ((!jTextFieldNickName.getText().isEmpty()) && usu.getNickName().contains(jTextFieldNickName.getText())) {
+                jLabelAyuda.setVisible(true);
+                Object[] dat = {usu.getNickName(), usu.getNombre(), usu.getApellido(), usu.getCorreo()};
+                model.addRow(dat);
+            } else if (jTextFieldNickName.getText().isEmpty()) {
+                jLabelAyuda.setVisible(false);
+                Object[] dat = {usu.getNickName(), usu.getNombre(), usu.getApellido(), usu.getCorreo()};
+                model.addRow(dat);
+            }
+        }
+
+    }//GEN-LAST:event_jTextFieldNickNameKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -364,6 +410,7 @@ public class AltaPropuesta1 extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabelAyuda;
     private javax.swing.JPanel jPanelAlProp1;
     private javax.swing.JPanel jPanelNewCategoria;
     private javax.swing.JPanel jPanelNuevaCategoria;
