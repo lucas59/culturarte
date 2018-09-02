@@ -16,6 +16,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import logica.Clases.Categoria;
 import logica.Clases.Colaboracion;
 import logica.Clases.Colaborador;
@@ -167,7 +169,7 @@ public class DBPropuesta {
 
                 cat.getPropuestas().put(nuevaP.getTituloP(), nuevaP);
                 prop.getPropuestasRealizadas().put(nuevaP.getTituloP(), nuevaP);
-                Fabrica.getInstance().getControladorPropCat().getpropuesta().put(nuevaP.getTituloP(), nuevaP);
+                Fabrica.getInstance().getControladorPropCat().getPropuestas().put(nuevaP.getTituloP(), nuevaP);
             }
             rs.close();
             st.close();
@@ -282,6 +284,19 @@ public class DBPropuesta {
         return true;
     }
 
- 
+    public void ComprobarBaseCat() {
+
+        try {
+            PreparedStatement sT1 = conexion.prepareStatement("SELECT * FROM categoria WHERE nombreC = 'Categoria' ");
+            ResultSet rs1 = sT1.executeQuery();
+
+            if (!rs1.next()) {
+                this.agregarCategoria("Categoria", null);
+                Fabrica.getInstance().getControladorPropCat().getCategorias().put("Categoria", new Categoria("Categoria"));
+            } 
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
 
 }

@@ -152,4 +152,17 @@ public class Propuesta {
     public void setColaboraciones(Colaboracion Colaboracion) {
         this.Colaboraciones.add(Colaboracion);
     }
+
+    public boolean eliminarColaboracion(Colaboracion c) {
+        boolean ok = false;
+        for (Colaboracion col : this.Colaboraciones) {
+            if (col.getColaborador().getNickname().equals(c.getColaborador().getNickname())) {
+                this.Colaboraciones.remove(col);
+                ok = true;
+                break;
+            }
+        }
+        return ok;
+    }
+
 }

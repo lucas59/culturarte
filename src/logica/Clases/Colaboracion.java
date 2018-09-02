@@ -79,4 +79,16 @@ public class Colaboracion {
     public String getTituloP() {
         return Propuesta.getTituloP();
     }
+
+    public boolean borrarme() {
+        boolean ok;
+        ok = this.UColaborador.borrarColaboracion(this);
+        if (ok) {
+            ok = this.Propuesta.eliminarColaboracion(this);
+        }
+        this.UColaborador = null;
+        this.Propuesta = null;
+        return ok;
+    }
+
 }

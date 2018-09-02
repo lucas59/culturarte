@@ -20,8 +20,10 @@ public class DtConsultaPropuesta {
     private float montoActual;
     private String EstadoActual;
     private float montoE;
+    private float montoTot;
+    private String tipoRet;
 
-    public DtConsultaPropuesta(String tit, String cat, String lugar, String fecha, float monto, float montoe, String estado, String desc, String img) {
+    public DtConsultaPropuesta(String tit, String cat, String lugar, String fecha, float monto, float montoe, String estado, String desc, String img, float montoTot, String tipoRet) {
         this.titulo = tit;
         this.categoria = cat;
         this.descripcion = desc;
@@ -31,6 +33,16 @@ public class DtConsultaPropuesta {
         this.imagen = img;
         this.fechaR = fecha;
         this.lugar = lugar;
+        this.montoTot = montoTot;
+        this.tipoRet = tipoRet;
+    }
+
+    public float getMontoTot() {
+        return this.montoTot;
+    }
+
+    public String getTipoRetorno() {
+        return this.tipoRet;
     }
 
     public String getTitulo() {

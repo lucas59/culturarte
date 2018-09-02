@@ -22,7 +22,7 @@ public class Colaborador extends Usuario {
 
     public Colaborador(String nickname, String nombre, String apellido, String correo, Calendar fechaN, String imagen) {
         super(nickname, nombre, apellido, correo, fechaN, imagen);
-        this.Colaboraciones = new ArrayList();     
+        this.Colaboraciones = new ArrayList();
     }
 
     public List<Colaboracion> getColaboraciones() {
@@ -31,5 +31,18 @@ public class Colaborador extends Usuario {
 
     public void setColaboraciones(Colaboracion Colaboraciones) {
         this.Colaboraciones.add(Colaboraciones);
+    }
+
+    public boolean borrarColaboracion(Colaboracion col) {
+        boolean ok = false;
+
+        for (Colaboracion c : this.Colaboraciones) {
+            if (c.getUColaborador().getNickname().equals(col.getColaborador().getNickname())) {
+                this.Colaboraciones.remove(c);
+                ok = true;
+                break;
+            }
+        }
+        return ok;
     }
 }
