@@ -30,7 +30,7 @@ public interface IPropCat {
 
     public abstract DtConsultaPropuesta SeleccionarPropuesta(String titulo) throws Exception;
 
-    public abstract Map<String, Propuesta> getpropuesta();
+    public abstract Map<String, Propuesta> getPropuestas();
 
     public abstract List<DtinfoPropuesta> DarPropuestasCol(Colaborador c);
 
@@ -69,10 +69,16 @@ public interface IPropCat {
     public abstract List<DtinfoPropuesta> ListarPropuestasDeProponenteX(String nick);
 
     public abstract EstadoPropuesta verEstadoPropuesta(String titulo);
-    
+
     public void ComunicarControladores(IControladorUsuario icu);
 
     public abstract void CargarColaboraciones();
 
     public abstract void LimpiarPropCat();
+
+    public abstract void comprobarBaseCat();
+
+    public abstract void copiarFoto(String foto, String tituloP);
+
+    public abstract void setEstadoActualDatosDePrueba(String titulo, EstadoPropuesta estadoActual);
 }
