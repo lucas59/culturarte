@@ -120,7 +120,7 @@ public class Fabrica {
                 + "propia Comparsa de negros y lubolos \\\"Cuareim 1080\\\". Director responsable, compositor y cantante de la misma. ",
                 "https://www.facebook.com/C1080?ref=br_rs");
 
-        ICU.AgregarUsuarioProponente("juliob", "Julio", "Bocca", "juliobocca@sodre.com.uy", new GregorianCalendar(1967, 02, 16),ruta + "\\fotosdp\\nadie.png",
+        ICU.AgregarUsuarioProponente("juliob", "Julio", "Bocca", "juliobocca@sodre.com.uy", new GregorianCalendar(1967, 02, 16), ruta + "\\fotosdp\\nadie.png",
                 "Benito Blanco 4321", "", "");
 
         ICU.AgregarUsuarioProponente("diegop", "Diego", "Parodi", "diego@efectocine.com", new GregorianCalendar(1975, 00, 01), ruta + "\\fotosdp\\nadie.png", "Emilio Frugoni 1138 Ap. 02", "", "http://www.efectocine.com");
@@ -297,38 +297,38 @@ public class Fabrica {
         IPC.nuevoEstadoPropuestaDatosdePrueba("Cine en el Botánico", TipoE.enFinanciacion, new GregorianCalendar(2018, 04, 20, 14, 30, 0));
         IPC.nuevoEstadoPropuestaDatosdePrueba("Cine en el Botánico", TipoE.Financiada, new GregorianCalendar(2018, 04, 30, 18, 30, 0));
 
-        IPC.setEstadoActualDatosDePrueba("Cine en el Botánico", new EstadoPropuesta(TipoE.Cancelada, new GregorianCalendar(2018, 05, 15, 14, 50, 0)));
+        IPC.setEstadoActualDatosDePrueba("Cine en el Botánico", new EstadoPropuesta(TipoE.Cancelada, new GregorianCalendar(2018, 05, 15, 14, 50, 0), true));
 
         IPC.nuevoEstadoPropuestaDatosdePrueba("Religiosamente", TipoE.Ingresada, new GregorianCalendar(2018, 05, 18, 4, 28, 0));
         IPC.nuevoEstadoPropuestaDatosdePrueba("Religiosamente", TipoE.Publicada, new GregorianCalendar(2018, 05, 20, 4, 56, 0));
         IPC.nuevoEstadoPropuestaDatosdePrueba("Religiosamente", TipoE.enFinanciacion, new GregorianCalendar(2018, 05, 30, 14, 25, 0));
 
-        IPC.setEstadoActualDatosDePrueba("Religiosamente", new EstadoPropuesta(TipoE.Financiada, new GregorianCalendar(2018, 06, 15, 9, 45, 0)));
+        IPC.setEstadoActualDatosDePrueba("Religiosamente", new EstadoPropuesta(TipoE.Financiada, new GregorianCalendar(2018, 06, 15, 9, 45, 0), true));
 
         IPC.nuevoEstadoPropuestaDatosdePrueba("El Pimiento Indomable", TipoE.Ingresada, new GregorianCalendar(2018, 06, 26, 15, 30, 0));
         IPC.nuevoEstadoPropuestaDatosdePrueba("El Pimiento Indomable", TipoE.Publicada, new GregorianCalendar(2018, 06, 31, 8, 30, 0));
 
-        IPC.setEstadoActualDatosDePrueba("El Pimiento Indomable", new EstadoPropuesta(TipoE.enFinanciacion, new GregorianCalendar(2018, 07, 01, 7, 40, 0)));
+        IPC.setEstadoActualDatosDePrueba("El Pimiento Indomable", new EstadoPropuesta(TipoE.enFinanciacion, new GregorianCalendar(2018, 07, 01, 7, 40, 0), true));
 
         IPC.nuevoEstadoPropuestaDatosdePrueba("Pilsen Rock", TipoE.Ingresada, new GregorianCalendar(2018, 06, 30, 15, 40, 0));
         IPC.nuevoEstadoPropuestaDatosdePrueba("Pilsen Rock", TipoE.Publicada, new GregorianCalendar(2018, 07, 01, 14, 30, 0));
 
-        IPC.setEstadoActualDatosDePrueba("Pilsen Rock", new EstadoPropuesta(TipoE.enFinanciacion, new GregorianCalendar(2018, 07, 05, 16, 50, 0)));
+        IPC.setEstadoActualDatosDePrueba("Pilsen Rock", new EstadoPropuesta(TipoE.enFinanciacion, new GregorianCalendar(2018, 07, 05, 16, 50, 0), true));
 
         IPC.nuevoEstadoPropuestaDatosdePrueba("Romeo y Julieta", TipoE.Ingresada, new GregorianCalendar(2018, 07, 04, 12, 20, 0));
         IPC.nuevoEstadoPropuestaDatosdePrueba("Romeo y Julieta", TipoE.Publicada, new GregorianCalendar(2018, 07, 10, 10, 25, 0));
 
-        IPC.setEstadoActualDatosDePrueba("Romeo y Julieta", new EstadoPropuesta(TipoE.enFinanciacion, new GregorianCalendar(2018, 07, 13, 04, 58, 0)));
+        IPC.setEstadoActualDatosDePrueba("Romeo y Julieta", new EstadoPropuesta(TipoE.enFinanciacion, new GregorianCalendar(2018, 07, 13, 04, 58, 0), true));
 
         IPC.nuevoEstadoPropuestaDatosdePrueba("Un día de Julio", TipoE.Ingresada, new GregorianCalendar(2018, 07, 06, 02, 00, 0));
         IPC.nuevoEstadoPropuestaDatosdePrueba("Un día de Julio", TipoE.Publicada, new GregorianCalendar(2018, 07, 12, 04, 50, 0));
 
-        IPC.setEstadoActualDatosDePrueba("Un día de Julio", new EstadoPropuesta(TipoE.enFinanciacion, new GregorianCalendar(2018, 07, 15, 04, 48, 0)));
+        IPC.setEstadoActualDatosDePrueba("Un día de Julio", new EstadoPropuesta(TipoE.enFinanciacion, new GregorianCalendar(2018, 07, 15, 04, 48, 0), true));
 
         IPC.nuevoEstadoPropuestaDatosdePrueba("El Lazarillo de Tormes", TipoE.Ingresada, new GregorianCalendar(2018, 07, 18, 02, 40, 0));
-        IPC.setEstadoActualDatosDePrueba("Un día de Julio", new EstadoPropuesta(TipoE.enFinanciacion, new GregorianCalendar(2018, 07, 20, 21, 58, 0)));
+        IPC.setEstadoActualDatosDePrueba("El Lazarillo de Tormes", new EstadoPropuesta(TipoE.Publicada, new GregorianCalendar(2018, 07, 20, 02, 40, 0), true));
 
-        IPC.setEstadoActualDatosDePrueba("Durazno Rock", new EstadoPropuesta(TipoE.Ingresada, new GregorianCalendar(2018, 07, 23, 2, 12, 0)));
+        IPC.setEstadoActualDatosDePrueba("Durazno Rock", new EstadoPropuesta(TipoE.Ingresada, new GregorianCalendar(2018, 07, 23, 2, 12, 0), true));
 
 //    
         this.datosCargados = true;
@@ -336,34 +336,32 @@ public class Fabrica {
     }
 
     public void LimpiarLogica() {
-        
+
         IControladorUsuario ICU = this.getIControladorUsuario();
         IPropCat IPC = this.getControladorPropCat();
-     
-                
+
         Map<String, Usuario> usuarios = ICU.getUsuarios();
         Set set = usuarios.entrySet();
         Iterator iterator = set.iterator();
         while (iterator.hasNext()) {
             Map.Entry mentry = (Map.Entry) iterator.next();
             if (mentry.getValue() instanceof Proponente) {
-                Proponente p=(Proponente) mentry.getValue();
+                Proponente p = (Proponente) mentry.getValue();
                 ICU.borrarProponente(p.getNickname());
                 iterator.remove();//aca se van borrando los usuarios proponentes
-                }
-            
+            }
+
             if (mentry.getValue() instanceof Colaborador) {
-                Colaborador c=(Colaborador) mentry.getValue();
+                Colaborador c = (Colaborador) mentry.getValue();
                 ICU.borrarColaborador(c.getNickname());
                 iterator.remove();//aca se van borrando los usuarios colaboradores
-                }
-               
             }
-            ICU.getUsuarios().clear();
-            IPC.getPropuestas().clear();//para limpiar el map dsp que borre todo
-            ICU.eliminarCategorias();
 
         }
-        
-        
+        ICU.getUsuarios().clear();
+        IPC.getPropuestas().clear();//para limpiar el map dsp que borre todo
+        ICU.eliminarCategorias();
+
     }
+
+}

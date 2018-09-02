@@ -9,10 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -80,7 +78,7 @@ public class DBPropuesta {
             stat.executeUpdate();
             stat.close();
 
-            stat = conexion.prepareStatement("INSERT INTO estadopropuesta" + " (TituloP, FechaInicio, Estado) values (?,?,?)");
+            stat = conexion.prepareStatement("INSERT INTO estadopropuesta" + " (TituloP, FechaInicio, Estado, estActual) values (?,?,?,?)");
 
             Calendar cal = nuevoEst.getfechaInicio();
             Date fechaI = (Date) cal.getTime();
@@ -89,6 +87,7 @@ public class DBPropuesta {
             stat.setString(1, nuevaP.getTituloP());
             stat.setDate(2, fechaII);
             stat.setInt(3, 2);
+            stat.setBoolean(4, true);
             stat.executeUpdate();
             stat.close();
 
@@ -214,14 +213,11 @@ public class DBPropuesta {
                         break;
                 }
 
-                EstadoPropuesta Estado = new EstadoPropuesta(est, fechaI);
+                boolean estActual = rs2.getBoolean("estActual");
 
-                Date fechaf = rs2.getDate("fechaFinal");
+                EstadoPropuesta Estado = new EstadoPropuesta(est, fechaI, estActual);
 
-                if (fechaf != null) {
-                    Calendar fechaFin = Calendar.getInstance();
-                    fechaFin.setTime(fechaf);
-                    Estado.setfechaFinal(fechaFin);
+                if (!estActual) {
                     prop.getHistorialEst().add(Estado);
                 } else {
                     prop.setEstadoActual(Estado);
@@ -265,14 +261,14 @@ public class DBPropuesta {
 
     public boolean agregarEstadoPropuestaDatosdePrueba(EstadoPropuesta nuevoEst, String TituloP) {
         try {
-            PreparedStatement stat = conexion.prepareStatement("INSERT INTO estadopropuesta" + " (TituloP, FechaInicio, FechaFinal, Estado) values (?,?,?,?)");
+            PreparedStatement stat = conexion.prepareStatement("INSERT INTO estadopropuesta" + " (TituloP, FechaInicio, estActual, Estado) values (?,?,?,?)");
 
             java.util.Date dateR = (java.util.Date) nuevoEst.getfechaInicio().getTime();
             java.sql.Timestamp dateII = new java.sql.Timestamp(dateR.getTime());
 
             stat.setString(1, TituloP);
             stat.setTimestamp(2, dateII);
-            stat.setTimestamp(3, dateII);
+            stat.setBoolean(3, nuevoEst.getActual());
             stat.setInt(4, nuevoEst.getEstado().ordinal());
             stat.executeUpdate();
             stat.close();
@@ -293,7 +289,7 @@ public class DBPropuesta {
             if (!rs1.next()) {
                 this.agregarCategoria("Categoria", null);
                 Fabrica.getInstance().getControladorPropCat().getCategorias().put("Categoria", new Categoria("Categoria"));
-            } 
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
