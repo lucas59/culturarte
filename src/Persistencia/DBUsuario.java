@@ -173,41 +173,41 @@ public class DBUsuario {
     
         try {
             statement = conexion.prepareStatement("SET FOREIGN_KEY_CHECKS = 0");
-            statement.executeQuery();
+            statement.executeUpdate();
             statement.close();
 
 
             statement = conexion.prepareStatement("TRUNCATE TABLE estadopropuesta");
-            statement.executeQuery();
+            statement.executeUpdate();
             statement.close();
             
            
             statement = conexion.prepareStatement("TRUNCATE TABLE ususigueusu");
-            statement.executeQuery();
+            statement.executeUpdate();
             statement.close();
             
             
             statement = conexion.prepareStatement("TRUNCATE TABLE colaboracion");
-            statement.executeQuery();
+            statement.executeUpdate();
             statement.close();
             
             statement = conexion.prepareStatement("TRUNCATE TABLE propuesta");
-            statement.executeQuery();
+            statement.executeUpdate();
             statement.close();
             
             
             statement = conexion.prepareStatement("TRUNCATE TABLE categoria");
-            statement.executeQuery();
+            statement.executeUpdate();
             statement.close();
             
             
             statement = conexion.prepareStatement("TRUNCATE TABLE usuario"); 
-            statement.executeQuery();
+            statement.executeUpdate();
             statement.close();
             
             
             statement = conexion.prepareStatement("SET FOREIGN_KEY_CHECKS = 1");
-            statement.executeQuery();
+            statement.executeUpdate();
             statement.close();
             
                     
