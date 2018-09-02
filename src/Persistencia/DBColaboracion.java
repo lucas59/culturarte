@@ -160,7 +160,7 @@ public class DBColaboracion {
                         }
                     }
                 }
-                Map<String, Propuesta> propuestas = IPC.getpropuesta();
+                Map<String, Propuesta> propuestas = IPC.getPropuestas();
                 set = propuestas.entrySet();
                 iterator = set.iterator();
                 while (iterator.hasNext()) {
