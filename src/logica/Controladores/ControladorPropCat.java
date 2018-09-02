@@ -7,13 +7,13 @@ package logica.Controladores;
 
 import Persistencia.DBColaboracion;
 import Persistencia.DBPropuesta;
-import com.sun.javafx.scene.control.skin.VirtualFlow;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -40,7 +40,6 @@ import logica.Clases.Proponente;
 import logica.Clases.Propuesta;
 import logica.Clases.TipoE;
 import logica.Clases.TipoRetorno;
-import logica.Clases.Usuario;
 import logica.Fabrica;
 import logica.Interfaces.IControladorUsuario;
 import logica.Interfaces.IPropCat;
@@ -616,16 +615,15 @@ public class ControladorPropCat implements IPropCat {
                 break;
             }
         }
-        if (ok) {
-            try {
-                ok = this.dbColaboracion.eliminarColaboracion(titulo, nick);
-                if (ok) {
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(ControladorPropCat.class.getName()).log(Level.SEVERE, null, ex);
-
+        try {
+            ok = this.dbColaboracion.eliminarColaboracion(titulo, nick);
+            if (ok) {
             }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorPropCat.class.getName()).log(Level.SEVERE, null, ex);
+
         }
+
         return ok;
     }
 }
