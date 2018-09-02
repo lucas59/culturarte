@@ -583,8 +583,11 @@ public class ControladorPropCat implements IPropCat {
     public void setEstadoActualDatosDePrueba(String titulo, EstadoPropuesta estadoActual) {
 
         Propuesta prop = this.getPropuestas().get(titulo);
-        prop.setEstadoActual(estadoActual);
 
+        boolean ok = this.dbPropuesta.agregarEstadoPropuestaDatosdePrueba(estadoActual, titulo);
+        if (ok) {
+            prop.setEstadoActual(estadoActual);
+        }
     }
 
     @Override
