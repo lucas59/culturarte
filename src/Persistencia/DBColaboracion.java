@@ -62,18 +62,19 @@ public class DBColaboracion {
             statement.executeUpdate();
             statement.close();
 
-            statement = conexion.prepareStatement("UPDATE estadopropuesta set FechaFinal = ? where FechaFinal = NULL");
-            statement.setDate(1, sqlDate);
+            statement = conexion.prepareStatement("UPDATE estadopropuesta set estActual = ? where estActual = 1");
+            statement.setInt(1, 0);
             statement.executeUpdate();
             statement.close();
 
-            statement = conexion.prepareStatement("INSERT INTO estadopropuesta " + "(TituloP, FechaInicio, Estado) values(?,?,?)");
+            statement = conexion.prepareStatement("INSERT INTO estadopropuesta " + "(TituloP, FechaInicio, estActual,  Estado) values(?,?,?)");
             statement.setString(1, CPU.getPropuesta().getTituloP());
             statement.setDate(2, sqlDate);
+            statement.setInt(3, 1);
             if (TotalColaboracion < CPU.getPropuesta().getMontoTot()) {
-                statement.setInt(3, 4);
+                statement.setInt(4, 2);
             } else if (TotalColaboracion == CPU.getPropuesta().getMontoTot()) {
-                statement.setInt(3, 6);
+                statement.setInt(4, 3);
             }
             statement.executeUpdate();
             statement.close();
