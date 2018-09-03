@@ -12,6 +12,7 @@ import logica.Clases.Categoria;
 import logica.Clases.Colaborador;
 import logica.Clases.DtColaboraciones;
 import logica.Clases.DtConsultaPropuesta;
+import logica.Clases.DtConsultaPropuesta2;
 import logica.Clases.DtinfoColaborador;
 import logica.Clases.DtinfoPropuesta;
 import logica.Clases.DtNickTitProp;
@@ -86,4 +87,6 @@ public interface IPropCat {
     public abstract List<DtColaboraciones> listarColaboraciones(String titulo) throws Exception;
 
     public abstract boolean eliminarColaboracion(String titulo, String nick);
+
+    public abstract List<DtConsultaPropuesta2> ListaColaboradoresProp(String titulo);
 }

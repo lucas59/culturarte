@@ -169,6 +169,8 @@ public class ControladorUsuario implements IControladorUsuario {
                 String ex = getFileExtension(fLocal);
                 String ruta = System.getProperty("user.dir") + "\\fPerfiles\\" + c.getNickname() + "." + ex;
                 c.setImagen(nickName + "." + ex);
+            } else {
+                c.setImagen("nadie.png");
             }
             boolean res = this.dbUsuario.agregarColaborador(c);
 

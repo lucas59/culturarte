@@ -128,10 +128,10 @@ public class Fabrica {
                 + "propia Comparsa de negros y lubolos \\\"Cuareim 1080\\\". Director responsable, compositor y cantante de la misma. ",
                 "https://www.facebook.com/C1080?ref=br_rs");
 
-        ICU.AgregarUsuarioProponenteDatosdePrueba("juliob", "Julio", "Bocca", "juliobocca@sodre.com.uy", new GregorianCalendar(1967, 02, 16), "nadie.png",
+        ICU.AgregarUsuarioProponenteDatosdePrueba("juliob", "Julio", "Bocca", "juliobocca@sodre.com.uy", new GregorianCalendar(1967, 02, 16), "",
                 "Benito Blanco 4321", "", "");
 
-        ICU.AgregarUsuarioProponenteDatosdePrueba("diegop", "Diego", "Parodi", "diego@efectocine.com", new GregorianCalendar(1975, 00, 01), "nadie.png", "Emilio Frugoni 1138 Ap. 02", "", "http://www.efectocine.com");
+        ICU.AgregarUsuarioProponenteDatosdePrueba("diegop", "Diego", "Parodi", "diego@efectocine.com", new GregorianCalendar(1975, 00, 01), "", "Emilio Frugoni 1138 Ap. 02", "", "http://www.efectocine.com");
 
         ICU.AgregarUsuarioProponenteDatosdePrueba("kairoh", "Kairo", "Herrera", "kairoher@pilsenrock.com.uy", new GregorianCalendar(1840, 03, 25),
                 "kairoh.jpg", "Paraguay 1423", "", "");

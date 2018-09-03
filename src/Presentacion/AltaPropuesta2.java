@@ -16,18 +16,20 @@ import logica.Interfaces.IPropCat;
  * @author Martin
  */
 public class AltaPropuesta2 extends javax.swing.JInternalFrame {
-    
+
     private IPropCat ICP;
-    
+
     public AltaPropuesta2(String categoria, String nickName) {
         initComponents();
-        
+
         this.jTextCategoria.setText(categoria);
         this.jTextProponente.setText(nickName);
-        
+        jTextTitulo.requestFocus();
         this.ICP = Fabrica.getInstance().getControladorPropCat();
+        
+        jCalendarFechaReal.setMinSelectableDate(new Date());
     }
-    
+
     public void LimpiarComponentes() {
         jTextTitulo.setText("");
         jTextLugar.setText("");
@@ -130,6 +132,10 @@ public class AltaPropuesta2 extends javax.swing.JInternalFrame {
         });
 
         jLabel7.setText("Monto Entrada(*):");
+
+        jCalendarFechaReal.setDate(new java.util.Date(1535940087000L));
+        jCalendarFechaReal.setMaxSelectableDate(new java.util.Date(253370779287000L));
+        jCalendarFechaReal.setMinSelectableDate(new java.util.Date(1504404087000L));
 
         jLabel8.setText("Fecha de Realizacion del evento(*):");
 
@@ -317,7 +323,7 @@ public class AltaPropuesta2 extends javax.swing.JInternalFrame {
 
     private void jButtonCrearPropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearPropActionPerformed
         boolean datosBien = true;
-        
+
         String tituloP = jTextTitulo.getText();
         String lugar = jTextLugar.getText();
         float montoE = Float.parseFloat(jTextMontoEnt.getText());
@@ -326,7 +332,7 @@ public class AltaPropuesta2 extends javax.swing.JInternalFrame {
         Calendar fechaR = jCalendarFechaReal.getCalendar();
         String imagen = rSFotoCirclePropuesta.getRutaImagen();
         TipoRetorno tipoR = null;
-        
+
         if ("".equals(tituloP)) {
             javax.swing.JOptionPane.showMessageDialog(null, "Ingrese un titulo");
             jTextTitulo.requestFocus();
@@ -365,7 +371,7 @@ public class AltaPropuesta2 extends javax.swing.JInternalFrame {
         if (datosBien) {
             try {
                 boolean ok = ICP.crearPropuesta(tituloP, descripcion, lugar, imagen, fechaR, montoE, montoTot, tipoR);
-                
+
                 if (ok) {
                     javax.swing.JOptionPane.showMessageDialog(null, "La propuesta ha sido creada con Exito");
                     this.LimpiarComponentes();
@@ -375,6 +381,8 @@ public class AltaPropuesta2 extends javax.swing.JInternalFrame {
                 }
             } catch (Exception e) {
                 javax.swing.JOptionPane.showMessageDialog(null, e);
+                jTextTitulo.setText("");
+                jTextTitulo.requestFocus();
             }
         }
     }//GEN-LAST:event_jButtonCrearPropActionPerformed
