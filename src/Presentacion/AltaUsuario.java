@@ -14,6 +14,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -60,6 +62,7 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
         jTextSitioWeb.setEnabled(false);
         jTextBiografia.setEnabled(false);
         this.jTextNick.requestFocus();
+        jDateChooser1.setCalendar(new GregorianCalendar(2000, 00, 01));
     }
 
     /**
