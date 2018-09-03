@@ -82,6 +82,7 @@ public interface IPropCat {
     public abstract void copiarFoto(String foto, String tituloP);
 
     public abstract void setEstadoActualDatosDePrueba(String titulo, EstadoPropuesta estadoActual);
+
     public abstract List<DtColaboraciones> listarColaboraciones(String titulo) throws Exception;
 
     public abstract boolean eliminarColaboracion(String titulo, String nick);

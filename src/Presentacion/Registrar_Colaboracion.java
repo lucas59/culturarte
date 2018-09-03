@@ -47,7 +47,6 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane5 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -534,26 +533,28 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
-        jScrollPane5.setViewportView(jPanel1);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 1122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 7, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 8, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 6, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 6, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+
         Fabrica fabrica = Fabrica.getInstance();
         IPropCat controladorPC = fabrica.getControladorPropCat();
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
@@ -580,20 +581,19 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
         Fabrica fabrica = Fabrica.getInstance();
         IPropCat CPC = fabrica.getControladorPropCat();
         IControladorUsuario CU = fabrica.getIControladorUsuario();
+        float monto = Float.parseFloat(jTextField17.getText());
         if (jTextField17.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingrese el monto de la colaboración");
-        }
-        else if(jTable1.getSelectedRow() < 0 && jTable2.getSelectedRow() < 0){
+        } else if (monto <= 0) {
+            JOptionPane.showMessageDialog(null, "No puede ingresar montos menores o iguales a 0");
+        } else if (jTable1.getSelectedRow() < 0 && jTable2.getSelectedRow() < 0) {
             JOptionPane.showMessageDialog(null, "Seleccione un colaborador y una propuesta");
-        }
-        else if(jTable1.getSelectedRow() < 0){
+        } else if (jTable1.getSelectedRow() < 0) {
             JOptionPane.showMessageDialog(null, "Seleccione un colaborador");
-        }
-        else if(jTable2.getSelectedRow() < 0){
+        } else if (jTable2.getSelectedRow() < 0) {
             JOptionPane.showMessageDialog(null, "Seleccione una propuesta");
-        }
-        else {
-            float monto = Float.parseFloat(jTextField17.getText());
+        } else {
+
             boolean OK = false;
             if (jComboBox2.getSelectedItem().toString().compareTo("Entradas") == 0) {
                 try {
@@ -660,10 +660,10 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
             Map.Entry mentry = (Map.Entry) iterator.next();
             Propuesta aux = (Propuesta) mentry.getValue();
             if ((!jTextField14.getText().isEmpty()) && aux.getTituloP().contains(jTextField14.getText())) {
-                Object[] dat = {aux.getTituloP()};
+                Object[] dat = {aux.getTituloP(), aux.getAutor().getNickname()};
                 modelo.addRow(dat);
             } else if (jTextField14.getText().isEmpty()) {
-                Object[] dat = {aux.getTituloP()};
+                Object[] dat = {aux.getTituloP(), aux.getAutor().getNickname()};
                 modelo.addRow(dat);
             }
         }
@@ -812,7 +812,6 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;

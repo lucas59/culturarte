@@ -92,7 +92,7 @@ public class ControladorPropCat implements IPropCat {
             Map.Entry mentry = (Map.Entry) iterator.next();
             Propuesta aux = (Propuesta) mentry.getValue();
 
-            if (aux.getEstadoActual().getEstado() == TipoE.Publicada || aux.getEstadoActual().getEstado() == TipoE.enFinanciacion) {
+            if (aux.getEstadoActual().getEstado() == TipoE.Publicada || aux.getEstadoActual().getEstado() == TipoE.enFinanciacion || aux.getEstadoActual().getEstado() == TipoE.Ingresada) {
                 DtNickTitProp aux2 = new DtNickTitProp(aux);
                 retorno.add(aux2);
             }
@@ -170,7 +170,7 @@ public class ControladorPropCat implements IPropCat {
 
         TipoE tipo = TipoE.Publicada;
         Calendar fechaI = new GregorianCalendar();
-        EstadoPropuesta estado = new EstadoPropuesta(tipo, fechaI);
+        EstadoPropuesta estado = new EstadoPropuesta(tipo, fechaI, true);
 
         if (!"".equals(imagen)) {
             File fotoL = new File(imagen);
@@ -348,15 +348,16 @@ public class ControladorPropCat implements IPropCat {
 
     @Override
     public boolean agregarColaboracion(boolean Entrada, Float monto) throws Exception {
-        Fabrica fabrica = Fabrica.getInstance();
-        IControladorUsuario ICU = fabrica.getIControladorUsuario();
+
+        IControladorUsuario ICU = Fabrica.getInstance().getIControladorUsuario();
         Calendar calendario = new GregorianCalendar();
         java.util.Date utilDate = new java.util.Date();
         utilDate = calendario.getTime();
-        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
         List<Colaboracion> colaboraciones = this.getPropuesta().getColaboraciones();
         List<Colaboracion> colaboracionesC = ICU.getColaborador().getColaboraciones();
         float TotalColaboracion = 0;
+
         for (int indice = 0; indice < colaboraciones.size(); indice++) {
             TotalColaboracion = TotalColaboracion + colaboraciones.get(indice).getMontoC();
         }
@@ -367,20 +368,34 @@ public class ControladorPropCat implements IPropCat {
             }
         }
         if ((TotalColaboracion + monto) <= this.getPropuesta().getMontoTot()) {
+
             Colaboracion colaboracion = new Colaboracion(ICU.getColaborador(), monto, calendario, Entrada, this.getPropuesta());
             ICU.getColaborador().setColaboraciones(colaboracion);
             this.getPropuesta().setColaboraciones(colaboracion);
-            if (TotalColaboracion < this.getPropuesta().getMontoTot()) {
-                EstadoPropuesta EstadoP = new EstadoPropuesta(TipoE.enFinanciacion, calendario);
+
+            if (this.getPropuesta().getEstadoActual().getEstado() != TipoE.enFinanciacion) {
+                // se crea un estado solo por la primer colaboracion y se mantiene hasta otro evento
+                EstadoPropuesta EstadoP = new EstadoPropuesta(TipoE.enFinanciacion, calendario, true);
+                // se recupera el estado actual anterior para pasarlo al historial
+                EstadoPropuesta EstAnterior = this.getPropuesta().getEstadoActual();
+                // se le asigan nul por que ya no es un aestado actual
+                EstAnterior.setEsActual(false);
+                // se setea en el historial y posterior se carga el nuevo estado actual
+                this.getPropuesta().setEstados(EstAnterior);
                 this.getPropuesta().setEstadoActual(EstadoP);
-                this.getPropuesta().setEstados(EstadoP);
+
             } else if (TotalColaboracion == this.getPropuesta().getMontoTot()) {
-                EstadoPropuesta EstadoP = new EstadoPropuesta(TipoE.Financiada, calendario);
+                // igual proceso para otro estado distinto 
+                EstadoPropuesta EstadoP = new EstadoPropuesta(TipoE.Financiada, calendario, true);
+                EstadoPropuesta EstAnterior = this.getPropuesta().getEstadoActual();
+                EstAnterior.setEsActual(false);
+                
                 this.getPropuesta().setEstadoActual(EstadoP);
-                this.getPropuesta().setEstados(EstadoP);
+                this.getPropuesta().setEstados(EstAnterior);
             }
             DBColaboracion DBC = new DBColaboracion();
             DBC.agregarColaboracion(Entrada, monto);
+            this.Propuesta = null;
             return true;
         } else {
             throw new Exception("El monto que ingreso ha superado el limite del monto total, ingrese un monto menor o igual a: $" + (this.getPropuesta().getMontoTot() - TotalColaboracion));
@@ -488,11 +503,10 @@ public class ControladorPropCat implements IPropCat {
     @Override
     public boolean nuevoEstadoPropuestaDatosdePrueba(String TituloP, TipoE estado, Calendar fecha) {
 
-        EstadoPropuesta estadop = new EstadoPropuesta(estado, fecha);
+        EstadoPropuesta estadop = new EstadoPropuesta(estado, fecha,false);
         Propuesta p = (Propuesta) this.propuestas.get(TituloP);
         p.setEstados(estadop);
-        p.setEstadoActual(estadop);
-
+        
         DBPropuesta DBP = new DBPropuesta();
         DBP.agregarEstadoPropuestaDatosdePrueba(estadop, TituloP);
 
@@ -583,8 +597,11 @@ public class ControladorPropCat implements IPropCat {
     public void setEstadoActualDatosDePrueba(String titulo, EstadoPropuesta estadoActual) {
 
         Propuesta prop = this.getPropuestas().get(titulo);
-        prop.setEstadoActual(estadoActual);
 
+        boolean ok = this.dbPropuesta.agregarEstadoPropuestaDatosdePrueba(estadoActual, titulo);
+        if (ok) {
+            prop.setEstadoActual(estadoActual);
+        }
     }
 
     @Override

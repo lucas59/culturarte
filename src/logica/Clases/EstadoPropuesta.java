@@ -11,11 +11,12 @@ public class EstadoPropuesta {
 
     private TipoE Estado;
     private Calendar fechaInicio;
-    private Calendar fechaFinal;
+    private boolean Actual;
 
-    public EstadoPropuesta(TipoE Estado, Calendar Fechacambio) {
+    public EstadoPropuesta(TipoE Estado, Calendar Fechacambio, boolean estActual) {
         this.Estado = Estado;
         this.fechaInicio = Fechacambio;
+        this.Actual = estActual;
     }
 
     public TipoE getEstado() {
@@ -26,8 +27,8 @@ public class EstadoPropuesta {
         return this.fechaInicio;
     }
 
-    public Calendar getfechaFinal() {
-        return this.fechaFinal;
+    public boolean getActual() {
+        return this.Actual;
     }
 
     public void setEstado(TipoE Estado) {
@@ -38,8 +39,8 @@ public class EstadoPropuesta {
         this.fechaInicio = inicio;
     }
 
-    public void setfechaFinal(Calendar fechaF) {
-        this.fechaFinal = fechaF;
+    public void setEsActual(boolean actual) {
+        this.Actual = actual;
     }
 
 }
