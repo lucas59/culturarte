@@ -32,6 +32,7 @@ import logica.Clases.Colaboracion;
 import logica.Clases.Colaborador;
 import logica.Clases.DtColaboraciones;
 import logica.Clases.DtConsultaPropuesta;
+import logica.Clases.DtConsultaPropuesta2;
 import logica.Clases.DtinfoColaborador;
 import logica.Clases.DtinfoPropuesta;
 import logica.Clases.EstadoPropuesta;
@@ -168,7 +169,7 @@ public class ControladorPropCat implements IPropCat {
         }
         String nuevaRutaI;
 
-        TipoE tipo = TipoE.Publicada;
+        TipoE tipo = TipoE.Ingresada;
         Calendar fechaI = new GregorianCalendar();
         EstadoPropuesta estado = new EstadoPropuesta(tipo, fechaI, true);
 
@@ -389,7 +390,7 @@ public class ControladorPropCat implements IPropCat {
                 EstadoPropuesta EstadoP = new EstadoPropuesta(TipoE.Financiada, calendario, true);
                 EstadoPropuesta EstAnterior = this.getPropuesta().getEstadoActual();
                 EstAnterior.setEsActual(false);
-                
+
                 this.getPropuesta().setEstadoActual(EstadoP);
                 this.getPropuesta().setEstados(EstAnterior);
             }
@@ -503,10 +504,10 @@ public class ControladorPropCat implements IPropCat {
     @Override
     public boolean nuevoEstadoPropuestaDatosdePrueba(String TituloP, TipoE estado, Calendar fecha) {
 
-        EstadoPropuesta estadop = new EstadoPropuesta(estado, fecha,false);
+        EstadoPropuesta estadop = new EstadoPropuesta(estado, fecha, false);
         Propuesta p = (Propuesta) this.propuestas.get(TituloP);
         p.setEstados(estadop);
-        
+
         DBPropuesta DBP = new DBPropuesta();
         DBP.agregarEstadoPropuestaDatosdePrueba(estadop, TituloP);
 
@@ -642,5 +643,22 @@ public class ControladorPropCat implements IPropCat {
         }
 
         return ok;
+    }
+
+    @Override
+    public List<DtConsultaPropuesta2> ListaColaboradoresProp(String titulo) {
+        List<DtConsultaPropuesta2> listColab = new ArrayList<>();
+
+        Propuesta prop = this.getPropuestas().get(titulo);
+
+        Iterator it = prop.getColaboraciones().iterator();
+
+        while (it.hasNext()) {
+            Colaboracion colab = (Colaboracion) it.next();
+            Date fecha = (Date) colab.getFechaRealiz().getTime();
+            String fechaR = new SimpleDateFormat("dd/MMM/yyyy").format(fecha);
+            listColab.add(new DtConsultaPropuesta2(colab.getNickName(), colab.getUColaborador().getNombre(), colab.getUColaborador().getNombre(), colab.getMontoC(), fechaR));
+        }
+        return listColab;
     }
 }

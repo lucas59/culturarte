@@ -26,6 +26,8 @@ public class ConsultaPropuesta extends javax.swing.JInternalFrame {
 
     private IPropCat ICP;
     private List<DtNickTitProp> listProp;
+    private float montoTot;
+    private String titulo;
 
     /**
      * Creates new form ConsultaPropuesta
@@ -34,7 +36,7 @@ public class ConsultaPropuesta extends javax.swing.JInternalFrame {
         initComponents();
         jLabelAdvertencia.setVisible(false);
         this.ICP = Fabrica.getInstance().getControladorPropCat();
-
+        this.montoTot = 0;
         listProp = ICP.listarPropuestas();
 
         DefaultTableModel modelo = (DefaultTableModel) jTablePropuestas.getModel();
@@ -141,7 +143,7 @@ public class ConsultaPropuesta extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextFieldBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelAdvertencia, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(111, Short.MAX_VALUE))
+                .addContainerGap(254, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,16 +159,28 @@ public class ConsultaPropuesta extends javax.swing.JInternalFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        jTextPaneTiutlo.setEditable(false);
+        jTextPaneTiutlo.setFocusable(false);
         jScrollPane2.setViewportView(jTextPaneTiutlo);
 
+        jTextPaneCategoria.setEditable(false);
+        jTextPaneCategoria.setFocusable(false);
         jScrollPane3.setViewportView(jTextPaneCategoria);
 
+        jTextPaneLugar.setEditable(false);
+        jTextPaneLugar.setFocusable(false);
         jScrollPane4.setViewportView(jTextPaneLugar);
 
+        jTextPaneMontoRecaudado.setEditable(false);
+        jTextPaneMontoRecaudado.setFocusable(false);
         jScrollPane5.setViewportView(jTextPaneMontoRecaudado);
 
+        jTextPaneFecha.setEditable(false);
+        jTextPaneFecha.setFocusable(false);
         jScrollPane6.setViewportView(jTextPaneFecha);
 
+        jTextPaneMontoE.setEditable(false);
+        jTextPaneMontoE.setFocusable(false);
         jScrollPane7.setViewportView(jTextPaneMontoE);
 
         jLabel1.setFont(new java.awt.Font("Consolas", 1, 12)); // NOI18N
@@ -191,24 +205,40 @@ public class ConsultaPropuesta extends javax.swing.JInternalFrame {
         jLabel7.setText("Informacion Propuesta");
 
         jButton1.setText("Ver colaboradores");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Consolas", 1, 12)); // NOI18N
         jLabel8.setText("Descripcion:");
 
+        jTextPaneEstado.setEditable(false);
+        jTextPaneEstado.setFocusable(false);
         jScrollPane8.setViewportView(jTextPaneEstado);
 
         jLabel9.setFont(new java.awt.Font("Consolas", 1, 12)); // NOI18N
         jLabel9.setText("Estado Actual:");
 
+        jTextAreaDescripcion.setEditable(false);
         jTextAreaDescripcion.setColumns(20);
         jTextAreaDescripcion.setRows(5);
         jTextAreaDescripcion.setAutoscrolls(false);
         jTextAreaDescripcion.setBorder(null);
+        jTextAreaDescripcion.setFocusable(false);
         jScrollPane9.setViewportView(jTextAreaDescripcion);
 
         jLabel10.setFont(new java.awt.Font("Consolas", 1, 12)); // NOI18N
         jLabel10.setText("Monto Total:");
 
+        jTextPaneMontoTot.setEditable(false);
+        jTextPaneMontoTot.setFocusable(false);
         jScrollPane11.setViewportView(jTextPaneMontoTot);
 
         jTablePropuestas.setModel(new javax.swing.table.DefaultTableModel(
@@ -246,6 +276,8 @@ public class ConsultaPropuesta extends javax.swing.JInternalFrame {
         jLabel14.setFont(new java.awt.Font("Consolas", 1, 12)); // NOI18N
         jLabel14.setText("Retorno:");
 
+        jTextPaneRetorno.setEditable(false);
+        jTextPaneRetorno.setFocusable(false);
         jScrollPane10.setViewportView(jTextPaneRetorno);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
@@ -307,27 +339,28 @@ public class ConsultaPropuesta extends javax.swing.JInternalFrame {
                                         .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGap(73, 73, 73)
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addComponent(jLabel13)
+                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                                        .addGap(18, 18, 18)
+                                                        .addComponent(jLabel3))
+                                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                                         .addGroup(jPanel2Layout.createSequentialGroup()
                                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                 .addComponent(jLabel5)
                                                 .addComponent(jLabel6)
                                                 .addComponent(jLabel10))
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                            .addComponent(jLabel13)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                                    .addGap(14, 14, 14)
-                                                    .addComponent(jLabel3))))
-                                        .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(68, 68, 68))))))
-                .addContainerGap(89, Short.MAX_VALUE))
+                                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                                                .addComponent(jScrollPane5)
+                                                .addComponent(jScrollPane11)))))))))
+                .addContainerGap(282, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -367,8 +400,8 @@ public class ConsultaPropuesta extends javax.swing.JInternalFrame {
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(8, 8, 8)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -416,7 +449,7 @@ public class ConsultaPropuesta extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 517, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 525, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton2)
                 .addContainerGap())
@@ -445,11 +478,13 @@ public class ConsultaPropuesta extends javax.swing.JInternalFrame {
         try {
             DtConsultaPropuesta info = ICP.SeleccionarPropuesta(titulo);
 
+            this.titulo = info.getTitulo();
             jTextPaneTiutlo.setText(info.getTitulo());
             jTextPaneCategoria.setText(info.getCategoria());
             jTextPaneEstado.setText(info.getEstadoActual());
             jTextPaneLugar.setText(info.getLugar());
             jTextPaneFecha.setText(info.getFechaR());
+            this.montoTot = info.getMontoActual();
             jTextPaneMontoRecaudado.setText(String.valueOf(info.getMontoActual()));
             jTextPaneMontoE.setText(String.valueOf(info.getMontoE()));
             jTextAreaDescripcion.setText(info.getDescripcion());
@@ -500,6 +535,26 @@ public class ConsultaPropuesta extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_jTextFieldBusquedaKeyReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+
+        if (this.montoTot == 0) {
+            javax.swing.JOptionPane.showMessageDialog(null, "Esta propuesta aún no contiene colaboraciones");
+
+        } else {
+            ConsultaPropuesta2 cons = new ConsultaPropuesta2(this.titulo);
+            inicio.Escritorio.add(cons);
+            this.setVisible(false);
+            cons.toFront();
+            cons.setVisible(true);
+            
+        }
+
+    }//GEN-LAST:event_jButton1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

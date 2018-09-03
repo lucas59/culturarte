@@ -387,7 +387,7 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
         IControladorUsuario ICU = fabrica.getIControladorUsuario();
         List<Colaboracion> colaboraciones = ICU.ListarColaboraciones(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
         this.nickname = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
-         DefaultTableModel modelo = (DefaultTableModel) Tabla_propuesta.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) Tabla_propuesta.getModel();
         if (!colaboraciones.isEmpty()) {
             modelo.setRowCount(0);
             for (int indice = 0; indice < colaboraciones.size(); indice++) {
@@ -402,7 +402,7 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
             jTextField5.setText("");
             jTextField6.setText("");
             JOptionPane.showMessageDialog(null, "El colaborador no tiene colaboraciones");
-            
+
         }
 
     }//GEN-LAST:event_jTable1MouseClicked
