@@ -33,7 +33,7 @@ public class inicio extends javax.swing.JFrame {
         Fabrica fabrica = Fabrica.getInstance();
         ICU = fabrica.getIControladorUsuario();
         IPC = fabrica.getControladorPropCat();
-        //IPC.comprobarBaseCat();
+        IPC.comprobarBaseCat();
         ICU.CargarUsuarios();
         IPC.CargarPropuestas();
         IPC.CargarColaboraciones();
