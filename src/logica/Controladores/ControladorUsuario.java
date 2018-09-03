@@ -17,11 +17,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import logica.Clases.Categoria;
 import logica.Clases.Colaboracion;
 import logica.Clases.DtColaboraciones;
@@ -445,8 +450,7 @@ public class ControladorUsuario implements IControladorUsuario {
 
         }
         System.gc();
-        
-        
+
     }
 
     public void LimpiarColaboracionesU(Colaborador usu) { // limpiado de la logica en proceso
@@ -490,108 +494,187 @@ public class ControladorUsuario implements IControladorUsuario {
 
         return ok;
     }
-    
+
     @Override
     public void borrarProponente(String nickProp) {
-		Fabrica fabrica = Fabrica.getInstance();
-                IPropCat iContPro = fabrica.getControladorPropCat();
-		IControladorUsuario ControladorU = fabrica.getIControladorUsuario();
+        Fabrica fabrica = Fabrica.getInstance();
+        IPropCat iContPro = fabrica.getControladorPropCat();
+        IControladorUsuario ControladorU = fabrica.getIControladorUsuario();
 
-		Proponente usr = ControladorU.ObtenerProponente(nickProp);
-                if(usr!=null){
-                
-		//se elimina el usuario como seguido de sus seguidores
-		Map<String, Usuario> eliminarseg = usr.getSeguidores();
-		List<Usuario> listaSeguidores = new ArrayList<Usuario>(eliminarseg.values());
-		Iterator<Usuario> iter = listaSeguidores.iterator();
-		while (iter.hasNext()) {
-			Usuario sigue = iter.next();
-			sigue.getSeguidos().remove(nickProp);
-		}
-                usr.getSeguidores().clear();
-                usr.getSeguidos().clear();
+        Proponente usr = ControladorU.ObtenerProponente(nickProp);
+        if (usr != null) {
 
-			
-		//se eliminan las propuestas en las que participa el proponente
-		Map<String, Propuesta> eliminarprop = usr.getPropuestas();
-                Set set = eliminarprop.entrySet();
-                Iterator iterProp = set.iterator();
-                
-		while (iterProp.hasNext()) {
-                    Map.Entry mentry = (Map.Entry) iterProp.next();
-                    if (mentry.getValue() instanceof Propuesta){
-                    Propuesta propActual = (Propuesta) mentry.getValue();           
+            //se elimina el usuario como seguido de sus seguidores
+            Map<String, Usuario> eliminarseg = usr.getSeguidores();
+            List<Usuario> listaSeguidores = new ArrayList<Usuario>(eliminarseg.values());
+            Iterator<Usuario> iter = listaSeguidores.iterator();
+            while (iter.hasNext()) {
+                Usuario sigue = iter.next();
+                sigue.getSeguidos().remove(nickProp);
+            }
+            usr.getSeguidores().clear();
+            usr.getSeguidos().clear();
+
+            //se eliminan las propuestas en las que participa el proponente
+            Map<String, Propuesta> eliminarprop = usr.getPropuestas();
+            Set set = eliminarprop.entrySet();
+            Iterator iterProp = set.iterator();
+
+            while (iterProp.hasNext()) {
+                Map.Entry mentry = (Map.Entry) iterProp.next();
+                if (mentry.getValue() instanceof Propuesta) {
+                    Propuesta propActual = (Propuesta) mentry.getValue();
                     iContPro.getPropuestas().remove(propActual.getTituloP());
                     iterProp.remove();
-                    }
-		}
-                usr.getPropuestas().clear();
-                usr.getPropuestasRealizadas().clear();
-                } 
-      
-	}
-    
-    
+                }
+            }
+            usr.getPropuestas().clear();
+            usr.getPropuestasRealizadas().clear();
+        }
+
+    }
+
     @Override
     public Colaborador ObtenerColaborador(String nombreC) {
         return (Colaborador) this.Usuarios.get(nombreC);
     }
-    
+
     @Override
-    public void borrarColaborador(String nickColab){
+    public void borrarColaborador(String nickColab) {
         Fabrica fabrica = Fabrica.getInstance();
         IPropCat iContPro = fabrica.getControladorPropCat();
         IControladorUsuario ControladorU = fabrica.getIControladorUsuario();
 
         Colaborador usr = ControladorU.ObtenerColaborador(nickColab);
-        if(usr!=null){
-        
-        //se elimina el usuario como seguido de sus seguidores
-        Map<String, Usuario> eliminarseg = usr.getSeguidores();
-        List<Usuario> listaSeguidores = new ArrayList<Usuario>(eliminarseg.values());
-        Iterator<Usuario> iter = listaSeguidores.iterator();
-        while (iter.hasNext()) {
-            Usuario sigue = iter.next();
-            sigue.getSeguidos().remove(nickColab);
-        }
-        usr.getSeguidores().clear();
-        usr.getSeguidos().clear();
-         
-        //se eliminan las colaboraciones para ese colaborador
+        if (usr != null) {
 
-        List<Colaboracion> lCol = usr.getColaboraciones();
-        Iterator it = lCol.iterator();
-        while (it.hasNext()) {
-        Colaboracion col = (Colaboracion) it.next();
-        it.remove();
+            //se elimina el usuario como seguido de sus seguidores
+            Map<String, Usuario> eliminarseg = usr.getSeguidores();
+            List<Usuario> listaSeguidores = new ArrayList<Usuario>(eliminarseg.values());
+            Iterator<Usuario> iter = listaSeguidores.iterator();
+            while (iter.hasNext()) {
+                Usuario sigue = iter.next();
+                sigue.getSeguidos().remove(nickColab);
+            }
+            usr.getSeguidores().clear();
+            usr.getSeguidos().clear();
+
+            //se eliminan las colaboraciones para ese colaborador
+            List<Colaboracion> lCol = usr.getColaboraciones();
+            Iterator it = lCol.iterator();
+            while (it.hasNext()) {
+                Colaboracion col = (Colaboracion) it.next();
+                it.remove();
+            }
+            usr.getColaboraciones().clear();
+
         }
-        usr.getColaboraciones().clear();
-        
-        }    
-         
+
     }
-    
-    
+
     @Override
-    public void eliminarCategorias(){
+    public void eliminarCategorias() {
         Fabrica fabrica = Fabrica.getInstance();
         IPropCat IPC = fabrica.getControladorPropCat();
-       
-                
+
         Map<String, Categoria> categorias = IPC.getCategorias();
         Set set = categorias.entrySet();
         Iterator iterator = set.iterator();
         while (iterator.hasNext()) {
             Map.Entry mentry = (Map.Entry) iterator.next();
             if (mentry.getValue() instanceof Categoria) {
-                Categoria c=(Categoria) mentry.getValue();
+                Categoria c = (Categoria) mentry.getValue();
                 iterator.remove();//aca se van borrando todas las categorias
-                }
-                        
             }
-        IPC.getCategorias().clear();//limpia todo el map por si querdo algo
 
         }
-        
- 
+        IPC.getCategorias().clear();//limpia todo el map por si querdo algo
+
+    }
+
+    @Override
+    public boolean AgregarUsuarioColaboradorDatosdePrueba(String nickName, String nombre, String apellido, String correo, Calendar fechaN, String imagen) {
+        String ruta = System.getProperty("user.dir");
+        if (this.Usuarios.get(nickName) != null) {
+            return false;
+
+        } else {
+            Colaborador c = new Colaborador(nickName, nombre, apellido, correo, fechaN, imagen);
+
+            String fotoLocal = c.getImagen();
+            if (!"".equals(c.getImagen())) {
+                File fLocal = new File(fotoLocal);
+                String ex = getFileExtension(fLocal);
+                File dataInputFile = new File(ruta + "//fotosdp//" + imagen);
+                File fileSendPath = new File(ruta + "//fPerfiles//", dataInputFile.getName());
+                try {
+                    Files.copy(Paths.get(dataInputFile.getAbsolutePath()), Paths.get(fileSendPath.getAbsolutePath()), StandardCopyOption.REPLACE_EXISTING);
+                } catch (IOException exep) {
+                    Logger.getLogger(ControladorPropCat.class.getName()).log(Level.SEVERE, null, exep);
+                }
+                c.setImagen(nickName + "." + ex);
+            } else {
+                File dataInputFile = new File(ruta + "//fotosdp//" + imagen);
+                File fileSendPath = new File(ruta + "//fPerfiles//", "nadie.png");
+                try {
+                    Files.copy(Paths.get(dataInputFile.getAbsolutePath()), Paths.get(fileSendPath.getAbsolutePath()), StandardCopyOption.REPLACE_EXISTING);
+                } catch (IOException ex) {
+                    Logger.getLogger(ControladorPropCat.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                dataInputFile.renameTo(fileSendPath);
+                c.setImagen("nadie.png");
+            }
+            boolean res = this.dbUsuario.agregarColaborador(c);
+
+            if (res) {
+                this.Usuarios.put(nickName, c);
+                if (!"".equals(c.getImagen())) {
+                    copiarFoto(fotoLocal, nickName);
+                }
+            }
+            return res;
+        }
+    }
+
+    @Override
+    public boolean AgregarUsuarioProponenteDatosdePrueba(String nickName, String nombre, String apellido, String correo, Calendar fechaN, String imagen, String direccion, String biografia, String sitioWeb) {
+        String ruta = System.getProperty("user.dir");
+        if (this.Usuarios.get(nickName) != null) {
+            return false;
+        } else {
+            Proponente c = new Proponente(biografia, direccion, sitioWeb, nickName, nombre, apellido, correo, fechaN, imagen);
+            String fotoLocal = c.getImagen();
+            if (!"".equals(c.getImagen())) {
+                File fLocal = new File(fotoLocal);
+                String ex = getFileExtension(fLocal);
+                File dataInputFile = new File(ruta + "//fotosdp//" + imagen);
+                File fileSendPath = new File(ruta + "//fPerfiles//", dataInputFile.getName());
+                try {
+                    Files.copy(Paths.get(dataInputFile.getAbsolutePath()), Paths.get(fileSendPath.getAbsolutePath()), StandardCopyOption.REPLACE_EXISTING);
+                } catch (IOException exep) {
+                    Logger.getLogger(ControladorPropCat.class.getName()).log(Level.SEVERE, null, exep);
+                }
+                c.setImagen(nickName + "." + ex);
+            } else {
+                File dataInputFile = new File(ruta + "//fotosdp//" + imagen);
+                File fileSendPath = new File(ruta + "//fPerfiles//", "nadie.png");
+                try {
+                    Files.copy(Paths.get(dataInputFile.getAbsolutePath()), Paths.get(fileSendPath.getAbsolutePath()), StandardCopyOption.REPLACE_EXISTING);
+                } catch (IOException ex) {
+                    Logger.getLogger(ControladorPropCat.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                dataInputFile.renameTo(fileSendPath);
+                c.setImagen("nadie.png");
+            }
+            boolean res = this.dbUsuario.agregarProponente(c);
+            if (res) {
+                this.Usuarios.put(nickName, c);
+                if (!"".equals(c.getImagen())) {
+                    copiarFoto(fotoLocal, nickName);
+                }
+            }
+            return res;
+        }
+    }
+
 }
