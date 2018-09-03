@@ -13,6 +13,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -373,7 +376,7 @@ public class ControladorPropCat implements IPropCat {
             ICU.getColaborador().setColaboraciones(colaboracion);
             this.getPropuesta().setColaboraciones(colaboracion);
 
-            if (this.getPropuesta().getEstadoActual().getEstado() != TipoE.enFinanciacion) {
+            if (TotalColaboracion < this.getPropuesta().getMontoTot()) {
                 // se crea un estado solo por la primer colaboracion y se mantiene hasta otro evento
                 EstadoPropuesta EstadoP = new EstadoPropuesta(TipoE.enFinanciacion, calendario, true);
                 // se recupera el estado actual anterior para pasarlo al historial
@@ -389,7 +392,7 @@ public class ControladorPropCat implements IPropCat {
                 EstadoPropuesta EstadoP = new EstadoPropuesta(TipoE.Financiada, calendario, true);
                 EstadoPropuesta EstAnterior = this.getPropuesta().getEstadoActual();
                 EstAnterior.setEsActual(false);
-                
+
                 this.getPropuesta().setEstadoActual(EstadoP);
                 this.getPropuesta().setEstados(EstAnterior);
             }
@@ -449,10 +452,16 @@ public class ControladorPropCat implements IPropCat {
         Propuesta nuevaP;
         nuevaP = new Propuesta(tituloP, descripcion, imagen, lugar, fecha, montoE, montoTot, null, cat, retorno, p);
         this.propuestas.put(tituloP, nuevaP);
-
+        String ruta = System.getProperty("user.dir");
+        File dataInputFile = new File(ruta + "//fotosdp//" + imagen);
+        File fileSendPath = new File(ruta + "//fPropuestas//", dataInputFile.getName());
+        try {
+            Files.copy(Paths.get(dataInputFile.getAbsolutePath()), Paths.get(fileSendPath.getAbsolutePath()), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException ex) {
+            Logger.getLogger(ControladorPropCat.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.dbPropuesta = new DBPropuesta();
         boolean agregada = this.dbPropuesta.agregarPropuestaDatosdePrueba(nuevaP);
-
         return true;
     }
 
@@ -503,10 +512,10 @@ public class ControladorPropCat implements IPropCat {
     @Override
     public boolean nuevoEstadoPropuestaDatosdePrueba(String TituloP, TipoE estado, Calendar fecha) {
 
-        EstadoPropuesta estadop = new EstadoPropuesta(estado, fecha,false);
+        EstadoPropuesta estadop = new EstadoPropuesta(estado, fecha, false);
         Propuesta p = (Propuesta) this.propuestas.get(TituloP);
         p.setEstados(estadop);
-        
+
         DBPropuesta DBP = new DBPropuesta();
         DBP.agregarEstadoPropuestaDatosdePrueba(estadop, TituloP);
 
