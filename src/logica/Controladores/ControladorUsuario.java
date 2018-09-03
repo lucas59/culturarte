@@ -191,7 +191,8 @@ public class ControladorUsuario implements IControladorUsuario {
         } else {
             Proponente c = new Proponente(biografia, direccion, sitioWeb, nickName, nombre, apellido, correo, fechaN, imagen);
             String fotoLocal = c.getImagen();
-            if (!"".equals(c.getImagen())) {
+            if (!"".
+                    equals(c.getImagen())) {
                 File fLocal = new File(fotoLocal);
                 String ex = getFileExtension(fLocal);
                 String ruta = System.getProperty("user.dir") + "\\fPerfiles\\" + c.getNickname() + "." + ex;
