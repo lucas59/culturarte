@@ -221,9 +221,19 @@ public class inicio extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
 
+        Fabrica fabrica = Fabrica.getInstance();
+        IControladorUsuario ICU = fabrica.getIControladorUsuario();
+        IPropCat IPC = fabrica.getControladorPropCat();
+
+        if (ICU.ListarUsuarios().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No existen Usuarios en el sistema");
+        } else {
         Seguir_Usuario seguir = new Seguir_Usuario();
         Escritorio.add(seguir);
         seguir.setVisible(true);
+        }
+        
+        
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed

@@ -176,7 +176,7 @@ public class ControladorUsuario implements IControladorUsuario {
 
             if (res) {
                 this.Usuarios.put(nickName, c);
-                if (!"".equals(c.getImagen())) {
+                if (!"nadie.png".equals(c.getImagen())) {
                     copiarFoto(fotoLocal, nickName);
                 }
             }
@@ -202,7 +202,7 @@ public class ControladorUsuario implements IControladorUsuario {
             boolean res = this.dbUsuario.agregarProponente(c);
             if (res) {
                 this.Usuarios.put(nickName, c);
-                if (!"".equals(c.getImagen())) {
+                if (!"nadie.png".equals(c.getImagen())) {
                     copiarFoto(fotoLocal, nickName);
                 }
             }
@@ -607,8 +607,8 @@ public class ControladorUsuario implements IControladorUsuario {
             if (!"".equals(c.getImagen())) {
                 File fLocal = new File(fotoLocal);
                 String ex = getFileExtension(fLocal);
-                File dataInputFile = new File(ruta + "//fotosdp//" + imagen);
-                File fileSendPath = new File(ruta + "//fPerfiles//", dataInputFile.getName());
+                File dataInputFile = new File(ruta + "\\fotosdp\\" + imagen);
+                File fileSendPath = new File(ruta + "\\fPerfiles\\", dataInputFile.getName());
                 try {
                     Files.copy(Paths.get(dataInputFile.getAbsolutePath()), Paths.get(fileSendPath.getAbsolutePath()), StandardCopyOption.REPLACE_EXISTING);
                 } catch (IOException exep) {
@@ -616,8 +616,8 @@ public class ControladorUsuario implements IControladorUsuario {
                 }
                 c.setImagen(nickName + "." + ex);
             } else {
-                File dataInputFile = new File(ruta + "//fotosdp//" + imagen);
-                File fileSendPath = new File(ruta + "//fPerfiles//", "nadie.png");
+                File dataInputFile = new File(ruta + "\\fotosdp\\" + imagen);
+                File fileSendPath = new File(ruta + "\\fPerfiles\\", "nadie.png");
                 try {
                     Files.copy(Paths.get(dataInputFile.getAbsolutePath()), Paths.get(fileSendPath.getAbsolutePath()), StandardCopyOption.REPLACE_EXISTING);
                 } catch (IOException ex) {
