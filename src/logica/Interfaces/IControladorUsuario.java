@@ -44,7 +44,7 @@ public interface IControladorUsuario {
 
     public abstract ArrayList<DtinfoColaborador> BuscarColaborador(String nick);
 
-    public abstract List<DtinfoPropuesta> verPropuestas(DtinfoColaborador dtc);
+    public abstract List<DtinfoPropuesta> verPropuestas();
 
     public abstract DtinfoColaborador verPerfil(String nombre);
 
@@ -79,4 +79,8 @@ public interface IControladorUsuario {
      public abstract boolean AgregarUsuarioColaboradorDatosdePrueba(String nickName, String nombre, String apellido, String correo, Calendar fechaN, String imagen);
 
     public abstract boolean AgregarUsuarioProponenteDatosdePrueba(String nickName, String nombre, String apellido, String correo, Calendar fechaN, String imagen, String direccion, String biografia, String sitioWeb);
+    
+    public abstract void resetearColaborador();
+    
+    public abstract DtinfoColaborador getDtColaborador();
 }

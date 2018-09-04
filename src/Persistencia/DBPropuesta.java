@@ -294,5 +294,29 @@ public class DBPropuesta {
             ex.printStackTrace();
         }
     }
+    
+    public boolean ModificarDatosPropuesta(Propuesta p) {
+        try {
+            Calendar c = p.getFecha();
+            int dia = c.get(Calendar.DAY_OF_MONTH);
+            int mes = c.get(Calendar.MONTH);
+            int anio = c.get(Calendar.YEAR) -1900;
+            Date d = new java.sql.Date(anio, mes, dia);
+            PreparedStatement stat = conexion.prepareStatement("UPDATE propuesta SET montoE=?,lugar=?,imagen=?,montoTot=?,fechaR=?,descripcion=? WHERE tituloP=?");
+            stat.setFloat(1, p.getMontoE());
+            stat.setString(2, p.getLugar());
+            stat.setString(3, p.getImagen());
+            stat.setFloat(4, p.getMontoTot());
+            stat.setDate(5, (java.sql.Date) d);
+            stat.setString(6, p.getDescripcionP());
+            stat.setString(7, p.getTituloP());
+            stat.executeUpdate();
+            stat.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 
 }

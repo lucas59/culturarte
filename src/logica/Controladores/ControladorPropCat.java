@@ -670,4 +670,46 @@ public class ControladorPropCat implements IPropCat {
         }
         return listColab;
     }
+    
+    @Override
+    public boolean ActualizarDatosPropuesta(DtinfoPropuesta dtp) {
+        Set set = this.propuestas.entrySet();
+        Iterator it = set.iterator();
+        while (it.hasNext()) {
+            Map.Entry mentry = (Map.Entry) it.next();
+            Propuesta p = (Propuesta) mentry.getValue();
+            if (p.getTituloP().equals(dtp.getTitulo())) {
+                if (!dtp.getDescripcion().equals("")) {
+                    p.setDescripcionP(dtp.getDescripcion());
+                }
+                if (dtp.getPrecio() != 0) {
+                    p.setMontoE(dtp.getPrecio());
+                }
+                if (!dtp.getImagen().equals("")) {
+                    p.setImagen(dtp.getImagen());
+                }
+                if (!dtp.getLugar().equals("")) {
+                    p.setLugar(dtp.getLugar());
+                }
+                if (dtp.getMonto() != 0) {
+                    p.setMontoTot(dtp.getMonto());
+                }
+                if (dtp.getFechaReal() != null) {
+                    p.setFecha(dtp.getFechaReal());
+                }
+                boolean modifico = this.dbPropuesta.ModificarDatosPropuesta(p);
+                if (!modifico) {
+                    return false;
+                }
+                break;
+            }
+        }
+        return true;
+    }
+    
+    @Override
+     public void resetearPropuesta() {
+        Propuesta p = new Propuesta("", "", "", "", null, 0, 0, null, null, null, null);
+        this.Propuesta = p;
+    }
 }

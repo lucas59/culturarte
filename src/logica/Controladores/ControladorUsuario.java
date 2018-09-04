@@ -65,7 +65,8 @@ public class ControladorUsuario implements IControladorUsuario {
         this.Usuarios = new HashMap<>();
         this.dbUsuario = new DBUsuario();
         this.CargarUsuarios();
-        this.Colaborador = null;
+        this.Colaborador=new Colaborador("","","","",null,"");
+        this.IPC=Fabrica.getInstance().getControladorPropCat();
     }
 
     @Override
@@ -306,7 +307,7 @@ public class ControladorUsuario implements IControladorUsuario {
     }
 
     @Override
-    public List<DtinfoPropuesta> verPropuestas(DtinfoColaborador dtc) {
+    public List<DtinfoPropuesta> verPropuestas() {
         List<DtinfoPropuesta> dtpropuestas = null;
         Set set = this.Usuarios.entrySet();
         Iterator it = set.iterator();
@@ -314,7 +315,7 @@ public class ControladorUsuario implements IControladorUsuario {
             Map.Entry mentry = (Map.Entry) it.next();
             if (mentry.getValue() instanceof Colaborador) {
                 Colaborador c2 = (Colaborador) mentry.getValue();
-                if (c2.getNickname().equals(dtc.getNickname())) {
+                if (c2.getNickname().equals(this.Colaborador.getNickname())) {
                     dtpropuestas = this.IPC.DarPropuestasCol(c2);
                     break;
                 }
@@ -337,6 +338,7 @@ public class ControladorUsuario implements IControladorUsuario {
 
                 if (aux.getNickname().equals(nick)) {
                     dtc = new DtinfoColaborador(aux);
+                    this.Colaborador=aux;
                     break;
                 }
             }
@@ -678,6 +680,18 @@ public class ControladorUsuario implements IControladorUsuario {
             }
             return res;
         }
+    }
+    
+    @Override
+    public void resetearColaborador(){
+        Colaborador c=new Colaborador("","","","",null,"");
+        this.Colaborador=c;
+    }
+    
+    @Override
+      public DtinfoColaborador getDtColaborador(){
+        DtinfoColaborador dtc=new DtinfoColaborador(this.Colaborador);
+        return dtc;
     }
 
 }

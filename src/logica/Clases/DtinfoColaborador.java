@@ -18,6 +18,7 @@ public class DtinfoColaborador {
     private String apellido;
     private String correo;
     private Calendar fechaN;
+    private String imagen;
 
     public DtinfoColaborador(String nickname, String nombre, String apellido, String correo, Calendar fechaN) {
         this.nickname = nickname;
@@ -32,6 +33,11 @@ public class DtinfoColaborador {
         this.apellido=aux.getApellido();
         this.correo=aux.getCorreo();
         this.fechaN=aux.getFechaN();
+        this.imagen=aux.getImagen();
+    }
+
+    public String getImagen() {
+        return imagen;
     }
 
     
