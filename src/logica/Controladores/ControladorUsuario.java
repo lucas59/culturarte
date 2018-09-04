@@ -272,13 +272,12 @@ public class ControladorUsuario implements IControladorUsuario {
 
     @Override
     public ArrayList<DtinfoColaborador> ListarColaboradores() {
-        ControladorUsuario CU = new ControladorUsuario();
+        IControladorUsuario CU = Fabrica.getInstance().getIControladorUsuario();
         Set set = Usuarios.entrySet();
         Iterator iterator = set.iterator();
         ArrayList<DtinfoColaborador> retorno = new ArrayList();
         while (iterator.hasNext()) {
             Map.Entry mentry = (Map.Entry) iterator.next();
-
             if (mentry.getValue() instanceof Colaborador) {
                 Colaborador aux = (Colaborador) mentry.getValue();
                 DtinfoColaborador aux2 = new DtinfoColaborador(aux.getNickname(), aux.getNombre(), aux.getApellido(), aux.getCorreo(), aux.getFechaN());

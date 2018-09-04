@@ -38,7 +38,6 @@ public class DBColaboracion {
         Fabrica fabrica = Fabrica.getInstance();
         IControladorUsuario CU = (ControladorUsuario) fabrica.getIControladorUsuario();
         IPropCat CPU = (ControladorPropCat) fabrica.getControladorPropCat();
-        IControladorUsuario ICU = fabrica.getIControladorUsuario();
         Calendar calendario = new GregorianCalendar();
         java.util.Date utilDate = new java.util.Date();
         utilDate = calendario.getTime();
@@ -61,8 +60,29 @@ public class DBColaboracion {
             }
             statement.executeUpdate();
             statement.close();
+            return true;
 
-            statement = conexion.prepareStatement("UPDATE estadopropuesta set estActual = ? where estActual = 1 AND TituloP = '" + CPU.getPropuesta().getTituloP() + "'");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean agregarestadocolaboracion() {
+        Fabrica fabrica = Fabrica.getInstance();
+        IControladorUsuario CU = (ControladorUsuario) fabrica.getIControladorUsuario();
+        IPropCat CPU = (ControladorPropCat) fabrica.getControladorPropCat();
+        Calendar calendario = new GregorianCalendar();
+        java.util.Date utilDate = new java.util.Date();
+        utilDate = calendario.getTime();
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+        List<Colaboracion> colaboraciones = CPU.getPropuesta().getColaboraciones();
+        float TotalColaboracion = 0;
+        for (int indice = 0; indice < colaboraciones.size(); indice++) {
+            TotalColaboracion = TotalColaboracion + colaboraciones.get(indice).getMontoC();
+        }
+        try {
+            PreparedStatement statement = conexion.prepareStatement("UPDATE estadopropuesta set estActual = ? where estActual = 1 AND TituloP = '" + CPU.getPropuesta().getTituloP() + "'");
             statement.setInt(1, 0);
             statement.executeUpdate();
             statement.close();
@@ -78,13 +98,11 @@ public class DBColaboracion {
             }
             statement.executeUpdate();
             statement.close();
-
-            return true;
-
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
         }
+        return false;
     }
 
     public boolean agregarColaboracionDatosdePrueba(String TituloP, String nickName, float monto, Calendar fechaRealiz, boolean Entrada) {

@@ -90,7 +90,7 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
             }
         });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(251, 0, 125)));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
         jLabel1.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
         jLabel1.setText("Seleccionar colaborador");
@@ -98,7 +98,6 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
         jLabel2.setText("Seleccionar propuesta");
 
-        jTable1.setForeground(new java.awt.Color(0, 0, 0));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -186,7 +185,7 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
         jLabel3.setText("Información de la colaboración");
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(251, 0, 125)));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
         jLabel5.setFont(new java.awt.Font("Consolas", 1, 12)); // NOI18N
         jLabel5.setText("Monto de la colaboración:");

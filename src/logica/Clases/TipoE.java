@@ -12,8 +12,8 @@ package logica.Clases;
 public enum TipoE {
     Ingresada,
     Publicada,
-    noFinanciada,
     enFinanciacion,
-    Cancelada,
     Financiada,
+    noFinanciada,
+    Cancelada,
 }

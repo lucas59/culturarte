@@ -352,9 +352,10 @@ public class ControladorPropCat implements IPropCat {
 
     @Override
     public boolean agregarColaboracion(boolean Entrada, Float monto) throws Exception {
-
+        
         IControladorUsuario ICU = Fabrica.getInstance().getIControladorUsuario();
         Calendar calendario = new GregorianCalendar();
+        DBColaboracion DBC = new DBColaboracion();
         java.util.Date utilDate = new java.util.Date();
         utilDate = calendario.getTime();
 
@@ -387,17 +388,18 @@ public class ControladorPropCat implements IPropCat {
                 // se setea en el historial y posterior se carga el nuevo estado actual
                 this.getPropuesta().setEstados(EstAnterior);
                 this.getPropuesta().setEstadoActual(EstadoP);
-
+                //Se agrega el estado en la base de datos
+                DBC.agregarestadocolaboracion();
             } else if ((TotalColaboracion + monto) == this.getPropuesta().getMontoTot()) {
                 // igual proceso para otro estado distinto 
                 EstadoPropuesta EstadoP = new EstadoPropuesta(TipoE.Financiada, calendario, true);
                 EstadoPropuesta EstAnterior = this.getPropuesta().getEstadoActual();
                 EstAnterior.setEsActual(false);
-
                 this.getPropuesta().setEstadoActual(EstadoP);
                 this.getPropuesta().setEstados(EstAnterior);
+                DBC.agregarestadocolaboracion();
             }
-            DBColaboracion DBC = new DBColaboracion();
+            
             DBC.agregarColaboracion(Entrada, monto);
             this.Propuesta = null;
             return true;
