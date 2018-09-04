@@ -26,9 +26,9 @@ public class AltaPropuesta2 extends javax.swing.JInternalFrame {
         this.jTextProponente.setText(nickName);
         jTextTitulo.requestFocus();
         this.ICP = Fabrica.getInstance().getControladorPropCat();
-        
+
         jCalendarFechaReal.setMinSelectableDate(new Date());
-       
+
     }
 
     public void LimpiarComponentes() {
@@ -120,6 +120,11 @@ public class AltaPropuesta2 extends javax.swing.JInternalFrame {
                 jTextMontoTotActionPerformed(evt);
             }
         });
+        jTextMontoTot.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextMontoTotKeyTyped(evt);
+            }
+        });
 
         jLabel5.setText("Monto Total(*):");
         jLabel5.setToolTipText("");
@@ -129,6 +134,11 @@ public class AltaPropuesta2 extends javax.swing.JInternalFrame {
         jTextMontoEnt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextMontoEntActionPerformed(evt);
+            }
+        });
+        jTextMontoEnt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextMontoEntKeyTyped(evt);
             }
         });
 
@@ -394,12 +404,38 @@ public class AltaPropuesta2 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        AltaPropuesta1 altaP = new AltaPropuesta1();
+
+        inicio.Escritorio.add(altaP);
+        this.setVisible(false);
+        altaP.toFront();
+        altaP.setVisible(true);
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jCheckBoxEntradasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxEntradasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBoxEntradasActionPerformed
+
+    private void jTextMontoTotKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextMontoTotKeyTyped
+        char c = evt.getKeyChar();
+        String d = "" + c;
+        if (Character.isDigit(c) || d.equals("\b")) {
+
+        } else {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextMontoTotKeyTyped
+
+    private void jTextMontoEntKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextMontoEntKeyTyped
+        char c = evt.getKeyChar();
+        String d = "" + c;
+        if (Character.isDigit(c) || d.equals("\b")) {
+
+        } else {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextMontoEntKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

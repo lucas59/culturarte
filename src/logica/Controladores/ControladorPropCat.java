@@ -158,6 +158,7 @@ public class ControladorPropCat implements IPropCat {
 
             if (correcto) {
                 this.catRecordada.setCategoriaH(cat);
+                this.categorias.put(cat.getNombreC(), cat);
             } else {
                 throw new Exception("La operacion no pudo ser realizada con exito");
             }
