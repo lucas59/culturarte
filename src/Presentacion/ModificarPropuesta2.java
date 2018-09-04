@@ -257,13 +257,6 @@ public DtinfoPropuesta dtp2;
 
     private void TextDescKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextDescKeyTyped
         // TODO add your handling code here:
-        char c = evt.getKeyChar();
-        String d = "" + c;
-        if (Character.isLetter(c) || d.equals("\b") || d.equals(" ")) {
-
-        } else {
-            evt.consume();
-        }
     }//GEN-LAST:event_TextDescKeyTyped
 
     private void TextMontoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextMontoKeyTyped
