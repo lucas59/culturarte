@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
@@ -38,10 +40,8 @@ public class DBColaboracion {
         Fabrica fabrica = Fabrica.getInstance();
         IControladorUsuario CU = (ControladorUsuario) fabrica.getIControladorUsuario();
         IPropCat CPU = (ControladorPropCat) fabrica.getControladorPropCat();
-        Calendar calendario = new GregorianCalendar();
-        java.util.Date utilDate = new java.util.Date();
-        utilDate = calendario.getTime();
-        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+        LocalDate todayLocalDate = LocalDate.now( ZoneId.of( "America/Montreal" ) );
+        java.sql.Date sqlDate = java.sql.Date.valueOf( todayLocalDate );
         List<Colaboracion> colaboraciones = CPU.getPropuesta().getColaboraciones();
         float TotalColaboracion = 0;
         for (int indice = 0; indice < colaboraciones.size(); indice++) {

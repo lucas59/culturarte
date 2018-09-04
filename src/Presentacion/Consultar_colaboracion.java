@@ -22,6 +22,7 @@ import logica.Clases.Colaborador;
 import logica.Clases.DtColaboraciones;
 import logica.Clases.DtinfoColaborador;
 import logica.Clases.DtNickTitProp;
+import logica.Clases.DtUsuario;
 import logica.Clases.DtinfoPropuesta;
 import logica.Clases.Propuesta;
 import logica.Clases.TipoRetorno;
@@ -50,6 +51,7 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
         });
         Tabla_propuesta.addMouseListener(new MouseAdapter() {
         });
+        DefaultTableModel modelo;
     }
 
     /**
@@ -379,7 +381,6 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
             Object[] dat = {C.getNickname(), C.getNombre()};
             modelo.addRow(dat);
         }
-        jTable1.setModel(modelo);
     }//GEN-LAST:event_formComponentShown
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -408,57 +409,37 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jTextField7KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField7KeyReleased
+        Fabrica fabrica = Fabrica.getInstance();
+        ControladorUsuario ICU = (ControladorUsuario) fabrica.getIControladorUsuario();
+        List<DtinfoColaborador> lista2 = ICU.ListarColaboradores();
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.setRowCount(0);
-        for (int i = 0; i < jTable1.getRowCount(); i++) {
-            modelo.removeRow(i);
-            i -= 1;
-        }
-        Fabrica fabrica = Fabrica.getInstance();
-        ControladorUsuario controladorU = (ControladorUsuario) fabrica.getIControladorUsuario();
-        List<DtinfoColaborador> lista2 = controladorU.ListarColaboradores();
-        modelo = (DefaultTableModel) jTable1.getModel();
-        modelo.setRowCount(0);
         for (int i = 0; i < lista2.size(); i++) {
-            DtinfoColaborador C = (DtinfoColaborador) lista2.get(i);
-            if ((!jTextField7.getText().isEmpty()) && C.getNickname().contains(jTextField7.getText())) {
-                Object[] dat = {C.getNickname(), C.getNombre()};
-                modelo.addRow(dat);
-            } else if (jTextField7.getText().isEmpty()) {
-                Object[] dat = {C.getNickname(), C.getNombre()};
+            DtinfoColaborador u = lista2.get(i);
+            if (u.getNickname().contains(jTextField7.getText())) {
+                Object[] dat = {u.getNickname(), u.getNombre()};
                 modelo.addRow(dat);
             }
-        }
-jTable1.setModel(modelo);
+        }        // TODO add your handling code here:
     }//GEN-LAST:event_jTextField7KeyReleased
 
     private void jTextField8KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField8KeyReleased
-        DefaultTableModel modelo = (DefaultTableModel) Tabla_propuesta.getModel();
-        modelo.setRowCount(0);
-        for (int i = 0; i < jTable1.getRowCount(); i++) {
-            modelo.removeRow(i);
-            i -= 1;
-        }
         Fabrica fabrica = Fabrica.getInstance();
-        IControladorUsuario ICU = fabrica.getIControladorUsuario();
-        List<Colaboracion> colaboraciones = ICU.ListarColaboraciones(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
+        ControladorUsuario ICU = (ControladorUsuario) fabrica.getIControladorUsuario();
+         List<Colaboracion> colaboraciones = ICU.ListarColaboraciones(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
         if (!colaboraciones.isEmpty()) {
+            DefaultTableModel modelo = (DefaultTableModel) Tabla_propuesta.getModel();
             modelo.setRowCount(0);
-            for (int indice = 0; indice < colaboraciones.size(); indice++) {
-                if ((!jTextField8.getText().isEmpty()) && colaboraciones.get(indice).getTituloP().contains(jTextField8.getText())) {
-                    Object[] dat = {colaboraciones.get(indice).getTituloP(), colaboraciones.get(indice).getColaborador().getNickname()};
-                    modelo.addRow(dat);
-                } else if (jTextField8.getText().isEmpty()) {
-                    Object[] dat = {colaboraciones.get(indice).getTituloP(), colaboraciones.get(indice).getColaborador().getNickname()};
+            for (int i = 0; i < colaboraciones.size(); i++) {
+                Colaboracion u = colaboraciones.get(i);
+                if (u.getTituloP().contains(jTextField8.getText())) {
+                    Object[] dat = {u.getTituloP() , u.getNickName()};
                     modelo.addRow(dat);
                 }
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "El colaborador no tiene colaboraciones");
-        }
-        this.Tabla_propuesta.setModel(modelo);
+        }    
     }//GEN-LAST:event_jTextField8KeyReleased
-
+    
     private void Tabla_propuestaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla_propuestaMouseClicked
         Fabrica fabrica = Fabrica.getInstance();
         IControladorUsuario ICU = fabrica.getIControladorUsuario();
