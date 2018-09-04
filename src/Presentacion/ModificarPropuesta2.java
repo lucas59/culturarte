@@ -10,6 +10,7 @@ import Presentacion.inicio;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import logica.Clases.DtinfoPropuesta;
 import logica.Fabrica;
 import logica.Interfaces.IPropCat;
@@ -27,6 +28,7 @@ public DtinfoPropuesta dtp2;
     public ModificarPropuesta2(DtinfoPropuesta dtp) {
         initComponents();
         IPC=Fabrica.getInstance().getControladorPropCat();
+        ((JTextField) this.fecha.getDateEditor()).setEditable(false); 
         dtp2=dtp;
     }
 

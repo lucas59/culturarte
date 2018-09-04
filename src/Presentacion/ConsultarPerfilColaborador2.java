@@ -141,15 +141,20 @@ public class ConsultarPerfilColaborador2 extends javax.swing.JInternalFrame {
                 textTituloActionPerformed(evt);
             }
         });
-        jPanel1.add(textTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(212, 217, 199, -1));
+        jPanel1.add(textTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, 199, -1));
 
         TextCat.setEditable(false);
-        jPanel1.add(TextCat, new org.netbeans.lib.awtextra.AbsoluteConstraints(212, 243, 199, -1));
+        jPanel1.add(TextCat, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, 199, -1));
 
         TextFecha.setEditable(false);
         jPanel1.add(TextFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(212, 269, 199, -1));
 
         TextMonto.setEditable(false);
+        TextMonto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextMontoActionPerformed(evt);
+            }
+        });
         jPanel1.add(TextMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 300, 199, -1));
 
         Textprecio.setEditable(false);
@@ -300,6 +305,10 @@ public class ConsultarPerfilColaborador2 extends javax.swing.JInternalFrame {
         ICU.resetearColaborador();
         this.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void TextMontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextMontoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextMontoActionPerformed
 
     /**
      * @param args the command line arguments
