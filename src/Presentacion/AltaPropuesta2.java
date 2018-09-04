@@ -26,9 +26,9 @@ public class AltaPropuesta2 extends javax.swing.JInternalFrame {
         this.jTextProponente.setText(nickName);
         jTextTitulo.requestFocus();
         this.ICP = Fabrica.getInstance().getControladorPropCat();
-        
+
         jCalendarFechaReal.setMinSelectableDate(new Date());
-       
+
     }
 
     public void LimpiarComponentes() {
@@ -120,6 +120,11 @@ public class AltaPropuesta2 extends javax.swing.JInternalFrame {
                 jTextMontoTotActionPerformed(evt);
             }
         });
+        jTextMontoTot.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextMontoTotKeyTyped(evt);
+            }
+        });
 
         jLabel5.setText("Monto Total(*):");
         jLabel5.setToolTipText("");
@@ -129,6 +134,11 @@ public class AltaPropuesta2 extends javax.swing.JInternalFrame {
         jTextMontoEnt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextMontoEntActionPerformed(evt);
+            }
+        });
+        jTextMontoEnt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextMontoEntKeyTyped(evt);
             }
         });
 
@@ -237,11 +247,11 @@ public class AltaPropuesta2 extends javax.swing.JInternalFrame {
                 .addGroup(jPanelAltaProp2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelAltaProp2Layout.createSequentialGroup()
                         .addComponent(rSFotoCirclePropuesta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCalendarFechaReal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
+                        .addGap(79, 79, 79)
                         .addGroup(jPanelAltaProp2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButtonCancelar)
                             .addComponent(jButtonCrearProp)
@@ -279,7 +289,7 @@ public class AltaPropuesta2 extends javax.swing.JInternalFrame {
                         .addGap(15, 15, 15)
                         .addGroup(jPanelAltaProp2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -394,12 +404,38 @@ public class AltaPropuesta2 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        AltaPropuesta1 altaP = new AltaPropuesta1();
+
+        inicio.Escritorio.add(altaP);
+        this.setVisible(false);
+        altaP.toFront();
+        altaP.setVisible(true);
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jCheckBoxEntradasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxEntradasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBoxEntradasActionPerformed
+
+    private void jTextMontoTotKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextMontoTotKeyTyped
+        char c = evt.getKeyChar();
+        String d = "" + c;
+        if (Character.isDigit(c) || d.equals("\b")) {
+
+        } else {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextMontoTotKeyTyped
+
+    private void jTextMontoEntKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextMontoEntKeyTyped
+        char c = evt.getKeyChar();
+        String d = "" + c;
+        if (Character.isDigit(c) || d.equals("\b")) {
+
+        } else {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextMontoEntKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -76,10 +76,7 @@ public class ControladorPropCat implements IPropCat {
         this.dbColaboracion = new DBColaboracion();
         this.categorias = new HashMap<>();
         this.propuestas = new HashMap<>();
-        /*  Categoria cat = new Categoria("Categoria");
-        this.categorias.put("Categoria", cat);
-        this.dbPropuesta.agregarCategoria("Categoria", null);
-         */ this.Propuesta = null;
+        this.Propuesta = null;
     }
 
     public void ComunicarControladores(IControladorUsuario icu) {
@@ -158,6 +155,7 @@ public class ControladorPropCat implements IPropCat {
 
             if (correcto) {
                 this.catRecordada.setCategoriaH(cat);
+                this.categorias.put(cat.getNombreC(), cat);
             } else {
                 throw new Exception("La operacion no pudo ser realizada con exito");
             }
@@ -166,27 +164,26 @@ public class ControladorPropCat implements IPropCat {
 
     @Override
     public boolean crearPropuesta(String tituloP, String descripcion, String lugar, String imagen, Calendar fecha, float montoE, float montoTot, TipoRetorno retorno) throws Exception {
+        String ruta = System.getProperty("user.dir");
 
         if (this.propuestas.get(tituloP) != null) {
             throw new Exception("Ya existe una propuesta bajo ese Nombre");
         }
-        String nuevaRutaI;
 
         TipoE tipo = TipoE.Ingresada;
         Calendar fechaI = new GregorianCalendar();
         EstadoPropuesta estado = new EstadoPropuesta(tipo, fechaI, true);
 
-        if (!"".equals(imagen)) {
-            File fotoL = new File(imagen);
-            String extension = getFileExtension(fotoL);
-            String ruta = System.getProperty("user.dir") + "\\fPropuestas\\" + tituloP + "." + extension;
+        Propuesta nuevaP = new Propuesta(tituloP, descripcion, imagen, lugar, fecha, montoE, montoTot, estado, this.catRecordada, retorno, this.uProponente);
 
-            nuevaRutaI = (tituloP + "." + extension);
+        String fotoLocal = nuevaP.getImagen();
+        if (!"".equals(nuevaP.getImagen())) {
+            File fLocal = new File(fotoLocal);
+            String ex = getFileExtension(fLocal);
+            nuevaP.setImagen(tituloP + "." + ex);
         } else {
-            nuevaRutaI = "Culturarte.png";
+            nuevaP.setImagen("Culturarte.png");
         }
-
-        Propuesta nuevaP = new Propuesta(tituloP, descripcion, nuevaRutaI, lugar, fecha, montoE, montoTot, estado, this.catRecordada, retorno, this.uProponente);
 
         boolean agregada = this.dbPropuesta.agregarPropuesta(nuevaP, estado);
         if (agregada) {
@@ -195,7 +192,7 @@ public class ControladorPropCat implements IPropCat {
             this.uProponente.setPropuesta(nuevaP);
 
             if (!"".equals(nuevaP.getImagen())) {
-                copiarFoto(nuevaRutaI, tituloP);
+                copiarFoto(imagen, tituloP);
             }
 
         } else {

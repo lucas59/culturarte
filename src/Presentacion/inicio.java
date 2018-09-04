@@ -255,10 +255,15 @@ public class inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+
         // TODO add your handling code here:
-        AltaPropuesta1 altaprop1 = new AltaPropuesta1();
-        Escritorio.add(altaprop1);
-        altaprop1.setVisible(true);
+        if (this.ICU.ListarProponentes2().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No hay proponentes en el sistema ", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        } else {
+            AltaPropuesta1 altaprop1 = new AltaPropuesta1();
+            Escritorio.add(altaprop1);
+            altaprop1.setVisible(true);
+        }
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
@@ -287,24 +292,20 @@ public class inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-
         Fabrica fabrica = Fabrica.getInstance();
 
-        if (fabrica.getdatosCargados() == true) {
-            JOptionPane.showMessageDialog(null, "Datos de Prueba ya fueron cargados durante la ejecucion,\n debe reiniciar la aplicacion para continuar. ", "ERROR: Datos de Prueba ya cargados", JOptionPane.ERROR_MESSAGE);
-        } else {
-            int respuesta = JOptionPane.showConfirmDialog(null, "Se borraran todos los datos de la base de datos\n Desea continuar?", "ADVERTENCIA", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-            if (respuesta == 0) {
-                boolean ok = fabrica.limpiarBaseDeDatos();
-                if (ok) {
-                    fabrica.LimpiarLogica();
-                    fabrica.cargarDatosdePrueba();
-                    JOptionPane.showMessageDialog(null, "Datos Cargados Exitosamente!!!");
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Carga de Datos de Prueba fue cancelada");
+        int respuesta = JOptionPane.showConfirmDialog(null, "Se borraran todos los datos de la base de datos\n Desea continuar?", "ADVERTENCIA", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (respuesta == 0) {
+            boolean ok = fabrica.limpiarBaseDeDatos();
+            if (ok) {
+                fabrica.LimpiarLogica();
+                fabrica.cargarDatosdePrueba();
+                JOptionPane.showMessageDialog(null, "Datos Cargados Exitosamente!!!");
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Carga de Datos de Prueba fue cancelada");
         }
+
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
