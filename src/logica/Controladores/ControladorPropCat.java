@@ -76,10 +76,7 @@ public class ControladorPropCat implements IPropCat {
         this.dbColaboracion = new DBColaboracion();
         this.categorias = new HashMap<>();
         this.propuestas = new HashMap<>();
-        /*  Categoria cat = new Categoria("Categoria");
-        this.categorias.put("Categoria", cat);
-        this.dbPropuesta.agregarCategoria("Categoria", null);
-         */ this.Propuesta = null;
+        this.Propuesta = null;
     }
 
     public void ComunicarControladores(IControladorUsuario icu) {
@@ -167,29 +164,27 @@ public class ControladorPropCat implements IPropCat {
 
     @Override
     public boolean crearPropuesta(String tituloP, String descripcion, String lugar, String imagen, Calendar fecha, float montoE, float montoTot, TipoRetorno retorno) throws Exception {
-    String ruta = System.getProperty("user.dir");
-    
+        String ruta = System.getProperty("user.dir");
+
         if (this.propuestas.get(tituloP) != null) {
             throw new Exception("Ya existe una propuesta bajo ese Nombre");
         }
-        
+
         TipoE tipo = TipoE.Ingresada;
         Calendar fechaI = new GregorianCalendar();
         EstadoPropuesta estado = new EstadoPropuesta(tipo, fechaI, true);
 
         Propuesta nuevaP = new Propuesta(tituloP, descripcion, imagen, lugar, fecha, montoE, montoTot, estado, this.catRecordada, retorno, this.uProponente);
 
-        
-         String fotoLocal = nuevaP.getImagen();
-            if (!"".equals(nuevaP.getImagen())) {
-                File fLocal = new File(fotoLocal);
-                String ex = getFileExtension(fLocal);
-                nuevaP.setImagen(tituloP + "." + ex);
-            } else {
-                nuevaP.setImagen("Culturarte.png");
-            }
-            
-            
+        String fotoLocal = nuevaP.getImagen();
+        if (!"".equals(nuevaP.getImagen())) {
+            File fLocal = new File(fotoLocal);
+            String ex = getFileExtension(fLocal);
+            nuevaP.setImagen(tituloP + "." + ex);
+        } else {
+            nuevaP.setImagen("Culturarte.png");
+        }
+
         boolean agregada = this.dbPropuesta.agregarPropuesta(nuevaP, estado);
         if (agregada) {
             this.propuestas.put(tituloP, nuevaP);
