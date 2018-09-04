@@ -200,16 +200,16 @@ public class DBPropuesta {
                         est = TipoE.Publicada;
                         break;
                     case 2:
-                        est = TipoE.noFinanciada;
-                        break;
-                    case 3:
                         est = TipoE.enFinanciacion;
                         break;
+                    case 3:
+                        est = TipoE.Financiada;
+                        break;
                     case 4:
-                        est = TipoE.Cancelada;
+                        est = TipoE.noFinanciada;
                         break;
                     default:
-                        est = TipoE.Financiada;
+                        est = TipoE.Cancelada;
                         break;
                 }
 

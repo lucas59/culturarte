@@ -353,7 +353,7 @@ public class ControladorPropCat implements IPropCat {
 
     @Override
     public boolean agregarColaboracion(boolean Entrada, Float monto) throws Exception {
-        
+
         IControladorUsuario ICU = Fabrica.getInstance().getIControladorUsuario();
         Calendar calendario = new GregorianCalendar();
         DBColaboracion DBC = new DBColaboracion();
@@ -400,7 +400,7 @@ public class ControladorPropCat implements IPropCat {
                 this.getPropuesta().setEstados(EstAnterior);
                 DBC.agregarestadocolaboracion();
             }
-            
+
             DBC.agregarColaboracion(Entrada, monto);
             this.Propuesta = null;
             return true;
@@ -639,10 +639,11 @@ public class ControladorPropCat implements IPropCat {
     public boolean eliminarColaboracion(String titulo, String nick) {
         boolean ok = false;
         Propuesta a = this.propuestas.get(titulo);
-        for (Colaboracion col : a.getColaboraciones()) {
-            if (col.getUColaborador().getNickname().equals(nick)) {
-                ok = col.borrarme();
-                break;
+        List<Colaboracion> col = a.getColaboraciones();
+        for (int i = 0; i < a.getColaboraciones().size(); i++) {
+            Colaboracion c = col.get(i);
+            if (col.get(i).getNickName().equals(nick)) {
+                ok = c.borrarme();
             }
         }
         try {
@@ -651,9 +652,7 @@ public class ControladorPropCat implements IPropCat {
             }
         } catch (SQLException ex) {
             Logger.getLogger(ControladorPropCat.class.getName()).log(Level.SEVERE, null, ex);
-
         }
-
         return ok;
     }
 
@@ -669,11 +668,11 @@ public class ControladorPropCat implements IPropCat {
             Colaboracion colab = (Colaboracion) it.next();
             Date fecha = (Date) colab.getFechaRealiz().getTime();
             String fechaR = new SimpleDateFormat("dd/MMM/yyyy").format(fecha);
-            listColab.add(new DtConsultaPropuesta2(colab.getNickName(), colab.getUColaborador().getNombre(), colab.getUColaborador().getNombre(), colab.getMontoC(), fechaR));
+            listColab.add(new DtConsultaPropuesta2(colab.getNickName(), colab.getColaborador().getNombre(), colab.getColaborador().getNombre(), colab.getMontoC(), fechaR));
         }
         return listColab;
     }
-    
+
     @Override
     public boolean ActualizarDatosPropuesta(DtinfoPropuesta dtp) {
         Set set = this.propuestas.entrySet();
@@ -709,9 +708,9 @@ public class ControladorPropCat implements IPropCat {
         }
         return true;
     }
-    
+
     @Override
-     public void resetearPropuesta() {
+    public void resetearPropuesta() {
         Propuesta p = new Propuesta("", "", "", "", null, 0, 0, null, null, null, null);
         this.Propuesta = p;
     }
