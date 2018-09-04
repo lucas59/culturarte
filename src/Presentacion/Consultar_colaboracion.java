@@ -379,6 +379,7 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
             Object[] dat = {C.getNickname(), C.getNombre()};
             modelo.addRow(dat);
         }
+        jTable1.setModel(modelo);
     }//GEN-LAST:event_formComponentShown
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -421,14 +422,14 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
         for (int i = 0; i < lista2.size(); i++) {
             DtinfoColaborador C = (DtinfoColaborador) lista2.get(i);
             if ((!jTextField7.getText().isEmpty()) && C.getNickname().contains(jTextField7.getText())) {
-                Object[] dat = {C.getNickname()};
+                Object[] dat = {C.getNickname(), C.getNombre()};
                 modelo.addRow(dat);
             } else if (jTextField7.getText().isEmpty()) {
-                Object[] dat = {C.getNickname()};
+                Object[] dat = {C.getNickname(), C.getNombre()};
                 modelo.addRow(dat);
             }
         }
-
+jTable1.setModel(modelo);
     }//GEN-LAST:event_jTextField7KeyReleased
 
     private void jTextField8KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField8KeyReleased
@@ -455,6 +456,7 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(null, "El colaborador no tiene colaboraciones");
         }
+        this.Tabla_propuesta.setModel(modelo);
     }//GEN-LAST:event_jTextField8KeyReleased
 
     private void Tabla_propuestaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla_propuestaMouseClicked

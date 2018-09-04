@@ -583,7 +583,7 @@ public class ControladorPropCat implements IPropCat {
 
         File origen = new File(foto);
         String extension = getFileExtension(origen);
-        String rutaLocal = System.getProperty("user.dir") + "\\fPerfiles\\" + tituloP + "." + extension;
+        String rutaLocal = System.getProperty("user.dir") + "\\fPropuestas\\" + tituloP + "." + extension;
         File destino = new File(rutaLocal);
 
         try {
