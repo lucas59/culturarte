@@ -44,6 +44,8 @@ public class AltaPropuesta1 extends javax.swing.JInternalFrame {
         
         this.listUsu = ICU.ListarProponentes2();
         
+        
+        
         DefaultTableModel modelo = (DefaultTableModel) jTableAltaProp1.getModel();
         
         modelo.setRowCount(0);
@@ -87,6 +89,8 @@ public class AltaPropuesta1 extends javax.swing.JInternalFrame {
         jButtonCancelarCat = new javax.swing.JButton();
         jLabelAyuda = new javax.swing.JLabel();
 
+        setTitle("ALTA PROPUESTA (Seleccion de usuario y Categoria)");
+
         jTableAltaProp1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -97,7 +101,15 @@ public class AltaPropuesta1 extends javax.swing.JInternalFrame {
             new String [] {
                 "NickName", "Nombre", "Apellido", "Correo"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTableAltaProp1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableAltaProp1MouseClicked(evt);

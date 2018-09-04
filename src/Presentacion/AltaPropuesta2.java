@@ -28,6 +28,7 @@ public class AltaPropuesta2 extends javax.swing.JInternalFrame {
         this.ICP = Fabrica.getInstance().getControladorPropCat();
         
         jCalendarFechaReal.setMinSelectableDate(new Date());
+       
     }
 
     public void LimpiarComponentes() {
