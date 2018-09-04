@@ -322,6 +322,11 @@ public class inicio extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         ConsultaPropuesta CP = new ConsultaPropuesta();
+        int cantidad = IPC.listarPropuestas().size();
+        if (cantidad == 0) {
+            JOptionPane.showMessageDialog(null, "No existen propuestas en el sistema", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         Escritorio.add(CP);
         CP.setVisible(true);
 
@@ -329,6 +334,11 @@ public class inicio extends javax.swing.JFrame {
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         CancelarColaboracionPropuesta form = new CancelarColaboracionPropuesta();
+        int cantidad = IPC.listarPropuestas().size();
+        if (cantidad == 0) {
+            JOptionPane.showMessageDialog(null, "No existen propuestas en el sistema", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         Escritorio.add(form);
         form.setVisible(true);
 
@@ -337,6 +347,11 @@ public class inicio extends javax.swing.JFrame {
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         // TODO add your handling code here:
         ModificarPropuesta mod = new ModificarPropuesta();
+        int cantidad = IPC.listarPropuestas().size();
+        if (cantidad == 0) {
+            JOptionPane.showMessageDialog(null, "No existen propuestas en el sistema", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         Escritorio.add(mod);
         mod.setVisible(true);
     }//GEN-LAST:event_jMenuItem11ActionPerformed

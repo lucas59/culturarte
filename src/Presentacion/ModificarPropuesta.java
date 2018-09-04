@@ -25,15 +25,12 @@ import logica.Interfaces.IPropCat;
 public class ModificarPropuesta extends javax.swing.JInternalFrame {
     private IPropCat IPC;
 private DtinfoPropuesta prop;
+
     public ModificarPropuesta() {
         initComponents();
         prop=null;
         this.IPC = Fabrica.getInstance().getControladorPropCat();
         List<DtNickTitProp> listProp = IPC.listarPropuestas();
-        if(listProp.isEmpty()){
-            JOptionPane.showMessageDialog(null,"No existen propuestas en el sistema");
-            return;
-        }
         DefaultTableModel modelo = (DefaultTableModel) TablaPropuestas.getModel();
 
         modelo.setRowCount(0);
