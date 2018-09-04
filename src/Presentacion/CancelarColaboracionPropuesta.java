@@ -339,7 +339,6 @@ public class CancelarColaboracionPropuesta extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonEliminar;

@@ -68,10 +68,6 @@ public class Colaboracion {
         this.Propuesta = Propuesta;
     }
 
-    public Colaborador getUColaborador() {
-        return UColaborador;
-    }
-
     public String getNickName() {
         return UColaborador.getNickname();
     }

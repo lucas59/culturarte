@@ -35,9 +35,8 @@ public class Colaborador extends Usuario {
 
     public boolean borrarColaboracion(Colaboracion col) {
         boolean ok = false;
-
-        for (Colaboracion c : this.Colaboraciones) {
-            if (c.getUColaborador().getNickname().equals(col.getColaborador().getNickname())) {
+        for (Colaboracion c : this.getColaboraciones()) {
+            if (c.getColaborador().getNickname().equals(col.getColaborador().getNickname())) {
                 this.Colaboraciones.remove(c);
                 ok = true;
                 break;
