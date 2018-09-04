@@ -581,7 +581,10 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
         Fabrica fabrica = Fabrica.getInstance();
         IPropCat CPC = fabrica.getControladorPropCat();
         IControladorUsuario CU = fabrica.getIControladorUsuario();
-        float monto = Float.parseFloat(jTextField17.getText());
+        float monto=0;
+        if (!jTextField17.getText().isEmpty()) {
+       monto = Float.parseFloat(jTextField17.getText());
+        }
         if (jTextField17.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingrese el monto de la colaboración");
         } else if (monto <= 0) {
@@ -591,8 +594,8 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
         } else if (jTable1.getSelectedRow() < 0) {
             JOptionPane.showMessageDialog(null, "Seleccione un colaborador");
         } else if (jTable2.getSelectedRow() < 0) {
-            JOptionPane.showMessageDialog(null, "Seleccione una propuesta");
-        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione una propuesta"); 
+        }else {
 
             boolean OK = false;
             if (jComboBox2.getSelectedItem().toString().compareTo("Entradas") == 0) {
