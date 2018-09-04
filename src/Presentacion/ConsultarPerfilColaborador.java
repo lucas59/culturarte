@@ -29,10 +29,6 @@ public class ConsultarPerfilColaborador extends javax.swing.JInternalFrame {
         initComponents();
         this.ICU = Fabrica.getInstance().getIControladorUsuario();
         List<DtinfoColaborador> listaC = ICU.ListarColaboradores();
-        if(listaC.isEmpty()){
-            JOptionPane.showMessageDialog(null,"No existen colaboradores en el sistema");
-            return;
-        }
         DefaultTableModel modelo = (DefaultTableModel) TablaC.getModel();
         modelo.setRowCount(0);
         for (int i = 0; i < listaC.size(); i++) {

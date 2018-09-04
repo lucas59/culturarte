@@ -37,6 +37,7 @@ public class inicio extends javax.swing.JFrame {
         ICU.CargarUsuarios();
         IPC.CargarPropuestas();
         IPC.CargarColaboraciones();
+        this.setTitle("Culturarte");
     }
 
     /**
@@ -81,7 +82,7 @@ public class inicio extends javax.swing.JFrame {
         jMenu1.setText("Usuario");
         jMenu1.setToolTipText("");
 
-        jMenuItem1.setText("Alta Usuario");
+        jMenuItem1.setText("Alta usuario");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -89,7 +90,7 @@ public class inicio extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
-        jMenuItem3.setText("Seguir Usuario");
+        jMenuItem3.setText("Seguir usuario");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -97,7 +98,7 @@ public class inicio extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem3);
 
-        jMenuItem4.setText("Ver Proponente");
+        jMenuItem4.setText("Ver proponentes");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem4ActionPerformed(evt);
@@ -105,7 +106,7 @@ public class inicio extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem4);
 
-        jMenuItem7.setText("Consultar perfil de colaborador");
+        jMenuItem7.setText("Ver colaboradores");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem7ActionPerformed(evt);
@@ -127,7 +128,7 @@ public class inicio extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem2);
 
-        jMenuItem5.setText("Alta Propuesta");
+        jMenuItem5.setText("Alta propuesta");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);
@@ -135,7 +136,7 @@ public class inicio extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem5);
 
-        jMenuItem6.setText("Consultar Propuestas");
+        jMenuItem6.setText("Consultar propuestas");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem6ActionPerformed(evt);
@@ -159,7 +160,7 @@ public class inicio extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem10);
 
-        jMenuItem11.setText("Modificar Propuesta");
+        jMenuItem11.setText("Modificar propuesta");
         jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem11ActionPerformed(evt);
@@ -171,7 +172,7 @@ public class inicio extends javax.swing.JFrame {
 
         jMenu3.setText("Otros");
 
-        jMenuItem9.setText("Cargar Datos de Prueba");
+        jMenuItem9.setText("Cargar datos de prueba");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem9ActionPerformed(evt);
@@ -237,16 +238,21 @@ public class inicio extends javax.swing.JFrame {
         if (ICU.ListarUsuarios().isEmpty()) {
             JOptionPane.showMessageDialog(null, "No existen Usuarios en el sistema");
         } else {
-        Seguir_Usuario seguir = new Seguir_Usuario();
-        Escritorio.add(seguir);
-        seguir.setVisible(true);
+            Seguir_Usuario seguir = new Seguir_Usuario();
+            Escritorio.add(seguir);
+            seguir.setVisible(true);
         }
-        
-        
+
+
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         ConsultarPerfilProponentes p = new ConsultarPerfilProponentes();
+        int cantidad = ICU.ListarProponentes().size();
+        if (cantidad == 0) {
+            JOptionPane.showMessageDialog(null, "No existen proponentes", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         Escritorio.add(p);
         p.setVisible(true);
 
@@ -254,7 +260,6 @@ public class inicio extends javax.swing.JFrame {
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
-
         AltaPropuesta1 altaprop1 = new AltaPropuesta1();
         Escritorio.add(altaprop1);
         altaprop1.setVisible(true);
@@ -264,6 +269,11 @@ public class inicio extends javax.swing.JFrame {
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         // TODO add your handling code here:
         ConsultarPerfilColaborador PC = new ConsultarPerfilColaborador();
+        int cantidad = ICU.ListarColaboradores().size();
+        if (cantidad == 0) {
+            JOptionPane.showMessageDialog(null, "No existen colaboradores", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         Escritorio.add(PC);
         PC.setVisible(true);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
@@ -287,29 +297,25 @@ public class inicio extends javax.swing.JFrame {
         //this.IPC.LimpiarPropCat();
         Fabrica fabrica = Fabrica.getInstance();
 
-       if(fabrica.getdatosCargados()==true){
-           JOptionPane.showMessageDialog(null, "Datos de Prueba ya fueron cargados durante la ejecucion,\n debe reiniciar la aplicacion para continuar. ", "ERROR: Datos de Prueba ya cargados", JOptionPane.ERROR_MESSAGE); 
-       }
-       else{
-       
-       int respuesta = JOptionPane.showConfirmDialog(null, "Se borraran todos los datos de la base de datos\n Desea continuar?", "ADVERTENCIA", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (fabrica.getdatosCargados() == true) {
+            JOptionPane.showMessageDialog(null, "Datos de Prueba ya fueron cargados durante la ejecucion,\n debe reiniciar la aplicacion para continuar. ", "ERROR: Datos de Prueba ya cargados", JOptionPane.ERROR_MESSAGE);
+        } else {
 
-       if (respuesta == 0) {
-            boolean ok = fabrica.limpiarBaseDeDatos();
-            if(ok){
-            fabrica.LimpiarLogica();
-            fabrica.cargarDatosdePrueba();
-            JOptionPane.showMessageDialog(null, "Datos Cargados Exitosamente!!!");
-           }
-        } 
-       
-       else {           
-            JOptionPane.showMessageDialog(null, "Carga de Datos de Prueba fue cancelada");
+            int respuesta = JOptionPane.showConfirmDialog(null, "Se borraran todos los datos de la base de datos\n Desea continuar?", "ADVERTENCIA", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+            if (respuesta == 0) {
+                boolean ok = fabrica.limpiarBaseDeDatos();
+                if (ok) {
+                    fabrica.LimpiarLogica();
+                    fabrica.cargarDatosdePrueba();
+                    JOptionPane.showMessageDialog(null, "Datos Cargados Exitosamente!!!");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Carga de Datos de Prueba fue cancelada");
+            }
+
         }
-       
-       
-       }
-         
+
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
@@ -322,15 +328,15 @@ public class inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-        CancelarColaboracionPropuesta form= new CancelarColaboracionPropuesta();
+        CancelarColaboracionPropuesta form = new CancelarColaboracionPropuesta();
         Escritorio.add(form);
         form.setVisible(true);
-                
+
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         // TODO add your handling code here:
-         ModificarPropuesta mod=new ModificarPropuesta();
+        ModificarPropuesta mod = new ModificarPropuesta();
         Escritorio.add(mod);
         mod.setVisible(true);
     }//GEN-LAST:event_jMenuItem11ActionPerformed
