@@ -164,7 +164,7 @@ public class DBPropuesta {
 
                 Categoria cat = Fabrica.getInstance().getControladorPropCat().getCategorias().get(rs.getString("nombreC"));
                 Proponente prop = (Proponente) Fabrica.getInstance().getIControladorUsuario().getUsuarios().get(rs.getString("proponente"));
-                Propuesta nuevaP = new Propuesta(rs.getString("tituloP"), rs.getString("descripcion"), rs.getString("imagen"), rs.getString("lugar"), fechaRR, rs.getFloat("montoE"), rs.getFloat("montoTot"), null, cat, TipoRetorno.EntGan, prop);
+                Propuesta nuevaP = new Propuesta(rs.getString("tituloP"), rs.getString("descripcion"), rs.getString("imagen"), rs.getString("lugar"), fechaRR, rs.getFloat("montoE"), rs.getFloat("montoTot"), null, cat,TipoRetorno.valueOf(tip.name()), prop);
 
                 cat.getPropuestas().put(nuevaP.getTituloP(), nuevaP);
                 prop.getPropuestasRealizadas().put(nuevaP.getTituloP(), nuevaP);
