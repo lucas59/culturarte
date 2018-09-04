@@ -101,7 +101,7 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         rSFotoCircle2 = new rojerusan.RSFotoCircle();
 
-        setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.black, null));
+        setBorder(null);
         setTitle("Alta Usuario");
         setVisible(true);
 
@@ -322,7 +322,7 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -367,9 +367,9 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
             String biografia = jTextBiografia.getText();
             String sitioWeb = jTextSitioWeb.getText();
             String direccion = jTextDireccion.getText();
-            if (sitioWeb != "") {
+            if (!sitioWeb.isEmpty()) {
                 if (!isUrl(sitioWeb)) {
-                    JOptionPane.showMessageDialog(null,"Sitio web invalido","Advertencia",JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Sitio web invalido", "Advertencia", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
             }
@@ -420,19 +420,16 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
 
     private static boolean isUrl(String s) {
         String regex = "^(https?://)?(([\\w!~*'().&=+$%-]+: )?[\\w!~*'().&=+$%-]+@)?(([0-9]{1,3}\\.){3}[0-9]{1,3}|([\\w!~*'()-]+\\.)*([\\w^-][\\w-]{0,61})?[\\w]\\.[a-z]{2,6})(:[0-9]{1,4})?((/*)|(/+[\\w!~*'().;?:@&=+$,%#-]+)+/*)$";
-
         try {
             Pattern patt = Pattern.compile(regex);
             Matcher matcher = patt.matcher(s);
             return matcher.matches();
-
         } catch (RuntimeException e) {
             return false;
         }
     }
 
     private void jRadioProponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioProponenteActionPerformed
-        // TODO add your handling code here:
         jTextDireccion.setEnabled(true);
         jTextSitioWeb.setEnabled(true);
         jTextBiografia.setEnabled(true);
