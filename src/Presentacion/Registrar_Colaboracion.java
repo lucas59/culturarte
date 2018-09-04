@@ -106,7 +106,7 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
         jLabel1.setText("Propuestas del sistema");
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(251, 0, 125)));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
         jLabel2.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
         jLabel2.setText("Información de la propuesta");
@@ -244,7 +244,7 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(251, 0, 125)));
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
         jLabel12.setFont(new java.awt.Font("Consolas", 1, 12)); // NOI18N
         jLabel12.setText("NickName:");
@@ -351,7 +351,7 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
             }
         });
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(251, 0, 125)));
+        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
         jLabel18.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
         jLabel18.setText("Información Adicional");
@@ -762,7 +762,7 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
             jComboBox2.addItem("Entradas");
             jComboBox2.addItem("Por Ganancias");
         }
-        String dir = System.getProperty("user.dir");
+        String dir = System.getProperty("user.dir") + "\\fPRopuestas\\";
         String dir2 = dir.concat(Dtinfop.getImagen());
 
         ImageIcon fot = new ImageIcon(dir2);
