@@ -292,7 +292,6 @@ public class inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-
         Fabrica fabrica = Fabrica.getInstance();
 
         int respuesta = JOptionPane.showConfirmDialog(null, "Se borraran todos los datos de la base de datos\n Desea continuar?", "ADVERTENCIA", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
