@@ -356,8 +356,7 @@ public class ControladorPropCat implements IPropCat {
         IControladorUsuario ICU = Fabrica.getInstance().getIControladorUsuario();
         Calendar calendario = new GregorianCalendar();
         DBColaboracion DBC = new DBColaboracion();
-        java.util.Date utilDate = new java.util.Date();
-        utilDate = calendario.getTime();
+        java.util.Date utilDate = Calendar.getInstance().getTime();
 
         List<Colaboracion> colaboraciones = this.getPropuesta().getColaboraciones();
         List<Colaboracion> colaboracionesC = ICU.getColaborador().getColaboraciones();
@@ -377,7 +376,6 @@ public class ControladorPropCat implements IPropCat {
             Colaboracion colaboracion = new Colaboracion(ICU.getColaborador(), monto, calendario, Entrada, this.getPropuesta());
             ICU.getColaborador().setColaboraciones(colaboracion);
             this.getPropuesta().setColaboraciones(colaboracion);
-
             if ((TotalColaboracion + monto) < this.getPropuesta().getMontoTot() && this.getPropuesta().getEstadoActual().getEstado() != TipoE.enFinanciacion) {
                 // se crea un estado solo por la primer colaboracion y se mantiene hasta otro evento
                 EstadoPropuesta EstadoP = new EstadoPropuesta(TipoE.enFinanciacion, calendario, true);
