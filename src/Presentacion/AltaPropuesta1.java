@@ -322,7 +322,7 @@ public class AltaPropuesta1 extends javax.swing.JInternalFrame {
                     jTextFieldNickName.setText("");
                 }
             } catch (Exception e) {
-                javax.swing.JOptionPane.showMessageDialog(null, e);
+                javax.swing.JOptionPane.showMessageDialog(null, e.getMessage());
             }
         } else {
             javax.swing.JOptionPane.showMessageDialog(null, "Debe completar los campos para continuar");
