@@ -292,22 +292,20 @@ public class inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-
         Fabrica fabrica = Fabrica.getInstance();
 
-        
-            int respuesta = JOptionPane.showConfirmDialog(null, "Se borraran todos los datos de la base de datos\n Desea continuar?", "ADVERTENCIA", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-            if (respuesta == 0) {
-                boolean ok = fabrica.limpiarBaseDeDatos();
-                if (ok) {
-                    fabrica.LimpiarLogica();
-                    fabrica.cargarDatosdePrueba();
-                    JOptionPane.showMessageDialog(null, "Datos Cargados Exitosamente!!!");
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Carga de Datos de Prueba fue cancelada");
-            
+        int respuesta = JOptionPane.showConfirmDialog(null, "Se borraran todos los datos de la base de datos\n Desea continuar?", "ADVERTENCIA", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (respuesta == 0) {
+            boolean ok = fabrica.limpiarBaseDeDatos();
+            if (ok) {
+                fabrica.LimpiarLogica();
+                fabrica.cargarDatosdePrueba();
+                JOptionPane.showMessageDialog(null, "Datos Cargados Exitosamente!!!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Carga de Datos de Prueba fue cancelada");
         }
+
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed

@@ -19,44 +19,42 @@ import logica.Clases.DtUsuario;
  * @author Martin
  */
 public class AltaPropuesta1 extends javax.swing.JInternalFrame {
-    
+
     private IControladorUsuario ICU;
     private IPropCat ICP;
     private String nickProp;
     private String Categoria;
     private List<DtUsuario> listUsu;
-    
+
     public AltaPropuesta1() {
         initComponents();
         this.ICU = Fabrica.getInstance().getIControladorUsuario();
         this.ICP = Fabrica.getInstance().getControladorPropCat();
-        
+
         jLabelAyuda.setVisible(false);
-        
+
         jPanelNuevaCategoria.setVisible(false);
-        
+
         List listCat = ICP.ListarCategorias();
         Iterator it = listCat.iterator();
-        
+
         while (it.hasNext()) {
             jComboBoxCategoria.addItem(it.next().toString());
         }
-        
+
         this.listUsu = ICU.ListarProponentes2();
-        
-        
-        
+
         DefaultTableModel modelo = (DefaultTableModel) jTableAltaProp1.getModel();
-        
+
         modelo.setRowCount(0);
-        
+
         for (int i = 0; i < listUsu.size(); i++) {
             DtUsuario usu = (DtUsuario) listUsu.get(i);
             Object[] datos = {usu.getNickName(), usu.getNombre(), usu.getApellido(), usu.getCorreo()};
-            
+
             modelo.addRow(datos);
         }
-        
+
     }
 
     /**
@@ -308,7 +306,7 @@ public class AltaPropuesta1 extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
 
         this.Categoria = String.valueOf(jComboBoxCategoria.getSelectedItem());
-        
+
         if (!jTextFieldNickName.getText().isEmpty() && this.Categoria != null) {
             try {
                 if (!ICP.seleccionarUC(jTextFieldNickName.getText(), this.Categoria)) {
@@ -342,14 +340,14 @@ public class AltaPropuesta1 extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
 
         jPanelNuevaCategoria.setVisible(true);
-        
+
         List listC = ICP.ListarCategorias();
         Iterator it = listC.iterator();
-        
+
         while (it.hasNext()) {
             jComboBoxCatAnte.addItem(it.next().toString());
         }
-        
+
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -358,19 +356,19 @@ public class AltaPropuesta1 extends javax.swing.JInternalFrame {
 
         String cat = String.valueOf(jComboBoxCatAnte.getSelectedItem());
         String nomCatN = jTextFieldNewCat.getText();
-        
+
         try {
-            
+
             if ("".equals(jTextFieldNewCat.getText())) {
                 javax.swing.JOptionPane.showMessageDialog(null, "Debe ingresar el nombre de la nueva categoria");
-                
+
             }
-            
+
             ICP.altaCategoria(nomCatN, cat);
             javax.swing.JOptionPane.showMessageDialog(null, "La categoria fue agregada con exito");
             jComboBoxCategoria.addItem(nomCatN);
             jPanelNuevaCategoria.setVisible(false);
-            
+
         } catch (Exception e) {
             javax.swing.JOptionPane.showMessageDialog(null, e);
         }
@@ -382,19 +380,19 @@ public class AltaPropuesta1 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonCancelarCatActionPerformed
 
     private void jTextFieldNickNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNickNameKeyReleased
-        
+
         DefaultTableModel model = (DefaultTableModel) jTableAltaProp1.getModel();
-        
+
         model.setRowCount(0);
-        
+
         for (int i = 0; i < jTableAltaProp1.getRowCount(); i++) {
             model.removeRow(i);
             i -= 1;
         }
-        
+
         model = (DefaultTableModel) jTableAltaProp1.getModel();
         model.setRowCount(0);
-        
+
         for (int i = 0; i < this.listUsu.size(); i++) {
             DtUsuario usu = (DtUsuario) this.listUsu.get(i);
             if ((!jTextFieldNickName.getText().isEmpty()) && usu.getNickName().contains(jTextFieldNickName.getText())) {
