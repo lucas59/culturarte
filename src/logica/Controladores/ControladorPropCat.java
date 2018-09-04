@@ -377,7 +377,7 @@ public class ControladorPropCat implements IPropCat {
             ICU.getColaborador().setColaboraciones(colaboracion);
             this.getPropuesta().setColaboraciones(colaboracion);
 
-            if (TotalColaboracion < this.getPropuesta().getMontoTot()) {
+            if ((TotalColaboracion + monto) < this.getPropuesta().getMontoTot() && this.getPropuesta().getEstadoActual().getEstado() != TipoE.enFinanciacion) {
                 // se crea un estado solo por la primer colaboracion y se mantiene hasta otro evento
                 EstadoPropuesta EstadoP = new EstadoPropuesta(TipoE.enFinanciacion, calendario, true);
                 // se recupera el estado actual anterior para pasarlo al historial
@@ -388,7 +388,7 @@ public class ControladorPropCat implements IPropCat {
                 this.getPropuesta().setEstados(EstAnterior);
                 this.getPropuesta().setEstadoActual(EstadoP);
 
-            } else if (TotalColaboracion == this.getPropuesta().getMontoTot()) {
+            } else if ((TotalColaboracion + monto) == this.getPropuesta().getMontoTot()) {
                 // igual proceso para otro estado distinto 
                 EstadoPropuesta EstadoP = new EstadoPropuesta(TipoE.Financiada, calendario, true);
                 EstadoPropuesta EstAnterior = this.getPropuesta().getEstadoActual();
