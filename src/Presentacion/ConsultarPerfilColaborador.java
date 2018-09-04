@@ -5,17 +5,15 @@
  */
 package Presentacion;
 
-import java.awt.event.KeyEvent;
+import Presentacion.inicio;
+import java.awt.Image;
 import java.util.Calendar;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.Clases.DtinfoColaborador;
-import logica.Clases.DtinfoPropuesta;
-import logica.Controladores.ControladorUsuario;
 import logica.Fabrica;
 import logica.Interfaces.IControladorUsuario;
 
@@ -31,6 +29,10 @@ public class ConsultarPerfilColaborador extends javax.swing.JInternalFrame {
         initComponents();
         this.ICU = Fabrica.getInstance().getIControladorUsuario();
         List<DtinfoColaborador> listaC = ICU.ListarColaboradores();
+        if(listaC.isEmpty()){
+            JOptionPane.showMessageDialog(null,"No existen colaboradores en el sistema");
+            return;
+        }
         DefaultTableModel modelo = (DefaultTableModel) TablaC.getModel();
         modelo.setRowCount(0);
         for (int i = 0; i < listaC.size(); i++) {
@@ -38,7 +40,7 @@ public class ConsultarPerfilColaborador extends javax.swing.JInternalFrame {
             Object[] dat = {dtc.getNickname(), dtc.getNombre(), dtc.getApellido()};
             modelo.addRow(dat);
         }
-
+//ImageIcon img=new ImageIcon()
     }
 
     /**
@@ -55,26 +57,34 @@ public class ConsultarPerfilColaborador extends javax.swing.JInternalFrame {
         NombreCol = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaC = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        DatosColaborador = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        Colaboraciones = new javax.swing.JTextArea();
-        jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        Textnick = new javax.swing.JTextField();
+        textnom = new javax.swing.JTextField();
+        textape = new javax.swing.JTextField();
+        textcorreo = new javax.swing.JTextField();
+        textfecha = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        foto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(616, 620));
+        setPreferredSize(new java.awt.Dimension(580, 580));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setAlignmentX(600.0F);
-        jPanel1.setPreferredSize(new java.awt.Dimension(600, 623));
+        jPanel1.setMinimumSize(new java.awt.Dimension(600, 650));
+        jPanel1.setPreferredSize(new java.awt.Dimension(600, 600));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Consultar Perfil de Colaborador");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, -1, -1));
 
         NombreCol.setToolTipText("");
         NombreCol.addActionListener(new java.awt.event.ActionListener() {
@@ -90,7 +100,7 @@ public class ConsultarPerfilColaborador extends javax.swing.JInternalFrame {
                 NombreColKeyTyped(evt);
             }
         });
-        jPanel1.add(NombreCol, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 280, -1));
+        jPanel1.add(NombreCol, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 280, -1));
 
         TablaC.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -127,17 +137,11 @@ public class ConsultarPerfilColaborador extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(TablaC);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 350, 120));
-
-        DatosColaborador.setColumns(20);
-        DatosColaborador.setRows(5);
-        jScrollPane2.setViewportView(DatosColaborador);
-
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, 350, 120));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 350, 120));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Datos del colaborador");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 220, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, -1, -1));
 
         jButton1.setText("Salir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -145,21 +149,61 @@ public class ConsultarPerfilColaborador extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 550, -1, -1));
-
-        Colaboraciones.setColumns(20);
-        Colaboraciones.setRows(5);
-        jScrollPane3.setViewportView(Colaboraciones);
-
-        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 400, 350, 130));
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Colaboraciones");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 370, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 470, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Buscar:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, -1, -1));
+
+        Textnick.setEditable(false);
+        Textnick.setToolTipText("");
+        Textnick.setBorder(null);
+        Textnick.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextnickActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Textnick, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 200, -1));
+
+        textnom.setEditable(false);
+        textnom.setBorder(null);
+        jPanel1.add(textnom, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, 200, -1));
+
+        textape.setEditable(false);
+        textape.setBorder(null);
+        jPanel1.add(textape, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 330, 200, -1));
+
+        textcorreo.setEditable(false);
+        textcorreo.setBorder(null);
+        jPanel1.add(textcorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 360, 200, -1));
+
+        textfecha.setEditable(false);
+        textfecha.setBorder(null);
+        jPanel1.add(textfecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 390, 200, -1));
+
+        jLabel5.setText("Nickname:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, -1, -1));
+
+        jLabel6.setText("Nombre:");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, -1, -1));
+
+        jLabel7.setText("Apellido:");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 330, -1, -1));
+
+        jLabel8.setText("Correo:");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, -1, -1));
+
+        jLabel9.setText("Fecha de ingreso:");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 390, -1, -1));
+
+        jButton2.setText("Ver colaboraciones");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 430, 140, -1));
+        jPanel1.add(foto, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 270, 140, 140));
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -172,35 +216,32 @@ public class ConsultarPerfilColaborador extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        ICU.resetearColaborador();
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void TablaCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaCMouseClicked
         // TODO add your handling code here:
 
-        Colaboraciones.setText("");
-        DatosColaborador.setText("");
+        Textnick.setText("");
+        textape.setText("");
+        textcorreo.setText("");
+        textnom.setText("");
+        textfecha.setText("");
         DtinfoColaborador dtc = ICU.verPerfil((String) TablaC.getValueAt(TablaC.getSelectedRow(), 0));
         Calendar c = dtc.getFechaN();
-
         int dia = c.get(Calendar.DAY_OF_MONTH);
         int mes = c.get(Calendar.MONTH) + 1;
         int anio = c.get(Calendar.YEAR);
-        DatosColaborador.setText("NickName: " + dtc.getNickname() + "\n" + "Nombre: " + dtc.getNombre() + "\n" + "Apellido: " + dtc.getApellido() + "\n" + "Correo: " + dtc.getCorreo() + "\n" + "Fecha de nacimiento: " + dia + "/" + mes + "/" + anio + "\n");
-        List<DtinfoPropuesta> dtp = ICU.verPropuestas(dtc);
-        if (dtp == null || dtp.size() == 0) {
-            Colaboraciones.setText("No posee colaboraciones");
-            return;
-        }
-        Iterator it = dtp.iterator();
-        while (it.hasNext()) {
-           // Map.Entry mentry = (Map.Entry) it.next();
-            DtinfoPropuesta dtp2 = (DtinfoPropuesta) it.next();
-            dia = c.get(Calendar.DAY_OF_MONTH);
-            mes = c.get(Calendar.MONTH) + 1;
-            anio = c.get(Calendar.YEAR);
-            Colaboraciones.setText("Titulo: " + dtp2.getTitulo() + "\n" + "Categoria: " + dtp2.getTipoEspec() + "\n" + "Fecha de publicacion: " + dia + "/" + mes + "/" + anio + "\n" + "Monto: " + dtp2.getMonto() + "\n" +"Precio de entrada: "+dtp2.getPrecio()+"\n");
-        }
+        Textnick.setText(dtc.getNickname());
+        textape.setText(dtc.getApellido());
+        textcorreo.setText(dtc.getCorreo());
+        textnom.setText(dtc.getNombre());
+        textfecha.setText(dia + "/" + mes + "/" + anio);
+        String fotos = System.getProperty("user.dir") + "\\fPerfiles\\" + dtc.getImagen();
+        ImageIcon fot = new ImageIcon(fotos);
+        Icon icono = new ImageIcon(fot.getImage().getScaledInstance(foto.getWidth(), foto.getHeight(), Image.SCALE_DEFAULT));
+        foto.setIcon(icono);
 
 
     }//GEN-LAST:event_TablaCMouseClicked
@@ -234,6 +275,29 @@ public class ConsultarPerfilColaborador extends javax.swing.JInternalFrame {
             evt.consume();
         }
     }//GEN-LAST:event_NombreColKeyTyped
+
+    private void TextnickActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextnickActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextnickActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        if (ICU.getDtColaborador().getNickname().equals("")) {
+            JOptionPane.showMessageDialog(null, "Porfavor seleccione un colaborador");
+            return;
+        }
+
+        try {
+            ConsultarPerfilColaborador2 cpc = new ConsultarPerfilColaborador2();
+            inicio.Escritorio.add(cpc);
+            this.setVisible(false);
+            cpc.toFront();
+            cpc.setVisible(true);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -271,18 +335,25 @@ public class ConsultarPerfilColaborador extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea Colaboraciones;
-    private javax.swing.JTextArea DatosColaborador;
     private javax.swing.JTextField NombreCol;
     private javax.swing.JTable TablaC;
+    private javax.swing.JTextField Textnick;
+    private javax.swing.JLabel foto;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextField textape;
+    private javax.swing.JTextField textcorreo;
+    private javax.swing.JTextField textfecha;
+    private javax.swing.JTextField textnom;
     // End of variables declaration//GEN-END:variables
 }
