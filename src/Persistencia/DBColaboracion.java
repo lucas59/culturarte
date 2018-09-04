@@ -186,23 +186,19 @@ public class DBColaboracion {
                         ((Propuesta) mentry.getValue()).setColaboraciones(colaboracion);
                     }
                 }
-
             }
             stat.close();
             rs.close();
             conexion.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
-
         }
-
     }
 
     public boolean eliminarColaboracion(String TituloP, String nickName) throws SQLException {
         PreparedStatement sql = conexion.prepareStatement("DELETE FROM colaboracion WHERE colaboracion.TituloP = '" + TituloP + "' AND colaboracion.nickName='" + nickName + "';");
         sql.executeUpdate();
         sql.close();
-        conexion.close();
         return true;
     }
 }
