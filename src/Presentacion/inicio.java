@@ -295,9 +295,7 @@ public class inicio extends javax.swing.JFrame {
 
         Fabrica fabrica = Fabrica.getInstance();
 
-        if (fabrica.getdatosCargados() == true) {
-            JOptionPane.showMessageDialog(null, "Datos de Prueba ya fueron cargados durante la ejecucion,\n debe reiniciar la aplicacion para continuar. ", "ERROR: Datos de Prueba ya cargados", JOptionPane.ERROR_MESSAGE);
-        } else {
+        
             int respuesta = JOptionPane.showConfirmDialog(null, "Se borraran todos los datos de la base de datos\n Desea continuar?", "ADVERTENCIA", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (respuesta == 0) {
                 boolean ok = fabrica.limpiarBaseDeDatos();
@@ -308,7 +306,7 @@ public class inicio extends javax.swing.JFrame {
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Carga de Datos de Prueba fue cancelada");
-            }
+            
         }
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
