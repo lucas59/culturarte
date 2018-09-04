@@ -86,7 +86,7 @@ public class DBPropuesta {
 
             stat.setString(1, nuevaP.getTituloP());
             stat.setDate(2, fechaII);
-            stat.setInt(3, 2);
+            stat.setInt(3, 0);
             stat.setBoolean(4, true);
             stat.executeUpdate();
             stat.close();
@@ -147,10 +147,10 @@ public class DBPropuesta {
                 TipoRetorno tip;
                 int i = rs.getInt("retornos");
                 switch (i) {
-                    case 1:
+                    case 0:
                         tip = TipoRetorno.Entradas;
                         break;
-                    case 2:
+                    case 1:
                         tip = TipoRetorno.porGanancias;
                         break;
                     default:
@@ -193,19 +193,19 @@ public class DBPropuesta {
                 int i = rs2.getInt("Estado");
 
                 switch (i) {
-                    case 1:
+                    case 0:
                         est = TipoE.Ingresada;
                         break;
-                    case 2:
+                    case 1:
                         est = TipoE.Publicada;
                         break;
-                    case 3:
+                    case 2:
                         est = TipoE.noFinanciada;
                         break;
-                    case 4:
+                    case 3:
                         est = TipoE.enFinanciacion;
                         break;
-                    case 5:
+                    case 4:
                         est = TipoE.Cancelada;
                         break;
                     default:
