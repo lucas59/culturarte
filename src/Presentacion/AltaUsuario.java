@@ -63,6 +63,7 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
         jTextBiografia.setEnabled(false);
         this.jTextNick.requestFocus();
         jDateChooser1.setCalendar(new GregorianCalendar(2000, 00, 01));
+        ((JTextField) this.jDateChooser1.getDateEditor()).setEditable(false);  
     }
 
     /**
