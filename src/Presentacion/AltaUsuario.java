@@ -63,6 +63,7 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
         jTextBiografia.setEnabled(false);
         this.jTextNick.requestFocus();
         jDateChooser1.setCalendar(new GregorianCalendar(2000, 00, 01));
+        ((JTextField) this.jDateChooser1.getDateEditor()).setEditable(false);
     }
 
     /**
@@ -366,6 +367,13 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
             String biografia = jTextBiografia.getText();
             String sitioWeb = jTextSitioWeb.getText();
             String direccion = jTextDireccion.getText();
+            if (sitioWeb != "") {
+                if (!isUrl(sitioWeb)) {
+                    JOptionPane.showMessageDialog(null,"Sitio web invalido","Advertencia",JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+            }
+
             ingreso = ICU.AgregarUsuarioProponente(nick, nombre, apellido, correo, fechaN, imagen, direccion, biografia, sitioWeb);
         } else {
             ingreso = ICU.AgregarUsuarioColaborador(nick, nombre, apellido, correo, fechaN, imagen);
@@ -408,6 +416,19 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
             diff_year = diff_year - 1; //no aparecían los dos guiones del postincremento :|
         }
         return diff_year;
+    }
+
+    private static boolean isUrl(String s) {
+        String regex = "^(https?://)?(([\\w!~*'().&=+$%-]+: )?[\\w!~*'().&=+$%-]+@)?(([0-9]{1,3}\\.){3}[0-9]{1,3}|([\\w!~*'()-]+\\.)*([\\w^-][\\w-]{0,61})?[\\w]\\.[a-z]{2,6})(:[0-9]{1,4})?((/*)|(/+[\\w!~*'().;?:@&=+$,%#-]+)+/*)$";
+
+        try {
+            Pattern patt = Pattern.compile(regex);
+            Matcher matcher = patt.matcher(s);
+            return matcher.matches();
+
+        } catch (RuntimeException e) {
+            return false;
+        }
     }
 
     private void jRadioProponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioProponenteActionPerformed

@@ -359,7 +359,7 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
             } else if (seleccion.equals("En financiacion")) {
                 seleccion = "enFinanciacion";
             } else if (seleccion.equals("Financiada")) {
-                seleccion = "Fiananciada";
+                seleccion = "Financiada";
             } else if (seleccion.equals("No finalizada")) {
                 seleccion = "noFinanciada";
             }
