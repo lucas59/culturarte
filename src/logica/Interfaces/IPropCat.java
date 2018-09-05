@@ -72,6 +72,7 @@ public interface IPropCat {
 
     public abstract EstadoPropuesta verEstadoPropuesta(String titulo);
 
+   
     public abstract void CargarColaboraciones();
 
     public abstract void LimpiarPropCat();
