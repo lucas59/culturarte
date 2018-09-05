@@ -63,14 +63,14 @@ public class DBPropuesta {
 
             Calendar calen = nuevaP.getFecha();
             Date fechaR = (Date) calen.getTime();
-            java.sql.Date dateRR = new java.sql.Date(fechaR.getTime());
+            java.sql.Timestamp dateRR = new java.sql.Timestamp(fechaR.getTime());
 
             stat.setString(1, nuevaP.getTituloP());
             stat.setString(2, nuevaP.getCategoria().getNombreC());
             stat.setString(3, nuevaP.getAutor().getNickname());
             stat.setString(4, nuevaP.getDescripcionP());
             stat.setString(5, nuevaP.getImagen());
-            stat.setDate(6, dateRR);
+            stat.setTimestamp(6, dateRR);
             stat.setString(7, nuevaP.getLugar());
             stat.setFloat(8, nuevaP.getMontoE());
             stat.setFloat(9, nuevaP.getMontoTot());
@@ -82,10 +82,10 @@ public class DBPropuesta {
 
             Calendar cal = nuevoEst.getfechaInicio();
             Date fechaI = (Date) cal.getTime();
-            java.sql.Date fechaII = new java.sql.Date(fechaI.getTime());
+            java.sql.Timestamp fechaII = new java.sql.Timestamp(fechaI.getTime());
 
             stat.setString(1, nuevaP.getTituloP());
-            stat.setDate(2, fechaII);
+            stat.setTimestamp(2, fechaII);
             stat.setInt(3, 0);
             stat.setBoolean(4, true);
             stat.executeUpdate();
@@ -164,7 +164,7 @@ public class DBPropuesta {
 
                 Categoria cat = Fabrica.getInstance().getControladorPropCat().getCategorias().get(rs.getString("nombreC"));
                 Proponente prop = (Proponente) Fabrica.getInstance().getIControladorUsuario().getUsuarios().get(rs.getString("proponente"));
-                Propuesta nuevaP = new Propuesta(rs.getString("tituloP"), rs.getString("descripcion"), rs.getString("imagen"), rs.getString("lugar"), fechaRR, rs.getFloat("montoE"), rs.getFloat("montoTot"), null, cat, TipoRetorno.EntGan, prop);
+                Propuesta nuevaP = new Propuesta(rs.getString("tituloP"), rs.getString("descripcion"), rs.getString("imagen"), rs.getString("lugar"), fechaRR, rs.getFloat("montoE"), rs.getFloat("montoTot"), null, cat,TipoRetorno.valueOf(tip.name()), prop);
 
                 cat.getPropuestas().put(nuevaP.getTituloP(), nuevaP);
                 prop.getPropuestasRealizadas().put(nuevaP.getTituloP(), nuevaP);

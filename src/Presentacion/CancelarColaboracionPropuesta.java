@@ -293,6 +293,7 @@ public class CancelarColaboracionPropuesta extends javax.swing.JInternalFrame {
                 Object[] dat = {colaboraciones.get(i).getMontoC(), fecha, colaboraciones.get(i).getUColaborador()};
                 modelo.addRow(dat);
             }
+            this.seleccion=seleccion;
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
@@ -330,12 +331,29 @@ public class CancelarColaboracionPropuesta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTableColaboracionesMouseClicked
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
+        try{
         String nickColaborador = (String) jTableColaboraciones.getValueAt(this.seleccion, 2);
         float monto = (float) jTableColaboraciones.getValueAt(this.seleccion, 0);
         if (ICP.eliminarColaboracion(this.titulo, nickColaborador)) {
             JOptionPane.showMessageDialog(null, "Colaboracion eliminada con exito");
+            this.jButtonEliminar.setVisible(false);
+            
+            DefaultTableModel modelo = (DefaultTableModel) jTableColaboraciones.getModel();
+            modelo.setRowCount(0);
+            String titulo = (String) jTablePropuestas.getValueAt(seleccion, 0);
+            List<DtColaboraciones> colaboraciones = ICP.listarColaboraciones(titulo);
+            for (int i = 0; i < colaboraciones.size(); i++) {
+                SimpleDateFormat d = new SimpleDateFormat("dd-MMM-yyyy");
+                Date date = colaboraciones.get(i).getFechaRealiz().getTime();
+                String fecha = d.format(date);
+                Object[] dat = {colaboraciones.get(i).getMontoC(), fecha, colaboraciones.get(i).getUColaborador()};
+                modelo.addRow(dat);
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Error al eliminar esta colaboracion", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
+        }catch(Exception ex){
+            
         }
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 

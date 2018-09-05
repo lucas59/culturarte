@@ -39,6 +39,7 @@ public class AltaPropuesta2 extends javax.swing.JInternalFrame {
         jTextAreaDescripcion.setText("");
         jCheckBoxEntradas.setSelected(false);
         jCheckBoxGanancias.setSelected(false);
+        rSFotoCirclePropuesta.setImagenDefault(null);
     }
 
     /**
@@ -170,6 +171,8 @@ public class AltaPropuesta2 extends javax.swing.JInternalFrame {
         jTextAreaDescripcion.setLineWrap(true);
         jTextAreaDescripcion.setRows(5);
         jScrollPane1.setViewportView(jTextAreaDescripcion);
+
+        rSFotoCirclePropuesta.setImagenDefault(null);
 
         jButton1.setText("Atras");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

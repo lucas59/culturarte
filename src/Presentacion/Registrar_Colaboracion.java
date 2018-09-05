@@ -58,7 +58,6 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
@@ -66,7 +65,6 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -132,9 +130,6 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
         jLabel9.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         jLabel9.setText("Monto final:");
 
-        jLabel10.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        jLabel10.setText("Fecha de Publicación:");
-
         jTextField1.setEditable(false);
         jTextField1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -156,9 +151,6 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
         jTextField7.setEditable(false);
         jTextField7.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTextField8.setEditable(false);
-        jTextField8.setBackground(new java.awt.Color(255, 255, 255));
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -167,19 +159,16 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9))
+                        .addGap(26, 26, 26)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel6)
-                                .addComponent(jLabel7)
-                                .addComponent(jLabel8)
-                                .addComponent(jLabel9))
-                            .addComponent(jLabel10))
-                        .addGap(22, 22, 22)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -237,11 +226,7 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
@@ -360,6 +345,12 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
 
         jLabel18.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
         jLabel18.setText("Información Adicional");
+
+        jTextField17.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField17KeyTyped(evt);
+            }
+        });
 
         jLabel24.setFont(new java.awt.Font("Consolas", 1, 12)); // NOI18N
         jLabel24.setText("Tipo de retorno");
@@ -559,11 +550,9 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-
         Fabrica fabrica = Fabrica.getInstance();
         IPropCat controladorPC = fabrica.getControladorPropCat();
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-
         List<DtNickTitProp> lista = controladorPC.listarPropuestaC();
         modelo.setRowCount(0);
         for (int i = 0; i < lista.size(); i++) {
@@ -596,11 +585,11 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "No puede ingresar montos menores o iguales a 0");
         } else if (jTable1.getSelectedRow() < 0 && jTable2.getSelectedRow() < 0) {
             JOptionPane.showMessageDialog(null, "Seleccione un colaborador y una propuesta");
-        } else if (jTable1.getSelectedRow() < 0) {
-            JOptionPane.showMessageDialog(null, "Seleccione un colaborador");
         } else if (jTable2.getSelectedRow() < 0) {
-            JOptionPane.showMessageDialog(null, "Seleccione una propuesta"); 
-        }else {
+            JOptionPane.showMessageDialog(null, "Seleccione un colaborador");
+        } else if (jTable1.getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(null, "Seleccione una propuesta");
+        } else {
 
             boolean OK = false;
             if (jComboBox2.getSelectedItem().toString().compareTo("Entradas") == 0) {
@@ -630,7 +619,6 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
             jTextField5.setText("");
             jTextField6.setText("");
             jTextField7.setText("");
-            jTextField8.setText("");
             jTextField9.setText("");
             jTextField10.setText("");
             jTextField11.setText("");
@@ -641,6 +629,7 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
             jTextField17.setText("");
             jTable1.clearSelection();
             jTable2.clearSelection();
+            jLabel20.setIcon(null);
 
         }
 
@@ -651,15 +640,10 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jTextField14KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField14KeyReleased
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-        modelo.setRowCount(0);
-        for (int i = 0; i < jTable1.getRowCount(); i++) {
-            modelo.removeRow(i);
-            i -= 1;
-        }
         Fabrica fabrica = Fabrica.getInstance();
         IPropCat IPC = fabrica.getControladorPropCat();
-        String usu = this.jTextField14.getText();
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        modelo.setRowCount(0);
         Map<String, Propuesta> Propuestas = IPC.getPropuestas();
         Set set = Propuestas.entrySet();
         Iterator iterator = set.iterator();
@@ -667,47 +651,33 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
         while (iterator.hasNext()) {
             Map.Entry mentry = (Map.Entry) iterator.next();
             Propuesta aux = (Propuesta) mentry.getValue();
-            if ((!jTextField14.getText().isEmpty()) && aux.getTituloP().contains(jTextField14.getText())) {
-                Object[] dat = {aux.getTituloP(), aux.getAutor().getNickname()};
-                modelo.addRow(dat);
-            } else if (jTextField14.getText().isEmpty()) {
+            if (aux.getTituloP().contains(jTextField14.getText())) {
                 Object[] dat = {aux.getTituloP(), aux.getAutor().getNickname()};
                 modelo.addRow(dat);
             }
         }
-        this.jTable1.setModel(modelo);
 
     }//GEN-LAST:event_jTextField14KeyReleased
 
     private void jTextField15KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField15KeyReleased
-        DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
-        modelo.setRowCount(0);
-        for (int i = 0; i < jTable2.getRowCount(); i++) {
-            modelo.removeRow(i);
-            i -= 1;
-        }
         Fabrica fabrica = Fabrica.getInstance();
         IControladorUsuario CU = fabrica.getIControladorUsuario();
-        String usu = this.jTextField15.getText();
+        DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
+        modelo.setRowCount(0);
         Map<String, Usuario> usuarios = CU.getUsuarios();
         Set set = usuarios.entrySet();
         Iterator iterator = set.iterator();
-        jTable2.clearSelection();
+        jTable1.clearSelection();
         while (iterator.hasNext()) {
             Map.Entry mentry = (Map.Entry) iterator.next();
             if (mentry.getValue() instanceof Colaborador) {
                 Usuario aux = (Usuario) mentry.getValue();
-                if (!jTextField15.getText().isEmpty() && aux.getNickname().contains(jTextField15.getText())) {
-                    Object[] dat = {aux.getNickname(), aux.getNombre()};
-                    modelo.addRow(dat);
-                } else if (jTextField15.getText().isEmpty()) {
+                if (aux.getNickname().contains(jTextField15.getText())) {
                     Object[] dat = {aux.getNickname(), aux.getNombre()};
                     modelo.addRow(dat);
                 }
             }
         }
-        this.jTable2.setModel(modelo);
-
 
     }//GEN-LAST:event_jTextField15KeyReleased
 
@@ -770,7 +740,7 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
             jComboBox2.addItem("Entradas");
             jComboBox2.addItem("Por Ganancias");
         }
-        String dir = System.getProperty("user.dir") + "\\fPRopuestas\\";
+        String dir = System.getProperty("user.dir") + "\\fPropuestas\\";
         String dir2 = dir.concat(Dtinfop.getImagen());
 
         ImageIcon fot = new ImageIcon(dir2);
@@ -785,8 +755,17 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
         jTextField5.setText(sf.format(Dtinfop.getFechaReal().getTime()));
         jTextField6.setText(String.valueOf(Dtinfop.getPrecio()));
         jTextField7.setText(String.valueOf(Dtinfop.getMonto()));
-        jTextField8.setText(sf.format(Dtinfop.getFechaReal().getTime()));
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jTextField17KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField17KeyTyped
+        char c = evt.getKeyChar();
+        String d = "" + c;
+        if (Character.isDigit(c) || d.equals("\b")) {
+
+        } else {
+            evt.consume();
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField17KeyTyped
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -798,7 +777,6 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -841,7 +819,6 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
 }

@@ -76,10 +76,7 @@ public class ControladorPropCat implements IPropCat {
         this.dbColaboracion = new DBColaboracion();
         this.categorias = new HashMap<>();
         this.propuestas = new HashMap<>();
-        /*  Categoria cat = new Categoria("Categoria");
-        this.categorias.put("Categoria", cat);
-        this.dbPropuesta.agregarCategoria("Categoria", null);
-         */ this.Propuesta = null;
+        this.Propuesta = null;
     }
 
     public void ComunicarControladores(IControladorUsuario icu) {
@@ -167,29 +164,27 @@ public class ControladorPropCat implements IPropCat {
 
     @Override
     public boolean crearPropuesta(String tituloP, String descripcion, String lugar, String imagen, Calendar fecha, float montoE, float montoTot, TipoRetorno retorno) throws Exception {
-    String ruta = System.getProperty("user.dir");
-    
+        String ruta = System.getProperty("user.dir");
+
         if (this.propuestas.get(tituloP) != null) {
             throw new Exception("Ya existe una propuesta bajo ese Nombre");
         }
-        
+
         TipoE tipo = TipoE.Ingresada;
         Calendar fechaI = new GregorianCalendar();
         EstadoPropuesta estado = new EstadoPropuesta(tipo, fechaI, true);
 
         Propuesta nuevaP = new Propuesta(tituloP, descripcion, imagen, lugar, fecha, montoE, montoTot, estado, this.catRecordada, retorno, this.uProponente);
 
-        
-         String fotoLocal = nuevaP.getImagen();
-            if (!"".equals(nuevaP.getImagen())) {
-                File fLocal = new File(fotoLocal);
-                String ex = getFileExtension(fLocal);
-                nuevaP.setImagen(tituloP + "." + ex);
-            } else {
-                nuevaP.setImagen("Culturarte.png");
-            }
-            
-            
+        String fotoLocal = nuevaP.getImagen();
+        if (!"".equals(nuevaP.getImagen())) {
+            File fLocal = new File(fotoLocal);
+            String ex = getFileExtension(fLocal);
+            nuevaP.setImagen(tituloP + "." + ex);
+        } else {
+            nuevaP.setImagen("Culturarte.png");
+        }
+
         boolean agregada = this.dbPropuesta.agregarPropuesta(nuevaP, estado);
         if (agregada) {
             this.propuestas.put(tituloP, nuevaP);
@@ -358,8 +353,7 @@ public class ControladorPropCat implements IPropCat {
         IControladorUsuario ICU = Fabrica.getInstance().getIControladorUsuario();
         Calendar calendario = new GregorianCalendar();
         DBColaboracion DBC = new DBColaboracion();
-        java.util.Date utilDate = new java.util.Date();
-        utilDate = calendario.getTime();
+        java.util.Date utilDate = Calendar.getInstance().getTime();
 
         List<Colaboracion> colaboraciones = this.getPropuesta().getColaboraciones();
         List<Colaboracion> colaboracionesC = ICU.getColaborador().getColaboraciones();
@@ -379,7 +373,6 @@ public class ControladorPropCat implements IPropCat {
             Colaboracion colaboracion = new Colaboracion(ICU.getColaborador(), monto, calendario, Entrada, this.getPropuesta());
             ICU.getColaborador().setColaboraciones(colaboracion);
             this.getPropuesta().setColaboraciones(colaboracion);
-
             if ((TotalColaboracion + monto) < this.getPropuesta().getMontoTot() && this.getPropuesta().getEstadoActual().getEstado() != TipoE.enFinanciacion) {
                 // se crea un estado solo por la primer colaboracion y se mantiene hasta otro evento
                 EstadoPropuesta EstadoP = new EstadoPropuesta(TipoE.enFinanciacion, calendario, true);

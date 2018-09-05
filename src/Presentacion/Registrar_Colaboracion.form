@@ -158,21 +158,17 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel6" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel7" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel8" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel9" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel6" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel7" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel8" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel9" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextField8" min="-2" pref="278" max="-2" attributes="0"/>
                                   <Component id="jTextField1" min="-2" pref="278" max="-2" attributes="0"/>
                                   <Component id="jTextField2" alignment="0" min="-2" pref="278" max="-2" attributes="0"/>
                                   <Component id="jTextField3" min="-2" pref="278" max="-2" attributes="0"/>
@@ -247,12 +243,7 @@
                           <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextField7" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField8" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="37" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -322,14 +313,6 @@
                 <Property name="text" type="java.lang.String" value="Monto final:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel10">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Century Gothic" size="12" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Fecha de Publicaci&#xf3;n:"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JTextField" name="jTextField1">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
@@ -379,14 +362,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField7">
-              <Properties>
-                <Property name="editable" type="boolean" value="false"/>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextField8">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -650,6 +625,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField17">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextField17KeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JComboBox" name="jComboBox2">
               <Properties>

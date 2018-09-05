@@ -41,7 +41,7 @@ public class DBColaboracion {
         Calendar calendario = new GregorianCalendar();
         java.util.Date utilDate = new java.util.Date();
         utilDate = calendario.getTime();
-        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+        java.sql.Timestamp sqlDate = new java.sql.Timestamp(utilDate.getTime());
         List<Colaboracion> colaboraciones = CPU.getPropuesta().getColaboraciones();
         float TotalColaboracion = 0;
         for (int indice = 0; indice < colaboraciones.size(); indice++) {
@@ -52,7 +52,7 @@ public class DBColaboracion {
             statement.setString(1, CPU.getPropuesta().getTituloP());
             statement.setString(2, CU.getColaborador().getNickname());
             statement.setFloat(3, monto);
-            statement.setDate(4, sqlDate);
+            statement.setTimestamp(4, sqlDate);
             if (Entrada == true) {
                 statement.setInt(5, 1);
             } else {
@@ -75,7 +75,7 @@ public class DBColaboracion {
         Calendar calendario = new GregorianCalendar();
         java.util.Date utilDate = new java.util.Date();
         utilDate = calendario.getTime();
-        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+        java.sql.Timestamp sqlDate = new java.sql.Timestamp(utilDate.getTime());
         List<Colaboracion> colaboraciones = CPU.getPropuesta().getColaboraciones();
         float TotalColaboracion = 0;
         for (int indice = 0; indice < colaboraciones.size(); indice++) {
@@ -89,7 +89,7 @@ public class DBColaboracion {
 
             statement = conexion.prepareStatement("INSERT INTO estadopropuesta" + " (TituloP, FechaInicio, estActual, Estado) values (?,?,?,?)");
             statement.setString(1, CPU.getPropuesta().getTituloP());
-            statement.setDate(2, sqlDate);
+            statement.setTimestamp(2, sqlDate);
             statement.setBoolean(3, true);
             if (TotalColaboracion < CPU.getPropuesta().getMontoTot()) {
                 statement.setInt(4, 2);
@@ -186,23 +186,19 @@ public class DBColaboracion {
                         ((Propuesta) mentry.getValue()).setColaboraciones(colaboracion);
                     }
                 }
-
             }
             stat.close();
             rs.close();
             conexion.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
-
         }
-
     }
 
     public boolean eliminarColaboracion(String TituloP, String nickName) throws SQLException {
         PreparedStatement sql = conexion.prepareStatement("DELETE FROM colaboracion WHERE colaboracion.TituloP = '" + TituloP + "' AND colaboracion.nickName='" + nickName + "';");
         sql.executeUpdate();
         sql.close();
-        conexion.close();
         return true;
     }
 }
