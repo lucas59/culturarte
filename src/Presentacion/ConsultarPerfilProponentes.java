@@ -35,6 +35,7 @@ import logica.Clases.Propuesta;
 import logica.Clases.Usuario;
 import logica.Fabrica;
 import logica.Interfaces.IControladorUsuario;
+import logica.Interfaces.IPropCat;
 
 /**
  *
@@ -43,6 +44,7 @@ import logica.Interfaces.IControladorUsuario;
 public class ConsultarPerfilProponentes extends javax.swing.JInternalFrame {
 
     private IControladorUsuario ICU;
+    private IPropCat ICP;
     private ArrayList<DtProponente> dtproponentes;
     private String proponenteSeleccionado;
 
@@ -54,6 +56,7 @@ public class ConsultarPerfilProponentes extends javax.swing.JInternalFrame {
         jPanelDatos.setVisible(false);
 
         this.ICU = Fabrica.getInstance().getIControladorUsuario();
+        this.ICP = Fabrica.getInstance().getControladorPropCat();
 
         List<DtProponente> proponentes = ICU.ListarProponentes();
         this.dtproponentes = (ArrayList<DtProponente>) proponentes;
@@ -210,6 +213,7 @@ public class ConsultarPerfilProponentes extends javax.swing.JInternalFrame {
             }
         });
 
+        jTextAreaBiografia.setEditable(false);
         jTextAreaBiografia.setColumns(20);
         jTextAreaBiografia.setLineWrap(true);
         jTextAreaBiografia.setRows(5);
@@ -393,6 +397,11 @@ public class ConsultarPerfilProponentes extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ListaDePropuestasDeProponente a = new ListaDePropuestasDeProponente(this.proponenteSeleccionado, "Lista de propuestas de " + this.proponenteSeleccionado);
         inicio.Escritorio.add(a);
+        int cantidad = ICP.ListarPropuestasDeProponenteX(this.proponenteSeleccionado).size();
+        if (cantidad == 0) {
+            JOptionPane.showMessageDialog(null, "Este usuario no contiene propuestas", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         this.setVisible(false);
         a.toFront();
         a.setVisible(true);
