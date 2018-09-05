@@ -191,12 +191,12 @@ public class Fabrica {
 
         IPC.crearPropuestaDatosdePrueba("Durazno Rock", "Una vez mas EspectaculosBA dice presente en DURAZNO ROCK! Mas de 400 personas nos acompañaron el\\r\\naño pasado y "
                 + "este año se repite!! Este año con la presencia destacada de La Beriso!!", IPC.ObtenerCategoria("Festival"), new GregorianCalendar(2018, 11, 10),
-                "Jardín Botánico ", 0, 100000, TipoRetorno.porGanancias, ICU.ObtenerProponente("durazno"), "Culturarte.png");
+                "Durazno", 0, 100000, TipoRetorno.porGanancias, ICU.ObtenerProponente("durazno"), "Culturarte.png");
 
         IPC.crearPropuestaDatosdePrueba("El Lazarillo de Tormes", "Vuelve unas de las producciones de El Galpón más aclamadas de los últimos tiempos. Esta obra se ha\\r\\npresentado "
                 + "en Miami, Nueva York, Washington, México, Guadalajara, Río de Janeiro y La Habana. En nuestro\\r\\npaís, El Lazarillo de Tormes fue nominado en los rubros mejor espectáculo "
                 + "y mejor dirección a los Premios\\r\\nFlorencio 1995, obteniendo su protagonista Héctor Guido el Florencio a Mejor actor de ese año.",
-                IPC.ObtenerCategoria("Festival"), new GregorianCalendar(2018, 11, 03), "Teatro el Galpón", 350, 1750000, TipoRetorno.Entradas, ICU.ObtenerProponente("hectorg"), "Culturarte.png");
+                IPC.ObtenerCategoria("Teatro Dramático"), new GregorianCalendar(2018, 11, 03), "Teatro el Galpón", 350, 1750000, TipoRetorno.Entradas, ICU.ObtenerProponente("hectorg"), "Culturarte.png");
 
         IPC.crearPropuestaDatosdePrueba("El Pimiento Indomable", "El Pimiento Indomable, formación compuesta por Kiko Veneno y el uruguayo Martín Buscaglia, presentará\\r\\neste 19 de Octubre, "
                 + "su primer trabajo. Bajo un título homónimo al del grupo, es un disco que según los\\r\\npropios protagonistas “no se parece al de ninguno de los dos por separado. Entre los "
@@ -215,7 +215,7 @@ public class Fabrica {
 
         IPC.crearPropuestaDatosdePrueba("Romeo y Julieta", "Romeo y Julieta de Kenneth MacMillan, uno de los ballets favoritos del director artístico Julio Bocca, se\\r\\npresentará nuevamente "
                 + "el 5 de Noviembre en el Auditorio Nacional del Sodre. Basada en la obra homónima\\r\\nde William Shakespeare, Romeo y Julieta es considerada la coreografía maestra del MacMillan. "
-                + "La producción\\r\\nde vestuario y escenografía se realizó en los Talleres del Auditorio Adela Reta, sobre los diseños originales.", IPC.ObtenerCategoria("Ballet"), new GregorianCalendar(2018, 04, 11),
+                + "La producción\\r\\nde vestuario y escenografía se realizó en los Talleres del Auditorio Adela Reta, sobre los diseños originales.", IPC.ObtenerCategoria("Ballet"), new GregorianCalendar(2018, 10, 05),
                 "Auditorio Nacional del Sodre", 800, 750000, TipoRetorno.porGanancias, ICU.ObtenerProponente("juliob"),"Romeo y Julieta.jpg");
 
         IPC.crearPropuestaDatosdePrueba("Un día de Julio", "La Catalina presenta el espectáculo Un Día de Julio en Landia. Un hombre misterioso y solitario vive\\r\\nencerrado entre las cuatro paredes "
