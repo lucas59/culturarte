@@ -164,7 +164,7 @@ public class DBPropuesta {
 
                 Categoria cat = Fabrica.getInstance().getControladorPropCat().getCategorias().get(rs.getString("nombreC"));
                 Proponente prop = (Proponente) Fabrica.getInstance().getIControladorUsuario().getUsuarios().get(rs.getString("proponente"));
-                Propuesta nuevaP = new Propuesta(rs.getString("tituloP"), rs.getString("descripcion"), rs.getString("imagen"), rs.getString("lugar"), fechaRR, rs.getFloat("montoE"), rs.getFloat("montoTot"), null, cat,TipoRetorno.valueOf(tip.name()), prop);
+                Propuesta nuevaP = new Propuesta(rs.getString("tituloP"), rs.getString("descripcion"), rs.getString("imagen"), rs.getString("lugar"), fechaRR, rs.getFloat("montoE"), rs.getFloat("montoTot"), null, cat, tip, prop);
 
                 cat.getPropuestas().put(nuevaP.getTituloP(), nuevaP);
                 prop.getPropuestasRealizadas().put(nuevaP.getTituloP(), nuevaP);
@@ -294,13 +294,13 @@ public class DBPropuesta {
             ex.printStackTrace();
         }
     }
-    
+
     public boolean ModificarDatosPropuesta(Propuesta p) {
         try {
             Calendar c = p.getFecha();
             int dia = c.get(Calendar.DAY_OF_MONTH);
             int mes = c.get(Calendar.MONTH);
-            int anio = c.get(Calendar.YEAR) -1900;
+            int anio = c.get(Calendar.YEAR) - 1900;
             Date d = new java.sql.Date(anio, mes, dia);
             PreparedStatement stat = conexion.prepareStatement("UPDATE propuesta SET montoE=?,lugar=?,imagen=?,montoTot=?,fechaR=?,descripcion=? WHERE tituloP=?");
             stat.setFloat(1, p.getMontoE());
