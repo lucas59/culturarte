@@ -111,7 +111,6 @@ public class DBUsuario {
             ex.printStackTrace();
             return false;
         }
-
     }
 
     public Map<String, Usuario> cargarUsuarios() {
@@ -119,7 +118,6 @@ public class DBUsuario {
             PreparedStatement statement = conexion.prepareStatement("SELECT * FROM usuario");
             ResultSet st = statement.executeQuery();
             Map<String, Usuario> usuarios = new HashMap<String, Usuario>();
-
             while (st.next()) {
                 String nick = st.getString(1);
                 String nombre = st.getString(2);

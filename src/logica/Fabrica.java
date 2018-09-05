@@ -79,13 +79,12 @@ public class Fabrica {
     public void cargarDatosdePrueba() {
         IControladorUsuario ICU = this.getIControladorUsuario();
         IPropCat IPC = this.getControladorPropCat();
-        String ruta = System.getProperty("user.dir")+"\\fotosdp\\";
+        String ruta = System.getProperty("user.dir") + "\\fotosdp\\";
 //    
 //    DBUsuario d=new DBUsuario();
 //    d.limpiarBD();
 //           
-      
-        
+
         //-----------------------------------------------------Proponentes------------------------------------//   
         ICU.AgregarUsuarioProponente("hrubino", "Horacio", "Rubino", "horacio.rubino@guambia.com.uy", new GregorianCalendar(1962, 01, 25),
                 ruta + "hrubino.jpg", "18 de Julio 1234", "Horacio Rubino Torres nace el 25 de " + "febrero de 1962, es conductor, actor y libretista.  Debuta en "
@@ -94,7 +93,7 @@ public class Fabrica {
                 + " en su propio conjunto Momosapiens. ", "https://twitter.com/horaciorubino");
 
         ICU.AgregarUsuarioProponente("mbusca", "Martín", "Buscaglia", "Martin.bus@agadu.org.uy", new GregorianCalendar(1972, 05, 14),
-                ruta +"mbusca.jpg", "Colonia 4321", "Martín Buscaglia (Montevideo, 1972) es un artista, músico, compositor y productor uruguayo."
+                ruta + "mbusca.jpg", "Colonia 4321", "Martín Buscaglia (Montevideo, 1972) es un artista, músico, compositor y productor uruguayo."
                 + " Tanto con su banda (“Los Bochamakers”) como en su formato “Hombre orquesta”, o solo con su guitarra, "
                 + "ha recorrido el mundo tocando entre otros países en España, Estados Unidos, Inglaterra, Francia, Australia, "
                 + "Brasil, Colombia, Argentina, Chile, Paraguay, México y Uruguay. (Actualmente los Bochamakers son Matías Rada,"
@@ -103,7 +102,7 @@ public class Fabrica {
                 + "Mulheres Negras.", "http://www.martinbuscaglia.com/");
 
         ICU.AgregarUsuarioProponente("hectorg", "Héctor", "Guido", "hector.gui@elgalpon.org.uy", new GregorianCalendar(1954, 00, 07),
-                ruta +"hectorg.jpg", "Gral. Flores 5645", "En 1972 ingresó a la Escuela de Arte Dramático del teatro El Galpón. Participó en más de treinta "
+                ruta + "hectorg.jpg", "Gral. Flores 5645", "En 1972 ingresó a la Escuela de Arte Dramático del teatro El Galpón. Participó en más de treinta "
                 + "obras teatrales y varios largometrajes. Integró el elenco estable de Radioteatro del Sodre, y en 2006 fue asesor "
                 + "de su Consejo Directivo. Como actor recibió múltiples reconocimientos: cuatro premios Florencio, premio al mejor actor"
                 + " extranjero del Festival de Miami y premio Mejor Actor de Cine 2008. Durante varios períodos fue directivo del teatro"
@@ -112,11 +111,11 @@ public class Fabrica {
                 + "y del equipo de gestión en la construcción del teatro De la Candela y de la sala Atahualpa de El Galpón.", "");
 
         ICU.AgregarUsuarioProponente("tabarec", "Tabaré", "Cardozo", "tabare.car@agadu.org.uy", new GregorianCalendar(1971, 06, 24),
-                ruta +"tabarec.jpg", "Santiago Rivas 1212", "Tabaré Cardozo (Montevideo, 24 de julio de 1971) es un cantante, compositor y murguista uruguayo; "
+                ruta + "tabarec.jpg", "Santiago Rivas 1212", "Tabaré Cardozo (Montevideo, 24 de julio de 1971) es un cantante, compositor y murguista uruguayo; "
                 + "conocido por su participación en la murga Agarrate Catalina, conjunto que fundó junto a su hermano Yamandú y Carlos "
                 + "Tanco en el año 2001.", "https://www.facebook.com/Tabar%C3%A9-Cardozo-55179094281/?ref=br_rs");
 
-        ICU.AgregarUsuarioProponente("cachilas", "Waldemar “Cachila”", "Silva", "Cachila.sil@c1080.org.uy", new GregorianCalendar(1947, 00, 01),ruta +"cachilas.jpg", "Br. Artigas 4567", "Nace en el año 1947 en el conventillo \\\"Medio Mundo\\\" ubicado en pleno Barrio Sur. Es heredero parcialmente-junto"
+        ICU.AgregarUsuarioProponente("cachilas", "Waldemar “Cachila”", "Silva", "Cachila.sil@c1080.org.uy", new GregorianCalendar(1947, 00, 01), ruta + "cachilas.jpg", "Br. Artigas 4567", "Nace en el año 1947 en el conventillo \\\"Medio Mundo\\\" ubicado en pleno Barrio Sur. Es heredero parcialmente-junto"
                 + " al resto de sus hermanos- de la Comparsa \\\"Morenada\\\" (inactiva desde el fallecimiento de Juan Ángel Silva), en 1999 forma su "
                 + "propia Comparsa de negros y lubolos \\\"Cuareim 1080\\\". Director responsable, compositor y cantante de la misma. ",
                 "https://www.facebook.com/C1080?ref=br_rs");
@@ -127,27 +126,27 @@ public class Fabrica {
         ICU.AgregarUsuarioProponente("diegop", "Diego", "Parodi", "diego@efectocine.com", new GregorianCalendar(1975, 00, 01), "", "Emilio Frugoni 1138 Ap. 02", "", "http://www.efectocine.com");
 
         ICU.AgregarUsuarioProponente("kairoh", "Kairo", "Herrera", "kairoher@pilsenrock.com.uy", new GregorianCalendar(1840, 03, 25),
-                ruta +"kairoh.jpg", "Paraguay 1423", "", "");
+                ruta + "kairoh.jpg", "Paraguay 1423", "", "");
 
         ICU.AgregarUsuarioProponente("durazno", "Itendencia", "Durazno", "comunicacion@durazno.gub.uy", new GregorianCalendar(1980, 9, 31),
-                ruta +"durazno.png", "8 de Octubre 1429", "Nuestros festivales que son orgullo del Uruguay, como cada enero con lo mejor del tango o el festival de la música "
+                ruta + "durazno.png", "8 de Octubre 1429", "Nuestros festivales que son orgullo del Uruguay, como cada enero con lo mejor del tango o el festival de la música "
                 + "tropical. La fiesta de los jóvenes, donde miles de ellos disfrutan de variados espectáculos al aire libre y se confunden para vivir "
                 + "tres días inolvidables, convocados por diversos géneros, como rock, tropical, murga y tango.", "http://durazno.gub.uy/portal/index.php");
 
 ////-----------------------------------------------------Colaboradores------------------------------------//
         ICU.AgregarUsuarioColaborador("robinh", "Robin", "Henderson", "Robin.h@tinglesa.com.uy", new GregorianCalendar(1940, 07, 03), "");
 
-        ICU.AgregarUsuarioColaborador("marcelot", "Marcelo", "Tinelli", "marcelot@ideasdelsur.com.ar", new GregorianCalendar(1960, 03, 01),ruta+"marcelot.jpg");
+        ICU.AgregarUsuarioColaborador("marcelot", "Marcelo", "Tinelli", "marcelot@ideasdelsur.com.ar", new GregorianCalendar(1960, 03, 01), ruta + "marcelot.jpg");
 
-        ICU.AgregarUsuarioColaborador("novick", "Edgardo", "Novick", "edgardo@novick.com.uy", new GregorianCalendar(1960, 03, 01),ruta+"novick.jpg");
+        ICU.AgregarUsuarioColaborador("novick", "Edgardo", "Novick", "edgardo@novick.com.uy", new GregorianCalendar(1960, 03, 01), ruta + "novick.jpg");
 
-        ICU.AgregarUsuarioColaborador("sergiop", "Sergio", "Puglia", "puglia@alpanpan.com.uy", new GregorianCalendar(1950, 00, 28),ruta+"sergiop.jpg");
+        ICU.AgregarUsuarioColaborador("sergiop", "Sergio", "Puglia", "puglia@alpanpan.com.uy", new GregorianCalendar(1950, 00, 28), ruta + "sergiop.jpg");
 
-        ICU.AgregarUsuarioColaborador("chino", "Alvaro", "Recoba", "chino@trico.org.uy", new GregorianCalendar(1976, 02, 17),"");
+        ICU.AgregarUsuarioColaborador("chino", "Alvaro", "Recoba", "chino@trico.org.uy", new GregorianCalendar(1976, 02, 17), "");
 
-        ICU.AgregarUsuarioColaborador("tonyp", "Antonio", "Pacheco", "eltony@manya.org.uy", new GregorianCalendar(1995, 01, 14),"");
+        ICU.AgregarUsuarioColaborador("tonyp", "Antonio", "Pacheco", "eltony@manya.org.uy", new GregorianCalendar(1995, 01, 14), "");
 
-        ICU.AgregarUsuarioColaborador("nicoJ", "Nicolás", "Jodal", "jodal@artech.com.uy", new GregorianCalendar(1960, 07, 9),ruta+"nicoJ.jpg");
+        ICU.AgregarUsuarioColaborador("nicoJ", "Nicolás", "Jodal", "jodal@artech.com.uy", new GregorianCalendar(1960, 07, 9), ruta + "nicoJ.jpg");
 
         ICU.AgregarUsuarioColaborador("juanP", "Juan", "Perez", "juanp@elpueblo.com", new GregorianCalendar(1970, 00, 01), "");
 
@@ -155,7 +154,7 @@ public class Fabrica {
 
         ICU.AgregarUsuarioColaborador("Perengano", "Perengano", "López", "pere@elpueblo.com", new GregorianCalendar(1985, 02, 03), "");
 
-        ICU.AgregarUsuarioColaborador("Tiajaci", "Tía", "Jacinta", "jacinta@elpueblo.com", new GregorianCalendar(1990, 03, 04),"");
+        ICU.AgregarUsuarioColaborador("Tiajaci", "Tía", "Jacinta", "jacinta@elpueblo.com", new GregorianCalendar(1990, 03, 04), "");
 
 //-----------------------------------------------------Categorias------------------------------------//
         IPC.crearCategoriaDatosdePrueba("Categoria", null);
@@ -182,8 +181,6 @@ public class Fabrica {
         IPC.crearCategoriaDatosdePrueba("Stand-up", "Comedia");
 
 //-----------------------------------------------------Propuestas------------------------------------//
-
-
         IPC.crearPropuestaDatosdePrueba("Cine en el Botánico", "El 16 de Diciembre a la hora 20 se proyectará la película \"Clever\", en el Jardín Botánico (Av. 19 de Abril 1181)\n"
                 + "en el marco de las actividades realizadas por el ciclo Cultura al Aire Libre. El largometraje uruguayo de ficción\n"
                 + "Clever es dirigido por Federico Borgia y Guillermo Madeiro. Es apto para mayores de 15 años.", IPC.ObtenerCategoria("Cine al Aire Libre"), new GregorianCalendar(2018, 8, 16),
@@ -191,36 +188,36 @@ public class Fabrica {
 
         IPC.crearPropuestaDatosdePrueba("Durazno Rock", "Una vez mas EspectaculosBA dice presente en DURAZNO ROCK! Mas de 400 personas nos acompañaron el\\r\\naño pasado y "
                 + "este año se repite!! Este año con la presencia destacada de La Beriso!!", IPC.ObtenerCategoria("Festival"), new GregorianCalendar(2018, 11, 10),
-                "Jardín Botánico ", 0, 100000, TipoRetorno.porGanancias, ICU.ObtenerProponente("durazno"), "Culturarte.png");
+                "Durazno", 0, 100000, TipoRetorno.porGanancias, ICU.ObtenerProponente("durazno"), "Culturarte.png");
 
         IPC.crearPropuestaDatosdePrueba("El Lazarillo de Tormes", "Vuelve unas de las producciones de El Galpón más aclamadas de los últimos tiempos. Esta obra se ha\\r\\npresentado "
                 + "en Miami, Nueva York, Washington, México, Guadalajara, Río de Janeiro y La Habana. En nuestro\\r\\npaís, El Lazarillo de Tormes fue nominado en los rubros mejor espectáculo "
                 + "y mejor dirección a los Premios\\r\\nFlorencio 1995, obteniendo su protagonista Héctor Guido el Florencio a Mejor actor de ese año.",
-                IPC.ObtenerCategoria("Festival"), new GregorianCalendar(2018, 11, 03), "Teatro el Galpón", 350, 1750000, TipoRetorno.Entradas, ICU.ObtenerProponente("hectorg"), "Culturarte.png");
+                IPC.ObtenerCategoria("Teatro Dramático"), new GregorianCalendar(2018, 11, 03), "Teatro el Galpón", 350, 1750000, TipoRetorno.Entradas, ICU.ObtenerProponente("hectorg"), "Culturarte.png");
 
         IPC.crearPropuestaDatosdePrueba("El Pimiento Indomable", "El Pimiento Indomable, formación compuesta por Kiko Veneno y el uruguayo Martín Buscaglia, presentará\\r\\neste 19 de Octubre, "
                 + "su primer trabajo. Bajo un título homónimo al del grupo, es un disco que según los\\r\\npropios protagonistas “no se parece al de ninguno de los dos por separado. Entre los "
                 + "títulos que se podrán\\r\\nescuchar se encuentran “Nadador salvador”, “América es más grande”, “Pescaito Enroscado” o “La reina del\\r\\nplacer", IPC.ObtenerCategoria("Concierto"), new GregorianCalendar(2018, 9, 19),
-                "Teatro Solís", 400, 400000, TipoRetorno.porGanancias, ICU.ObtenerProponente("mbusca"),"El Pimiento Indomable.jpg");
+                "Teatro Solís", 400, 400000, TipoRetorno.porGanancias, ICU.ObtenerProponente("mbusca"), "El Pimiento Indomable.jpg");
 
         IPC.crearPropuestaDatosdePrueba("Pilsen Rock", "La edición 2018 del Pilsen Rock se celebrará el 21 de Octubre en la Rural del Prado y contará con la\\r\\nparticipación de "
                 + "más de 15 bandas nacionales. Quienes no puedan trasladarse al lugar, "
                 + "tendrán la posibilidad\\r\\nde disfrutar los shows a través de Internet, así como entrevistas en vivo a los músicos una vez finalizados los\\r\\nconciertos.",
-                IPC.ObtenerCategoria("Festival"), new GregorianCalendar(2018, 9, 21), "Rural de Prado", 1000, 900000, TipoRetorno.EntGan, ICU.ObtenerProponente("kairoh"),"Pilsen Rock.jpg");
+                IPC.ObtenerCategoria("Festival"), new GregorianCalendar(2018, 9, 21), "Rural de Prado", 1000, 900000, TipoRetorno.EntGan, ICU.ObtenerProponente("kairoh"), "Pilsen Rock.jpg");
 
         IPC.crearPropuestaDatosdePrueba("Religiosamente", "MOMOSAPIENS presenta Religiosamente. Mediante dos parodias y un hilo conductor que aborda la temática\\r\\nde la religión "
                 + "Momosapiens, mediante el humor y la reflexión, hilvana una historia que muestra al hombre\\r\\ninmerso en el tema religioso. El libreto está escrito utilizando diferentes"
                 + " lenguajes de humor, dando una\\r\\nvisión satírica y reflexiva desde distintos puntos de vista, logrando mediante situaciones paródicas armar una\\r\\npropuesta plena de"
-                + "arte carnavalero. ", IPC.ObtenerCategoria("Parodistas"), new GregorianCalendar(2018, 9, 07), "Teatro de Verano", 300, 300000, TipoRetorno.EntGan, ICU.ObtenerProponente("hrubino"),"Religiosamente.jpg");
+                + "arte carnavalero. ", IPC.ObtenerCategoria("Parodistas"), new GregorianCalendar(2018, 9, 07), "Teatro de Verano", 300, 300000, TipoRetorno.EntGan, ICU.ObtenerProponente("hrubino"), "Religiosamente.jpg");
 
         IPC.crearPropuestaDatosdePrueba("Romeo y Julieta", "Romeo y Julieta de Kenneth MacMillan, uno de los ballets favoritos del director artístico Julio Bocca, se\\r\\npresentará nuevamente "
                 + "el 5 de Noviembre en el Auditorio Nacional del Sodre. Basada en la obra homónima\\r\\nde William Shakespeare, Romeo y Julieta es considerada la coreografía maestra del MacMillan. "
-                + "La producción\\r\\nde vestuario y escenografía se realizó en los Talleres del Auditorio Adela Reta, sobre los diseños originales.", IPC.ObtenerCategoria("Ballet"), new GregorianCalendar(2018, 04, 11),
+                + "La producción\\r\\nde vestuario y escenografía se realizó en los Talleres del Auditorio Adela Reta, sobre los diseños originales.", IPC.ObtenerCategoria("Ballet"), new GregorianCalendar(2018, 10, 05),
                 "Auditorio Nacional del Sodre", 800, 750000, TipoRetorno.porGanancias, ICU.ObtenerProponente("juliob"),"Romeo y Julieta.jpg");
 
         IPC.crearPropuestaDatosdePrueba("Un día de Julio", "La Catalina presenta el espectáculo Un Día de Julio en Landia. Un hombre misterioso y solitario vive\\r\\nencerrado entre las cuatro paredes "
                 + "de su casa. Intenta, con sus teorías extravagantes, cambiar el mundo\\r\\nexterior que le resulta inhabitable. Un día de Julio sucederá algo que cambiará su vida y la de su entorno "
-                + "para\\r\\nsiempre.", IPC.ObtenerCategoria("Murga"), new GregorianCalendar(2018, 10, 16), "Landia", 650, 300000, TipoRetorno.EntGan, ICU.ObtenerProponente("tabarec"),"Un día de Julio.jpg");
+                + "para\\r\\nsiempre.", IPC.ObtenerCategoria("Murga"), new GregorianCalendar(2018, 10, 16), "Landia", 650, 300000, TipoRetorno.EntGan, ICU.ObtenerProponente("tabarec"), "Un día de Julio.jpg");
 
         //------------------------------------------Seguidores--------------------------------------------------//
         try {
@@ -365,7 +362,6 @@ public class Fabrica {
         IPC.getPropuestas().clear();//para limpiar el map dsp que borre todo
         ICU.eliminarCategorias();
 
-        
         File directorioPerfiles = new File(System.getProperty("user.dir") + "\\fPerfiles");
         File[] ficherosPerfiles = directorioPerfiles.listFiles();
         for (int x = 0; x < ficherosPerfiles.length; x++) {
@@ -373,16 +369,13 @@ public class Fabrica {
                 boolean estatus = ficherosPerfiles[x].delete();
             }
         }//Esto para limpiar las imagenes de la carpeta fPerfiles
-        
-        File directorioPropuestas = new File(System.getProperty("user.dir")+ "\\fPropuestas\\");
+
+        File directorioPropuestas = new File(System.getProperty("user.dir") + "\\fPropuestas\\");
         File[] ficherosPropuestas = directorioPropuestas.listFiles();
         for (int x = 0; x < ficherosPropuestas.length; x++) {
             if (ficherosPropuestas[x].getName().compareTo("Culturarte.png") != 0) {
                 boolean estatus = ficherosPropuestas[x].delete();
             }
-        }//Borra las imagenes de propuestas
-        
-        
+        }//Borra las imagenes de propuestas       
     }
-
 }

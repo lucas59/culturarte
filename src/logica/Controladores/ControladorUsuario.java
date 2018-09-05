@@ -364,7 +364,7 @@ public class ControladorUsuario implements IControladorUsuario {
                     Iterator it3 = set3.iterator();
                     while (it3.hasNext()) {
                         Map.Entry mentry3 = (Map.Entry) it3.next();
-                        Usuario u2 = (Usuario) mentry3.getValue();
+                        Usuario u2 = (Usuario) mentry3.getValue();//SE AGREGAN A LOS SEGUIDOS
                         if (s.getSeguido().equals(u2.getNickname())) {
                             u.getSeguidos().put(u2.getNickname(), u2);
                             break;
@@ -434,11 +434,9 @@ public class ControladorUsuario implements IControladorUsuario {
 
     @Override
     public void LimpiarUsuarios() { // Limpiado de la logica en proceso 
-
         Iterator it = this.Usuarios.entrySet().iterator();
         boolean borrado;
         while (it.hasNext()) {
-
             Map.Entry mtry = (Map.Entry) it.next();
 
             if (mtry.getValue() instanceof Colaborador) {
@@ -496,10 +494,8 @@ public class ControladorUsuario implements IControladorUsuario {
 
     @Override
     public boolean limpiarBaseDeDatos() {
-
         DBUsuario d = new DBUsuario();
         boolean ok = d.limpiarBD();
-
         return ok;
     }
 
