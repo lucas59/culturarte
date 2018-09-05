@@ -54,7 +54,6 @@ private DtinfoPropuesta prop;
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaPropuestas = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
@@ -81,6 +80,7 @@ private DtinfoPropuesta prop;
         TextDesc = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Modificar propuesta");
         setMinimumSize(new java.awt.Dimension(550, 650));
         setPreferredSize(new java.awt.Dimension(600, 650));
 
@@ -88,10 +88,6 @@ private DtinfoPropuesta prop;
         jPanel1.setName(""); // NOI18N
         jPanel1.setPreferredSize(new java.awt.Dimension(600, 650));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Modificar Propuesta");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 10, -1, -1));
 
         TablaPropuestas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -254,9 +250,7 @@ private DtinfoPropuesta prop;
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 22, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 620, Short.MAX_VALUE)
         );
 
         pack();
@@ -374,7 +368,6 @@ private DtinfoPropuesta prop;
     private javax.swing.JTextArea TextDesc;
     private javax.swing.JLabel foto;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;

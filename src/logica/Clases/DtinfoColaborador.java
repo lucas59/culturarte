@@ -34,6 +34,7 @@ public class DtinfoColaborador {
         this.correo=aux.getCorreo();
         this.fechaN=aux.getFechaN();
         this.imagen=aux.getImagen();
+        
     }
 
     public String getImagen() {

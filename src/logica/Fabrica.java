@@ -77,7 +77,6 @@ public class Fabrica {
     }
 
     public void cargarDatosdePrueba() {
-
         IControladorUsuario ICU = this.getIControladorUsuario();
         IPropCat IPC = this.getControladorPropCat();
         String ruta = System.getProperty("user.dir") + "\\fotosdp\\";

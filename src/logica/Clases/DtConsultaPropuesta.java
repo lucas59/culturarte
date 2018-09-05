@@ -22,8 +22,9 @@ public class DtConsultaPropuesta {
     private float montoE;
     private float montoTot;
     private String tipoRet;
+    private String nickproponente;
 
-    public DtConsultaPropuesta(String tit, String cat, String lugar, String fecha, float monto, float montoe, String estado, String desc, String img, float montoTot, String tipoRet) {
+    public DtConsultaPropuesta(String tit, String cat, String lugar, String fecha, float monto, float montoe, String estado, String desc, String img, float montoTot, String tipoRet,String nickprop) {
         this.titulo = tit;
         this.categoria = cat;
         this.descripcion = desc;
@@ -35,6 +36,11 @@ public class DtConsultaPropuesta {
         this.lugar = lugar;
         this.montoTot = montoTot;
         this.tipoRet = tipoRet;
+        this.nickproponente=nickprop;
+    }
+
+    public String getNickproponente() {
+        return nickproponente;
     }
 
     public float getMontoTot() {

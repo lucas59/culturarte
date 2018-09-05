@@ -42,7 +42,7 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
     private List<DtinfoPropuesta> propuestas;
     private DtinfoPropuesta propSeleccionada;
 
-    public ListaDePropuestasDeProponente(String proponente, String title) {
+    public ListaDePropuestasDeProponente(String proponente, String title){
         super(title);
         Fabrica fab = Fabrica.getInstance();
         this.ICP = fab.getControladorPropCat();
@@ -50,7 +50,6 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
         jPanelColaboradores.setVisible(false);
         this.nickProponente = proponente;
         propuestas = this.ICP.ListarPropuestasDeProponenteX(nickProponente);
-
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.setRowCount(0);
         for (int i = 0; i < propuestas.size(); i++) {

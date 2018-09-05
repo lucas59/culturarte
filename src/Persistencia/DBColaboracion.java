@@ -160,7 +160,7 @@ public class DBColaboracion {
             IPropCat IPC = fabrica.getControladorPropCat();
             IControladorUsuario ICU = fabrica.getIControladorUsuario();
             while (rs.next()) {
-                java.util.Date fecha = rs.getDate("fechaRealiz");
+                java.util.Date fecha = rs.getTimestamp("fechaRealiz");
                 Calendar fechaRC = Calendar.getInstance();
                 fechaRC.setTime(fecha);
                 Colaboracion colaboracion = new Colaboracion(null, rs.getFloat("montoC"), fechaRC, rs.getBoolean("entradas"), null);

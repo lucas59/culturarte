@@ -10,6 +10,7 @@ import Presentacion.inicio;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import logica.Clases.DtinfoPropuesta;
 import logica.Fabrica;
 import logica.Interfaces.IPropCat;
@@ -27,6 +28,7 @@ public DtinfoPropuesta dtp2;
     public ModificarPropuesta2(DtinfoPropuesta dtp) {
         initComponents();
         IPC=Fabrica.getInstance().getControladorPropCat();
+        ((JTextField) this.fecha.getDateEditor()).setEditable(false); 
         dtp2=dtp;
     }
 
@@ -255,13 +257,6 @@ public DtinfoPropuesta dtp2;
 
     private void TextDescKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextDescKeyTyped
         // TODO add your handling code here:
-        char c = evt.getKeyChar();
-        String d = "" + c;
-        if (Character.isLetter(c) || d.equals("\b") || d.equals(" ")) {
-
-        } else {
-            evt.consume();
-        }
     }//GEN-LAST:event_TextDescKeyTyped
 
     private void TextMontoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextMontoKeyTyped

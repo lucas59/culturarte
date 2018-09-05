@@ -323,6 +323,11 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
                 jButton1MouseClicked(evt);
             }
         });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jTextField14.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -570,9 +575,9 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
         Fabrica fabrica = Fabrica.getInstance();
         IPropCat CPC = fabrica.getControladorPropCat();
         IControladorUsuario CU = fabrica.getIControladorUsuario();
-        float monto = 0;
+        float monto=0;
         if (!jTextField17.getText().isEmpty()) {
-            monto = Float.parseFloat(jTextField17.getText());
+       monto = Float.parseFloat(jTextField17.getText());
         }
         if (jTextField17.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingrese el monto de la colaboración");
@@ -761,6 +766,10 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
             evt.consume();
         }        // TODO add your handling code here:
     }//GEN-LAST:event_jTextField17KeyTyped
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

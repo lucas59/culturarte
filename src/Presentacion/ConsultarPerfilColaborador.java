@@ -5,7 +5,6 @@
  */
 package Presentacion;
 
-import Presentacion.inicio;
 import java.awt.Image;
 import java.util.Calendar;
 import java.util.List;
@@ -49,7 +48,6 @@ public class ConsultarPerfilColaborador extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         NombreCol = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaC = new javax.swing.JTable();
@@ -70,6 +68,7 @@ public class ConsultarPerfilColaborador extends javax.swing.JInternalFrame {
         foto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Consultar perfil de colaborador");
         setPreferredSize(new java.awt.Dimension(580, 580));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -77,10 +76,6 @@ public class ConsultarPerfilColaborador extends javax.swing.JInternalFrame {
         jPanel1.setMinimumSize(new java.awt.Dimension(600, 650));
         jPanel1.setPreferredSize(new java.awt.Dimension(600, 600));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setText("Consultar Perfil de Colaborador");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, -1, -1));
 
         NombreCol.setToolTipText("");
         NombreCol.addActionListener(new java.awt.event.ActionListener() {
@@ -189,8 +184,8 @@ public class ConsultarPerfilColaborador extends javax.swing.JInternalFrame {
         jLabel8.setText("Correo:");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, -1, -1));
 
-        jLabel9.setText("Fecha de ingreso:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 390, -1, -1));
+        jLabel9.setText("Fecha de nacimiento:");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 390, -1, -1));
 
         jButton2.setText("Ver colaboraciones");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -337,7 +332,6 @@ public class ConsultarPerfilColaborador extends javax.swing.JInternalFrame {
     private javax.swing.JLabel foto;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
