@@ -394,7 +394,7 @@ public class AltaPropuesta2 extends javax.swing.JInternalFrame {
                     this.LimpiarComponentes();
                 }
             } catch (Exception e) {
-                javax.swing.JOptionPane.showMessageDialog(null, e);
+                javax.swing.JOptionPane.showMessageDialog(null, e.getMessage());
                 jTextTitulo.setText("");
                 jTextTitulo.requestFocus();
             }
