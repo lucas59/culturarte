@@ -72,8 +72,6 @@ public interface IPropCat {
 
     public abstract EstadoPropuesta verEstadoPropuesta(String titulo);
 
-    public void ComunicarControladores(IControladorUsuario icu);
-
     public abstract void CargarColaboraciones();
 
     public abstract void LimpiarPropCat();
