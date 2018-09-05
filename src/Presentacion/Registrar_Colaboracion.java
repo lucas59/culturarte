@@ -21,9 +21,7 @@ import logica.Clases.Colaborador;
 import logica.Clases.DtinfoColaborador;
 import logica.Clases.DtinfoPropuesta;
 import logica.Clases.DtNickTitProp;
-import logica.Clases.Propuesta;
 import logica.Clases.TipoRetorno;
-import logica.Clases.Usuario;
 import logica.Fabrica;
 import logica.Interfaces.IControladorUsuario;
 import logica.Interfaces.IPropCat;
@@ -575,9 +573,9 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
         Fabrica fabrica = Fabrica.getInstance();
         IPropCat CPC = fabrica.getControladorPropCat();
         IControladorUsuario CU = fabrica.getIControladorUsuario();
-        float monto=0;
+        float monto = 0;
         if (!jTextField17.getText().isEmpty()) {
-       monto = Float.parseFloat(jTextField17.getText());
+            monto = Float.parseFloat(jTextField17.getText());
         }
         if (jTextField17.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingrese el monto de la colaboración");
@@ -644,19 +642,14 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
         IPropCat IPC = fabrica.getControladorPropCat();
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.setRowCount(0);
-        Map<String, Propuesta> Propuestas = IPC.getPropuestas();
-        Set set = Propuestas.entrySet();
-        Iterator iterator = set.iterator();
+        List<DtNickTitProp> prop = IPC.listarPropuestas();
         jTable1.clearSelection();
-        while (iterator.hasNext()) {
-            Map.Entry mentry = (Map.Entry) iterator.next();
-            Propuesta aux = (Propuesta) mentry.getValue();
-            if (aux.getTituloP().contains(jTextField14.getText())) {
-                Object[] dat = {aux.getTituloP(), aux.getAutor().getNickname()};
+        for (int i = 0; i < prop.size(); i++) {
+            if (prop.get(i).getTituloP().contains(jTextField14.getText())) {
+                Object[] dat = {prop.get(i).getTituloP(), prop.get(i).getProponente()};
                 modelo.addRow(dat);
             }
         }
-
     }//GEN-LAST:event_jTextField14KeyReleased
 
     private void jTextField15KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField15KeyReleased
@@ -664,19 +657,11 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
         IControladorUsuario CU = fabrica.getIControladorUsuario();
         DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
         modelo.setRowCount(0);
-        Map<String, Usuario> usuarios = CU.getUsuarios();
-        Set set = usuarios.entrySet();
-        Iterator iterator = set.iterator();
         jTable1.clearSelection();
-        while (iterator.hasNext()) {
-            Map.Entry mentry = (Map.Entry) iterator.next();
-            if (mentry.getValue() instanceof Colaborador) {
-                Usuario aux = (Usuario) mentry.getValue();
-                if (aux.getNickname().contains(jTextField15.getText())) {
-                    Object[] dat = {aux.getNickname(), aux.getNombre()};
-                    modelo.addRow(dat);
-                }
-            }
+        List<DtinfoColaborador> col = CU.ListarColaboradores();
+        for (int i = 0; i < col.size(); i++) {
+            Object[] dat = {col.get(i).getNickname(), col.get(i).getNombre()};
+            modelo.addRow(dat);
         }
 
     }//GEN-LAST:event_jTextField15KeyReleased
@@ -684,22 +669,15 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
         Fabrica fabrica = Fabrica.getInstance();
         IControladorUsuario controladorU = fabrica.getIControladorUsuario();
-        Map<String, Usuario> Usuarios = controladorU.getUsuarios();
-
-        Set set = Usuarios.entrySet();
-        Iterator iterator = set.iterator();
-        iterator = set.iterator();
         DtinfoColaborador DtinfoCol = null;
-        while (iterator.hasNext()) {
-            Map.Entry mentry = (Map.Entry) iterator.next();
-            Usuario aux = (Usuario) mentry.getValue();
-            if (aux.getNickname().compareTo((String) jTable2.getValueAt(jTable2.getSelectedRow(), 0)) == 0) {
-                DtinfoCol = new DtinfoColaborador(aux.getNickname(), aux.getNombre(), aux.getApellido(), aux.getCorreo(), aux.getFechaN());
-                controladorU.SeleccionarColaborador(aux.getNickname());
+        List<DtinfoColaborador> col = controladorU.ListarColaboradores();
+        for (int i = 0; i < col.size(); i++) {
+            if (col.get(i).getNickname().compareTo((String) jTable2.getValueAt(jTable2.getSelectedRow(), 0)) == 0) {
+                DtinfoCol = new DtinfoColaborador(col.get(i).getNickname(), col.get(i).getNombre(), col.get(i).getApellido(), col.get(i).getCorreo(), col.get(i).getFechaN());
+                controladorU.SeleccionarColaborador(col.get(i).getNickname());
                 break;
             }
         }
-
         String[] textField = null;
         jTextField9.setText((String) jTable2.getValueAt(jTable2.getSelectedRow(), 0));
         jTextField10.setText((String) DtinfoCol.getNombre());
@@ -715,18 +693,13 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
 
         Fabrica fabrica = Fabrica.getInstance();
         IPropCat controladorPC = fabrica.getControladorPropCat();
-        Map<String, Propuesta> propuestas = controladorPC.getPropuestas();
-        Set set = propuestas.entrySet();
-        Iterator iterator = set.iterator();
-        iterator = set.iterator();
+        List<DtNickTitProp> prop = controladorPC.listarPropuestas();
+
         DtinfoPropuesta Dtinfop = null;
-        while (iterator.hasNext()) {
-            Map.Entry mentry = (Map.Entry) iterator.next();
-            Propuesta aux = (Propuesta) mentry.getValue();
-            boolean tituloOK = aux.getTituloP().compareTo((String) jTable1.getValueAt(jTable1.getSelectedRow(), 0)) == 0;
+        for (int i = 0; i < prop.size(); i++) {
+            boolean tituloOK = prop.get(i).getTituloP().compareTo((String) jTable1.getValueAt(jTable1.getSelectedRow(), 0)) == 0;
             if (tituloOK) {
-                Dtinfop = controladorPC.SeleccionarPropuestaR(aux.getTituloP());
-                break;
+                Dtinfop = controladorPC.SeleccionarPropuestaR(prop.get(i).getTituloP());
             }
         }
         if (Dtinfop.getTipoRetorno().compareTo(TipoRetorno.Entradas) == 0) {
