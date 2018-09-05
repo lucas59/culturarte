@@ -56,7 +56,7 @@ public class DBColaboracion {
             if (Entrada == true) {
                 statement.setInt(5, 1);
             } else {
-                statement.setInt(5, 2);
+                statement.setInt(5, 0);
             }
             statement.executeUpdate();
             statement.close();
@@ -129,7 +129,7 @@ public class DBColaboracion {
             if (Entrada) {
                 statement.setInt(5, 1);
             } else {
-                statement.setInt(5, 2);
+                statement.setInt(5, 0);
             }
             statement.executeUpdate();
             statement.close();
