@@ -5,16 +5,13 @@
  */
 package Presentacion;
 
-import Presentacion.inicio;
 import java.awt.Image;
-import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
-import logica.Clases.Colaborador;
 import logica.Clases.DtConsultaPropuesta;
 import logica.Clases.DtinfoPropuesta;
 import logica.Fabrica;

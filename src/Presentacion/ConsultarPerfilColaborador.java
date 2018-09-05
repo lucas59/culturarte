@@ -185,7 +185,7 @@ public class ConsultarPerfilColaborador extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, -1, -1));
 
         jLabel9.setText("Fecha de nacimiento:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 390, -1, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 390, -1, -1));
 
         jButton2.setText("Ver colaboraciones");
         jButton2.addActionListener(new java.awt.event.ActionListener() {

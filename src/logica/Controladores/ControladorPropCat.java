@@ -79,10 +79,6 @@ public class ControladorPropCat implements IPropCat {
         this.Propuesta = null;
     }
 
-    public void ComunicarControladores(IControladorUsuario icu) {
-        this.ICU = icu;
-    }
-
     @Override
     public List<DtNickTitProp> listarPropuestaC() {
         Map<String, Propuesta> prop = this.propuestas;
@@ -250,7 +246,7 @@ public class ControladorPropCat implements IPropCat {
             Map.Entry mentry = (Map.Entry) iterator.next();
             Propuesta aux = (Propuesta) mentry.getValue();
             if (aux.getTituloP().compareTo(titulo) == 0) {
-               
+
                 retorno = new DtinfoPropuesta(aux.getTituloP(), aux.getDescripcionP(), aux.getImagen(), aux.getCategoria().getNombreC(), aux.getLugar(), aux.getFecha(), aux.getMontoE(), aux.getMontoTot(), aux.getRetorno());
                 this.Propuesta = aux;
             }
@@ -281,7 +277,7 @@ public class ControladorPropCat implements IPropCat {
             String estado;
             estado = prop.getEstadoActual().getEstado().name();
             float monto = this.CalcularMontoPropuesta(prop);
-String nick=prop.getAutor().getNickname();
+            String nick = prop.getAutor().getNickname();
             String tipoR;
 
             if (prop.getRetorno() == TipoRetorno.EntGan) {
@@ -294,7 +290,7 @@ String nick=prop.getAutor().getNickname();
             Date fecha = (Date) prop.getFecha().getTime();
             String fechaR = new SimpleDateFormat("dd/MMM/yyyy").format(fecha);
 
-            return new DtConsultaPropuesta(prop.getTituloP(), prop.getCategoria().getNombreC(), prop.getLugar(), fechaR, monto, prop.getMontoE(), estado, prop.getDescripcionP(), prop.getImagen(), prop.getMontoTot(), tipoR,nick);
+            return new DtConsultaPropuesta(prop.getTituloP(), prop.getCategoria().getNombreC(), prop.getLugar(), fechaR, monto, prop.getMontoE(), estado, prop.getDescripcionP(), prop.getImagen(), prop.getMontoTot(), tipoR, nick);
         } else {
             throw new Exception("La propuesta ingresada no esta en el sistema");
         }
