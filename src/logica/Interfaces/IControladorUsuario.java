@@ -60,7 +60,7 @@ public interface IControladorUsuario {
 
     public abstract void CargarUsuarios();
 
-    public abstract List ListarColaboraciones(String nickname);
+    public abstract List<DtColaboraciones> ListarColaboraciones(String nickname);
 
     public abstract void LimpiarUsuarios();
     

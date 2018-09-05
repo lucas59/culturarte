@@ -235,11 +235,13 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField2)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                    .addComponent(jTextField6)
                     .addComponent(jTextField3)
                     .addComponent(jTextField5)
-                    .addComponent(jTextField1))
+                    .addComponent(jTextField1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -386,13 +388,13 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         Fabrica fabrica = Fabrica.getInstance();
         IControladorUsuario ICU = fabrica.getIControladorUsuario();
-        List<Colaboracion> colaboraciones = ICU.ListarColaboraciones(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
+        List<DtColaboraciones> colaboraciones = ICU.ListarColaboraciones(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
         this.nickname = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
         DefaultTableModel modelo = (DefaultTableModel) Tabla_propuesta.getModel();
         if (!colaboraciones.isEmpty()) {
             modelo.setRowCount(0);
             for (int indice = 0; indice < colaboraciones.size(); indice++) {
-                Object[] dat = {colaboraciones.get(indice).getTituloP(), colaboraciones.get(indice).getColaborador().getNickname()};
+                Object[] dat = {colaboraciones.get(indice).getPropuesta(), colaboraciones.get(indice).getUColaborador()};
                 modelo.addRow(dat);
             }
         } else {
@@ -426,14 +428,14 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
     private void jTextField8KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField8KeyReleased
         Fabrica fabrica = Fabrica.getInstance();
         ControladorUsuario ICU = (ControladorUsuario) fabrica.getIControladorUsuario();
-         List<Colaboracion> colaboraciones = ICU.ListarColaboraciones(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
+         List<DtColaboraciones> colaboraciones = ICU.ListarColaboraciones(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
         if (!colaboraciones.isEmpty()) {
             DefaultTableModel modelo = (DefaultTableModel) Tabla_propuesta.getModel();
             modelo.setRowCount(0);
             for (int i = 0; i < colaboraciones.size(); i++) {
-                Colaboracion u = colaboraciones.get(i);
-                if (u.getTituloP().contains(jTextField8.getText())) {
-                    Object[] dat = {u.getTituloP() , u.getNickName()};
+                DtColaboraciones u = colaboraciones.get(i);
+                if (u.getPropuesta().contains(jTextField8.getText())) {
+                    Object[] dat = {u.getPropuesta() , u.getUColaborador()};
                     modelo.addRow(dat);
                 }
             }
@@ -443,13 +445,13 @@ public class Consultar_colaboracion extends javax.swing.JInternalFrame {
     private void Tabla_propuestaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla_propuestaMouseClicked
         Fabrica fabrica = Fabrica.getInstance();
         IControladorUsuario ICU = fabrica.getIControladorUsuario();
-        List<Colaboracion> colaboraciones = ICU.ListarColaboraciones(this.nickname);
+        List<DtColaboraciones> colaboraciones = ICU.ListarColaboraciones(this.nickname);
         if (!colaboraciones.isEmpty()) {
             TableModel modelo = (TableModel) Tabla_propuesta.getModel();
 
             for (int indice = 0; indice < colaboraciones.size(); indice++) {
-                if (colaboraciones.get(indice).getPropuesta().getTituloP().compareTo((String) modelo.getValueAt(Tabla_propuesta.getSelectedRow(), 0)) == 0) {
-                    DtColaboraciones ColaboracionesM = new DtColaboraciones(colaboraciones.get(indice).getNickName(), colaboraciones.get(indice).getMontoC(), colaboraciones.get(indice).getFechaRealiz(), colaboraciones.get(indice).getEntradas(), colaboraciones.get(indice).getTituloP());
+                if (colaboraciones.get(indice).getPropuesta().compareTo((String) modelo.getValueAt(Tabla_propuesta.getSelectedRow(), 0)) == 0) {
+                    DtColaboraciones ColaboracionesM = new DtColaboraciones(colaboraciones.get(indice).getUColaborador(), colaboraciones.get(indice).getMontoC(), colaboraciones.get(indice).getFechaRealiz(), colaboraciones.get(indice).getEntradas(), colaboraciones.get(indice).getPropuesta());
                     jTextField2.setText(ColaboracionesM.getPropuesta());
                     if (ColaboracionesM.getEntradas() == true) {
                         jTextField5.setText("Entradas");
