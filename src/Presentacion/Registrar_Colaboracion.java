@@ -661,13 +661,13 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
         IControladorUsuario CU = fabrica.getIControladorUsuario();
         DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
         modelo.setRowCount(0);
-        jTable1.clearSelection();
         List<DtinfoColaborador> col = CU.ListarColaboradores();
         for (int i = 0; i < col.size(); i++) {
+            if (col.get(i).getNickname().contains(jTextField15.getText())) {
             Object[] dat = {col.get(i).getNickname(), col.get(i).getNombre()};
             modelo.addRow(dat);
+            }
         }
-
     }//GEN-LAST:event_jTextField15KeyReleased
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
