@@ -370,7 +370,7 @@ public class AltaPropuesta1 extends javax.swing.JInternalFrame {
             jPanelNuevaCategoria.setVisible(false);
 
         } catch (Exception e) {
-            javax.swing.JOptionPane.showMessageDialog(null, e);
+            javax.swing.JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }//GEN-LAST:event_jButtonCrearCatActionPerformed
 
