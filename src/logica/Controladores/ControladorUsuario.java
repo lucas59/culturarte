@@ -410,18 +410,22 @@ public class ControladorUsuario implements IControladorUsuario {
     }
 
     @Override
-    public List ListarColaboraciones(String nickName) {
+    public List<DtColaboraciones> ListarColaboraciones(String nickName) {
         Fabrica fabrica = Fabrica.getInstance();
         IControladorUsuario ICU = fabrica.getIControladorUsuario();
         Map<String, Usuario> Usuarios = ICU.getUsuarios();
         Set set = Usuarios.entrySet();
         Iterator iterator = set.iterator();
-        List<DtColaboraciones> retorno;
+        List<DtColaboraciones> retorno = new ArrayList<>();
         while (iterator.hasNext()) {
             Map.Entry mentry = (Map.Entry) iterator.next();
             if (mentry.getValue() instanceof Colaborador) {
                 if ((((Usuario) mentry.getValue()).getNickname().compareTo(nickName) == 0)) {
-                    return ((Colaborador) mentry.getValue()).getColaboraciones();
+                    List<Colaboracion> col = ((Colaborador) mentry.getValue()).getColaboraciones();
+                    for(int i = 0; i < col.size();i++){
+                        retorno.add(new DtColaboraciones(col.get(i).getNickName(), col.get(i).getMontoC(), col.get(i).getFechaRealiz(), col.get(i).getEntradas(), col.get(i).getTituloP()));
+                    }
+                    return retorno;
                 }
             }
         }
