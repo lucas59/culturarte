@@ -21,17 +21,9 @@ import logica.Clases.Colaboracion;
 import logica.Clases.Colaborador;
 import logica.Clases.DtColaboraciones;
 import logica.Clases.DtinfoColaborador;
-import logica.Clases.DtNickTitProp;
-import logica.Clases.DtUsuario;
-import logica.Clases.DtinfoPropuesta;
-import logica.Clases.Propuesta;
-import logica.Clases.TipoRetorno;
-import logica.Clases.Usuario;
-import logica.Controladores.ControladorPropCat;
 import logica.Controladores.ControladorUsuario;
 import logica.Fabrica;
 import logica.Interfaces.IControladorUsuario;
-import logica.Interfaces.IPropCat;
 
 /**
  *
