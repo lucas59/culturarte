@@ -42,7 +42,7 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
     private List<DtinfoPropuesta> propuestas;
     private DtinfoPropuesta propSeleccionada;
 
-    public ListaDePropuestasDeProponente(String proponente, String title) throws Exception {
+    public ListaDePropuestasDeProponente(String proponente, String title){
         super(title);
         Fabrica fab = Fabrica.getInstance();
         this.ICP = fab.getControladorPropCat();
@@ -50,9 +50,6 @@ public class ListaDePropuestasDeProponente extends javax.swing.JInternalFrame {
         jPanelColaboradores.setVisible(false);
         this.nickProponente = proponente;
         propuestas = this.ICP.ListarPropuestasDeProponenteX(nickProponente);
-if(propuestas.isEmpty()){
-     throw new Exception("El proponente no tiene propuestas");
-}
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.setRowCount(0);
         for (int i = 0; i < propuestas.size(); i++) {

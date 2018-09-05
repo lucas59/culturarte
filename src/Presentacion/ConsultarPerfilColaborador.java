@@ -7,6 +7,7 @@ package Presentacion;
 
 import Presentacion.inicio;
 import java.awt.Image;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import javax.swing.Icon;
@@ -49,7 +50,6 @@ public class ConsultarPerfilColaborador extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         NombreCol = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaC = new javax.swing.JTable();
@@ -70,6 +70,7 @@ public class ConsultarPerfilColaborador extends javax.swing.JInternalFrame {
         foto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Consultar perfil de colaborador");
         setPreferredSize(new java.awt.Dimension(580, 580));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -77,10 +78,6 @@ public class ConsultarPerfilColaborador extends javax.swing.JInternalFrame {
         jPanel1.setMinimumSize(new java.awt.Dimension(600, 650));
         jPanel1.setPreferredSize(new java.awt.Dimension(600, 600));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setText("Consultar Perfil de Colaborador");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, -1, -1));
 
         NombreCol.setToolTipText("");
         NombreCol.addActionListener(new java.awt.event.ActionListener() {
@@ -233,7 +230,9 @@ public class ConsultarPerfilColaborador extends javax.swing.JInternalFrame {
         textape.setText(dtc.getApellido());
         textcorreo.setText(dtc.getCorreo());
         textnom.setText(dtc.getNombre());
-        textfecha.setText(dia + "/" + mes + "/" + anio);
+        java.util.Date utilDate = dtc.getFechaN().getTime();
+        SimpleDateFormat g = new SimpleDateFormat("hh:mm:ss a");
+        textfecha.setText(dia + "/" + mes + "/" + anio + " " + g.format(utilDate.getTime()));
         String fotos = System.getProperty("user.dir") + "\\fPerfiles\\" + dtc.getImagen();
         ImageIcon fot = new ImageIcon(fotos);
         Icon icono = new ImageIcon(fot.getImage().getScaledInstance(foto.getWidth(), foto.getHeight(), Image.SCALE_DEFAULT));
@@ -337,7 +336,6 @@ public class ConsultarPerfilColaborador extends javax.swing.JInternalFrame {
     private javax.swing.JLabel foto;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
