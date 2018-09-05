@@ -5,9 +5,7 @@
  */
 package Presentacion;
 
-import Presentacion.inicio;
 import java.awt.Image;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import javax.swing.Icon;
@@ -186,8 +184,8 @@ public class ConsultarPerfilColaborador extends javax.swing.JInternalFrame {
         jLabel8.setText("Correo:");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, -1, -1));
 
-        jLabel9.setText("Fecha de ingreso:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 390, -1, -1));
+        jLabel9.setText("Fecha de nacimiento:");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 390, -1, -1));
 
         jButton2.setText("Ver colaboraciones");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -230,9 +228,7 @@ public class ConsultarPerfilColaborador extends javax.swing.JInternalFrame {
         textape.setText(dtc.getApellido());
         textcorreo.setText(dtc.getCorreo());
         textnom.setText(dtc.getNombre());
-        java.util.Date utilDate = dtc.getFechaN().getTime();
-        SimpleDateFormat g = new SimpleDateFormat("hh:mm:ss a");
-        textfecha.setText(dia + "/" + mes + "/" + anio + " " + g.format(utilDate.getTime()));
+        textfecha.setText(dia + "/" + mes + "/" + anio);
         String fotos = System.getProperty("user.dir") + "\\fPerfiles\\" + dtc.getImagen();
         ImageIcon fot = new ImageIcon(fotos);
         Icon icono = new ImageIcon(fot.getImage().getScaledInstance(foto.getWidth(), foto.getHeight(), Image.SCALE_DEFAULT));
