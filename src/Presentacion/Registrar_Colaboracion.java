@@ -654,6 +654,16 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
                 modelo.addRow(dat);
             }
         }
+          jTextField1.setText("");
+            jTextArea1.setText("");
+            jTextField3.setText("");
+            jTextField4.setText("");
+            jTextField5.setText("");
+            jTextField6.setText("");
+            jTextField7.setText("");
+           
+            jTable1.clearSelection();
+            jLabel20.setIcon(null);
     }//GEN-LAST:event_jTextField14KeyReleased
 
     private void jTextField15KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField15KeyReleased
@@ -668,6 +678,13 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
             modelo.addRow(dat);
             }
         }
+        
+            jTextField9.setText("");
+            jTextField10.setText("");
+            jTextField11.setText("");
+            jTextField12.setText("");
+            jTextField13.setText("");
+            jTable2.clearSelection();
     }//GEN-LAST:event_jTextField15KeyReleased
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
