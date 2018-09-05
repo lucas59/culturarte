@@ -75,7 +75,7 @@ public class DBColaboracion {
         Calendar calendario = new GregorianCalendar();
         java.util.Date utilDate = new java.util.Date();
         utilDate = calendario.getTime();
-        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+        java.sql.Timestamp sqlDate = new java.sql.Timestamp(utilDate.getTime());
         List<Colaboracion> colaboraciones = CPU.getPropuesta().getColaboraciones();
         float TotalColaboracion = 0;
         for (int indice = 0; indice < colaboraciones.size(); indice++) {
@@ -89,7 +89,7 @@ public class DBColaboracion {
 
             statement = conexion.prepareStatement("INSERT INTO estadopropuesta" + " (TituloP, FechaInicio, estActual, Estado) values (?,?,?,?)");
             statement.setString(1, CPU.getPropuesta().getTituloP());
-            statement.setDate(2, sqlDate);
+            statement.setTimestamp(2, sqlDate);
             statement.setBoolean(3, true);
             if (TotalColaboracion < CPU.getPropuesta().getMontoTot()) {
                 statement.setInt(4, 2);
