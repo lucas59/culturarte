@@ -646,7 +646,7 @@ public class Registrar_Colaboracion extends javax.swing.JInternalFrame {
         IPropCat IPC = fabrica.getControladorPropCat();
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.setRowCount(0);
-        List<DtNickTitProp> prop = IPC.listarPropuestas();
+        List<DtNickTitProp> prop = IPC.listarPropuestaC();
         jTable1.clearSelection();
         for (int i = 0; i < prop.size(); i++) {
             if (prop.get(i).getTituloP().contains(jTextField14.getText())) {
