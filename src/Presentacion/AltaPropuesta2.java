@@ -340,8 +340,14 @@ public class AltaPropuesta2 extends javax.swing.JInternalFrame {
 
         String tituloP = jTextTitulo.getText();
         String lugar = jTextLugar.getText();
-        float montoE = Float.parseFloat(jTextMontoEnt.getText());
-        float montoTot = Float.parseFloat(jTextMontoTot.getText());
+        float montoE =0;
+        if(!this.jTextMontoEnt.getText().equals("")){
+       montoE = Float.parseFloat(jTextMontoEnt.getText());
+        }
+        float montoTot=0;
+        if(!jTextMontoTot.getText().equals("")){
+        montoTot = Float.parseFloat(jTextMontoTot.getText());
+        }
         String descripcion = jTextAreaDescripcion.getText();
         Calendar fechaR = jCalendarFechaReal.getCalendar();
         String imagen = rSFotoCirclePropuesta.getRutaImagen();
