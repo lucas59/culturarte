@@ -18,7 +18,7 @@ import logica.Interfaces.IPropCat;
  * @author Lucas
  */
 public class inicio extends javax.swing.JFrame {
-
+    
     private IPropCat IPC;
     private IControladorUsuario ICU;
 
@@ -27,7 +27,7 @@ public class inicio extends javax.swing.JFrame {
      */
     public inicio() {
         initComponents();
-
+        
         this.setLocationRelativeTo(null);
         this.setExtendedState(inicio.MAXIMIZED_BOTH);
         Fabrica fabrica = Fabrica.getInstance();
@@ -56,6 +56,7 @@ public class inicio extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItemVerSeguidores = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -113,6 +114,14 @@ public class inicio extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem7);
+
+        jMenuItemVerSeguidores.setText("Ver Seguidores");
+        jMenuItemVerSeguidores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemVerSeguidoresActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemVerSeguidores);
 
         jMenuBar1.add(jMenu1);
 
@@ -199,11 +208,11 @@ public class inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-
+        
         Fabrica fabrica = Fabrica.getInstance();
         IControladorUsuario ICU = fabrica.getIControladorUsuario();
         IPropCat IPC = fabrica.getControladorPropCat();
-
+        
         if (ICU.ListarColaboradores().isEmpty() && IPC.listarPropuestaC().isEmpty()) {
             JOptionPane.showMessageDialog(null, "No existen Colaboradores ni propuestas en el sistema");
         } else if (ICU.ListarColaboradores().isEmpty()) {
@@ -343,6 +352,15 @@ public class inicio extends javax.swing.JFrame {
         mod.setVisible(true);
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
+    private void jMenuItemVerSeguidoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVerSeguidoresActionPerformed
+        
+        VerSeguidores verS = new VerSeguidores();
+        Escritorio.add(verS);
+        
+        verS.setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItemVerSeguidoresActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -395,5 +413,6 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JMenuItem jMenuItemVerSeguidores;
     // End of variables declaration//GEN-END:variables
 }

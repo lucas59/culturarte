@@ -22,15 +22,6 @@ public class Usuario {
     private Calendar fechaN;
     private String imagen;
     private Map<String, Usuario> seguidos;
-    private Map<String, Usuario> seguidores;
-
-    public Map<String, Usuario> getSeguidores() {
-        return seguidores;
-    }
-
-    public void setSeguidores(Map<String, Usuario> seguidores) {
-        this.seguidores = seguidores;
-    }
 
     public Usuario(String nickname, String nombre, String apellido, String correo, Calendar fechaN, String imagen) {
         this.nickname = nickname;
@@ -39,8 +30,7 @@ public class Usuario {
         this.correo = correo;
         this.fechaN = fechaN;
         this.imagen = imagen;
-        this.seguidos = new HashMap<String, Usuario>();
-        this.seguidores = new HashMap<String, Usuario>();
+        this.seguidos = new HashMap<>();
 
     }
 
@@ -96,8 +86,7 @@ public class Usuario {
         return seguidos;
     }
 
-    public void setSeguidos(Map<String, Usuario> seguidos) {
-        this.seguidos = seguidos;
+    public void setSeguido(Usuario u){
+        this.seguidos.put(u.getNickname(), u);
     }
-
 }

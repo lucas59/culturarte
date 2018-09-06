@@ -14,6 +14,7 @@ import logica.Clases.Colaboracion;
 import logica.Clases.Colaborador;
 import logica.Clases.DtColaboraciones;
 import logica.Clases.DtProponente;
+import logica.Clases.DtSeguidor;
 import logica.Clases.DtUsuario;
 import logica.Clases.DtinfoColaborador;
 import logica.Clases.DtinfoPropuesta;
@@ -26,11 +27,11 @@ import logica.Clases.Usuario;
  */
 public interface IControladorUsuario {
 
-    public abstract boolean seguirUsuario(String nickUsu1, String nickUsu2)throws Exception;
+    public abstract boolean seguirUsuario(String nickUsu1, String nickUsu2) throws Exception;
 
     public abstract void copiarFoto(String foto, String nick);
 
-    public abstract boolean dejarseguirUsuario(String nickUsu1, String nickUsu2)throws Exception;
+    public abstract boolean dejarseguirUsuario(String nickUsu1, String nickUsu2) throws Exception;
 
     public abstract boolean AgregarUsuarioColaborador(String nickName, String nombre, String apellido, String correo, Calendar fechaN, String imagen);
 
@@ -63,24 +64,28 @@ public interface IControladorUsuario {
     public abstract List<DtColaboraciones> ListarColaboraciones(String nickname);
 
     public abstract void LimpiarUsuarios();
-    
+
     public abstract ArrayList<DtUsuario> ListarUsuarios();
-    
+
     public abstract boolean limpiarBaseDeDatos();
-    
+
     public abstract void borrarProponente(String nickProp);
-    
+
     public abstract void borrarColaborador(String nickColab);
-    
+
     public abstract Colaborador ObtenerColaborador(String nombreC);
-    
+
     public abstract void eliminarCategorias();
-    
-     public abstract boolean AgregarUsuarioColaboradorDatosdePrueba(String nickName, String nombre, String apellido, String correo, Calendar fechaN, String imagen);
+
+    public abstract boolean AgregarUsuarioColaboradorDatosdePrueba(String nickName, String nombre, String apellido, String correo, Calendar fechaN, String imagen);
 
     public abstract boolean AgregarUsuarioProponenteDatosdePrueba(String nickName, String nombre, String apellido, String correo, Calendar fechaN, String imagen, String direccion, String biografia, String sitioWeb);
-    
+
     public abstract void resetearColaborador();
-    
+
     public abstract DtinfoColaborador getDtColaborador();
+
+    public abstract List<DtSeguidor> MostrarUsuarios();
+
+    public abstract List<DtSeguidor> MostrarMisSeguidos(String nick);
 }

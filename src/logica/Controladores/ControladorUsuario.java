@@ -31,11 +31,11 @@ import logica.Clases.Categoria;
 import logica.Clases.Colaboracion;
 import logica.Clases.DtColaboraciones;
 import logica.Clases.DtProponente;
+import logica.Clases.DtSeguidor;
 import logica.Clases.DtUsuario;
 import logica.Clases.DtinfoColaborador;
 import logica.Clases.DtinfoPropuesta;
 import logica.Clases.Proponente;
-import logica.Clases.Seguidos;
 import logica.Fabrica;
 import logica.Interfaces.IControladorUsuario;
 import logica.Interfaces.IPropCat;
@@ -52,7 +52,6 @@ public class ControladorUsuario implements IControladorUsuario {
     private IPropCat IPC;
     private DBUsuario dbUsuario = null;
     private Colaborador Colaborador;
-    private Map<String, Seguidos> seguidos;
 
     public static ControladorUsuario getInstance() {
         if (instancia == null) {
@@ -64,9 +63,8 @@ public class ControladorUsuario implements IControladorUsuario {
     public ControladorUsuario() {
         this.Usuarios = new HashMap<>();
         this.dbUsuario = new DBUsuario();
-        this.CargarUsuarios();
-        this.Colaborador=new Colaborador("","","","",null,"");
-        this.IPC=Fabrica.getInstance().getControladorPropCat();
+        this.Colaborador = new Colaborador("", "", "", "", null, "");
+        this.IPC = Fabrica.getInstance().getControladorPropCat();
     }
 
     @Override
@@ -102,7 +100,6 @@ public class ControladorUsuario implements IControladorUsuario {
         boolean res = this.dbUsuario.seguirUsuario(nickUsu1, nickUsu2);
         if (res) {
             aux1.getSeguidos().put(nickUsu2, aux2);
-            aux2.getSeguidores().put(nickUsu1, aux1);
             return true;
         }
 
@@ -149,7 +146,6 @@ public class ControladorUsuario implements IControladorUsuario {
         boolean res = this.dbUsuario.dejarseguirUsuario(nickUsu1, nickUsu2);
         if (res) {
             aux1.getSeguidos().remove(nickUsu2, aux2);
-            aux2.getSeguidores().remove(nickUsu1, aux1);
             return true;
         }
 
@@ -337,7 +333,7 @@ public class ControladorUsuario implements IControladorUsuario {
 
                 if (aux.getNickname().equals(nick)) {
                     dtc = new DtinfoColaborador(aux);
-                    this.Colaborador=aux;
+                    this.Colaborador = aux;
                     break;
                 }
             }
@@ -348,30 +344,13 @@ public class ControladorUsuario implements IControladorUsuario {
     @Override
     public void CargarUsuarios() {
         this.Usuarios = dbUsuario.cargarUsuarios();
-        this.seguidos = dbUsuario.Cargarseguidos();
-        Set set = Usuarios.entrySet();
-        Iterator it = set.iterator();
+
+        Iterator it = this.Usuarios.entrySet().iterator();
+
         while (it.hasNext()) {
-            Map.Entry mentry = (Map.Entry) it.next();
-            Usuario u = (Usuario) mentry.getValue();
-            Set set2 = seguidos.entrySet();
-            Iterator it2 = set2.iterator();
-            while (it2.hasNext()) {
-                Map.Entry mentry2 = (Map.Entry) it2.next();
-                Seguidos s = (Seguidos) mentry2.getValue();
-                if (s.getSeguidor().equals(u.getNickname())) {
-                    Set set3 = Usuarios.entrySet();
-                    Iterator it3 = set3.iterator();
-                    while (it3.hasNext()) {
-                        Map.Entry mentry3 = (Map.Entry) it3.next();
-                        Usuario u2 = (Usuario) mentry3.getValue();//SE AGREGAN A LOS SEGUIDOS
-                        if (s.getSeguido().equals(u2.getNickname())) {
-                            u.getSeguidos().put(u2.getNickname(), u2);
-                            break;
-                        }
-                    }
-                }
-            }
+            Map.Entry mtry = (Map.Entry) it.next();
+            Usuario usu = (Usuario) mtry.getValue();
+            dbUsuario.Cargarseguidos(usu);
         }
 
     }
@@ -422,7 +401,7 @@ public class ControladorUsuario implements IControladorUsuario {
             if (mentry.getValue() instanceof Colaborador) {
                 if ((((Usuario) mentry.getValue()).getNickname().compareTo(nickName) == 0)) {
                     List<Colaboracion> col = ((Colaborador) mentry.getValue()).getColaboraciones();
-                    for(int i = 0; i < col.size();i++){
+                    for (int i = 0; i < col.size(); i++) {
                         retorno.add(new DtColaboraciones(col.get(i).getNickName(), col.get(i).getMontoC(), col.get(i).getFechaRealiz(), col.get(i).getEntradas(), col.get(i).getTituloP()));
                     }
                     return retorno;
@@ -509,14 +488,13 @@ public class ControladorUsuario implements IControladorUsuario {
         if (usr != null) {
 
             //se elimina el usuario como seguido de sus seguidores
-            Map<String, Usuario> eliminarseg = usr.getSeguidores();
+            Map<String, Usuario> eliminarseg = usr.getSeguidos();
             List<Usuario> listaSeguidores = new ArrayList<Usuario>(eliminarseg.values());
             Iterator<Usuario> iter = listaSeguidores.iterator();
             while (iter.hasNext()) {
                 Usuario sigue = iter.next();
                 sigue.getSeguidos().remove(nickProp);
             }
-            usr.getSeguidores().clear();
             usr.getSeguidos().clear();
 
             //se eliminan las propuestas en las que participa el proponente
@@ -551,17 +529,6 @@ public class ControladorUsuario implements IControladorUsuario {
 
         Colaborador usr = ControladorU.ObtenerColaborador(nickColab);
         if (usr != null) {
-
-            //se elimina el usuario como seguido de sus seguidores
-            Map<String, Usuario> eliminarseg = usr.getSeguidores();
-            List<Usuario> listaSeguidores = new ArrayList<Usuario>(eliminarseg.values());
-            Iterator<Usuario> iter = listaSeguidores.iterator();
-            while (iter.hasNext()) {
-                Usuario sigue = iter.next();
-                sigue.getSeguidos().remove(nickColab);
-            }
-            usr.getSeguidores().clear();
-            usr.getSeguidos().clear();
 
             //se eliminan las colaboraciones para ese colaborador
             List<Colaboracion> lCol = usr.getColaboraciones();
@@ -680,17 +647,59 @@ public class ControladorUsuario implements IControladorUsuario {
             return res;
         }
     }
-    
+
     @Override
-    public void resetearColaborador(){
-        Colaborador c=new Colaborador("","","","",null,"");
-        this.Colaborador=c;
+    public void resetearColaborador() {
+        Colaborador c = new Colaborador("", "", "", "", null, "");
+        this.Colaborador = c;
     }
-    
+
     @Override
-      public DtinfoColaborador getDtColaborador(){
-        DtinfoColaborador dtc=new DtinfoColaborador(this.Colaborador);
+    public DtinfoColaborador getDtColaborador() {
+        DtinfoColaborador dtc = new DtinfoColaborador(this.Colaborador);
         return dtc;
     }
 
+    @Override
+    public List<DtSeguidor> MostrarUsuarios() {
+        List<DtSeguidor> listU = new ArrayList<>();
+
+        Iterator it = this.Usuarios.entrySet().iterator();
+
+        while (it.hasNext()) {
+            Map.Entry mtry = (Map.Entry) it.next();
+
+            Usuario usu = (Usuario) mtry.getValue();
+
+            if (usu instanceof Proponente) {
+                listU.add(new DtSeguidor(usu.getNickname(), usu.getNombre(), usu.getApellido(), "Proponente"));
+            } else {
+                listU.add(new DtSeguidor(usu.getNickname(), usu.getNombre(), usu.getApellido(), "Colaborador"));
+            }
+
+        }
+        return listU;
+    }
+
+    @Override
+    public List<DtSeguidor> MostrarMisSeguidos(String nick) {
+        List<DtSeguidor> listU = new ArrayList<>();
+
+        Iterator it = this.Usuarios.get(nick).getSeguidos().entrySet().iterator();
+
+        while (it.hasNext()) {
+            Map.Entry mtry = (Map.Entry) it.next();
+
+            Usuario usu = (Usuario) mtry.getValue();
+
+            if (usu instanceof Proponente) {
+                listU.add(new DtSeguidor(usu.getNickname(), usu.getNombre(), usu.getApellido(), "Proponente"));
+            } else {
+                listU.add(new DtSeguidor(usu.getNickname(), usu.getNombre(), usu.getApellido(), "Colaborador"));
+            }
+
+        }
+        
+        return listU;
+    }
 }

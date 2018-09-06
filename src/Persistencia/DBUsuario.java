@@ -22,8 +22,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import logica.Clases.Colaboracion;
 import logica.Clases.Propuesta;
-import logica.Clases.Seguidos;
 import logica.Clases.Usuario;
+import logica.Fabrica;
 
 /**
  *
@@ -117,7 +117,7 @@ public class DBUsuario {
         try {
             PreparedStatement statement = conexion.prepareStatement("SELECT * FROM usuario");
             ResultSet st = statement.executeQuery();
-            Map<String, Usuario> usuarios = new HashMap<String, Usuario>();
+            Map<String, Usuario> usuarios = new HashMap<>();
             while (st.next()) {
                 String nick = st.getString(1);
                 String nombre = st.getString(2);
@@ -138,6 +138,8 @@ public class DBUsuario {
                     usuarios.put(nick, col);
                 }
             }
+            statement.close();
+            st.close();
             return usuarios;
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -146,78 +148,68 @@ public class DBUsuario {
 
     }
 
-    public Map<String, Seguidos> Cargarseguidos() {
-        try{
-            PreparedStatement statement = conexion.prepareStatement("SELECT * FROM ususigueusu");
+    public void Cargarseguidos(Usuario usu) {
+        try {
+            PreparedStatement statement = conexion.prepareStatement("SELECT nickSeguido FROM ususigueusu WHERE nickSeguidor = '" + usu.getNickname() + "'");
             ResultSet st = statement.executeQuery();
-            Map<String, Seguidos> seguidos=new HashMap();
-            while(st.next()){
-                String seguidor=st.getString("nickSeguidor");
-                String seguido=st.getString("nickSeguido");
-                Seguidos s=new Seguidos(seguidor,seguido);
-                seguidos.put(seguidor, s);
+
+            while (st.next()) {
+
+                Usuario seguido = Fabrica.getInstance().getIControladorUsuario().getUsuarios().get(st.getString("nickSeguido"));
+
+                usu.setSeguido(seguido);
+
             }
-            return seguidos;
-        }catch(SQLException ex){
+            statement.close();
+            st.close();
+        } catch (SQLException ex) {
             ex.printStackTrace();
-            return null;
         }
     }
-    
-    
-    public boolean limpiarBD(){
-        
-    PreparedStatement statement;
-    
+
+    public boolean limpiarBD() {
+
+        PreparedStatement statement;
+
         try {
             statement = conexion.prepareStatement("SET FOREIGN_KEY_CHECKS = 0");
             statement.executeUpdate();
             statement.close();
 
-
             statement = conexion.prepareStatement("TRUNCATE TABLE estadopropuesta");
             statement.executeUpdate();
             statement.close();
-            
-           
+
             statement = conexion.prepareStatement("TRUNCATE TABLE ususigueusu");
             statement.executeUpdate();
             statement.close();
-            
-            
+
             statement = conexion.prepareStatement("TRUNCATE TABLE colaboracion");
             statement.executeUpdate();
             statement.close();
-            
+
             statement = conexion.prepareStatement("TRUNCATE TABLE propuesta");
             statement.executeUpdate();
             statement.close();
-            
-            
+
             statement = conexion.prepareStatement("TRUNCATE TABLE categoria");
             statement.executeUpdate();
             statement.close();
-            
-            
-            statement = conexion.prepareStatement("TRUNCATE TABLE usuario"); 
+
+            statement = conexion.prepareStatement("TRUNCATE TABLE usuario");
             statement.executeUpdate();
             statement.close();
-            
-            
+
             statement = conexion.prepareStatement("SET FOREIGN_KEY_CHECKS = 1");
             statement.executeUpdate();
             statement.close();
-            
-                    
+
             return true;
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(DBUsuario.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-     
-           
-    }
-    
-}
 
+    }
+}
