@@ -87,25 +87,27 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
         jTextCorreo = new javax.swing.JTextField();
         jRadioProponente = new javax.swing.JRadioButton();
         jRadioColaborador = new javax.swing.JRadioButton();
-        jLabel6 = new javax.swing.JLabel();
-        jTextDireccion = new javax.swing.JTextField();
-        jTextSitioWeb = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jLabel8 = new javax.swing.JLabel();
+        rSFotoCircle2 = new rojerusan.RSFotoCircle();
         jPanelAdicionales = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextBiografia = new javax.swing.JTextArea();
         jLabel9 = new javax.swing.JLabel();
         jButtonAceptar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jLabel8 = new javax.swing.JLabel();
-        rSFotoCircle2 = new rojerusan.RSFotoCircle();
+        jTextDireccion = new javax.swing.JTextField();
+        jTextSitioWeb = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jPasswordPass = new javax.swing.JPasswordField();
+        jPasswordConfirm = new javax.swing.JPasswordField();
 
         setBorder(null);
         setTitle("Alta Usuario");
         setVisible(true);
-
-        jPanel1.setBorder(null);
 
         jLabel1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jLabel1.setText("NickName(*)");
@@ -144,11 +146,18 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jLabel6.setText("Direccion");
+        jDateChooser1.setMaxSelectableDate(new java.util.Date(253370779282000L));
+        jDateChooser1.setMinSelectableDate(new java.util.Date(-62135755118000L));
+        jDateChooser1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jDateChooser1MouseClicked(evt);
+            }
+        });
 
-        jLabel7.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jLabel7.setText("Sitio Web");
+        jLabel8.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel8.setText("Tipo de usuario(*)");
+
+        rSFotoCircle2.setImagenDefault(null);
 
         jTextBiografia.setColumns(20);
         jTextBiografia.setRows(5);
@@ -173,6 +182,12 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel7.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        jLabel7.setText("Sitio Web");
+
+        jLabel6.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        jLabel6.setText("Direccion");
+
         javax.swing.GroupLayout jPanelAdicionalesLayout = new javax.swing.GroupLayout(jPanelAdicionales);
         jPanelAdicionales.setLayout(jPanelAdicionalesLayout);
         jPanelAdicionalesLayout.setHorizontalGroup(
@@ -191,11 +206,25 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAdicionalesLayout.createSequentialGroup()
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jTextSitioWeb, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanelAdicionalesLayout.setVerticalGroup(
             jPanelAdicionalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelAdicionalesLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(14, 14, 14)
+                .addGroup(jPanelAdicionalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(jTextSitioWeb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
@@ -206,18 +235,9 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jDateChooser1.setMaxSelectableDate(new java.util.Date(253370779282000L));
-        jDateChooser1.setMinSelectableDate(new java.util.Date(-62135755118000L));
-        jDateChooser1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jDateChooser1MouseClicked(evt);
-            }
-        });
+        jLabel10.setText("Contraseña");
 
-        jLabel8.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        jLabel8.setText("Tipo de usuario(*)");
-
-        rSFotoCircle2.setImagenDefault(null);
+        jLabel11.setText("Confirmacion");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -226,31 +246,6 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addGap(26, 26, 26)
-                                        .addComponent(jTextDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel7))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextSitioWeb, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jRadioProponente)
-                                        .addGap(52, 52, 52)
-                                        .addComponent(jRadioColaborador)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(11, 11, 11))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -265,15 +260,37 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
                             .addComponent(jTextNick, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(rSFotoCircle2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanelAdicionales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addGap(25, 25, 25))
+                    .addComponent(jPanelAdicionales, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addGap(5, 5, 5))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addGap(7, 7, 7)
+                                        .addComponent(jLabel10)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jPasswordPass, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jRadioProponente)
+                                        .addGap(52, 52, 52)
+                                        .addComponent(jRadioColaborador)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jPasswordConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -296,18 +313,19 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioColaborador, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jRadioProponente))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addComponent(jTextSitioWeb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel11)
+                    .addComponent(jPasswordPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPasswordConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelAdicionales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -322,7 +340,7 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -340,6 +358,9 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
         String apellido = jTextApellido.getText();
         String correo = jTextCorreo.getText();
         String imagen = rSFotoCircle2.getRutaImagen();
+        String password = jPasswordPass.getText();
+        String confirmPass = jPasswordConfirm.getText();
+
         Calendar fechaN = jDateChooser1.getCalendar();
         boolean ingreso;
 
@@ -363,6 +384,16 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
             return;
         }
 
+        if (password.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar una contraseña", "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        } else {
+            if (!password.equals(confirmPass)) {
+                JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden", "Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        }
+
         if (jPanelAdicionales.isEnabled() == true) {
             String biografia = jTextBiografia.getText();
             String sitioWeb = jTextSitioWeb.getText();
@@ -373,10 +404,9 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
                     return;
                 }
             }
-
-            ingreso = ICU.AgregarUsuarioProponente(nick, nombre, apellido, correo, fechaN, imagen, direccion, biografia, sitioWeb);
+            ingreso = ICU.AgregarUsuarioProponente(nick, nombre, apellido, correo, fechaN, imagen, direccion, biografia, sitioWeb, password);
         } else {
-            ingreso = ICU.AgregarUsuarioColaborador(nick, nombre, apellido, correo, fechaN, imagen);
+            ingreso = ICU.AgregarUsuarioColaborador(nick, nombre, apellido, correo, fechaN, imagen, password);
         }
 
         if (ingreso) {
@@ -390,6 +420,8 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
             jTextBiografia.setText("");
             jDateChooser1.setCalendar(null);
             rSFotoCircle2.setImagenDefault(null);
+            jPasswordPass.setText("");
+            jPasswordConfirm.setText("");
         } else {
             javax.swing.JOptionPane.showMessageDialog(null, "Error al dar de alta la persona o la persona ya existe");
             jTextNick.setText("");
@@ -401,6 +433,8 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
             jTextBiografia.setText("");
             jDateChooser1.setCalendar(null);
             rSFotoCircle2.setImagenDefault(null);
+            jPasswordPass.setText("");
+            jPasswordConfirm.setText("");
         }
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
@@ -507,6 +541,8 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButtonAceptar;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -517,6 +553,8 @@ public final class AltaUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelAdicionales;
+    private javax.swing.JPasswordField jPasswordConfirm;
+    private javax.swing.JPasswordField jPasswordPass;
     private javax.swing.JRadioButton jRadioColaborador;
     private javax.swing.JRadioButton jRadioProponente;
     private javax.swing.JScrollPane jScrollPane1;

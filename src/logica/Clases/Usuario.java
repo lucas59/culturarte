@@ -21,17 +21,27 @@ public class Usuario {
     private String correo;
     private Calendar fechaN;
     private String imagen;
-    private Map<String, Usuario> seguidos;
+    private String password;
 
-    public Usuario(String nickname, String nombre, String apellido, String correo, Calendar fechaN, String imagen) {
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    private Map<String, Usuario> seguidos;
+    
+
+    public Usuario(String nickname, String nombre, String apellido, String correo, Calendar fechaN, String imagen,String password) {
         this.nickname = nickname;
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
         this.fechaN = fechaN;
         this.imagen = imagen;
+        this.password=password;
         this.seguidos = new HashMap<>();
-
     }
 
     public String getNickname() {

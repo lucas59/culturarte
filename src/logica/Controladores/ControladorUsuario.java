@@ -64,7 +64,7 @@ public class ControladorUsuario implements IControladorUsuario {
     public ControladorUsuario() {
         this.Usuarios = new HashMap<>();
         this.dbUsuario = new DBUsuario();
-        this.Colaborador = new Colaborador("", "", "", "", null, "");
+        this.Colaborador = new Colaborador("", "", "", "", null, "","");
         this.IPC = Fabrica.getInstance().getControladorPropCat();
     }
 
@@ -154,12 +154,12 @@ public class ControladorUsuario implements IControladorUsuario {
     }
 
     @Override
-    public boolean AgregarUsuarioColaborador(String nickName, String nombre, String apellido, String correo, Calendar fechaN, String imagen) {
+    public boolean AgregarUsuarioColaborador(String nickName, String nombre, String apellido, String correo, Calendar fechaN, String imagen, String password) {
         if (this.Usuarios.get(nickName) != null) {
             return false;
 
         } else {
-            Colaborador c = new Colaborador(nickName, nombre, apellido, correo, fechaN, imagen);
+            Colaborador c = new Colaborador(nickName, nombre, apellido, correo, fechaN, imagen,password);
 
             String fotoLocal = c.getImagen();
             if (!"".equals(c.getImagen())) {
@@ -183,11 +183,11 @@ public class ControladorUsuario implements IControladorUsuario {
     }
 
     @Override
-    public boolean AgregarUsuarioProponente(String nickName, String nombre, String apellido, String correo, Calendar fechaN, String imagen, String direccion, String biografia, String sitioWeb) {
+    public boolean AgregarUsuarioProponente(String nickName, String nombre, String apellido, String correo, Calendar fechaN, String imagen, String direccion, String biografia, String sitioWeb, String password) {
         if (this.Usuarios.get(nickName) != null) {
             return false;
         } else {
-            Proponente c = new Proponente(biografia, direccion, sitioWeb, nickName, nombre, apellido, correo, fechaN, imagen);
+            Proponente c = new Proponente(biografia, direccion, sitioWeb, nickName, nombre, apellido, correo, fechaN, imagen,password);
             String fotoLocal = c.getImagen();
             if (!"".
                     equals(c.getImagen())) {
@@ -565,13 +565,13 @@ public class ControladorUsuario implements IControladorUsuario {
     }
 
     @Override
-    public boolean AgregarUsuarioColaboradorDatosdePrueba(String nickName, String nombre, String apellido, String correo, Calendar fechaN, String imagen) {
+    public boolean AgregarUsuarioColaboradorDatosdePrueba(String nickName, String nombre, String apellido, String correo, Calendar fechaN, String imagen,String password) {
         String ruta = System.getProperty("user.dir");
         if (this.Usuarios.get(nickName) != null) {
             return false;
 
         } else {
-            Colaborador c = new Colaborador(nickName, nombre, apellido, correo, fechaN, imagen);
+            Colaborador c = new Colaborador(nickName, nombre, apellido, correo, fechaN, imagen,password);
 
             String fotoLocal = c.getImagen();
             if (!"".equals(c.getImagen())) {
@@ -609,12 +609,12 @@ public class ControladorUsuario implements IControladorUsuario {
     }
 
     @Override
-    public boolean AgregarUsuarioProponenteDatosdePrueba(String nickName, String nombre, String apellido, String correo, Calendar fechaN, String imagen, String direccion, String biografia, String sitioWeb) {
+    public boolean AgregarUsuarioProponenteDatosdePrueba(String nickName, String nombre, String apellido, String correo, Calendar fechaN, String imagen, String direccion, String biografia, String sitioWeb,String password) {
         String ruta = System.getProperty("user.dir");
         if (this.Usuarios.get(nickName) != null) {
             return false;
         } else {
-            Proponente c = new Proponente(biografia, direccion, sitioWeb, nickName, nombre, apellido, correo, fechaN, imagen);
+            Proponente c = new Proponente(biografia, direccion, sitioWeb, nickName, nombre, apellido, correo, fechaN, imagen,password);
             String fotoLocal = c.getImagen();
             if (!"".equals(c.getImagen())) {
                 File fLocal = new File(fotoLocal);
@@ -651,7 +651,7 @@ public class ControladorUsuario implements IControladorUsuario {
 
     @Override
     public void resetearColaborador() {
-        Colaborador c = new Colaborador("", "", "", "", null, "");
+        Colaborador c = new Colaborador("", "", "", "", null, "","");
         this.Colaborador = c;
     }
 
@@ -709,12 +709,12 @@ public class ControladorUsuario implements IControladorUsuario {
 
         Usuario usu = this.Usuarios.get(nick);
 
-        if(usu instanceof Proponente){
-            return new DtNickTitProp (usu.getNombre(),usu.getApellido());
-        }else{
-            throw new Exception ("El usuario no es un proponente");
+        if (usu instanceof Proponente) {
+            return new DtNickTitProp(usu.getNombre(), usu.getApellido());
+        } else {
+            throw new Exception("El usuario no es un proponente");
         }
-            
+
     }
 
 }
