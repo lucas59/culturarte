@@ -18,7 +18,7 @@ import logica.Interfaces.IPropCat;
  * @author Lucas
  */
 public class inicio extends javax.swing.JFrame {
-    
+
     private IPropCat IPC;
     private IControladorUsuario ICU;
 
@@ -27,7 +27,7 @@ public class inicio extends javax.swing.JFrame {
      */
     public inicio() {
         initComponents();
-        
+
         this.setLocationRelativeTo(null);
         this.setExtendedState(inicio.MAXIMIZED_BOTH);
         Fabrica fabrica = Fabrica.getInstance();
@@ -222,11 +222,11 @@ public class inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        
+
         Fabrica fabrica = Fabrica.getInstance();
         IControladorUsuario ICU = fabrica.getIControladorUsuario();
         IPropCat IPC = fabrica.getControladorPropCat();
-        
+
         if (ICU.ListarColaboradores().isEmpty() && IPC.listarPropuestaC().isEmpty()) {
             JOptionPane.showMessageDialog(null, "No existen Colaboradores ni propuestas en el sistema");
         } else if (ICU.ListarColaboradores().isEmpty()) {
@@ -318,7 +318,7 @@ public class inicio extends javax.swing.JFrame {
         Fabrica fabrica = Fabrica.getInstance();
         int respuesta = JOptionPane.showConfirmDialog(null, "Se borraran todos los datos de la base de datos\n Desea continuar?", "ADVERTENCIA", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (respuesta == 0) {
-            
+
             boolean ok = fabrica.limpiarBaseDeDatos();
             if (ok) {
                 fabrica.LimpiarLogica();
@@ -367,19 +367,19 @@ public class inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void jMenuItemVerSeguidoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVerSeguidoresActionPerformed
-        
+
         VerSeguidores verS = new VerSeguidores();
         Escritorio.add(verS);
-        
+
         verS.setVisible(true);
 
     }//GEN-LAST:event_jMenuItemVerSeguidoresActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
-        
+
         if (IPC.ListaEvaluarPropuesta().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Aun no se cargaron Propuestas en el sistema", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            
+            JOptionPane.showMessageDialog(null, "Actualmente el sistema no cuenta con propuestas en estado Ingresada ", "Advertencia", JOptionPane.WARNING_MESSAGE);
+
         } else {
             ConfirmarPropuestas confProp = new ConfirmarPropuestas();
             Escritorio.add(confProp);

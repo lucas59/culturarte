@@ -94,5 +94,5 @@ public interface IPropCat {
 
     public abstract List<DtNickTitProp> ListaEvaluarPropuesta();
 
-    public abstract boolean EvaluarPropuesta(String titulo, TipoE tipo);
+    public abstract boolean EvaluarPropuesta(String titulo, TipoE tipo)throws Exception;
 }

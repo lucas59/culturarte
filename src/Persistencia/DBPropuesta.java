@@ -319,4 +319,30 @@ public class DBPropuesta {
         return true;
     }
 
+    public boolean EvaluarPropuestaBD(EstadoPropuesta Nuevo, EstadoPropuesta Anterior, String titulo) {
+
+        try {
+            PreparedStatement stat = conexion.prepareStatement("UPDATE estadopropuesta SET estActual = ? WHERE TituloP = '" + titulo + "'");
+            stat.setBoolean(1, false);
+            stat.executeUpdate();
+            stat.close();
+
+            stat = conexion.prepareStatement("INSERT INTO estadopropuesta" + " (TituloP, FechaInicio, estActual, Estado) values (?,?,?,?)");
+
+            java.util.Date dateR = (java.util.Date) Nuevo.getfechaInicio().getTime();
+            java.sql.Timestamp dateII = new java.sql.Timestamp(dateR.getTime());
+
+            stat.setString(1, titulo);
+            stat.setTimestamp(2, dateII);
+            stat.setBoolean(3, Nuevo.getActual());
+            stat.setInt(4, Nuevo.getEstado().ordinal());
+            stat.executeUpdate();
+            stat.close();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 }

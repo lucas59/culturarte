@@ -712,7 +712,7 @@ public class ControladorPropCat implements IPropCat {
     }
 
     @Override
-    public boolean EvaluarPropuesta(String titulo, TipoE tipo) {
+    public boolean EvaluarPropuesta(String titulo, TipoE tipo) throws Exception {
 
         Propuesta prop = this.getPropuestas().get(titulo);
 
@@ -722,12 +722,16 @@ public class ControladorPropCat implements IPropCat {
             EstadoPropuesta estNuevo = new EstadoPropuesta(tipo, new GregorianCalendar(), true);
             EstadoPropuesta estAnterior = prop.getEstadoActual();
 
-            estAnterior.setEsActual(false);
-            prop.setEstados(estAnterior);
+            boolean ok = this.dbPropuesta.EvaluarPropuestaBD(estNuevo, estAnterior, titulo);
 
-            prop.setEstadoActual(estNuevo);
-
-            return true;
+            if (ok) {
+                estAnterior.setEsActual(false);
+                prop.setEstados(estAnterior);
+                prop.setEstadoActual(estNuevo);
+                return true;
+            } else {
+                throw new Exception("No se pudo alterar el estado en la Base de datos");
+            }
         }
     }
 }

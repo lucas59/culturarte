@@ -598,30 +598,32 @@ public class ConfirmarPropuestas extends javax.swing.JInternalFrame {
 
     private void jButtonConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonConfirmarMouseClicked
         boolean resultado;
-
-        if ("".equals(jTextFielTitulo.getText())) {
-            javax.swing.JOptionPane.showMessageDialog(null, "Debe seleccionar una Propuesta para continuar");
-        } else {
-            if (jCheckBoxPublicar.isSelected()) {
-                resultado = Fabrica.getInstance().getControladorPropCat().EvaluarPropuesta(jTextFielTitulo.getText(), TipoE.Publicada);
-
-                if (resultado) {
-                    javax.swing.JOptionPane.showMessageDialog(null, "La propuesta fue publicada con exito");
-                } else {
-                    javax.swing.JOptionPane.showMessageDialog(null, "Un fallo interno no permitio completar la operacion");
-                }
-            } else if (jCheckBoxCancelar.isSelected()) {
-                resultado = Fabrica.getInstance().getControladorPropCat().EvaluarPropuesta(jTextFielTitulo.getText(), TipoE.Cancelada);
-                if (resultado) {
-                    javax.swing.JOptionPane.showMessageDialog(null, "La propuesta fue cancelada con exito");
-                } else {
-                    javax.swing.JOptionPane.showMessageDialog(null, "Un fallo interno no permitio completar la operacion");
-                }
+        try {
+            if ("".equals(jTextFielTitulo.getText())) {
+                javax.swing.JOptionPane.showMessageDialog(null, "Debe seleccionar una Propuesta para continuar");
             } else {
-                javax.swing.JOptionPane.showMessageDialog(null, "Debe Optar por un nuevo estado para esta Propuesta");
-            }
-        }
+                if (jCheckBoxPublicar.isSelected()) {
+                    resultado = Fabrica.getInstance().getControladorPropCat().EvaluarPropuesta(jTextFielTitulo.getText(), TipoE.Publicada);
 
+                    if (resultado) {
+                        javax.swing.JOptionPane.showMessageDialog(null, "La propuesta fue publicada con exito");
+                    } else {
+                        javax.swing.JOptionPane.showMessageDialog(null, "Un fallo interno no permitio completar la operacion");
+                    }
+                } else if (jCheckBoxCancelar.isSelected()) {
+                    resultado = Fabrica.getInstance().getControladorPropCat().EvaluarPropuesta(jTextFielTitulo.getText(), TipoE.Cancelada);
+                    if (resultado) {
+                        javax.swing.JOptionPane.showMessageDialog(null, "La propuesta fue cancelada con exito");
+                    } else {
+                        javax.swing.JOptionPane.showMessageDialog(null, "Un fallo interno no permitio completar la operacion");
+                    }
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(null, "Debe Optar por un nuevo estado para esta Propuesta");
+                }
+            }
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(null, e.getMessage());
+        }
     }//GEN-LAST:event_jButtonConfirmarMouseClicked
 
 
