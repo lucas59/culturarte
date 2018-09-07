@@ -18,6 +18,7 @@ import java.util.Set;
 public class DtNickTitProp{
     private String Titulo;
     private String Proponente;
+    
     public DtNickTitProp(){
         this.Titulo = null;
         this.Proponente = null;

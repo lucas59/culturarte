@@ -420,23 +420,6 @@ public class ControladorPropCat implements IPropCat {
         return retorno;
     }
 
-    public List<DtColaboraciones> listarColaboraciones() {
-        return null;
-        /*
-        List<DtColaboraciones> listarcolaboraciones= new ArrayList();
-        Iterator it = this.propuestas.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry mentry = (Map.Entry) it.next();
-            Propuesta prop = (Propuesta) mentry.getValue();
-            DtConsultaPropuesta dtprop = new DtConsultaPropuesta(prop.getTituloP(), prop.getDescripcionP(), prop.getCategoria().getNombreC());
-
-            listarcolaboraciones.add(dtprop);
-        }
-        return listarcolaboraciones;
-         */
-
-    }
-
     @Override
     public boolean crearPropuestaDatosdePrueba(String tituloP, String descripcion, Categoria cat, Calendar fecha, String lugar, float montoE, float montoTot, TipoRetorno retorno, Proponente p, String imagen) {
 
@@ -704,5 +687,47 @@ public class ControladorPropCat implements IPropCat {
     public void resetearPropuesta() {
         Propuesta p = new Propuesta("", "", "", "", null, 0, 0, null, null, null, null);
         this.Propuesta = p;
+    }
+
+    @Override
+    public List<DtNickTitProp> ListaEvaluarPropuesta() {
+        List<DtNickTitProp> listProp = new ArrayList<>();
+
+        Iterator it = this.getPropuestas().entrySet().iterator();
+
+        while (it.hasNext()) {
+            Map.Entry mtry = (Map.Entry) it.next();
+
+            Propuesta prop = (Propuesta) mtry.getValue();
+
+            if (prop.getEstadoActual().getEstado() == TipoE.Ingresada) {
+
+                DtNickTitProp dtProp = new DtNickTitProp(prop.getTituloP(), prop.getAutor().getNickname());
+
+                listProp.add(dtProp);
+
+            }
+        }
+        return listProp;
+    }
+
+    @Override
+    public boolean EvaluarPropuesta(String titulo, TipoE tipo) {
+
+        Propuesta prop = this.getPropuestas().get(titulo);
+
+        if (prop.getEstadoActual().getEstado() != TipoE.Ingresada || prop.getEstadoActual().getActual() == false) {
+            return false;
+        } else {
+            EstadoPropuesta estNuevo = new EstadoPropuesta(tipo, new GregorianCalendar(), true);
+            EstadoPropuesta estAnterior = prop.getEstadoActual();
+
+            estAnterior.setEsActual(false);
+            prop.setEstados(estAnterior);
+
+            prop.setEstadoActual(estNuevo);
+
+            return true;
+        }
     }
 }

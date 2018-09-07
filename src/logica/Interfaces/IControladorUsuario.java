@@ -13,6 +13,7 @@ import java.util.Map;
 import logica.Clases.Colaboracion;
 import logica.Clases.Colaborador;
 import logica.Clases.DtColaboraciones;
+import logica.Clases.DtNickTitProp;
 import logica.Clases.DtProponente;
 import logica.Clases.DtSeguidor;
 import logica.Clases.DtUsuario;
@@ -88,4 +89,6 @@ public interface IControladorUsuario {
     public abstract List<DtSeguidor> MostrarUsuarios();
 
     public abstract List<DtSeguidor> MostrarMisSeguidos(String nick);
+
+    public abstract DtNickTitProp obtenerNombreApellido(String nick) throws Exception;
 }

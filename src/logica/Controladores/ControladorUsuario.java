@@ -30,6 +30,7 @@ import java.util.logging.Logger;
 import logica.Clases.Categoria;
 import logica.Clases.Colaboracion;
 import logica.Clases.DtColaboraciones;
+import logica.Clases.DtNickTitProp;
 import logica.Clases.DtProponente;
 import logica.Clases.DtSeguidor;
 import logica.Clases.DtUsuario;
@@ -699,7 +700,21 @@ public class ControladorUsuario implements IControladorUsuario {
             }
 
         }
-        
+
         return listU;
     }
+
+    @Override
+    public DtNickTitProp obtenerNombreApellido(String nick) throws Exception {
+
+        Usuario usu = this.Usuarios.get(nick);
+
+        if(usu instanceof Proponente){
+            return new DtNickTitProp (usu.getNombre(),usu.getApellido());
+        }else{
+            throw new Exception ("El usuario no es un proponente");
+        }
+            
+    }
+
 }

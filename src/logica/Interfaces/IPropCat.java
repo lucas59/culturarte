@@ -72,7 +72,6 @@ public interface IPropCat {
 
     public abstract EstadoPropuesta verEstadoPropuesta(String titulo);
 
-   
     public abstract void CargarColaboraciones();
 
     public abstract void LimpiarPropCat();
@@ -88,8 +87,12 @@ public interface IPropCat {
     public abstract boolean eliminarColaboracion(String titulo, String nick);
 
     public abstract List<DtConsultaPropuesta2> ListaColaboradoresProp(String titulo);
-    
+
     public abstract void resetearPropuesta();
-    
+
     public abstract boolean ActualizarDatosPropuesta(DtinfoPropuesta dtp);
+
+    public abstract List<DtNickTitProp> ListaEvaluarPropuesta();
+
+    public abstract boolean EvaluarPropuesta(String titulo, TipoE tipo);
 }
