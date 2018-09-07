@@ -28,7 +28,8 @@ public DtinfoPropuesta dtp2;
     public ModificarPropuesta2(DtinfoPropuesta dtp) {
         initComponents();
         IPC=Fabrica.getInstance().getControladorPropCat();
-        ((JTextField) this.fecha.getDateEditor()).setEditable(false); 
+        ((JTextField) this.fecha.getDateEditor()).setEditable(false);
+        fecha.setMinSelectableDate(new Date());
         dtp2=dtp;
     }
 
@@ -217,10 +218,7 @@ public DtinfoPropuesta dtp2;
          int mes=fech.get(Calendar.MONTH);
          int anio=fech.get(Calendar.YEAR);
          Calendar fecha=Calendar.getInstance();
-         int anio2=fecha.get(Calendar.YEAR);
-         int dia2=fecha.get(Calendar.DATE);
-         int mes2=fecha.get(Calendar.MONTH);
-        if(fech.getTime() == null || dia<=0 || dia>=32 || mes<=0 || mes>=13 || anio<1800 || anio>anio2 || dia > dia2 || mes > mes2 ){
+        if(fech.getTime() == null || dia<=0 || dia>=32 || mes<=0 || mes>=13 || anio<2018){
             JOptionPane.showMessageDialog(null,"Ingrese una fecha valida");
             return;
         }
