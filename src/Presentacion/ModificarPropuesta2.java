@@ -7,8 +7,11 @@ package Presentacion;
 
 import Persistencia.DBPropuesta;
 import Presentacion.inicio;
+import java.awt.Image;
 import java.util.Calendar;
 import java.util.Date;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import logica.Clases.DtinfoPropuesta;
@@ -20,17 +23,32 @@ import logica.Interfaces.IPropCat;
  * @author gabri
  */
 public class ModificarPropuesta2 extends javax.swing.JInternalFrame {
-private IPropCat IPC;
-public DtinfoPropuesta dtp2;
+
+    private IPropCat IPC;
+    public DtinfoPropuesta dtp2;
+
     /**
      * Creates new form ModificarPropuesta2
      */
     public ModificarPropuesta2(DtinfoPropuesta dtp) {
         initComponents();
-        IPC=Fabrica.getInstance().getControladorPropCat();
+        IPC = Fabrica.getInstance().getControladorPropCat();
         ((JTextField) this.fecha.getDateEditor()).setEditable(false);
         fecha.setMinSelectableDate(new Date());
-        dtp2=dtp;
+        dtp2 = dtp;
+        Calendar c = dtp.getFechaReal();
+        int dia = c.get(Calendar.DAY_OF_MONTH);
+        int mes = c.get(Calendar.MONTH) + 1;
+        int anio = c.get(Calendar.YEAR);
+        antiguafecha.setText(dia + "/" + mes + "/" + anio);
+        String fotos = System.getProperty("user.dir") + "\\fPropuestas\\" + dtp.getImagen();
+        ImageIcon fot = new ImageIcon(fotos);
+        Icon icono = new ImageIcon(fot.getImage().getScaledInstance(foto.getWidth(), foto.getHeight(), Image.SCALE_DEFAULT));
+        antiguafoto.setIcon(icono);
+        antiguodesc.setText(dtp.getDescripcion());
+        antiguolugar.setText(dtp.getLugar());
+        antiguomonto.setText("" + dtp.getMonto());
+        antiguoprecio.setText("" + dtp.getPrecio());
     }
 
     /**
@@ -54,36 +72,48 @@ public DtinfoPropuesta dtp2;
         jScrollPane1 = new javax.swing.JScrollPane();
         TextDesc = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
-        foto = new rojerusan.RSFotoCircle();
         jLabel7 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         fecha = new com.toedter.calendar.JDateChooser();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        antiguodesc = new javax.swing.JTextArea();
+        antiguolugar = new javax.swing.JTextField();
+        antiguoprecio = new javax.swing.JTextField();
+        antiguomonto = new javax.swing.JTextField();
+        antiguafecha = new javax.swing.JTextField();
+        antiguafoto = new javax.swing.JLabel();
+        foto = new rojerusan.RSFotoCircle();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(570, 500));
-        setPreferredSize(new java.awt.Dimension(570, 500));
+        setTitle("Modificar propuesta");
+        setMinimumSize(new java.awt.Dimension(730, 620));
+        setPreferredSize(new java.awt.Dimension(730, 620));
 
-        jPanel1.setMinimumSize(new java.awt.Dimension(570, 500));
-        jPanel1.setPreferredSize(new java.awt.Dimension(570, 500));
+        jPanel1.setMinimumSize(new java.awt.Dimension(770, 700));
+        jPanel1.setPreferredSize(new java.awt.Dimension(770, 700));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Ingrese los campos que quiere modificar");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, -1, -1));
 
         jLabel2.setText("Lugar:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, -1, -1));
 
         jLabel3.setText("Monto total:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, -1));
 
         jLabel4.setText("Precio entrada:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, -1));
 
         jLabel5.setText("Descripcion:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, -1, -1));
 
         TextLugar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,7 +125,7 @@ public DtinfoPropuesta dtp2;
                 TextLugarKeyTyped(evt);
             }
         });
-        jPanel1.add(TextLugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 208, -1));
+        jPanel1.add(TextLugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 208, -1));
 
         TextMonto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,14 +137,14 @@ public DtinfoPropuesta dtp2;
                 TextMontoKeyTyped(evt);
             }
         });
-        jPanel1.add(TextMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 208, -1));
+        jPanel1.add(TextMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 208, -1));
 
         TextPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 TextPrecioKeyTyped(evt);
             }
         });
-        jPanel1.add(TextPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 208, -1));
+        jPanel1.add(TextPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 208, -1));
 
         TextDesc.setColumns(20);
         TextDesc.setLineWrap(true);
@@ -126,14 +156,13 @@ public DtinfoPropuesta dtp2;
         });
         jScrollPane1.setViewportView(TextDesc);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 208, 100));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 208, 100));
 
         jLabel6.setText("Fecha:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, -1, -1));
-        jPanel1.add(foto, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 100, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, -1, -1));
 
         jLabel7.setText("Imagen:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 70, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, -1, -1));
 
         jButton1.setText("Volver");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -141,7 +170,7 @@ public DtinfoPropuesta dtp2;
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 400, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 540, -1, -1));
 
         jButton2.setText("Salir");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -149,7 +178,7 @@ public DtinfoPropuesta dtp2;
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 400, -1, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 540, -1, -1));
 
         jButton3.setText("Modificar Datos");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -157,20 +186,96 @@ public DtinfoPropuesta dtp2;
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 400, -1, -1));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 540, -1, -1));
 
         fecha.setToolTipText("");
-        jPanel1.add(fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 310, 210, -1));
+        jPanel1.add(fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 320, 210, -1));
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        antiguodesc.setColumns(20);
+        antiguodesc.setLineWrap(true);
+        antiguodesc.setRows(5);
+        jScrollPane2.setViewportView(antiguodesc);
+
+        antiguolugar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                antiguolugarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(antiguafecha, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(antiguoprecio, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(antiguomonto, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(antiguolugar, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(69, 69, 69)
+                        .addComponent(antiguafoto, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(antiguolugar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(antiguomonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(antiguoprecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(antiguafecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addComponent(antiguafoto, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
+        );
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, 270, 450));
+        jPanel1.add(foto, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 370, -1, -1));
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 318, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 448, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 320, 450));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel8.setText("Datos nuevos");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel9.setText("Datos antiguos");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 558, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 613, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -189,7 +294,7 @@ public DtinfoPropuesta dtp2;
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         IPC.resetearPropuesta();
-        ModificarPropuesta mp=new ModificarPropuesta();
+        ModificarPropuesta mp = new ModificarPropuesta();
         inicio.Escritorio.add(mp);
         this.setVisible(false);
         mp.toFront();
@@ -198,44 +303,58 @@ public DtinfoPropuesta dtp2;
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        String lugar=TextLugar.getText();
-        String desc=TextDesc.getText();
-        float monto=0;
-        if(TextMonto.getText().length()>0){
-        monto=Float.parseFloat(TextMonto.getText());
-        if(monto < this.dtp2.getMonto()){
-            JOptionPane.showMessageDialog(null,"Error: monto debe ser superior al existente");
+        String lugar = TextLugar.getText();
+        String desc = TextDesc.getText();
+        float monto = 0;
+        if (TextMonto.getText().length() > 0) {
+            monto = Float.parseFloat(TextMonto.getText());
+            if (monto < this.dtp2.getMonto()) {
+                JOptionPane.showMessageDialog(null, "Error: monto debe ser superior al existente");
+            }
         }
+        float precio = 0;
+        if (TextPrecio.getText().length() > 0) {
+            precio = Float.parseFloat(TextPrecio.getText());
         }
-        float precio=0;
-         if(TextPrecio.getText().length()>0){
-        precio=Float.parseFloat(TextPrecio.getText());
-         }
-         
-         Calendar fech=fecha.getCalendar();
-         if(fech != null){
-         int dia=fech.get(Calendar.DATE);
-         int mes=fech.get(Calendar.MONTH);
-         int anio=fech.get(Calendar.YEAR);
-         Calendar fecha=Calendar.getInstance();
-        if(fech.getTime() == null || dia<=0 || dia>=32 || mes<=0 || mes>=13 || anio<2018){
-            JOptionPane.showMessageDialog(null,"Ingrese una fecha valida");
-            return;
+
+        Calendar fech = fecha.getCalendar();
+        if (fech != null) {
+            int dia = fech.get(Calendar.DATE);
+            int mes = fech.get(Calendar.MONTH);
+            int anio = fech.get(Calendar.YEAR);
+            Calendar fecha = Calendar.getInstance();
+            if (fech.getTime() == null || dia <= 0 || dia >= 32 || mes <= 0 || mes >= 13 || anio < 2018) {
+                JOptionPane.showMessageDialog(null, "Ingrese una fecha valida");
+                return;
+            }
         }
-         }
-        String imagen=foto.getRutaImagen();
-        DtinfoPropuesta dtp= new DtinfoPropuesta(dtp2.getTitulo(),desc,imagen,null,lugar,fech,precio,monto,null);
-        boolean actualizo=IPC.ActualizarDatosPropuesta(dtp);
-        if(actualizo){
-            JOptionPane.showMessageDialog(null,"Datos actualizados correctamente");
-        }else{
-            JOptionPane.showMessageDialog(null,"Error al actualizar");
+        String imagen = foto.getRutaImagen();
+        DtinfoPropuesta dtp = new DtinfoPropuesta(dtp2.getTitulo(), desc, imagen, null, lugar, fech, precio, monto, null);
+        boolean actualizo = IPC.ActualizarDatosPropuesta(dtp);
+        if (actualizo) {
+            JOptionPane.showMessageDialog(null, "Datos actualizados correctamente");
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al actualizar");
         }
         TextDesc.setText("");
         TextLugar.setText("");
         TextMonto.setText("");
         TextPrecio.setText("");
         fecha.setCalendar(null);
+        dtp=IPC.SeleccionarPropuestaR(dtp2.getTitulo());
+        Calendar c = dtp.getFechaReal();
+        int dia = c.get(Calendar.DAY_OF_MONTH);
+        int mes = c.get(Calendar.MONTH) + 1;
+        int anio = c.get(Calendar.YEAR);
+        antiguafecha.setText(dia + "/" + mes + "/" + anio);
+        String fotos = System.getProperty("user.dir") + "\\fPropuestas\\" + dtp.getImagen();
+        ImageIcon fot = new ImageIcon(fotos);
+        Icon icono = new ImageIcon(fot.getImage().getScaledInstance(foto.getWidth(), foto.getHeight(), Image.SCALE_DEFAULT));
+        antiguafoto.setIcon(icono);
+        antiguodesc.setText(dtp.getDescripcion());
+        antiguolugar.setText(dtp.getLugar());
+        antiguomonto.setText("" + dtp.getMonto());
+        antiguoprecio.setText("" + dtp.getPrecio());
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void TextLugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextLugarActionPerformed
@@ -279,6 +398,10 @@ public DtinfoPropuesta dtp2;
         }
     }//GEN-LAST:event_TextPrecioKeyTyped
 
+    private void antiguolugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_antiguolugarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_antiguolugarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -319,6 +442,12 @@ public DtinfoPropuesta dtp2;
     private javax.swing.JTextField TextLugar;
     private javax.swing.JTextField TextMonto;
     private javax.swing.JTextField TextPrecio;
+    private javax.swing.JTextField antiguafecha;
+    private javax.swing.JLabel antiguafoto;
+    private javax.swing.JTextArea antiguodesc;
+    private javax.swing.JTextField antiguolugar;
+    private javax.swing.JTextField antiguomonto;
+    private javax.swing.JTextField antiguoprecio;
     private com.toedter.calendar.JDateChooser fecha;
     private rojerusan.RSFotoCircle foto;
     private javax.swing.JButton jButton1;
@@ -331,7 +460,12 @@ public DtinfoPropuesta dtp2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }
