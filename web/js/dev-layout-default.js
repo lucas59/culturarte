@@ -17,7 +17,7 @@ var dev_layout_alpha_settings = {
 
 var dev_layout_alpha_content = {
     init: function(settings){
-    /* content height control */
+        /* content height control */
         
         /* add state loaded to dev-page */
         $(".dev-page").addClass("dev-page-loaded");
@@ -61,7 +61,7 @@ var dev_layout_alpha_content = {
         var sidebar_height = $(".dev-page-container .dev-page-sidebar").height();                
 
         var height = content_height > sidebar_height ? content_height : sidebar_height;
-            height = height + minus;
+        height = height + minus;
         /* ./end */
 
         /* compare it with window height and get new height value */
@@ -75,14 +75,14 @@ var dev_layout_alpha_content = {
         
         return new_height;
         
-    /* ./content height control */
+        /* ./content height control */
     },
     sidebar_minimize: function(settings) {
-    /* minimize sidebar control */
+        /* minimize sidebar control */
         
         /* add event handler on .dev-page-sidebar-minimize */
         $(".dev-page-sidebar-minimize").on("click",function(){
-            
+
             /* change icon */
             var icon = $(this).find(".fa");
             if(icon.hasClass("fa-outdent"))
@@ -100,7 +100,7 @@ var dev_layout_alpha_content = {
             $(".dev-page").removeClass("dev-page-sidebar-collapsed");
             $(".dev-page-sidebar-collapse").removeClass("active");
             /* ./end */
-                        
+
             
             /* toggle dev-page-sidebar-minimized class on dev-page */
             if($(".dev-page").hasClass("dev-page-sidebar-minimized")){                
@@ -123,16 +123,16 @@ var dev_layout_alpha_content = {
         });
         /* ./end */
         
-    /* ./minimize sidebar control */    
+        /* ./minimize sidebar control */    
     },
     sidebar_collapse: function(settings) {
-    /* collapse sidebar control */
+        /* collapse sidebar control */
         
         var self = this;
         
         /* add event handler on .dev-page-sidebar-collapse */
         $(".dev-page-sidebar-collapse").on("click",function(){
-            
+
             /* close search container */
             self.search_container.close();
             self.rightbar.close();
@@ -166,16 +166,16 @@ var dev_layout_alpha_content = {
             return false;
         });
         /* ./end */
-    
-    /* ./collapse sidebar control */
+
+        /* ./collapse sidebar control */
     },
     rightbar: {
-    /* collappse rightbar control */        
+        /* collappse rightbar control */        
         init: function(settings){    
-            
+
             var self = this;
             
-        /* add event handler on .dev-page-rightbar-collapse */                        
+            /* add event handler on .dev-page-rightbar-collapse */                        
             $(".dev-page-rightbar-toggle").on("click",function(){
 
                 /* close other */        
@@ -184,17 +184,17 @@ var dev_layout_alpha_content = {
                 /* ./end */
                 
                 self.calcHeight();
-            
+
                 $(".dev-page").toggleClass("dev-page-rightbar-open");
                 
                 return false;
             });
-        /* ./end */            
-        /* add close rightbar handler */
+            /* ./end */            
+            /* add close rightbar handler */
             $(".rightbar-close").on("click",function(){
                 self.close();
             });
-        /* ./end */        
+            /* ./end */        
         },
         calcHeight: function(){
             var rightbar_height = window.innerHeight;
@@ -203,14 +203,14 @@ var dev_layout_alpha_content = {
             /* ./end */
         },
         close: function(){
-        /* close rightbar function */    
+            /* close rightbar function */    
             $(".dev-page").removeClass("dev-page-rightbar-open");
-        /* ./end */
+            /* ./end */
         }                
-    /* ./collappse rightbar control */        
+        /* ./collappse rightbar control */        
     },
     footer: function(){
-    /* footer collapse control */
+        /* footer collapse control */
         var self = this;
 
         /* fix footer control */
@@ -241,7 +241,7 @@ var dev_layout_alpha_content = {
             /* close all opened container */
             self.footer_container.closeAll();
             /* ./end */            
-                        
+
             if($(".dev-page-footer").hasClass("dev-page-footer-collapsed")){
                 $(".dev-page-footer").removeClass("dev-page-footer-effect").removeClass("dev-page-footer-collapsed").addClass("dev-page-footer-effect");
                 $(".dev-page").removeClass("dev-page-no-footer");                
@@ -255,28 +255,28 @@ var dev_layout_alpha_content = {
             
             return false;
         });
-    /* ./footer collapse control */
+        /* ./footer collapse control */
     },
     footer_buttons: function(settings) {
-    /* footer buttons width control */
-    
+        /* footer buttons width control */
+
         /* check footer settings */        
         if($(".dev-page-footer").hasClass("dev-page-footer-closed")){
             $(".dev-page-footer-collapse").click();            
         }
         /* ./end */
-    
+
         var buttonsWidth = $(".dev-page-footer-buttons li").length * (settings.footerHeight + settings.unit) + settings.unit;
         $(".dev-page-footer-buttons").css({width: buttonsWidth, "margin-left": -buttonsWidth/2}).addClass("dev-page-footer-buttons-effect");            
-    /* ./footer buttons width control */
+        /* ./footer buttons width control */
     },
     footer_container_open: function(){
-    
+
         var self = this;
         
         /* add event listener to dev-page-footer-buttons */
         $(".dev-page-footer-container-open").on("click",function(){
-            
+
             if(dev_layout_alpha_settings.footerContainerDisable) return false;
             
             if($(this).hasClass("active")){
@@ -301,18 +301,18 @@ var dev_layout_alpha_content = {
         
     },
     footer_container: {
-    /* footer container controls */            
+        /* footer container controls */            
         init: function(){
-        /* add close event listener on class .dev-layout-container-close */            
+            /* add close event listener on class .dev-layout-container-close */            
             var self = this;            
             $(".dev-page-footer-container-layer-button").on("click",function(){
                 self.closeAll();
                 return false;
             });            
-        /* ./add close event listener on class .dev-layout-container-close */
+            /* ./add close event listener on class .dev-layout-container-close */
         },
         open: function(contentID){
-        /* open content in container by id */
+            /* open content in container by id */
             
             if(dev_layout_alpha_settings.footerContainerDisable) return false;
             
@@ -321,161 +321,161 @@ var dev_layout_alpha_content = {
             /* ./close other */
             
             if($(contentID).length > 0){
-               dev_layout_alpha_settings.footerContainerDisable = 1;
-               
-                $(".dev-page-footer-container .dev-page-footer-container-content").css("display","");
-                $(".dev-page-footer-container").addClass("dev-page-footer-container-opened");
-                
-                dev_loaders_default.show($(".dev-page-footer-container"));
-                                
-                /* TEMP FOR DEMO */
-                setTimeout(function(){                    
-                    $(contentID).fadeIn("slow");                                        
-                    dev_loaders_default.hide($(".dev-page-footer-container"));
-                    dev_layout_alpha_settings.footerContainerDisable = 0;
-                    
-                    $(contentID).width(window.innerWidth);
-                    $(contentID).mCustomScrollbar({axis:"x", autoHideScrollbar: true, scrollInertia: 200, advanced: {autoScrollOnFocus: false,autoExpandHorizontalScroll:true}});
-                    
-                },1000);                
-                /* ./TEMP FOR DEMO */
-                
-                return true;
-            }else
-                return false;
-            
-        /* ./open content in container by id */    
-        },
-        closeAll: function(){
+             dev_layout_alpha_settings.footerContainerDisable = 1;
+
+             $(".dev-page-footer-container .dev-page-footer-container-content").css("display","");
+             $(".dev-page-footer-container").addClass("dev-page-footer-container-opened");
+
+             dev_loaders_default.show($(".dev-page-footer-container"));
+
+             /* TEMP FOR DEMO */
+             setTimeout(function(){                    
+                $(contentID).fadeIn("slow");                                        
+                dev_loaders_default.hide($(".dev-page-footer-container"));
+                dev_layout_alpha_settings.footerContainerDisable = 0;
+
+                $(contentID).width(window.innerWidth);
+                $(contentID).mCustomScrollbar({axis:"x", autoHideScrollbar: true, scrollInertia: 200, advanced: {autoScrollOnFocus: false,autoExpandHorizontalScroll:true}});
+
+            },1000);                
+             /* ./TEMP FOR DEMO */
+
+             return true;
+         }else
+         return false;
+
+         /* ./open content in container by id */    
+     },
+     closeAll: function(){
         /* close all contents */
-            $(".dev-page-footer-buttons a").removeClass("active");
-            $(".dev-page-footer-container .dev-page-footer-container-content").css("display","");
-            $(".dev-page-footer-container").removeClass("dev-page-footer-container-opened");
-            $(".dev-page-footer-container").each(function(){
-                $(this).mCustomScrollbar('destroy');
-            });
+        $(".dev-page-footer-buttons a").removeClass("active");
+        $(".dev-page-footer-container .dev-page-footer-container-content").css("display","");
+        $(".dev-page-footer-container").removeClass("dev-page-footer-container-opened");
+        $(".dev-page-footer-container").each(function(){
+            $(this).mCustomScrollbar('destroy');
+        });
         /* ./close all contents */
-        }            
+    }            
     /* ./footer container controls */
-    },
-    search_container: {
-        init: function(){
-        
+},
+search_container: {
+    init: function(){
+
         var self = this;
         
         /* toggle search container */
-            $(".dev-page-search-toggle").on("click",function(){      
-                
-                if($(".dev-page").hasClass("dev-page-search-active")){
-                    self.close();
-                }else{
-                    self.open();
-                }
-                
-                return false;
-            });                        
+        $(".dev-page-search-toggle").on("click",function(){      
+
+            if($(".dev-page").hasClass("dev-page-search-active")){
+                self.close();
+            }else{
+                self.open();
+            }
+
+            return false;
+        });                        
         /* ./end toggle search container */
-        },
-        open: function(){
+    },
+    open: function(){
         /* close other elements */
-            $(".dev-page").removeClass("dev-page-rightbar-open");
+        $(".dev-page").removeClass("dev-page-rightbar-open");
         /* ./end */
-            
+
         /* temp search results */
         $.get( "assets/search_result.html", function(data) {
             $(".dev-search .dev-search-results").html(data);
         });
         /* ./temp search results */
-            
-        /* open search container */
-            $(".dev-page").addClass("dev-page-search-active");
-            $(".dev-search .dev-search-field input").focus().val($(".dev-search .dev-search-field input").val());
-        /* ./open search container */
-        },
-        close: function(){
-        /* close search container */
-            $(".dev-page").removeClass("dev-page-search-active");
-        /* ./close search container */
-        }
-    },
-    rightbar_chat: {        
-        init: function(settings){
-            var self = this;
 
-            /* temp, using to show chat after click on contacts item */
-            $(".rightbar-chat .contacts a").on("click",function(){
-                self.open();
-                return false;
-            });
-            /* ./end */        
-            
-            /* add close chat event listener */
-            $(".rightbar-chat-close").on("click",function(){
-                self.close();
-                return false;
-            });
-            /* ./end */
-            
-            /* init chat */
-            self.messages.init(settings);
-            /* ./end */            
-        },
-        open: function(){
+        /* open search container */
+        $(".dev-page").addClass("dev-page-search-active");
+        $(".dev-search .dev-search-field input").focus().val($(".dev-search .dev-search-field input").val());
+        /* ./open search container */
+    },
+    close: function(){
+        /* close search container */
+        $(".dev-page").removeClass("dev-page-search-active");
+        /* ./close search container */
+    }
+},
+rightbar_chat: {        
+    init: function(settings){
+        var self = this;
+
+        /* temp, using to show chat after click on contacts item */
+        $(".rightbar-chat .contacts a").on("click",function(){
+            self.open();
+            return false;
+        });
+        /* ./end */        
+
+        /* add close chat event listener */
+        $(".rightbar-chat-close").on("click",function(){
+            self.close();
+            return false;
+        });
+        /* ./end */
+
+        /* init chat */
+        self.messages.init(settings);
+        /* ./end */            
+    },
+    open: function(){
         /* open chat window */
-            $(".rightbar-chat").addClass("rightbar-chat-opened");
+        $(".rightbar-chat").addClass("rightbar-chat-opened");
         /* ./open chat window */    
         /* set focus to message field */
-            setTimeout(function(){
-                /* set height */
-                $(".rightbar-chat .chat-wrapper").height($(".rightbar-chat-frame-chat").height() - 245);
-                /* ./end */
-                
+        setTimeout(function(){
+            /* set height */
+            $(".rightbar-chat .chat-wrapper").height($(".rightbar-chat-frame-chat").height() - 245);
+            /* ./end */
+
                 //$("#rightbar_chat_form").find("input[name=message]").focus();
             },200);            
         /* ./end */
-        },        
-        close: function(){
+    },        
+    close: function(){
         /* close chat window */
-            $(".rightbar-chat").removeClass("rightbar-chat-opened");
+        $(".rightbar-chat").removeClass("rightbar-chat-opened");
         /* ./close chat window */
+    },
+    messages: {
+        init: function(settings){                
+            var self = this;                
+
+            /* add submit form listener */
+            $("#rightbar_chat_form").on("submit",function(){                    
+                var message = $(this).find("input[name=message]");                    
+
+                if(message.val().length > 0)
+                    self.post(settings,message.val());
+
+                /* clear field */
+                message.val("");
+
+                return false;
+            });
+            /* ./end */
         },
-        messages: {
-            init: function(settings){                
-                var self = this;                
-                
-                /* add submit form listener */
-                $("#rightbar_chat_form").on("submit",function(){                    
-                    var message = $(this).find("input[name=message]");                    
-                    
-                    if(message.val().length > 0)
-                        self.post(settings,message.val());
-                    
-                    /* clear field */
-                    message.val("");
-                    
-                    return false;
-                });
-                /* ./end */
-            },
-            post: function(settings,message){       
-                /* build message using template from settings */                
-                var date = "1 min ago"; /* temp */
-                
-                var message = settings.rightbarChatTemplate.replace("{message}", message);
-                    message = message.replace("{date}", date);
-                /* ./end */
-                
-                /* append message to chat */
-                $("#rightbar_chat").append(message);
-                /* ./end */
-            }
+        post: function(settings,message){       
+            /* build message using template from settings */                
+            var date = "1 min ago"; /* temp */
+
+            var message = settings.rightbarChatTemplate.replace("{message}", message);
+            message = message.replace("{date}", date);
+            /* ./end */
+
+            /* append message to chat */
+            $("#rightbar_chat").append(message);
+            /* ./end */
         }
     }
+}
 };
 
 $(function(){
 //$(document).ready(function(){
-    
+
     setTimeout(function(){
         dev_layout_alpha_settings.contentHeight = dev_layout_alpha_content.init(dev_layout_alpha_settings);
     },500);
@@ -491,12 +491,14 @@ $(function(){
     dev_layout_alpha_content.footer_container.init();
     dev_layout_alpha_content.search_container.init();
     dev_layout_alpha_content.rightbar_chat.init(dev_layout_alpha_settings);
-    
-    
+
+    // Esto es para quitar el menu de la izquierda. Santiago
+    $(".dev-page").addClass("dev-page-sidebar-collapsed");
+    $(this).addClass("active");
     $(".dev-page-rightbar").on("click",function(e){
         e.stopPropagation();
     });
-        
+
     $("body").on("click",function(){
         if(!Modernizr.touch){
             dev_layout_alpha_content.rightbar.close();
@@ -506,7 +508,7 @@ $(function(){
 });
 
 $(window).resize(function(e){
-    
+
     if(Modernizr.touch) {
         e.preventDefault();
         

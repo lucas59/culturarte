@@ -117,7 +117,7 @@ p + p {
 
 /* line 21, ../scss/2-framework/_typography.scss */
 ul li, ol li {
-  margin: 10px 0px 10px 40px;
+  margin: 10px 0px 0px 0px;
   font-size: 0.933em;
   line-height: 1.650em;
 }
@@ -2215,14 +2215,14 @@ button.btn {
 /* line 36, ../scss/main.scss */
 html, body {
   height: 100%;
-  background: #fff;
+  background: #2F81BB;
 }
 
 /* line 41, ../scss/main.scss */
 .main {
   max-width: 1000px;
-  width: 90%;
-  margin: 0px auto;
+  width: 55%;
+  margin: -60px auto;
 }
 
 /* line 48, ../scss/main.scss */

@@ -14093,11 +14093,11 @@ Interactive Layer
 .dev-page .dev-page-header .dph-logo .dev-page-sidebar-collapse {
   position: absolute;
   top: 0px;
-  background: #ffffff;
+  background: #324259;
   height: 55px;
   width: 55px;
   text-decoration: none;
-  right: -55px;
+  right: 300px;
   cursor: pointer;
 }
 .dev-page .dev-page-header .dph-logo .dev-page-sidebar-collapse .dev-page-sidebar-collapse-icon {
@@ -14120,7 +14120,7 @@ Interactive Layer
   display: block;
   width: 3px;
   height: 3px;
-  background: #263c46;
+  background: #ffffff;
   -webkit-transition: all 100ms ease;
   -moz-transition: all 100ms ease;
   -ms-transition: all 100ms ease;
@@ -14812,7 +14812,7 @@ Interactive Layer
 }
 .dev-page-navigation > li ul li {
   float: left;
-  width: 100%;
+  width: 80%;
   position: relative;
 }
 .dev-page-navigation > li ul li a {
