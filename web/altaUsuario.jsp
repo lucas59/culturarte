@@ -32,10 +32,10 @@
                 </div>
                 <br>
                 <div>
-                    <label for="contrasenia">ContraseÃ±a:</label>
+                    <label for="contrasenia">Contraseña:</label>
                     <input type="password" id="name" />
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <label for="contrasenia">Confirmar contraseÃ±a:</label>
+                    <label for="contrasenia">Confirmar contraseña:</label>
                     <input type="password" id="name" />
                 </div>
                 <br>
