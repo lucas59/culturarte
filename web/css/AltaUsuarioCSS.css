@@ -14,5 +14,7 @@ and open the template in the editor.
     border: snow 3px solid;
     border-top-left-radius: 20px;
     border-bottom-right-radius: 20px;
-    background-color: #BDBDBD;
+    background-color: white;
+    alignment-adjust: 60px
+
 }

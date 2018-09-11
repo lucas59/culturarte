@@ -5,70 +5,72 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="../css/AltaUsuarioCSS.css">
+        <script type="text/javascript" src="../js/validacion.js"></script>
+
     </head>
     <body>
-        <div style="align-self: center" class="form">
+        <div style="padding-left: 444px" class="form">
             <h1>Registrarte</h1>
             <h4>Es gratis y lo sera siempre.</h4>
-            <form action="" method="post">
+            <form action="/Source Packages/ControladorServlet/ServletAltaUsuario.java" name="formu" method="post">
                 <div>
                     <label for="name">Nombre de usuario:</label>
-                    <input type="text" id="name"/>
+                    <input name="nick" type="text"/>
                 </div>
                 <br>
                 <div>
                     <label for="name">Nombre:</label>
-                    <input type="text" id="name" />
+                    <input name="nombre" type="text" />
                 </div>
                 <br>
                 <div>
                     <label for="name">Apellido:</label>
-                    <input type="text" id="name" />
+                    <input name="apellido" type="text"/>
                 </div>
                 <br>
                 <div>
                     <label for="mail">E-mail:</label>
-                    <input type="email" id="mail" />
+                    <input name="correo" type="email"/>
                 </div>
                 <br>
                 <div>
                     <label for="contrasenia">Contraseña:</label>
-                    <input type="password" id="name" />
+                    <input name="pass" type="password"/>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <label for="contrasenia">Confirmar contraseña:</label>
-                    <input type="password" id="name" />
+                    <input name="confPass"type="password" />
                 </div>
                 <br>
                 <div>
                     <label for="fechaN">Fecha de nacimiento</label>
-                    <input id="date" type="date">
+                    <input name="fecha" type="date">
                 </div>
                 <br>
                 <div>
 
-                    <label for="tipoP">Tipo de persona</label><br>
-                    <input type="radio" name="gender" value="male" checked>Soy un colaborador &nbsp;&nbsp;&nbsp;
-                    <input type="radio" name="gender" value="female">Soy un proponente<br>
+                    <label>Tipo de persona</label><br>
+                    <input name="tipo"  type="radio"  value="colaborador" checked>Soy un colaborador &nbsp;&nbsp;&nbsp;
+                    <input name="tipo"  type="radio"  value="proponente">Soy un proponente<br>
                 </div>
                 <br>
                 <div id="adivionales">
                     <div>
                         <label for="direccion">Direccion</label>
-                        <input type="text" id="name" />
+                        <input name="direccion" type="text" />
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <label for="direccion">Sitio web</label>
-                        <input type="text" id="name" />
+                        <label for="sitio">Sitio web</label>
+                        <input  name="sitio" type="text" />
                     </div><br><br><br>
                     <div>
                         <p>Biografia:
-                            <textarea id="msg"></textarea>
+                            <textarea name="biografia"></textarea>
                         </p>
                     </div>
                 </div>
                 <div>
-                    <input type="submit" value="Registrarme" />
+                    <input type="submit" value="Crear cuenta"/>
                 </div>
             </form>
-        </div>
+        </div>          
     </body>
 </html>
