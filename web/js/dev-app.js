@@ -713,6 +713,12 @@ var knob = {
     }
 };
 
+function toggleSidebar(){
+    document.getElementById("sidebar").classList.toggle('active');
+}
+function toggleSidebarEsconder(){
+    document.getElementById("sidebar").classList.toggle('hide');
+}
 var scroll = {    
     init: function(){        
         if($(".scroll").length > 0){
