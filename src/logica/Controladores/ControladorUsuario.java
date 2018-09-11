@@ -64,7 +64,7 @@ public class ControladorUsuario implements IControladorUsuario {
     public ControladorUsuario() {
         this.Usuarios = new HashMap<>();
         this.dbUsuario = new DBUsuario();
-        this.Colaborador = new Colaborador("", "", "", "", null, "");
+        this.Colaborador = null;
         this.IPC = Fabrica.getInstance().getControladorPropCat();
     }
 

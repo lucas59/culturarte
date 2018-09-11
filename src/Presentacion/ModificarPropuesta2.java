@@ -341,6 +341,7 @@ public class ModificarPropuesta2 extends javax.swing.JInternalFrame {
         TextMonto.setText("");
         TextPrecio.setText("");
         fecha.setCalendar(null);
+        foto.setImagenDefault(null);
         dtp=IPC.SeleccionarPropuestaR(dtp2.getTitulo());
         Calendar c = dtp.getFechaReal();
         int dia = c.get(Calendar.DAY_OF_MONTH);
