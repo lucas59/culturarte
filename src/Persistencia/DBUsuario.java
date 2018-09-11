@@ -49,6 +49,7 @@ public class DBUsuario {
             statement.setString(8, null);
             statement.setString(9, null);
             statement.setBoolean(10, false);
+            statement.setString(11,p.getPassword());
             statement.executeUpdate();
             statement.close();
             return true;
@@ -60,7 +61,7 @@ public class DBUsuario {
 
     public boolean agregarProponente(Proponente p) {
         try {
-            PreparedStatement statement = conexion.prepareStatement("INSERT INTO usuario " + "(nickName, nombre, apellido,correo,fechaN,imagen,direccion,biografia,sitioWeb,esProponente) values(?,?,?,?,?,?,?,?,?,?)");
+            PreparedStatement statement = conexion.prepareStatement("INSERT INTO usuario " + "(nickName, nombre, apellido,correo,fechaN,imagen,direccion,biografia,sitioWeb,esProponente,contrasenia) values(?,?,?,?,?,?,?,?,?,?,?)");
             Calendar calendar = p.getFechaN();
             Calendar calen = p.getFechaN();
             Date fechaN = (Date) calen.getTime();
@@ -75,6 +76,7 @@ public class DBUsuario {
             statement.setString(8, p.getBiografia());
             statement.setString(9, p.getsitioweb());
             statement.setBoolean(10, true);
+            statement.setString(11,p.getPassword());
             statement.executeUpdate();
             statement.close();
             return true;
@@ -130,11 +132,12 @@ public class DBUsuario {
                 String dir = st.getString(7);
                 String biog = st.getString(8);
                 String web = st.getString(9);
+                String pass= st.getString(11);
                 if (st.getInt(10) == 1) {
-                    Proponente p = new Proponente(biog, dir, web, nick, nombre, apellido, correo, c, img);
+                    Proponente p = new Proponente(biog, dir, web, nick, nombre, apellido, correo, c, img,pass);
                     usuarios.put(nick, p);
                 } else {
-                    Colaborador col = new Colaborador(nick, nombre, apellido, correo, c, img);
+                    Colaborador col = new Colaborador(nick, nombre, apellido, correo, c, img,pass);
                     usuarios.put(nick, col);
                 }
             }

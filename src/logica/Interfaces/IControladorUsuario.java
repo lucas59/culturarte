@@ -34,9 +34,9 @@ public interface IControladorUsuario {
 
     public abstract boolean dejarseguirUsuario(String nickUsu1, String nickUsu2) throws Exception;
 
-    public abstract boolean AgregarUsuarioColaborador(String nickName, String nombre, String apellido, String correo, Calendar fechaN, String imagen);
+    public abstract boolean AgregarUsuarioColaborador(String nickName, String nombre, String apellido, String correo, Calendar fechaN, String imagen, String password);
 
-    public abstract boolean AgregarUsuarioProponente(String nickName, String nombre, String apellido, String correo, Calendar fechaN, String imagen, String direccion, String biografia, String sitioWeb);
+    public abstract boolean AgregarUsuarioProponente(String nickName, String nombre, String apellido, String correo, Calendar fechaN, String imagen, String direccion, String biografia, String sitioWeb, String password);
 
     public abstract Proponente ObtenerProponente(String nombreP);
 
@@ -78,9 +78,9 @@ public interface IControladorUsuario {
 
     public abstract void eliminarCategorias();
 
-    public abstract boolean AgregarUsuarioColaboradorDatosdePrueba(String nickName, String nombre, String apellido, String correo, Calendar fechaN, String imagen);
+    public abstract boolean AgregarUsuarioColaboradorDatosdePrueba(String nickName, String nombre, String apellido, String correo, Calendar fechaN, String imagen,String password);
 
-    public abstract boolean AgregarUsuarioProponenteDatosdePrueba(String nickName, String nombre, String apellido, String correo, Calendar fechaN, String imagen, String direccion, String biografia, String sitioWeb);
+    public abstract boolean AgregarUsuarioProponenteDatosdePrueba(String nickName, String nombre, String apellido, String correo, Calendar fechaN, String imagen, String direccion, String biografia, String sitioWeb,String password);
 
     public abstract void resetearColaborador();
 
