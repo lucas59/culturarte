@@ -18,7 +18,7 @@ import logica.Interfaces.IPropCat;
  * @author Lucas
  */
 public class inicio extends javax.swing.JFrame {
-
+    
     private IPropCat IPC;
     private IControladorUsuario ICU;
 
@@ -27,7 +27,7 @@ public class inicio extends javax.swing.JFrame {
      */
     public inicio() {
         initComponents();
-
+        
         this.setLocationRelativeTo(null);
         this.setExtendedState(inicio.MAXIMIZED_BOTH);
         Fabrica fabrica = Fabrica.getInstance();
@@ -67,7 +67,7 @@ public class inicio extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenuItem12 = new javax.swing.JMenuItem();
+        jMenuItemEvaluarPropuesta = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -194,14 +194,19 @@ public class inicio extends javax.swing.JFrame {
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Opciones de Administrador");
-
-        jMenuItem12.setText("Evaluar Propuesta");
-        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem12ActionPerformed(evt);
+        jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu4MouseClicked(evt);
             }
         });
-        jMenu4.add(jMenuItem12);
+
+        jMenuItemEvaluarPropuesta.setText("Evaluar Propuesta       ");
+        jMenuItemEvaluarPropuesta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemEvaluarPropuestaActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItemEvaluarPropuesta);
 
         jMenuBar1.add(jMenu4);
 
@@ -222,11 +227,11 @@ public class inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-
+        
         Fabrica fabrica = Fabrica.getInstance();
         IControladorUsuario ICU = fabrica.getIControladorUsuario();
         IPropCat IPC = fabrica.getControladorPropCat();
-
+        
         if (ICU.ListarColaboradores().isEmpty() && IPC.listarPropuestaC().isEmpty()) {
             JOptionPane.showMessageDialog(null, "No existen Colaboradores ni propuestas en el sistema");
         } else if (ICU.ListarColaboradores().isEmpty()) {
@@ -318,7 +323,7 @@ public class inicio extends javax.swing.JFrame {
         Fabrica fabrica = Fabrica.getInstance();
         int respuesta = JOptionPane.showConfirmDialog(null, "Se borraran todos los datos de la base de datos\n Desea continuar?", "ADVERTENCIA", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (respuesta == 0) {
-
+            
             boolean ok = fabrica.limpiarBaseDeDatos();
             if (ok) {
                 fabrica.LimpiarLogica();
@@ -367,19 +372,19 @@ public class inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void jMenuItemVerSeguidoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVerSeguidoresActionPerformed
-
+        
         VerSeguidores verS = new VerSeguidores();
         Escritorio.add(verS);
-
+        
         verS.setVisible(true);
 
     }//GEN-LAST:event_jMenuItemVerSeguidoresActionPerformed
 
-    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
-
+    private void jMenuItemEvaluarPropuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEvaluarPropuestaActionPerformed
+        
         if (IPC.ListaEvaluarPropuesta().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Actualmente el sistema no cuenta con propuestas en estado Ingresada ", "Advertencia", JOptionPane.WARNING_MESSAGE);
-
+            
         } else {
             ConfirmarPropuestas confProp = new ConfirmarPropuestas();
             Escritorio.add(confProp);
@@ -387,7 +392,18 @@ public class inicio extends javax.swing.JFrame {
             confProp.setVisible(true);
         }
 
-    }//GEN-LAST:event_jMenuItem12ActionPerformed
+    }//GEN-LAST:event_jMenuItemEvaluarPropuestaActionPerformed
+
+    private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
+        int CantP = Fabrica.getInstance().getControladorPropCat().ListaEvaluarPropuesta().size();
+        
+        if (CantP == 0) {
+            this.jMenuItemEvaluarPropuesta.setText("Evaluar Propuesta     ");
+        } else {
+            this.jMenuItemEvaluarPropuesta.setText("Evaluar Propuesta (" + CantP + ")");
+        }
+        
+    }//GEN-LAST:event_jMenu4MouseClicked
 
     /**
      * @param args the command line arguments
@@ -434,7 +450,6 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -443,6 +458,7 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JMenuItem jMenuItemEvaluarPropuesta;
     private javax.swing.JMenuItem jMenuItemVerSeguidores;
     // End of variables declaration//GEN-END:variables
 }

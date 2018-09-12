@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import logica.Clases.DtConsultaPropuesta;
 import logica.Clases.DtNickTitProp;
+import logica.Clases.DtUsuario;
 import logica.Clases.TipoE;
 import logica.Fabrica;
 
@@ -22,11 +23,13 @@ import logica.Fabrica;
  */
 public class ConfirmarPropuestas extends javax.swing.JInternalFrame {
 
+    private List<DtNickTitProp> listP;
+
     public ConfirmarPropuestas() {
         initComponents();
 
         List<DtNickTitProp> listProp = Fabrica.getInstance().getControladorPropCat().ListaEvaluarPropuesta();
-
+        this.listP = listProp;
         DefaultTableModel modelo = (DefaultTableModel) jTablePropuestas.getModel();
 
         modelo.setRowCount(0);
@@ -135,6 +138,11 @@ public class ConfirmarPropuestas extends javax.swing.JInternalFrame {
         jTextFieldBuscador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldBuscadorActionPerformed(evt);
+            }
+        });
+        jTextFieldBuscador.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldBuscadorKeyReleased(evt);
             }
         });
 
@@ -581,15 +589,12 @@ public class ConfirmarPropuestas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonSalirActionPerformed
 
     private void jCheckBoxPublicarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBoxPublicarMouseClicked
-        if (jCheckBoxCancelar.isSelected()) {
-            jCheckBoxCancelar.setSelected(false);
-        }
+        jCheckBoxCancelar.setSelected(false);
+
     }//GEN-LAST:event_jCheckBoxPublicarMouseClicked
 
     private void jCheckBoxCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBoxCancelarMouseClicked
-        if (jCheckBoxPublicar.isSelected()) {
-            jCheckBoxPublicar.setSelected(false);
-        }
+        jCheckBoxPublicar.setSelected(false);
     }//GEN-LAST:event_jCheckBoxCancelarMouseClicked
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
@@ -602,29 +607,64 @@ public class ConfirmarPropuestas extends javax.swing.JInternalFrame {
             if ("".equals(jTextFielTitulo.getText())) {
                 javax.swing.JOptionPane.showMessageDialog(null, "Debe seleccionar una Propuesta para continuar");
             } else {
-                if (jCheckBoxPublicar.isSelected()) {
-                    resultado = Fabrica.getInstance().getControladorPropCat().EvaluarPropuesta(jTextFielTitulo.getText(), TipoE.Publicada);
-
-                    if (resultado) {
-                        javax.swing.JOptionPane.showMessageDialog(null, "La propuesta fue publicada con exito");
-                    } else {
-                        javax.swing.JOptionPane.showMessageDialog(null, "Un fallo interno no permitio completar la operacion");
-                    }
-                } else if (jCheckBoxCancelar.isSelected()) {
-                    resultado = Fabrica.getInstance().getControladorPropCat().EvaluarPropuesta(jTextFielTitulo.getText(), TipoE.Cancelada);
-                    if (resultado) {
-                        javax.swing.JOptionPane.showMessageDialog(null, "La propuesta fue cancelada con exito");
-                    } else {
-                        javax.swing.JOptionPane.showMessageDialog(null, "Un fallo interno no permitio completar la operacion");
-                    }
+                if (jCheckBoxCancelar.isSelected() && jCheckBoxPublicar.isSelected()) {
+                    javax.swing.JOptionPane.showMessageDialog(null, "Debe elegir una unica opcion sobre la Propuesta");
+                    jCheckBoxCancelar.setSelected(false);
+                    jCheckBoxPublicar.setSelected(false);
                 } else {
-                    javax.swing.JOptionPane.showMessageDialog(null, "Debe Optar por un nuevo estado para esta Propuesta");
+
+                    if (jCheckBoxPublicar.isSelected()) {
+                        resultado = Fabrica.getInstance().getControladorPropCat().EvaluarPropuesta(jTextFielTitulo.getText(), TipoE.Publicada);
+
+                        if (resultado) {
+                            javax.swing.JOptionPane.showMessageDialog(null, "La propuesta fue publicada con exito");
+                        } else {
+                            javax.swing.JOptionPane.showMessageDialog(null, "Un fallo interno no permitio completar la operacion");
+                        }
+                    } else if (jCheckBoxCancelar.isSelected()) {
+                        resultado = Fabrica.getInstance().getControladorPropCat().EvaluarPropuesta(jTextFielTitulo.getText(), TipoE.Cancelada);
+                        if (resultado) {
+                            javax.swing.JOptionPane.showMessageDialog(null, "La propuesta fue cancelada con exito");
+                        } else {
+                            javax.swing.JOptionPane.showMessageDialog(null, "Un fallo interno no permitio completar la operacion");
+                        }
+                    } else {
+                        javax.swing.JOptionPane.showMessageDialog(null, "Usted no selecciono ninguna opcion sobre la propuesta");
+
+                    }
                 }
             }
         } catch (Exception e) {
             javax.swing.JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }//GEN-LAST:event_jButtonConfirmarMouseClicked
+
+    private void jTextFieldBuscadorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldBuscadorKeyReleased
+
+        DefaultTableModel model = (DefaultTableModel) jTablePropuestas.getModel();
+
+        model.setRowCount(0);
+
+        for (int i = 0; i < jTablePropuestas.getRowCount(); i++) {
+            model.removeRow(i);
+            i -= 1;
+        }
+
+        model = (DefaultTableModel) jTablePropuestas.getModel();
+        model.setRowCount(0);
+
+        for (int i = 0; i < this.listP.size(); i++) {
+            DtNickTitProp prop = (DtNickTitProp) this.listP.get(i);
+            if ((!jTextFieldBuscador.getText().isEmpty()) && prop.getTituloP().contains(jTextFieldBuscador.getText())) {
+                Object[] dat = {prop.getTituloP(), prop.getProponente()};
+                model.addRow(dat);
+            } else if (jTextFieldBuscador.getText().isEmpty()) {
+                Object[] dat = {prop.getTituloP(), prop.getProponente()};
+                model.addRow(dat);
+            }
+        }
+
+    }//GEN-LAST:event_jTextFieldBuscadorKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

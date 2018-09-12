@@ -130,13 +130,16 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Opciones de Administrador"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenu4MouseClicked"/>
+          </Events>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem12">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemEvaluarPropuesta">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Evaluar Propuesta"/>
+                <Property name="text" type="java.lang.String" value="Evaluar Propuesta       "/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem12ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemEvaluarPropuestaActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
