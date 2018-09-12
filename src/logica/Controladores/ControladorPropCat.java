@@ -673,10 +673,22 @@ public class ControladorPropCat implements IPropCat {
                 if (dtp.getFechaReal() != null) {
                     p.setFecha(dtp.getFechaReal());
                 }
+                String fotoLocal = dtp.getImagen();
+        if (!"".equals(dtp.getImagen())) {
+            File fLocal = new File(fotoLocal);
+            String ex = getFileExtension(fLocal);
+            p.setImagen(dtp.getTitulo() + "." + ex);
+        } else {
+            p.setImagen("Culturarte.png");
+        }
                 boolean modifico = this.dbPropuesta.ModificarDatosPropuesta(p);
+              
                 if (!modifico) {
                     return false;
                 }
+                if (!"".equals(dtp.getImagen())) {
+                copiarFoto(dtp.getImagen(), dtp.getTitulo());
+            }
                 break;
             }
         }

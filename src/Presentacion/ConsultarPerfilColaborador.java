@@ -32,7 +32,7 @@ public class ConsultarPerfilColaborador extends javax.swing.JInternalFrame {
         modelo.setRowCount(0);
         for (int i = 0; i < listaC.size(); i++) {
             DtinfoColaborador dtc = (DtinfoColaborador) listaC.get(i);
-            Object[] dat = {dtc.getNickname(), dtc.getNombre(), dtc.getApellido()};
+            Object[] dat = {dtc.getNickname(), dtc.getNombre(), dtc.getApellido(),dtc.getCorreo()};
             modelo.addRow(dat);
         }
 //ImageIcon img=new ImageIcon()
@@ -95,22 +95,22 @@ public class ConsultarPerfilColaborador extends javax.swing.JInternalFrame {
 
         TablaC.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "NickName", "Nombre", "Apellido"
+                "NickName", "Nombre", "Apellido", "Correo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -128,7 +128,7 @@ public class ConsultarPerfilColaborador extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(TablaC);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 350, 120));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 470, 120));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Datos del colaborador");

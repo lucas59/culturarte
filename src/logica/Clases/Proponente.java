@@ -20,8 +20,8 @@ public class Proponente extends Usuario {
     private String sitioweb;
     private Map<String, Propuesta> Propuestas;
 
-    public Proponente(String biografia, String direccion, String sitioweb, String nickname, String nombre, String apellido, String correo, Calendar fechaN, String imagen) {
-        super(nickname, nombre, apellido, correo, fechaN, imagen);
+    public Proponente(String biografia, String direccion, String sitioweb, String nickname, String nombre, String apellido, String correo, Calendar fechaN, String imagen,String password) {
+        super(nickname, nombre, apellido, correo, fechaN, imagen,password);
         this.biografia = biografia;
         this.direccion = direccion;
         this.sitioweb = sitioweb;
@@ -31,6 +31,7 @@ public class Proponente extends Usuario {
     public String getSitioweb() {
         return sitioweb;
     }
+    
 
     public void setSitioweb(String sitioweb) {
         this.sitioweb = sitioweb;
