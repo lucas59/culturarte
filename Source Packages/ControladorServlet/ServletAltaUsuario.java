@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/registrarse")
+@WebServlet(name = "ServletAltaUsuario", urlPatterns = {"/altaUsuarioServlet"})
 public class ServletAltaUsuario extends HttpServlet {
 
     /**
@@ -98,18 +98,18 @@ public class ServletAltaUsuario extends HttpServlet {
                     String mensajeExito = "Imagen subida correctamente";
                     request.getSession().setAttribute(MENSAJE_EXITO, mensajeExito);
                     request.getSession().setAttribute("nick", nick);
-                    request.getRequestDispatcher("/Vistas/exito.jsp").include(request, response);
+                    request.getRequestDispatcher("/Vistas/altaUsuario.jsp").include(request, response);
                 } // try
                 catch (ExceptionInInitializerError | Exception a) {
                     String mensajeError = "Error al dar registrar este usuario";
                     request.getSession().setAttribute(MENSAJE_ERROR, mensajeError);
-                    request.getRequestDispatcher("/Vistas/error.jsp").forward(request, response);
+                    request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
                 } // catch           
 
             } else {
                 String mensajeError = "Debe completar todos los campos obligatorios";
                 request.getSession().setAttribute(MENSAJE_ERROR, mensajeError);
-                request.getRequestDispatcher("").forward(request, response);
+                request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
             }
         } else {
             if (!nick.equals("") && !apellido.equals("") && !correo.equals("") && !fecha.equals("") && !pass.equals("") && !confPass.equals("") && !sitio.equals("") && !direccion.equals("") && !biografia.equals("")) {
@@ -123,18 +123,18 @@ public class ServletAltaUsuario extends HttpServlet {
                     String mensajeExito = "Imagen subida correctamente";
                     request.getSession().setAttribute(MENSAJE_EXITO, mensajeExito);
                     request.getSession().setAttribute("nick", nick);
-                    request.getRequestDispatcher("/Vistas/exito.jsp").include(request, response);
+                    request.getRequestDispatcher("/Vistas/altaUsuario.jsp").include(request, response);
                 } // try
                 catch (ExceptionInInitializerError | Exception a) {
                     String mensajeError = "Error al dar registrar este usuario";
                     request.getSession().setAttribute(MENSAJE_ERROR, mensajeError);
-                    request.getRequestDispatcher("/Vistas/error.jsp").forward(request, response);
+                    request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
                 } // catch           
 
             } else {
                 String mensajeError = "Debe completar todos los campos obligatorios";
                 request.getSession().setAttribute(MENSAJE_ERROR, mensajeError);
-                request.getRequestDispatcher("/Vistas/error.jsp").forward(request, response);
+                request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
             }
         }
         processRequest(request, response);
