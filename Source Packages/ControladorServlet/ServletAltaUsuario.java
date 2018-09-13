@@ -1,13 +1,13 @@
+package ControladorServlet;
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.rmi.ServerError;
-import java.rmi.ServerException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = {"/ServletAltaUsuario"})
+@WebServlet("/registrarse")
 public class ServletAltaUsuario extends HttpServlet {
 
     /**
@@ -29,6 +29,9 @@ public class ServletAltaUsuario extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    public static final String MENSAJE_ERROR = "mensaje_error";
+    public static final String MENSAJE_EXITO = "mensaje_exito";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -82,6 +85,7 @@ public class ServletAltaUsuario extends HttpServlet {
         String sitio = request.getParameter("sitio");
         String biografia = request.getParameter("biografia");
         String tipoP = request.getParameter("tipo");
+        String imagen = "";
 
         if (tipoP == "proponente") {
             if (!nick.equals("") && !apellido.equals("") && !correo.equals("") && !fecha.equals("") && !pass.equals("") && !confPass.equals("")) {
@@ -89,15 +93,23 @@ public class ServletAltaUsuario extends HttpServlet {
                 DateFormat format = new SimpleDateFormat("yyyy/mm/dd");
                 format.format(fecha);
                 cal = format.getCalendar();
-
-                boolean ok = logica.Controladores.ControladorUsuario.getInstance().AgregarUsuarioProponente(nick, nombre, apellido, correo, cal, pass, direccion, biografia, sitio, pass);
-                if (ok) {
-                } else {
-                    throw new ServletException("Datos erroneos, debe revisar los datos");
-                }
+                try {
+                    logica.Controladores.ControladorUsuario.getInstance().AgregarUsuarioProponente(nick, nombre, apellido, correo, cal, imagen, direccion, biografia, sitio, pass);
+                    String mensajeExito = "Imagen subida correctamente";
+                    request.getSession().setAttribute(MENSAJE_EXITO, mensajeExito);
+                    request.getSession().setAttribute("nick", nick);
+                    request.getRequestDispatcher("/Vistas/exito.jsp").include(request, response);
+                } // try
+                catch (ExceptionInInitializerError | Exception a) {
+                    String mensajeError = "Error al dar registrar este usuario";
+                    request.getSession().setAttribute(MENSAJE_ERROR, mensajeError);
+                    request.getRequestDispatcher("/Vistas/error.jsp").forward(request, response);
+                } // catch           
 
             } else {
-                throw new ServerException("Debe completar todos los campos obligatorios");
+                String mensajeError = "Debe completar todos los campos obligatorios";
+                request.getSession().setAttribute(MENSAJE_ERROR, mensajeError);
+                request.getRequestDispatcher("").forward(request, response);
             }
         } else {
             if (!nick.equals("") && !apellido.equals("") && !correo.equals("") && !fecha.equals("") && !pass.equals("") && !confPass.equals("") && !sitio.equals("") && !direccion.equals("") && !biografia.equals("")) {
@@ -106,19 +118,25 @@ public class ServletAltaUsuario extends HttpServlet {
                 DateFormat format = new SimpleDateFormat("yyyy/mm/dd");
                 format.format(fecha);
                 cal = format.getCalendar();
-
-                boolean ok = logica.Controladores.ControladorUsuario.getInstance().AgregarUsuarioColaborador(nick, nombre, apellido, correo, cal, pass, pass);
-                if (ok) {
-                } else {
-                    throw new ServletException("Datos erroneos, debe revisar los datos");
-                }
+                try {
+                    logica.Controladores.ControladorUsuario.getInstance().AgregarUsuarioColaborador(nick, nombre, apellido, correo, cal, pass, pass);
+                    String mensajeExito = "Imagen subida correctamente";
+                    request.getSession().setAttribute(MENSAJE_EXITO, mensajeExito);
+                    request.getSession().setAttribute("nick", nick);
+                    request.getRequestDispatcher("/Vistas/exito.jsp").include(request, response);
+                } // try
+                catch (ExceptionInInitializerError | Exception a) {
+                    String mensajeError = "Error al dar registrar este usuario";
+                    request.getSession().setAttribute(MENSAJE_ERROR, mensajeError);
+                    request.getRequestDispatcher("/Vistas/error.jsp").forward(request, response);
+                } // catch           
 
             } else {
-                throw new ServerException("Debe completar todos los campos obligatorios");
+                String mensajeError = "Debe completar todos los campos obligatorios";
+                request.getSession().setAttribute(MENSAJE_ERROR, mensajeError);
+                request.getRequestDispatcher("/Vistas/error.jsp").forward(request, response);
             }
-
         }
-
         processRequest(request, response);
     }
 
