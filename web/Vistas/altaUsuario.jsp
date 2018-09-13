@@ -12,7 +12,7 @@
         <div style="padding-left: 444px" class="form">
             <h1>Registrarte</h1>
             <h4>Es gratis y lo sera siempre.</h4>
-            <form action="/Source Packages/ControladorServlet/ServletAltaUsuario.java" name="formu" method="post">
+            <form action="altaUsuarioServlet" name="formu" method="post">
                 <div>
                     <label for="name">Nombre de usuario:</label>
                     <input name="nick" type="text"/>
