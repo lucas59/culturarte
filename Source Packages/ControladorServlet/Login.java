@@ -1,21 +1,33 @@
+package ControladorServlet;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
+import clases.EstadoSesion;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import logica.Clases.Usuario;
+import logica.Fabrica;
+import logica.Interfaces.IControladorUsuario;
 
 /**
  *
  * @author PabloDesk
  */
+
+@WebServlet("/iniciar-sesion")
 public class Login extends HttpServlet {
+    private static final long serialVersionUID = 1L;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,19 +41,43 @@ public class Login extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Login</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Login at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+         HttpSession objSesion = request.getSession();
+        String login = request.getParameter("login");
+        String password = request.getParameter("pass");
+        EstadoSesion nuevoEstado;
+        
+        // chequea contraseña
+//		try {
+                        Fabrica fabrica=Fabrica.getInstance();
+//                        fabrica.limpiarBaseDeDatos();
+//                        fabrica.LimpiarLogica();
+//                        fabrica.cargarDatosdePrueba();
+                        IControladorUsuario ICU= fabrica.getIControladorUsuario();
+			Usuario usr = ICU.ObtenerUsuario(login);
+			if(usr.getPassword().compareTo(password)!=0)
+				nuevoEstado = EstadoSesion.LOGIN_INCORRECTO;
+			else {
+				nuevoEstado = EstadoSesion.LOGIN_CORRECTO;
+//				 setea el usuario logueado
+				request.getSession().setAttribute("usuario_logueado", usr.getCorreo());
+			}
+//		} catch(UsuarioNoEncontrado ex){
+//			nuevoEstado = EstadoSesion.LOGIN_INCORRECTO;
+//		}
+		
+        objSesion.setAttribute("estado_sesion", nuevoEstado);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/index.html");
+        dispatcher.forward(request, response);
+        
     }
+    static public Usuario getUsuarioLogueado(HttpServletRequest request)
+	{
+            Fabrica fabrica=Fabrica.getInstance();
+                        IControladorUsuario ICU= fabrica.getIControladorUsuario();
+		return ICU.ObtenerUsuario(
+				(String) request.getSession().getAttribute("usuario_logueado")
+			);
+	}
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
