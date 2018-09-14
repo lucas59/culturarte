@@ -47,7 +47,16 @@
                     </script>
                     </tbody>
                 </table>
+                    <ul class="pager" style="margin-left: -656px">
+                    <li><a href="#">Anterior</a></li>
+                    <li><a href="#">Siguiente</a></li>
+                </ul>
+
+
             </div>
+
+
+
             <div   style="width: 402px;margin-left: 200px">
                 <div class="input-group input-group-sm">
                     <span class="input-group-addon">Titulo</span>
