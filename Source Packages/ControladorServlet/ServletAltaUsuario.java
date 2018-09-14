@@ -29,8 +29,7 @@ public class ServletAltaUsuario extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    public static final String MENSAJE_ERROR = "mensaje_error";
-    public static final String MENSAJE_EXITO = "mensaje_exito";
+    public String MENSAJE_ERROR = null;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -74,6 +73,9 @@ public class ServletAltaUsuario extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        String accion=request.getParameter("accion");
+        
         String nick = request.getParameter("nick");
         String nombre = request.getParameter("nombre");
         String apellido = request.getParameter("apellido");
@@ -95,20 +97,19 @@ public class ServletAltaUsuario extends HttpServlet {
                 cal = format.getCalendar();
                 try {
                     logica.Controladores.ControladorUsuario.getInstance().AgregarUsuarioProponente(nick, nombre, apellido, correo, cal, imagen, direccion, biografia, sitio, pass);
-                    String mensajeExito = "Imagen subida correctamente";
-                    request.getSession().setAttribute(MENSAJE_EXITO, mensajeExito);
-                    request.getSession().setAttribute("nick", nick);
+                    MENSAJE_ERROR = "Imagen subida correctamente";
+                    request.setAttribute("mensaje", MENSAJE_ERROR);
                     request.getRequestDispatcher("/Vistas/altaUsuario.jsp").include(request, response);
                 } // try
                 catch (ExceptionInInitializerError | Exception a) {
-                    String mensajeError = "Error al dar registrar este usuario";
-                    request.getSession().setAttribute(MENSAJE_ERROR, mensajeError);
+                    MENSAJE_ERROR = "Error al dar registrar este usuario";
+                    request.getSession().setAttribute("mensaje", MENSAJE_ERROR);
                     request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
                 } // catch           
 
             } else {
-                String mensajeError = "Debe completar todos los campos obligatorios";
-                request.getSession().setAttribute(MENSAJE_ERROR, mensajeError);
+                MENSAJE_ERROR = "Debe completar todos los campos obligatorios";
+                request.getSession().setAttribute("mensaje", MENSAJE_ERROR);
                 request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
             }
         } else {
@@ -120,20 +121,20 @@ public class ServletAltaUsuario extends HttpServlet {
                 cal = format.getCalendar();
                 try {
                     logica.Controladores.ControladorUsuario.getInstance().AgregarUsuarioColaborador(nick, nombre, apellido, correo, cal, pass, pass);
-                    String mensajeExito = "Imagen subida correctamente";
-                    request.getSession().setAttribute(MENSAJE_EXITO, mensajeExito);
+                    MENSAJE_ERROR = "Imagen subida correctamente";
+                    request.getSession().setAttribute("mensaje", MENSAJE_ERROR);
                     request.getSession().setAttribute("nick", nick);
                     request.getRequestDispatcher("/Vistas/altaUsuario.jsp").include(request, response);
                 } // try
                 catch (ExceptionInInitializerError | Exception a) {
-                    String mensajeError = "Error al dar registrar este usuario";
-                    request.getSession().setAttribute(MENSAJE_ERROR, mensajeError);
+                    MENSAJE_ERROR = "Error al dar registrar este usuario";
+                    request.getSession().setAttribute("mensaje", MENSAJE_ERROR);
                     request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
                 } // catch           
 
             } else {
-                String mensajeError = "Debe completar todos los campos obligatorios";
-                request.getSession().setAttribute(MENSAJE_ERROR, mensajeError);
+                MENSAJE_ERROR = "Debe completar todos los campos obligatorios";
+                request.getSession().setAttribute("mensaje", MENSAJE_ERROR);
                 request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
             }
         }
