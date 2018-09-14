@@ -4,10 +4,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-         <link href="css/bootstrap.css" rel="stylesheet">
-  <script src="js/bootstrap.js"></script>
-  <script type="text/javascript" src="js/jquery.js"></script>
-  <script type="text/javascript" src="js/tabs.js"></script>
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <script src="js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/tabs.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Registrar Colaboración</title>
@@ -33,16 +33,16 @@
                         <%
 
                             List<DtNickTitProp> lista = (List<DtNickTitProp>) request.getAttribute("lista_propuestas");
-                            out.print("<tr>");
                             for (int i = 0; i < lista.size(); i++) {
-                                out.print("<td> <input class=\"magic-checkbox\" name=\"layout" + i +"\" id=\"1\" value=\"option \" type=\"checkbox\">");
+                                out.print("<tr>");
+                                out.print("<td> <input class=\"magic-checkbox\" name=\"layout" + i + "\" id=\"1\" value=\"option \" type=\"checkbox\">");
                                 out.print("<label class=\"pull-left\" for=\"1\"></label></td>");
                                 out.print("<td>" + lista.get(i).getTituloP() + "</td>");
                                 out.print("</tr>");
                             }
                         %>
 
-                      
+
                     </tbody>
                 </table>
             </div>

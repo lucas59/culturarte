@@ -28,22 +28,6 @@ import logica.Interfaces.IPropCat;
 @WebServlet(name = "ServletRegistrarColaboracion", urlPatterns = {"/Registrar-colaboracion"})
 public class ServletRegistrarColaboracion extends HttpServlet {
 
-    private IControladorUsuario ICU;
-    private IPropCat IPC;
-
-    public ServletRegistrarColaboracion() {
-        ICU = Fabrica.getInstance().getIControladorUsuario();
-        IPC = Fabrica.getInstance().getControladorPropCat();
-    }
-
-    @Override
-    public void init() throws ServletException {
-        try {
-            Fabrica.getInstance();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -61,6 +45,8 @@ public class ServletRegistrarColaboracion extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        IControladorUsuario ICU = Fabrica.getInstance().getIControladorUsuario();
+        IPropCat IPC = Fabrica.getInstance().getControladorPropCat();
         IPC.comprobarBaseCat();
         ICU.CargarUsuarios();
         IPC.CargarPropuestas();
