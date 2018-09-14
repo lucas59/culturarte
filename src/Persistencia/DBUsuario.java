@@ -35,7 +35,7 @@ public class DBUsuario {
 
     public boolean agregarColaborador(Colaborador p) {
         try {
-            PreparedStatement statement = conexion.prepareStatement("INSERT INTO usuario " + "(nickName, nombre, apellido,correo,fechaN,imagen,direccion,biografia,sitioWeb,esProponente) values(?,?,?,?,?,?,?,?,?,?)");
+            PreparedStatement statement = conexion.prepareStatement("INSERT INTO usuario " + "(nickName, nombre, apellido,correo,fechaN,imagen,direccion,biografia,sitioWeb,esProponente,contrasenia) values(?,?,?,?,?,?,?,?,?,?,?)");
             Calendar calen = p.getFechaN();
             Date fechaN = (Date) calen.getTime();
             java.sql.Date sDate = new java.sql.Date(fechaN.getTime());
