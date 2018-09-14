@@ -19,9 +19,9 @@
 
         <form action="ServletRegistrarColaboracion" method="post">
             <div class="table-responsive" >
-                <table class="table table-hover" style="margin-left: 192px; width: 30%;">
+                <table class="table table-bordered table-hover" style="margin-left: 192px; width: 30%;">
                     <thead>
-                    <h3>Propuestas</h3>
+                    <h3 style="position:fixed;top: 58px;left: 358px;">Propuestas</h3>
                     <tr>
                         <th class="active">#</th>
                         <th class="active">Titulo de Propuesta</th>
@@ -29,25 +29,25 @@
                     </tr>
                     </thead>
                     <tbody>
+                        <tr>
 
-                        <%
+                            <%
+                                List<DtNickTitProp> lista = (List<DtNickTitProp>) request.getAttribute("lista_propuestas");
+                                for (int i = 0; i < lista.size(); i++) {
+                                    out.print("<tr>");
+                                    out.print("<td> <input class=\"magic-checkbox\" name=\"layout" + i + "\" id=\"" + i + "\" value=\"option \" type=\"checkbox\">");
+                                    out.print("<label class=\"pull-left\" for=\"" + i + "\"></label></td>");
+                                    out.print("<td>" + lista.get(i).getTituloP() + "</td>");
+                                    out.print("<td>" + lista.get(i).getProponente() + "</td>");
+                                    out.print("</tr>");
+                                }
 
-                            List<DtNickTitProp> lista = (List<DtNickTitProp>) request.getAttribute("lista_propuestas");
-                            for (int i = 0; i < lista.size(); i++) {
-                                out.print("<tr>");
-                                out.print("<td> <input class=\"magic-checkbox\" name=\"layout" + i + "\" id=\"1\" value=\"option \" type=\"checkbox\">");
-                                out.print("<label class=\"pull-left\" for=\"1\"></label></td>");
-                                out.print("<td>" + lista.get(i).getTituloP() + "</td>");
-                                out.print("</tr>");
-                            }
-                        %>
-
-
+                            %>
+                    <script type="text/javascript">
+                    </script>
                     </tbody>
                 </table>
             </div>
-
-
             <div   style="width: 402px;margin-left: 200px">
                 <div class="input-group input-group-sm">
                     <span class="input-group-addon">Titulo</span>
