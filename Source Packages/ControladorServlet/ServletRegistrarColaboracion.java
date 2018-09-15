@@ -3,46 +3,35 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+import logica.Fabrica;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Map;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logica.Clases.DtNickTitProp;
+import logica.Clases.DtProponente;
+import logica.Clases.Usuario;
+import logica.Interfaces.IControladorUsuario;
+import logica.Interfaces.IPropCat;
 
 /**
  *
  * @author Santiago.S
  */
-@WebServlet(urlPatterns = {"/ServletRegistrarColaboracion"})
+@WebServlet(name = "ServletRegistrarColaboracion", urlPatterns = {"/Registrar-colaboracion"})
 public class ServletRegistrarColaboracion extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ServletRegistrarColaboracion</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ServletRegistrarColaboracion at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -55,9 +44,15 @@ public class ServletRegistrarColaboracion extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        IControladorUsuario ICU = Fabrica.getInstance().getIControladorUsuario();
+        IPropCat IPC = Fabrica.getInstance().getControladorPropCat();
+        IPC.comprobarBaseCat();
+        ICU.CargarUsuarios();
+        IPC.CargarPropuestas();
+        IPC.CargarColaboraciones();
+        List<DtNickTitProp> lista = IPC.listarPropuestaC();
+        request.setAttribute("lista_propuestas", lista);
     }
 
     /**
@@ -71,7 +66,7 @@ public class ServletRegistrarColaboracion extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
     }
 
     /**
@@ -83,5 +78,9 @@ public class ServletRegistrarColaboracion extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void log(String[] Titulos) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }
