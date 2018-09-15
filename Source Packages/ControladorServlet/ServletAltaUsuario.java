@@ -101,7 +101,7 @@ public class ServletAltaUsuario extends HttpServlet {
                         request.getRequestDispatcher("/Vistas/altaUsuario.jsp").include(request, response);
                     } // try
                     catch (ExceptionInInitializerError | Exception a) {
-                        MENSAJE = "Error al dar registrar este usuario";
+                        MENSAJE = "Error al registrar este usuario";
                         request.getSession().setAttribute("mensaje", MENSAJE);
                         request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
                     } // catch           
@@ -124,6 +124,7 @@ public class ServletAltaUsuario extends HttpServlet {
                         request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
                     } // catch           
                 }
+                
                 processRequest(request, response);
                 break;
         }
