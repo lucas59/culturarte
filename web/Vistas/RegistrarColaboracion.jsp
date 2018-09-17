@@ -25,7 +25,6 @@
                     <input style="width: 184px;margin-left: 330px;margin-top: 12px;margin-bottom: -23px;" type="text" class="form-control" placeholder="Buscar" />
                 </form>
                 <tr>
-                    <th class="active">#</th>
                     <th class="active">Titulo de Propuesta</th>
                     <th class="active">Nombre del Proponente</th>
                     <th class="active">Acciones</th>
@@ -38,7 +37,6 @@
                             List<DtNickTitProp> lista = (List<DtNickTitProp>) request.getAttribute("lista_propuestas");
                             for (int i = 0; i < lista.size(); i++) {
                                 out.print("<tr>");
-                                out.print("<td> <input class=\"magic-radio\" name=\"layout\" id=\"" + i + "\" value=\"option \" type=\"radio\">");
                                 out.print("<label for=\"" + i + "\"></label></td>");
                                 out.print("<td onclick=\"seleccionarusuario(" + lista.get(i).getTituloP() + "\")\">" + lista.get(i).getTituloP() + "</td>");
                                 out.print("<td>" + lista.get(i).getProponente() + "</td>");
