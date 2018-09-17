@@ -12,88 +12,112 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Registrar Colaboración</title>
     </head>
+    <jsp:include page="/Registrar-colaboracion"/>;
     <body>
-        <jsp:include page="/Registrar-colaboracion"/> 
 
 
 
-        <form action="ServletRegistrarColaboracion" method="post">
-            <div class="table-responsive" >
-                <table class="table table-bordered table-hover" style="margin-left: 192px; width: 30%;">
-                    <thead>
-                    <h3 style="position:fixed;top: 58px;left: 358px;">Propuestas</h3>
+        <div >
+            <table class="table table-bordered table-hover  formulario" style="margin-left: 192px; width: 30%;">
+                <thead>
+                <h3 style=" position: absolute; top: 76px;left: 358px;">Propuestas</h3>
+                <form class="navbar-form navbar-right">
+                    <input style="width: 184px;margin-left: 330px;margin-top: 12px;margin-bottom: -23px;" type="text" class="form-control" placeholder="Buscar" />
+                </form>
+                <tr>
+                    <th class="active">#</th>
+                    <th class="active">Titulo de Propuesta</th>
+                    <th class="active">Nombre del Proponente</th>
+                    <th class="active">Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
                     <tr>
-                        <th class="active">#</th>
-                        <th class="active">Titulo de Propuesta</th>
-                        <th class="active">Nombre del Proponente</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
+                        <%
 
-                            <%
-                                List<DtNickTitProp> lista = (List<DtNickTitProp>) request.getAttribute("lista_propuestas");
-                                for (int i = 0; i < lista.size(); i++) {
-                                    out.print("<tr>");
-                                    out.print("<td> <input class=\"magic-checkbox\" name=\"layout" + i + "\" id=\"" + i + "\" value=\"option \" type=\"checkbox\">");
-                                    out.print("<label class=\"pull-left\" for=\"" + i + "\"></label></td>");
-                                    out.print("<td>" + lista.get(i).getTituloP() + "</td>");
-                                    out.print("<td>" + lista.get(i).getProponente() + "</td>");
-                                    out.print("</tr>");
-                                }
+                            List<DtNickTitProp> lista = (List<DtNickTitProp>) request.getAttribute("lista_propuestas");
+                            for (int i = 0; i < lista.size(); i++) {
+                                out.print("<tr>");
+                                out.print("<td> <input class=\"magic-radio\" name=\"layout\" id=\"" + i + "\" value=\"option \" type=\"radio\">");
+                                out.print("<label for=\"" + i + "\"></label></td>");
+                                out.print("<td onclick=\"seleccionarusuario(" + lista.get(i).getTituloP() + "\")\">" + lista.get(i).getTituloP() + "</td>");
+                                out.print("<td>" + lista.get(i).getProponente() + "</td>");
+                                out.print("<td><button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#VerInfoPropuesta\">Ver</button><td>");
+                                out.print("</tr>");
+                            }
 
-                            %>
-                    <script type="text/javascript">
-                    </script>
-                    </tbody>
-                </table>
-                    <ul class="pager" style="margin-left: -656px">
-                    <li><a href="#">Anterior</a></li>
-                    <li><a href="#">Siguiente</a></li>
-                </ul>
-
-
-            </div>
+                        %>
 
 
 
-            <div   style="width: 402px;margin-left: 200px">
-                <div class="input-group input-group-sm">
-                    <span class="input-group-addon">Titulo</span>
-                    <input type="text" class="form-control" placeholder="">
+                <div class="modal fade" id="VerInfoPropuesta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Información de la propuesta</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div id="mostrarinfo">
+                                    <div>
+                                        <div class="input-group input-group-sm">
+                                            <span class="input-group-addon">Titulo</span>
+                                            <input readonly  type="text" class="form-control" placeholder="">
+                                        </div>
+                                        </br>
+                                        <div class="input-group input-group-sm">
+                                            <span class="input-group-addon">Descripcion</span>
+                                            <input readonly type="text" class="form-control" placeholder="">
+                                        </div>
+                                        </br>
+                                        <div class="input-group input-group-sm">
+                                            <span class="input-group-addon">Tipo de espectaculo</span>
+                                            <input readonly type="text" class="form-control" placeholder="">
+                                        </div>
+                                        </br>
+                                        <div class="input-group input-group-sm">
+                                            <span class="input-group-addon">Lugar</span>
+                                            <input readonly type="text" class="form-control" placeholder="">
+                                        </div>
+                                        </br>
+                                        <div class="input-group input-group-sm">
+                                            <span class="input-group-addon">Fecha de relizacion</span>
+                                            <input readonly type="text" class="form-control" placeholder="">
+                                        </div>
+                                        </br>
+                                        <div class="input-group input-group-sm">
+                                            <span class="input-group-addon">Precio de entrada</span>
+                                            <input readonly type="text" class="form-control" placeholder="">
+                                        </div>
+                                        </br>
+                                        <div class="input-group input-group-sm">
+                                            <span class="input-group-addon">Monto final</span>
+                                            <input readonly type="text" class="form-control" placeholder="">
+                                        </div>
+                                        </br>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                </br>
-                <div class="input-group input-group-sm">
-                    <span class="input-group-addon">Descripcion</span>
-                    <input type="text" class="form-control" placeholder="">
-                </div>
-                </br>
-                <div class="input-group input-group-sm">
-                    <span class="input-group-addon">Tipo de espectaculo</span>
-                    <input type="text" class="form-control" placeholder="">
-                </div>
-                </br>
-                <div class="input-group input-group-sm">
-                    <span class="input-group-addon">Lugar</span>
-                    <input type="text" class="form-control" placeholder="">
-                </div>
-                </br>
-                <div class="input-group input-group-sm">
-                    <span class="input-group-addon">Fecha de relizacion</span>
-                    <input type="text" class="form-control" placeholder="">
-                </div>
-                </br>
-                <div class="input-group input-group-sm">
-                    <span class="input-group-addon">Precio de entrada</span>
-                    <input type="text" class="form-control" placeholder="">
-                </div>
-                </br>
-                <div class="input-group input-group-sm">
-                    <span class="input-group-addon">Monto final</span>
-                    <input type="text" class="form-control" placeholder="">
-                </div>
-                </br>
-            </div>
-        </form>
+
+
+
+
+            </table>
+            <ul class="pager" style="margin-left: -656px">
+                <li><a href="#">Anterior</a></li>
+                <li><a href="#">Siguiente</a></li>
+            </ul>
+
+
+        </div>
+
     </body>
 </html>
