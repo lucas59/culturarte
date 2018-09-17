@@ -1,23 +1,19 @@
-package ControladorServlet;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package ControladorServlet;
 
-import clases.EstadoSesion;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import logica.Clases.DtUsuario;
-import logica.Clases.Usuario;
 import logica.Fabrica;
 import logica.Interfaces.IControladorUsuario;
 
@@ -25,10 +21,9 @@ import logica.Interfaces.IControladorUsuario;
  *
  * @author PabloDesk
  */
-
-@WebServlet("/iniciar-sesion")
-public class Login extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+@WebServlet(name = "SeguirUsuario", urlPatterns = {"/SeguirUsuario"})
+public class SeguirUsuario extends HttpServlet {
+private static final long serialVersionUID = 1L;
     Fabrica fabrica=Fabrica.getInstance();
     IControladorUsuario ICU= fabrica.getIControladorUsuario();
     /**
@@ -37,52 +32,17 @@ public class Login extends HttpServlet {
      *
      * @param request servlet request
      * @param response servlet response
-     * @return 
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    public static DtUsuario getUsuarioSesion(HttpServletRequest request)
-	{
-            Fabrica fabrica=Fabrica.getInstance();
-                        IControladorUsuario ICU= fabrica.getIControladorUsuario();
-		return ICU.ObtenerDTUsuario(
-				(String) request.getSession().getAttribute("usuario_logueado")
-			);
-       
-	}
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         response.setContentType("text/html;charset=UTF-8");
-        HttpSession objSesion = request.getSession();
-        String login = request.getParameter("login");
-        String password = request.getParameter("pass");
-        EstadoSesion nuevoEstado;
+        response.setContentType("text/html;charset=UTF-8");
+           ICU.CargarUsuarios();
         
-        // chequea contraseña
-//		try {
-                      
-                        fabrica.limpiarBaseDeDatos();
-                        fabrica.cargarDatosdePrueba();
-                        
-			DtUsuario usr = ICU.ObtenerDTUsuario(login);
-			if(usr.getPassword().compareTo(password)!=0)
-				nuevoEstado = EstadoSesion.LOGIN_INCORRECTO;
-			else {
-				nuevoEstado = EstadoSesion.LOGIN_CORRECTO;
-//				 setea el usuario logueado
-				request.getSession().setAttribute("usuario_logueado", usr.getCorreo());
-			}
-//		} catch(UsuarioNoEncontrado ex){
-//			nuevoEstado = EstadoSesion.LOGIN_INCORRECTO;
-//		}
-		
-        objSesion.setAttribute("estado_sesion", nuevoEstado);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/index.html");
-        dispatcher.forward(request, response);
-        
+       List<DtUsuario> lista = ICU.ListarProponentes2();
+        request.setAttribute("usuarios", lista);
     }
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
