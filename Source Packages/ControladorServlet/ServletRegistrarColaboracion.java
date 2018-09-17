@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logica.Clases.DtNickTitProp;
 import logica.Clases.DtProponente;
+import logica.Clases.DtinfoColaborador;
 import logica.Clases.Usuario;
 import logica.Interfaces.IControladorUsuario;
 import logica.Interfaces.IPropCat;
@@ -52,7 +53,9 @@ public class ServletRegistrarColaboracion extends HttpServlet {
         IPC.CargarPropuestas();
         IPC.CargarColaboraciones();
         List<DtNickTitProp> lista = IPC.listarPropuestaC();
+        List<DtinfoColaborador> lista2 = ICU.ListarColaboradores();
         request.setAttribute("lista_propuestas", lista);
+        request.setAttribute("lista_colaboradores", lista2);
     }
 
     /**
