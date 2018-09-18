@@ -16,9 +16,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logica.Fabrica;
+import logica.Interfaces.IControladorUsuario;
 
 @WebServlet(name = "ServletAltaUsuario", urlPatterns = {"/altaUsuarioServlet"})
+
 public class ServletAltaUsuario extends HttpServlet {
+
+    IControladorUsuario iUsuario;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,8 +34,6 @@ public class ServletAltaUsuario extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    public String MENSAJE = null;
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -73,6 +76,8 @@ public class ServletAltaUsuario extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        iUsuario = Fabrica.getInstance().getIControladorUsuario();
+        Boolean ok = false;
         String operacion = request.getParameter("op");
         switch (operacion) {
             case "1":
@@ -88,44 +93,42 @@ public class ServletAltaUsuario extends HttpServlet {
                 String biografia = request.getParameter("biografia");
                 String tipoP = request.getParameter("tipo");
                 String imagen = "";
+                String mensaje;
 
                 if (tipoP == "proponente") {
                     Calendar cal;
                     DateFormat format = new SimpleDateFormat("yyyy/mm/dd");
                     format.format(fecha);
                     cal = format.getCalendar();
-                    try {
-                        logica.Controladores.ControladorUsuario.getInstance().AgregarUsuarioProponente(nick, nombre, apellido, correo, cal, imagen, direccion, biografia, sitio, pass);
-                        MENSAJE = "Se registro exitosamente";
-                        request.setAttribute("mensaje", MENSAJE);
-                        request.getRequestDispatcher("/Vistas/altaUsuario.jsp").include(request, response);
-                    } // try
-                    catch (ExceptionInInitializerError | Exception a) {
-                        MENSAJE = "Error al registrar este usuario";
-                        request.getSession().setAttribute("mensaje", MENSAJE);
+                    ok = iUsuario.AgregarUsuarioProponente(nick, nombre, apellido, correo, cal, imagen, direccion, biografia, sitio, pass);
+                    if (ok) {
+                        mensaje = "Se registro exitosamente";
+                        request.setAttribute("mensaje", mensaje);
                         request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
-                    } // catch           
+                    } else {
+                        mensaje = "Error al registrar este usuario";
+                        request.setAttribute("mensaje", mensaje);
+                        request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
+                    }
 
                 } else {
                     Calendar cal;
                     DateFormat format = new SimpleDateFormat("yyyy/mm/dd");
                     format.format(fecha);
                     cal = format.getCalendar();
-                    try {
-                        logica.Controladores.ControladorUsuario.getInstance().AgregarUsuarioColaborador(nick, nombre, apellido, correo, cal, pass, pass);
-                        MENSAJE = "Se registro exitosamente";
-                        request.getSession().setAttribute("mensaje", MENSAJE);
-                        request.getSession().setAttribute("nick", nick);
-                        request.getRequestDispatcher("/Vistas/altaUsuario.jsp").include(request, response);
-                    } // try
-                    catch (ExceptionInInitializerError | Exception a) {
-                        MENSAJE = "Error al dar registrar este usuario";
-                        request.getSession().setAttribute("mensaje", MENSAJE);
+                    ok = iUsuario.AgregarUsuarioColaborador(nick, nombre, apellido, correo, cal, pass, pass);
+                    if (ok) {
+                        mensaje = "Se registro exitosamente";
+                        request.setAttribute("mensaje", mensaje);
                         request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
-                    } // catch           
+                    } else {
+                        mensaje = "Error al dar registrar este usuario";
+                        request.setAttribute("mensaje", mensaje);
+                        request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
+                    }
                 }
-                
-                processRequest(request, response);
+                break;
+            default:
                 break;
         }
 
