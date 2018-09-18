@@ -40,7 +40,7 @@ private static final long serialVersionUID = 1L;
         response.setContentType("text/html;charset=UTF-8");
            ICU.CargarUsuarios();
         
-       List<DtUsuario> lista = ICU.ListarProponentes2();
+       List<DtUsuario> lista = ICU.ListarUsuarios();
         request.setAttribute("usuarios", lista);
     }
 

@@ -20,6 +20,9 @@
             function RegistrarColaboracion() {
                 $('#main').load('Vistas/RegistrarColaboracion.jsp')
             }
+             function SeguirUsuario() {
+                $('#main').load('Vistas/SeguirUsuario.jsp')
+            }
         </script>
         <style>
             .dev-page{visibility: hidden; }            
@@ -47,7 +50,7 @@
                                 <li><a style="color: white"  href="">Usuarios</a>
                                     <ul  class="submenu" >
                                         <li><a style="color: black" onclick="recargar()">Alta Usuario</a></li>
-                                        <li><a style="color: black" href="#">Seguir usuario</a></li>
+                                        <li><a style="color: black" onclick="SeguirUsuario()">Seguir usuario</a></li>
                                         <li><a style="color: black" href="#">Ver proponentes</a></li>
                                         <li><a style="color: black" href="#">Ver colaboradores</a></li>
                                         <li><a style="color: black" href="#">Ver seguidores</a></li>

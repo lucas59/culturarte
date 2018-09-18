@@ -71,7 +71,7 @@ public class Login extends HttpServlet {
 			else {
 				nuevoEstado = EstadoSesion.LOGIN_CORRECTO;
 //				 setea el usuario logueado
-				request.getSession().setAttribute("usuario_logueado", usr.getCorreo());
+				request.getSession().setAttribute("usuario_logueado", usr.getNickName());
 			}
 //		} catch(UsuarioNoEncontrado ex){
 //			nuevoEstado = EstadoSesion.LOGIN_INCORRECTO;
